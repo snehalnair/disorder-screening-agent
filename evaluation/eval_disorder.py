@@ -77,6 +77,8 @@ def run_disorder_evaluation(
     mlip_name = sim_cfg.get("potential", "mace-mp-0")
     device = sim_cfg.get("device", "auto")
     supercell = sim_cfg.get("supercell", [2, 2, 2])
+    fmax = sim_cfg.get("fmax", 0.05)
+    max_steps = sim_cfg.get("max_relax_steps", 500)
     target_properties = list(config.get("pipeline", {}).get("property_weights", {}).keys())
 
     from stages.stage5.calculators import get_calculator
@@ -121,7 +123,7 @@ def run_disorder_evaluation(
             sqs_structures = []
 
         for sqs in sqs_structures:
-            rr = relax_structure(sqs, calculator)
+            rr = relax_structure(sqs, calculator, fmax=fmax, max_steps=max_steps)
             if rr.relaxation_converged:
                 props = compute_properties(
                     relaxed_structure=rr.relaxed_structure,
