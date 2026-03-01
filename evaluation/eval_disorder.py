@@ -28,8 +28,27 @@ import numpy as np
 logger = logging.getLogger(__name__)
 
 
-# Default dopant set: confirmed successful, good experimental coverage
+# Default dopant set: 8 confirmed successful with experimental data (validation set)
 _DEFAULT_DOPANTS = ["Al", "Ti", "Mg", "Ga", "Fe", "Zr", "Nb", "W"]
+
+# Full Stage 3 survivor set — all 28 unique elements (Co self-substitution excluded).
+# Best OS per element by Hautier-Ceder substitution probability:
+#   Mn+3, Ni+3, Ru+3 > Fe+3, Al+3 > Cr+3, Nb+4 > ... (see paper_draft_notes.md)
+# Use for RQ2 at n=28; no experimental data needed for computational comparison.
+_ALL_STAGE3_DOPANTS = [
+    # Known 8 (validation set)
+    "Al", "Ti", "Mg", "Ga", "Fe", "Zr", "Nb", "W",
+    # Novel 20 (synthesis targets — ranked by disorder-aware simulation)
+    "Mn", "Ni", "Cr", "V",           # isovalent/mild aliovalent, low mismatch
+    "Ge", "Sn", "Sb", "Ta",          # aliovalent, moderate mismatch
+    "Se", "As",                       # chalcogen/metalloid
+    "Ru", "Rh", "Ir", "Mo",          # platinum-group / refractory
+    "Os", "Re", "Pt",                 # unusual OS, high-valence
+    "Cu",                             # 33.9% mismatch, borderline
+    "S",                              # non-metal at Co site — flag in paper
+    "U",                              # radioactive — flag in paper
+]
+
 _DEFAULT_CONCENTRATION = 0.10  # 10% on Co site
 _DEFAULT_N_SQS = 5
 

@@ -178,6 +178,95 @@ NMC811, machine learning interatomic potential
 
 ---
 
+## Novel Candidates — Full n=28 Evaluation
+
+### Corrected research logic
+
+```
+Build filter (Stages 1–3)  →  29 unique candidates (28 excl. Co self-sub)
+         ↓
+RQ1: validate filter       →  n=8 known dopants  →  92.3% recall
+         ↓
+RQ2: disorder simulation   →  n=28 all candidates  →  ordered vs disordered
+         ↓
+RQ3: accuracy vs expt      →  n=8 known subset  →  validate MACE methodology
+         ↓
+Novel candidates           →  n=20 remaining  →  ranked synthesis targets
+```
+
+The 8 known dopants serve two roles: validate the filter (RQ1) and validate MACE
+accuracy (RQ3). Running disorder simulation on all 28 makes the novel predictions
+credible — the methodology is validated on the known 8, then applied to the unknown 20.
+
+### All 28 Stage 3 candidates (best OS by Hautier-Ceder substitution probability)
+
+| Element | OS | Prob | Mismatch | Category | Priority |
+|---------|-----|------|----------|----------|----------|
+| Mn | +3 | 0.023 | 6.4% | NOVEL | ★★★ isovalent, in NMC |
+| Ni | +3 | 0.018 | 2.8% | NOVEL | ★★★ isovalent, in NMC |
+| Cr | +3 | 0.016 | 12.8% | NOVEL | ★★★ isovalent, studied |
+| V  | +3 | 0.014 | 17.4% | NOVEL | ★★ mild aliovalent |
+| Ge | +4 | 0.003 | 2.8% | NOVEL | ★★ low mismatch |
+| Sn | +4 | 0.004 | 26.6% | NOVEL | ★★ |
+| Sb | +5 | 0.005 | 10.1% | NOVEL | ★★ similar to Nb |
+| Ta | +5 | 0.009 | 17.4% | NOVEL | ★★ similar to Nb |
+| Se | +4 | 0.019 | 8.3% | NOVEL | ★ chalcogen |
+| As | +3 | 0.007 | 6.4% | NOVEL | ★ toxic |
+| Ru | +3 | 0.039 | 24.8% | NOVEL | ★ PGM, expensive |
+| Rh | +3 | 0.005 | 22.0% | NOVEL | ★ PGM |
+| Ir | +3 | 0.017 | 24.8% | NOVEL | ★ PGM |
+| Mo | +3 | 0.005 | 26.6% | NOVEL | ★ |
+| Os | +7 | 0.006 | 3.7% | NOVEL | ⚠ unusual OS |
+| Re | +7 | 0.004 | 2.8% | NOVEL | ⚠ unusual OS |
+| Pt | +5 | 0.004 | 4.6% | NOVEL | ⚠ PGM |
+| Cu | +2 | 0.006 | 33.9% | NOVEL | ⚠ borderline mismatch |
+| S  | +5 | 0.002 | 34.7% | NOVEL | ⚠ non-metal at Co site |
+| U  | +6 | 0.004 | 33.9% | NOVEL | ✗ radioactive |
+| Al | +3 | 0.019 | 1.8% | KNOWN | validation |
+| Fe | +3 | 0.022 | 0.9% | KNOWN | validation |
+| Mn (see above) | | | | | |
+| Ni (see above) | | | | | |
+| Ti | +3 | 0.013 | 22.9% | KNOWN | validation |
+| Ga | +3 | 0.009 | 13.8% | KNOWN | validation |
+| Nb | +4 | 0.016 | 24.8% | KNOWN | validation |
+| Zr | +4 | 0.011 | 32.1% | KNOWN | validation |
+| W  | +6 | 0.003 | 10.1% | KNOWN | validation |
+| Mg | +2 | 0.004 | 32.1% | KNOWN | validation |
+
+### Run the full n=28 evaluation on Kaggle (both GPUs)
+
+In Kaggle cell 6, replace the DOPANTS list with `_ALL_STAGE3_DOPANTS`:
+
+```python
+from evaluation.eval_disorder import _ALL_STAGE3_DOPANTS
+
+# Split across 2 GPUs: 14 dopants each
+DOPANTS_A = _ALL_STAGE3_DOPANTS[:14]   # → cuda:0
+DOPANTS_B = _ALL_STAGE3_DOPANTS[14:]   # → cuda:1
+```
+
+Compute cost: 28 × (5 SQS + 1 ordered) = 168 relaxations
+≈ 7 hours on 2× T4 GPUs in parallel (~3.5 h per GPU)
+
+### Kaggle session plan (two sessions)
+
+**Session 1** (current results): n=8 known dopants → `rq2_disorder_444.json` ✓
+
+**Session 2** (to run): n=20 novel dopants → `rq2_disorder_novel.json`
+- Use `_ALL_STAGE3_DOPANTS` minus the 8 already done
+- Or re-run all 28 and merge
+
+### Expected paper contribution
+
+> "Of the 20 novel candidates identified by the pipeline, disorder-aware simulation
+> ranks [X] as the most promising synthesis targets, with predicted voltages of
+> [Y–Z] V and formation energies below [threshold] eV/atom. These candidates share
+> [common features], suggesting [mechanistic insight]."
+
+Top synthesis targets to fill in after n=28 run is complete.
+
+---
+
 ## Key Claims with Evidence
 
 | # | Claim | Evidence (Fig/Table) | Status |
