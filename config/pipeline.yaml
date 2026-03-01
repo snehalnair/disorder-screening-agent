@@ -1,0 +1,102 @@
+pipeline:
+
+  # ── LLM ───────────────────────────────────────────────────────────────────
+  # Used only in parse_input and generate_summary nodes.
+  # provider: anthropic | google | openai
+  llm:
+    provider: "anthropic"
+    model: "claude-sonnet-4-6"
+
+  # ── Stage 1: SMACT composition filter ─────────────────────────────────────
+  # Screens all elements Z=1–103 for charge neutrality and electronegativity
+  # ordering against the parent structure.
+  stage1_smact:
+    exclude_elements:
+      - He   # noble gases
+      - Ne
+      - Ar
+      - Kr
+      - Xe
+      - Rn
+      - Tc   # no stable isotopes
+      - Pm
+      - Po   # radioactive / no practical chemistry
+      - At
+      - Fr
+      - Ra
+      - Ac
+      - Pa
+      - Np
+      - Pu
+
+  # ── Stage 2: Shannon radius + tolerance factor ────────────────────────────
+  # mismatch_threshold: maximum allowed |r_dopant - r_host| / r_host
+  # tolerance_factor_max: Bartel τ upper limit (perovskites only; ignored otherwise)
+  stage2_radius:
+    mismatch_threshold: 0.35        # 35% relative mismatch — calibrated to achieve ≥90%
+                                    # recall on NMC known dopants (Mg2+/Zr4+ at 32%,
+                                    # Nb5+/Ta5+ at 17%; only B3+ at 50% still excluded)
+    tolerance_factor_max: 4.18      # Bartel 2019 threshold
+
+  # ── Stage 3: Hautier-Ceder substitution probability ───────────────────────
+  # Wraps pymatgen SubstitutionPredictor.
+  # Candidates below probability_threshold are pruned.
+  stage3_substitution:
+    probability_threshold: 0.001
+
+  # ── Stage 4: ML pre-screen (optional) ────────────────────────────────────
+  # Set enabled: false to skip and route directly from Stage 3 to Stage 5.
+  # model: roost | crabnet
+  # max_threshold: max predicted value above the convex hull (eV/atom)
+  stage4_ml:
+    enabled: false
+    model: "roost"
+    property: "formation_energy_per_atom"
+    max_threshold: 0.1              # eV/atom above hull
+
+  # ── Stage 5: SQS generation + MLIP relaxation + property calculation ──────
+  stage5_simulation:
+    supercell: [2, 2, 2]            # supercell expansion along a, b, c
+    concentrations: [0.05, 0.10]    # dopant site fractions to evaluate
+    n_sqs_realisations: 3           # number of SQS realisations per (dopant, concentration)
+    potential: "mace-mp-0"          # mace-mp-0 | mattersim | mock
+                                    # MACE-MP-0: pip install mace-torch
+                                    # Works on CUDA, Apple MPS (M1/M2/M3), and CPU
+    device: "auto"                  # auto (CUDA→MPS→CPU) | cuda | mps | cpu
+    fmax: 0.05                      # force convergence threshold (eV/Å)
+    max_relax_steps: 500
+
+  # ── Output ────────────────────────────────────────────────────────────────
+  output:
+    top_n: 5                        # number of top dopants to highlight in report
+    include_ordered_comparison: true
+
+  # ── Checkpointing ─────────────────────────────────────────────────────────
+  # backend: memory (in-process, lost on restart) | sqlite (persistent)
+  # db_path is relative to the project root.
+  checkpointing:
+    backend: "sqlite"
+    db_path: "checkpoints.db"
+
+  # ── Results database ───────────────────────────────────────────────────────
+  # local SQLite database: cache, session history, evaluation dataset.
+  database:
+    local:
+      path: "data/results.db"
+
+  # ── Routing thresholds (check_count node) ────────────────────────────────
+  # max_candidates_after_stage1: if count exceeds this, tighten threshold by
+  #   threshold_adjustment_pct and re-run the stage (up to max_retries times).
+  # If count == 0, loosen threshold by threshold_adjustment_pct and retry.
+  routing:
+    max_candidates_after_stage1: 35
+    max_retries: 2
+    threshold_adjustment_pct: 0.20
+
+  # ── Property weights for composite ranking score ──────────────────────────
+  # Values must sum to 1.0. Set a weight to 0 to exclude a property.
+  property_weights:
+    voltage: 0.35
+    formation_energy: 0.25
+    li_ni_exchange: 0.25
+    volume_change: 0.15

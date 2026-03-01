@@ -1,0 +1,166 @@
+# Disorder Screening Report
+
+**Parent material:** {{ parent_formula }}
+**Target site:** {{ target_site }} (OS: {{ target_oxidation_state }}+, CN: {{ target_coordination_number }})
+**Generated:** {{ generated_at }}
+**Run ID:** `{{ run_id }}`
+
+---
+
+## 1. Screening Summary
+
+| Parameter | Value |
+|-----------|-------|
+| MLIP | {{ mlip_name }} |
+| Device | {{ device }} |
+| Concentrations | {{ concentrations | join(", ") }} |
+| Supercell | {{ supercell | join("×") }} |
+| SQS realisations | {{ n_sqs_realisations }} |
+| Primary property | {{ primary_property }} |
+| Candidates simulated | {{ candidates_simulated }} |
+
+---
+
+## 2. Pruning Funnel
+
+| Stage | Candidates In | Candidates Out | Threshold |
+|-------|:------------:|:--------------:|-----------|
+{% for row in funnel_rows -%}
+| {{ row.stage }} | {{ row["in"] }} | {{ row.out }} | {{ row.threshold }} |
+{% endfor %}
+---
+
+## 3. Simulation Results
+
+| Dopant | Converged | Aborted |
+|--------|:---------:|:-------:|
+{% for row in sim_rows -%}
+| {{ row.dopant }} | {{ row.n_converged }} | {{ row.n_aborted }} |
+{% endfor %}
+
+---
+
+## 4. Property Predictions (Disordered SQS)
+
+{% if target_properties %}
+| Dopant |{% for p in target_properties %} {{ p }} (mean±std) |{% endfor %}
+
+|--------|{% for p in target_properties %}:---:|{% endfor %}
+
+{% for row in prop_rows -%}
+| {{ row.dopant }} |{% for p in target_properties %}{% set s = row.get(p, {}) %} {{ s.mean | fmt_float }}±{{ s.std | fmt_float }} (n={{ s.n | default("N/A") }}) |{% endfor %}
+
+{% endfor %}
+{% else %}
+*No properties computed.*
+{% endif %}
+
+---
+
+## 5. Ordered vs Disordered Comparison
+
+*This table shows the core scientific result: how much cation disorder changes each predicted property.*
+*Disorder sensitivity = |disordered − ordered| / |ordered|. Values > 20% indicate disorder significantly affects prediction.*
+
+{% if comparison_rows %}
+| Dopant | Property | Ordered | Disordered (mean) | Disorder Sensitivity |
+|--------|----------|:-------:|:-----------------:|:--------------------:|
+{% for row in comparison_rows -%}
+| {{ row.dopant }} | {{ row.property }} | {{ row.ordered | fmt_float }} | {{ row.disordered | fmt_float }} | {{ row.sensitivity | fmt_pct }} |
+{% endfor %}
+{% else %}
+*Ordered-cell comparison not available (no `ordered_results` in run).*
+{% endif %}
+
+---
+
+## 6. Ranking
+
+### Property Rankings
+
+| Dopant |{% for p in target_properties %} Rank ({{ p }}) |{% endfor %}
+
+|--------|{% for p in target_properties %}:---:|{% endfor %}
+
+{% for row in ranking_rows -%}
+| {{ row.dopant }} |{% for p in target_properties %} {{ row.ranks.get(p, "N/A") }} |{% endfor %}
+
+{% endfor %}
+
+### Spearman ρ (Ordered vs Disordered)
+
+*ρ < 0.8 indicates disorder significantly re-orders dopant rankings — experiment with disordered SQS is essential.*
+
+{% if spearman_rows %}
+| Property | ρ | p-value | n |
+|----------|:-:|:-------:|:-:|
+{% for row in spearman_rows -%}
+| {{ row.property }} | {{ row.rho | fmt_float }} | {{ row.pvalue | fmt_float }} | {{ row.n }} |
+{% endfor %}
+{% else %}
+*Spearman ρ not computed (fewer than 3 common dopants or no ordered results).*
+{% endif %}
+
+---
+
+## 7. Recommendations
+
+**Top {{ recommended | length }} dopant(s) by {{ primary_property }}:**
+
+{% if recommended %}
+{% for dopant in recommended -%}
+{{ loop.index }}. **{{ dopant }}**
+{% endfor %}
+
+### Top Dopant Details
+
+{% for entry in top_dopant_details -%}
+#### {{ entry.dopant }}
+
+- Converged SQS runs: {{ entry.n_converged }}
+{% for p in target_properties -%}
+{% set s = entry.properties.get(p, {}) -%}
+- {{ p }}: {{ s.mean | fmt_float }} ± {{ s.std | fmt_float }}
+{% endfor %}
+{% if entry.disorder_sensitivity -%}
+- Disorder sensitivity: {% for p, v in entry.disorder_sensitivity.items() %}{{ p }}: {{ v | fmt_pct }}{% if not loop.last %}, {% endif %}{% endfor %}
+
+{% endif %}
+{% endfor %}
+{% else %}
+*No recommendations — no converged results for primary property.*
+{% endif %}
+
+---
+
+## 8. Warnings
+
+{% if warnings %}
+{% for w in warnings -%}
+- ⚠ {{ w }}
+{% endfor %}
+{% else %}
+No warnings.
+{% endif %}
+
+---
+
+## 9. Configuration
+
+```yaml
+{{ config_yaml }}
+```
+
+---
+
+## 10. Metadata
+
+| Key | Value |
+|-----|-------|
+| Run ID | `{{ run_id }}` |
+| Generated | {{ generated_at }} |
+| MLIP | {{ mlip_name }} v{{ mlip_version }} |
+| Config hash | `{{ config_hash }}` |
+{% for key, value in stage_timings.items() -%}
+| {{ key }} | {{ value }} |
+{% endfor %}

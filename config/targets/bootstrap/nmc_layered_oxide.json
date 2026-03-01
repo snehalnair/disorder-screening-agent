@@ -1,0 +1,179 @@
+{
+  "confirmed_successful": [
+    {
+      "element": "Al",
+      "oxidation_state": 3,
+      "site": "TM_octahedral",
+      "max_concentration_pct": 10,
+      "effects": "Stabilises layered structure; suppresses Li/Ni mixing; reduces capacity slightly; improves thermal stability",
+      "key_references": [
+        "Cho et al., Electrochem. Solid-State Lett. 2001",
+        "Kim et al., Chem. Mater. 2006"
+      ]
+    },
+    {
+      "element": "Ti",
+      "oxidation_state": 4,
+      "site": "TM_octahedral",
+      "max_concentration_pct": 5,
+      "effects": "Suppresses phase transitions at high voltage; reduces cation mixing; aliovalent (charge compensation via Ni2+/Ni3+ ratio)",
+      "key_references": [
+        "Kim et al., J. Electrochem. Soc. 2017"
+      ]
+    },
+    {
+      "element": "Mg",
+      "oxidation_state": 2,
+      "site": "TM_octahedral",
+      "max_concentration_pct": 5,
+      "effects": "Pillaring effect in Li layer; reduces Li/Ni disorder at low concentrations; capacity penalty at high concentrations",
+      "key_references": [
+        "Huang et al., J. Power Sources 2018"
+      ]
+    },
+    {
+      "element": "W",
+      "oxidation_state": 6,
+      "site": "TM_octahedral",
+      "max_concentration_pct": 2,
+      "effects": "Forms W-rich grain boundary phase; enhances rate capability; very low solubility in bulk lattice",
+      "key_references": [
+        "Kim et al., Adv. Energy Mater. 2018"
+      ]
+    },
+    {
+      "element": "Zr",
+      "oxidation_state": 4,
+      "site": "TM_octahedral",
+      "max_concentration_pct": 5,
+      "effects": "Stabilises structure during cycling; reduces voltage fade; improves cycle life",
+      "key_references": [
+        "Schipper et al., J. Electrochem. Soc. 2017"
+      ]
+    },
+    {
+      "element": "Ta",
+      "oxidation_state": 5,
+      "site": "TM_octahedral",
+      "max_concentration_pct": 3,
+      "effects": "Strong TM-O bond stabilisation; suppresses oxygen loss at high voltage",
+      "key_references": [
+        "Ryu et al., Chem. Mater. 2019"
+      ]
+    },
+    {
+      "element": "Nb",
+      "oxidation_state": 5,
+      "site": "TM_octahedral",
+      "max_concentration_pct": 3,
+      "effects": "Similar to Ta; stabilises high-voltage operation; reduces impedance growth",
+      "key_references": [
+        "Sun et al., ACS Energy Lett. 2020"
+      ]
+    },
+    {
+      "element": "Mo",
+      "oxidation_state": 6,
+      "site": "TM_octahedral",
+      "max_concentration_pct": 3,
+      "effects": "Multi-valent; stabilises structure; may segregate to grain boundaries",
+      "key_references": []
+    },
+    {
+      "element": "Fe",
+      "oxidation_state": 3,
+      "site": "TM_octahedral",
+      "max_concentration_pct": 10,
+      "effects": "Earth-abundant Co replacement; increases Li/Ni disorder at high concentrations; voltage penalty",
+      "key_references": [
+        "Zheng et al., J. Power Sources 2016"
+      ]
+    },
+    {
+      "element": "V",
+      "oxidation_state": 3,
+      "site": "TM_octahedral",
+      "max_concentration_pct": 5,
+      "effects": "Multi-valent; can participate in redox; moderate structural stabilisation",
+      "key_references": []
+    },
+    {
+      "element": "Cr",
+      "oxidation_state": 3,
+      "site": "TM_octahedral",
+      "max_concentration_pct": 5,
+      "effects": "Good radius match to Co3+; stabilises layered structure; toxicity concern",
+      "key_references": []
+    },
+    {
+      "element": "B",
+      "oxidation_state": 3,
+      "site": "TM_octahedral",
+      "max_concentration_pct": 3,
+      "effects": "Very small ion; may partially occupy tetrahedral sites; strengthens TM-O bonds",
+      "key_references": [
+        "Park et al., J. Power Sources 2018"
+      ]
+    },
+    {
+      "element": "Ga",
+      "oxidation_state": 3,
+      "site": "TM_octahedral",
+      "max_concentration_pct": 5,
+      "effects": "Similar electronic config to Al; stabilises layered structure; suppresses phase transition",
+      "key_references": []
+    }
+  ],
+  "confirmed_limited": [
+    {
+      "element": "Sc",
+      "oxidation_state": 3,
+      "site": "TM_octahedral",
+      "max_concentration_pct": 2,
+      "notes": "Limited reports; relatively large ion for octahedral site; cost-prohibitive",
+      "key_references": []
+    },
+    {
+      "element": "Hf",
+      "oxidation_state": 4,
+      "site": "TM_octahedral",
+      "max_concentration_pct": 2,
+      "notes": "Limited reports; similar to Zr but heavier and more expensive",
+      "key_references": []
+    },
+    {
+      "element": "Y",
+      "oxidation_state": 3,
+      "site": "TM_octahedral",
+      "max_concentration_pct": 2,
+      "notes": "Large ionic radius limits solubility; may segregate to grain boundaries",
+      "key_references": []
+    },
+    {
+      "element": "Na",
+      "oxidation_state": 1,
+      "site": "Li_interlayer",
+      "max_concentration_pct": 3,
+      "notes": "Substitutes on Li site, not TM site; pillaring effect; limited solubility",
+      "key_references": []
+    }
+  ],
+  "confirmed_failed": [
+    {
+      "element": "Sb",
+      "oxidation_state": 5,
+      "site": "TM_octahedral",
+      "max_concentration_pct": 2,
+      "failure_mode": "Phase separation above ~2% concentration",
+      "key_references": []
+    },
+    {
+      "element": "Bi",
+      "oxidation_state": 3,
+      "site": "TM_octahedral",
+      "max_concentration_pct": 2,
+      "failure_mode": "Phase separation above ~2% concentration; very large ionic radius",
+      "key_references": []
+    }
+  ]
+}

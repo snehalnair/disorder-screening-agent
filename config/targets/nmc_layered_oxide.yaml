@@ -1,0 +1,34 @@
+# Material target configuration for NMC layered oxide cathode
+# Used by scripts/dopants_ground_truth_extraction.py
+
+material_id: "nmc_layered_oxide"
+display_name: "LiNi0.8Mn0.1Co0.1O2 (NMC811)"
+structure_type: "alpha-NaFeO2 (layered)"
+space_group: "R-3m (166)"
+target_site: "TM octahedral (replacing Co3+)"
+
+# Elements that are part of the host structure (not dopants)
+base_elements: ["Li", "Ni", "Mn", "Co", "O"]
+
+# Materials Project query parameters
+mp_query:
+  elements: ["Li", "O"]
+  spacegroup_number: 166        # R-3m
+
+# Semantic Scholar search queries
+s2_queries:
+  broad:
+    - "NMC cathode doping layered oxide"
+    - "LiNiMnCoO2 dopant substitution"
+    - "nickel-rich cathode element substitution"
+    - "NMC811 doping electrochemical performance"
+    - "layered oxide cathode dopant screening"
+  failure:
+    - "NMC doping phase separation secondary phase"
+    - "layered cathode dopant solubility limit exceeded"
+    - "NMC substitution structural collapse"
+    - "nickel-rich cathode doping failure degradation"
+    - "NMC dopant impurity phase formation"
+
+# Bootstrap ground truth (high-confidence literature entries)
+bootstrap_file: "config/targets/bootstrap/nmc_layered_oxide.json"

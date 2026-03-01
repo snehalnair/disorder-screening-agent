@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "disorder-screening"
+version = "0.1.0"
+description = "Disorder-aware substitutional dopant screening for battery cathode materials."
+requires-python = ">=3.10"
+dependencies = [
+    "langgraph>=1.0.0",
+    "langchain-core>=0.3.0",
+    "pymatgen>=2024.1.0",
+    "smact>=2.7.0",
+    "pyyaml>=6.0.0",
+    "jinja2>=3.1.0",
+]
+
+[project.scripts]
+disorder-screening = "__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+exclude = ["tests*", "notebooks*", "scripts*"]
+
+[tool.pytest.ini_options]
+addopts = "-m \"not gpu\""
+markers = [
+    "gpu: marks tests that require a real MLIP installation (mace-torch / mattersim). Run with: pytest -m gpu",
+]

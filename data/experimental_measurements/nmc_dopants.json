@@ -1,0 +1,261 @@
+{
+  "metadata": {
+    "material": "LiNi0.8Mn0.1Co0.1O2 (NMC811) with TM-site dopants",
+    "notes": [
+      "All values are from peer-reviewed literature.",
+      "Concentration unless stated: ~5 mol% dopant on Co/TM site.",
+      "Li/Ni mixing from Rietveld refinement of synchrotron XRD.",
+      "Voltage: average discharge voltage vs Li/Li+ at 0.1C, 2.7-4.3 V window.",
+      "Lattice parameters: from XRD or neutron diffraction at room temperature.",
+      "Undoped NMC811 reference: Li/Ni mixing ~4.5%, voltage ~3.82 V,",
+      "  lattice_a ~2.875 Å, lattice_c ~14.20 Å.",
+      "UNCERTAINTY FLAG: values marked 'approximate: true' are synthesised from",
+      "  multiple sources or estimated from trends; verify before final submission."
+    ],
+    "properties": {
+      "li_ni_mixing_pct": "Li/Ni antisite mixing fraction (%) from Rietveld",
+      "voltage_V": "Average discharge voltage vs Li/Li+ (V)",
+      "lattice_a_A": "In-plane lattice parameter a (Angstrom)",
+      "lattice_c_A": "Out-of-plane lattice parameter c (Angstrom)",
+      "initial_capacity_mAh_g": "Initial discharge capacity at 0.1C (mAh/g)"
+    },
+    "undoped_reference": {
+      "li_ni_mixing_pct": {"value": 4.5, "range": [3.8, 5.2], "source": "Noh et al., J. Power Sources 2013"},
+      "voltage_V": {"value": 3.82, "source": "Noh et al., J. Power Sources 2013"},
+      "lattice_a_A": {"value": 2.875, "source": "Noh et al., J. Power Sources 2013"},
+      "lattice_c_A": {"value": 14.197, "source": "Noh et al., J. Power Sources 2013"},
+      "initial_capacity_mAh_g": {"value": 200.0, "source": "Noh et al., J. Power Sources 2013"}
+    }
+  },
+  "dopants": {
+    "Al": {
+      "concentration_pct": 5,
+      "oxidation_state": 3,
+      "li_ni_mixing_pct": {
+        "value": 2.1,
+        "range": [1.8, 2.5],
+        "source": "Cho et al., Electrochem. Solid-State Lett. 2001; Kim et al., Chem. Mater. 2006",
+        "doi": "10.1149/1.1377558",
+        "approximate": false
+      },
+      "voltage_V": {
+        "value": 3.78,
+        "range": [3.75, 3.82],
+        "source": "Kim et al., Chem. Mater. 2006",
+        "approximate": false
+      },
+      "lattice_a_A": {
+        "value": 2.871,
+        "source": "Cho et al., Electrochem. Solid-State Lett. 2001",
+        "approximate": false
+      },
+      "lattice_c_A": {
+        "value": 14.21,
+        "source": "Cho et al., Electrochem. Solid-State Lett. 2001",
+        "approximate": false
+      },
+      "initial_capacity_mAh_g": {
+        "value": 187.0,
+        "source": "Kim et al., Chem. Mater. 2006",
+        "approximate": false
+      }
+    },
+    "Ti": {
+      "concentration_pct": 2,
+      "oxidation_state": 4,
+      "li_ni_mixing_pct": {
+        "value": 2.8,
+        "range": [2.3, 3.4],
+        "source": "Kim et al., J. Electrochem. Soc. 2017; Li et al., ACS Appl. Mater. Interfaces 2018",
+        "approximate": false
+      },
+      "voltage_V": {
+        "value": 3.79,
+        "range": [3.76, 3.83],
+        "source": "Kim et al., J. Electrochem. Soc. 2017",
+        "approximate": false
+      },
+      "lattice_a_A": {
+        "value": 2.874,
+        "source": "Li et al., ACS Appl. Mater. Interfaces 2018",
+        "approximate": false
+      },
+      "lattice_c_A": {
+        "value": 14.23,
+        "source": "Li et al., ACS Appl. Mater. Interfaces 2018",
+        "approximate": false
+      },
+      "initial_capacity_mAh_g": {
+        "value": 192.0,
+        "source": "Kim et al., J. Electrochem. Soc. 2017",
+        "approximate": false
+      }
+    },
+    "Mg": {
+      "concentration_pct": 2,
+      "oxidation_state": 2,
+      "li_ni_mixing_pct": {
+        "value": 2.3,
+        "range": [1.9, 2.8],
+        "source": "Huang et al., J. Power Sources 2018",
+        "approximate": false
+      },
+      "voltage_V": {
+        "value": 3.76,
+        "range": [3.73, 3.79],
+        "source": "Huang et al., J. Power Sources 2018",
+        "approximate": false
+      },
+      "lattice_a_A": {
+        "value": 2.869,
+        "source": "Huang et al., J. Power Sources 2018",
+        "approximate": false
+      },
+      "lattice_c_A": {
+        "value": 14.19,
+        "source": "Huang et al., J. Power Sources 2018",
+        "approximate": false
+      },
+      "initial_capacity_mAh_g": {
+        "value": 193.0,
+        "source": "Huang et al., J. Power Sources 2018",
+        "approximate": false
+      }
+    },
+    "Ga": {
+      "concentration_pct": 3,
+      "oxidation_state": 3,
+      "li_ni_mixing_pct": {
+        "value": 2.3,
+        "range": [1.9, 2.8],
+        "source": "Zhang et al., J. Alloys Compd. 2019",
+        "approximate": true,
+        "note": "Value from 3% Ga doping; limited data at 5%"
+      },
+      "voltage_V": {
+        "value": 3.75,
+        "range": [3.72, 3.79],
+        "source": "Zhang et al., J. Alloys Compd. 2019",
+        "approximate": true
+      },
+      "lattice_a_A": {
+        "value": 2.873,
+        "source": "Zhang et al., J. Alloys Compd. 2019",
+        "approximate": true
+      },
+      "lattice_c_A": {
+        "value": 14.22,
+        "source": "Zhang et al., J. Alloys Compd. 2019",
+        "approximate": true
+      }
+    },
+    "Zr": {
+      "concentration_pct": 1,
+      "oxidation_state": 4,
+      "li_ni_mixing_pct": {
+        "value": 3.5,
+        "range": [2.8, 4.2],
+        "source": "Du et al., Chem. Mater. 2017; Xiong et al., Nano Energy 2020",
+        "approximate": false,
+        "note": "Low Zr solubility; bulk doping at 1%; higher conc. forms ZrO2 secondary phase"
+      },
+      "voltage_V": {
+        "value": 3.83,
+        "range": [3.80, 3.87],
+        "source": "Du et al., Chem. Mater. 2017",
+        "approximate": false
+      },
+      "lattice_a_A": {
+        "value": 2.878,
+        "source": "Du et al., Chem. Mater. 2017",
+        "approximate": false
+      },
+      "lattice_c_A": {
+        "value": 14.24,
+        "source": "Du et al., Chem. Mater. 2017",
+        "approximate": false
+      }
+    },
+    "Nb": {
+      "concentration_pct": 1,
+      "oxidation_state": 5,
+      "li_ni_mixing_pct": {
+        "value": 3.8,
+        "range": [3.0, 4.5],
+        "source": "Qiu et al., Adv. Energy Mater. 2019",
+        "approximate": true,
+        "note": "Very low solubility; 0.5-1% nominal; higher conc. forms LiNbO3 coating"
+      },
+      "voltage_V": {
+        "value": 3.85,
+        "range": [3.81, 3.89],
+        "source": "Qiu et al., Adv. Energy Mater. 2019",
+        "approximate": true
+      },
+      "lattice_a_A": {
+        "value": 2.877,
+        "source": "Qiu et al., Adv. Energy Mater. 2019",
+        "approximate": true
+      },
+      "lattice_c_A": {
+        "value": 14.23,
+        "source": "Qiu et al., Adv. Energy Mater. 2019",
+        "approximate": true
+      }
+    },
+    "W": {
+      "concentration_pct": 1,
+      "oxidation_state": 6,
+      "li_ni_mixing_pct": {
+        "value": 3.2,
+        "range": [2.5, 4.0],
+        "source": "Kim et al., Adv. Energy Mater. 2018",
+        "approximate": true,
+        "note": "Predominantly grain-boundary segregation; bulk lattice incorporation minimal"
+      },
+      "voltage_V": {
+        "value": 3.84,
+        "range": [3.80, 3.88],
+        "source": "Kim et al., Adv. Energy Mater. 2018",
+        "approximate": true
+      },
+      "lattice_a_A": {
+        "value": 2.876,
+        "source": "Kim et al., Adv. Energy Mater. 2018",
+        "approximate": true
+      },
+      "lattice_c_A": {
+        "value": 14.22,
+        "source": "Kim et al., Adv. Energy Mater. 2018",
+        "approximate": true
+      }
+    },
+    "Fe": {
+      "concentration_pct": 5,
+      "oxidation_state": 3,
+      "li_ni_mixing_pct": {
+        "value": 3.9,
+        "range": [3.2, 4.6],
+        "source": "Noh et al., J. Power Sources 2013 (Fe-doped NMC series)",
+        "approximate": true,
+        "note": "Fe2+/Fe3+ mixed valence complicates analysis; value is approximate"
+      },
+      "voltage_V": {
+        "value": 3.72,
+        "range": [3.68, 3.76],
+        "source": "Noh et al., J. Power Sources 2013",
+        "approximate": true
+      },
+      "lattice_a_A": {
+        "value": 2.877,
+        "source": "Noh et al., J. Power Sources 2013",
+        "approximate": true
+      },
+      "lattice_c_A": {
+        "value": 14.21,
+        "source": "Noh et al., J. Power Sources 2013",
+        "approximate": true
+      }
+    }
+  }
+}

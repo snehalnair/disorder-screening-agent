@@ -1,0 +1,6582 @@
+{
+  "Ac": {
+    "3": {
+      "VI": {
+        "r_crystal": 1.26,
+        "r_ionic": 1.12,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.392,
+        "r_ionic": 1.252,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    }
+  },
+  "Ag": {
+    "1": {
+      "I": {
+        "r_crystal": 0.703,
+        "r_ionic": 0.563,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "II": {
+        "r_crystal": 0.81,
+        "r_ionic": 0.67,
+        "remark": "",
+        "spin": ""
+      },
+      "III": {
+        "r_crystal": 0.984,
+        "r_ionic": 0.844,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 1.14,
+        "r_ionic": 1.0,
+        "remark": "",
+        "spin": ""
+      },
+      "IX": {
+        "r_crystal": 1.49,
+        "r_ionic": 1.35,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 1.23,
+        "r_ionic": 1.09,
+        "remark": "",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 1.29,
+        "r_ionic": 1.15,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 1.36,
+        "r_ionic": 1.22,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.42,
+        "r_ionic": 1.28,
+        "remark": "",
+        "spin": ""
+      },
+      "X": {
+        "r_crystal": 1.555,
+        "r_ionic": 1.415,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "XI": {
+        "r_crystal": 1.619,
+        "r_ionic": 1.479,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "XII": {
+        "r_crystal": 1.682,
+        "r_ionic": 1.542,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "2": {
+      "II": {
+        "r_crystal": 0.692,
+        "r_ionic": 0.552,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 0.93,
+        "r_ionic": 0.79,
+        "remark": "",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 1.08,
+        "r_ionic": 0.94,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.216,
+        "r_ionic": 1.076,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "3": {
+      "IV": {
+        "r_crystal": 0.81,
+        "r_ionic": 0.67,
+        "remark": "",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.89,
+        "r_ionic": 0.75,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.022,
+        "r_ionic": 0.882,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    }
+  },
+  "Al": {
+    "3": {
+      "III": {
+        "r_crystal": 0.453,
+        "r_ionic": 0.313,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 0.53,
+        "r_ionic": 0.39,
+        "remark": "",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.62,
+        "r_ionic": 0.48,
+        "remark": "",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.675,
+        "r_ionic": 0.535,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 0.751,
+        "r_ionic": 0.611,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    }
+  },
+  "Am": {
+    "2": {
+      "IX": {
+        "r_crystal": 1.45,
+        "r_ionic": 1.31,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 1.35,
+        "r_ionic": 1.21,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.4,
+        "r_ionic": 1.26,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "3": {
+      "VI": {
+        "r_crystal": 1.115,
+        "r_ionic": 0.975,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.23,
+        "r_ionic": 1.09,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "4": {
+      "VI": {
+        "r_crystal": 0.99,
+        "r_ionic": 0.85,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.09,
+        "r_ionic": 0.95,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "As": {
+    "3": {
+      "III": {
+        "r_crystal": 0.553,
+        "r_ionic": 0.413,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 0.611,
+        "r_ionic": 0.471,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.664,
+        "r_ionic": 0.524,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.72,
+        "r_ionic": 0.58,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "5": {
+      "III": {
+        "r_crystal": 0.395,
+        "r_ionic": 0.255,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 0.475,
+        "r_ionic": 0.335,
+        "remark": "",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.535,
+        "r_ionic": 0.395,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.6,
+        "r_ionic": 0.46,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 0.717,
+        "r_ionic": 0.577,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    }
+  },
+  "At": {
+    "7": {
+      "VI": {
+        "r_crystal": 0.76,
+        "r_ionic": 0.62,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "Au": {
+    "1": {
+      "II": {
+        "r_crystal": 1.0,
+        "r_ionic": 0.86,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 1.51,
+        "r_ionic": 1.37,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "2": {
+      "III": {
+        "r_crystal": 0.847,
+        "r_ionic": 0.707,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "3": {
+      "IV": {
+        "r_crystal": 0.82,
+        "r_ionic": 0.68,
+        "remark": "",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.902,
+        "r_ionic": 0.762,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.99,
+        "r_ionic": 0.85,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.106,
+        "r_ionic": 0.966,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "X": {
+        "r_crystal": 1.23,
+        "r_ionic": 1.09,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "XII": {
+        "r_crystal": 1.356,
+        "r_ionic": 1.216,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "5": {
+      "VI": {
+        "r_crystal": 0.71,
+        "r_ionic": 0.57,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "B": {
+    "3": {
+      "III": {
+        "r_crystal": 0.15,
+        "r_ionic": 0.01,
+        "remark": "",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 0.25,
+        "r_ionic": 0.11,
+        "remark": "",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.328,
+        "r_ionic": 0.188,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.41,
+        "r_ionic": 0.27,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "Ba": {
+    "2": {
+      "I": {
+        "r_crystal": 1.119,
+        "r_ionic": 0.979,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "II": {
+        "r_crystal": 1.193,
+        "r_ionic": 1.053,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "III": {
+        "r_crystal": 1.268,
+        "r_ionic": 1.128,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 1.343,
+        "r_ionic": 1.203,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IX": {
+        "r_crystal": 1.61,
+        "r_ionic": 1.47,
+        "remark": "",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 1.414,
+        "r_ionic": 1.274,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 1.49,
+        "r_ionic": 1.35,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 1.52,
+        "r_ionic": 1.38,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.56,
+        "r_ionic": 1.42,
+        "remark": "",
+        "spin": ""
+      },
+      "X": {
+        "r_crystal": 1.66,
+        "r_ionic": 1.52,
+        "remark": "",
+        "spin": ""
+      },
+      "XI": {
+        "r_crystal": 1.71,
+        "r_ionic": 1.57,
+        "remark": "",
+        "spin": ""
+      },
+      "XII": {
+        "r_crystal": 1.75,
+        "r_ionic": 1.61,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "Be": {
+    "2": {
+      "III": {
+        "r_crystal": 0.3,
+        "r_ionic": 0.16,
+        "remark": "",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 0.41,
+        "r_ionic": 0.27,
+        "remark": "",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.499,
+        "r_ionic": 0.359,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.59,
+        "r_ionic": 0.45,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "Bi": {
+    "3": {
+      "I": {
+        "r_crystal": 0.754,
+        "r_ionic": 0.614,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "II": {
+        "r_crystal": 0.845,
+        "r_ionic": 0.705,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "III": {
+        "r_crystal": 0.935,
+        "r_ionic": 0.795,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 1.02,
+        "r_ionic": 0.88,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IX": {
+        "r_crystal": 1.36,
+        "r_ionic": 1.22,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 1.1,
+        "r_ionic": 0.96,
+        "remark": "",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 1.17,
+        "r_ionic": 1.03,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 1.237,
+        "r_ionic": 1.097,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.31,
+        "r_ionic": 1.17,
+        "remark": "",
+        "spin": ""
+      },
+      "X": {
+        "r_crystal": 1.415,
+        "r_ionic": 1.275,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "XI": {
+        "r_crystal": 1.47,
+        "r_ionic": 1.33,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "XII": {
+        "r_crystal": 1.525,
+        "r_ionic": 1.385,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "5": {
+      "II": {
+        "r_crystal": 0.559,
+        "r_ionic": 0.419,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 0.732,
+        "r_ionic": 0.592,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.816,
+        "r_ionic": 0.676,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.9,
+        "r_ionic": 0.76,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.018,
+        "r_ionic": 0.878,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    }
+  },
+  "Bk": {
+    "3": {
+      "VI": {
+        "r_crystal": 1.1,
+        "r_ionic": 0.96,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "4": {
+      "VI": {
+        "r_crystal": 0.97,
+        "r_ionic": 0.83,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.07,
+        "r_ionic": 0.93,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "Br": {
+    "-1": {
+      "VI": {
+        "r_crystal": 1.82,
+        "r_ionic": 1.96,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "1": {
+      "II": {
+        "r_crystal": 1.161,
+        "r_ionic": 1.021,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "3": {
+      "IV": {
+        "r_crystal": 0.73,
+        "r_ionic": 0.59,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "5": {
+      "III": {
+        "r_crystal": 0.45,
+        "r_ionic": 0.31,
+        "remark": "",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.775,
+        "r_ionic": 0.635,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "7": {
+      "IV": {
+        "r_crystal": 0.39,
+        "r_ionic": 0.25,
+        "remark": "",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.53,
+        "r_ionic": 0.39,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "C": {
+    "2": {
+      "I": {
+        "r_crystal": 0.245,
+        "r_ionic": 0.105,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "II": {
+        "r_crystal": 0.296,
+        "r_ionic": 0.156,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "3": {
+      "II": {
+        "r_crystal": 0.167,
+        "r_ionic": 0.027,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "III": {
+        "r_crystal": 0.224,
+        "r_ionic": 0.084,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "4": {
+      "III": {
+        "r_crystal": 0.21,
+        "r_ionic": 0.07,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 0.29,
+        "r_ionic": 0.15,
+        "remark": "",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.3,
+        "r_ionic": 0.16,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "Ca": {
+    "2": {
+      "I": {
+        "r_crystal": 0.741,
+        "r_ionic": 0.601,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "II": {
+        "r_crystal": 0.825,
+        "r_ionic": 0.685,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "III": {
+        "r_crystal": 0.909,
+        "r_ionic": 0.769,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 0.99,
+        "r_ionic": 0.85,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IX": {
+        "r_crystal": 1.32,
+        "r_ionic": 1.18,
+        "remark": "",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 1.067,
+        "r_ionic": 0.927,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 1.14,
+        "r_ionic": 1.0,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 1.2,
+        "r_ionic": 1.06,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.26,
+        "r_ionic": 1.12,
+        "remark": "",
+        "spin": ""
+      },
+      "X": {
+        "r_crystal": 1.37,
+        "r_ionic": 1.23,
+        "remark": "",
+        "spin": ""
+      },
+      "XI": {
+        "r_crystal": 1.426,
+        "r_ionic": 1.286,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "XII": {
+        "r_crystal": 1.48,
+        "r_ionic": 1.34,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "Cd": {
+    "2": {
+      "II": {
+        "r_crystal": 0.726,
+        "r_ionic": 0.586,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "III": {
+        "r_crystal": 0.83,
+        "r_ionic": 0.69,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 0.92,
+        "r_ionic": 0.78,
+        "remark": "",
+        "spin": ""
+      },
+      "IX": {
+        "r_crystal": 1.291,
+        "r_ionic": 1.151,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 1.01,
+        "r_ionic": 0.87,
+        "remark": "",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 1.09,
+        "r_ionic": 0.95,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 1.17,
+        "r_ionic": 1.03,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.24,
+        "r_ionic": 1.1,
+        "remark": "",
+        "spin": ""
+      },
+      "X": {
+        "r_crystal": 1.344,
+        "r_ionic": 1.204,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "XII": {
+        "r_crystal": 1.45,
+        "r_ionic": 1.31,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "Ce": {
+    "2": {
+      "VI": {
+        "r_crystal": 1.375,
+        "r_ionic": 1.235,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "3": {
+      "II": {
+        "r_crystal": 0.912,
+        "r_ionic": 0.772,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 1.035,
+        "r_ionic": 0.895,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IX": {
+        "r_crystal": 1.336,
+        "r_ionic": 1.196,
+        "remark": "",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 1.093,
+        "r_ionic": 0.953,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 1.15,
+        "r_ionic": 1.01,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 1.21,
+        "r_ionic": 1.07,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.283,
+        "r_ionic": 1.143,
+        "remark": "",
+        "spin": ""
+      },
+      "X": {
+        "r_crystal": 1.39,
+        "r_ionic": 1.25,
+        "remark": "",
+        "spin": ""
+      },
+      "XI": {
+        "r_crystal": 1.413,
+        "r_ionic": 1.273,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "XII": {
+        "r_crystal": 1.48,
+        "r_ionic": 1.34,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "4": {
+      "IX": {
+        "r_crystal": 1.163,
+        "r_ionic": 1.023,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 1.01,
+        "r_ionic": 0.87,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 1.053,
+        "r_ionic": 0.913,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.11,
+        "r_ionic": 0.97,
+        "remark": "",
+        "spin": ""
+      },
+      "X": {
+        "r_crystal": 1.21,
+        "r_ionic": 1.07,
+        "remark": "",
+        "spin": ""
+      },
+      "XII": {
+        "r_crystal": 1.28,
+        "r_ionic": 1.14,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "Cf": {
+    "3": {
+      "VI": {
+        "r_crystal": 1.09,
+        "r_ionic": 0.95,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "4": {
+      "VI": {
+        "r_crystal": 0.961,
+        "r_ionic": 0.821,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.06,
+        "r_ionic": 0.92,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "Cl": {
+    "-1": {
+      "VI": {
+        "r_crystal": 1.67,
+        "r_ionic": 1.81,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "1": {
+      "I": {
+        "r_crystal": 1.083,
+        "r_ionic": 0.943,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "II": {
+        "r_crystal": 1.137,
+        "r_ionic": 0.997,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "4": {
+      "II": {
+        "r_crystal": 0.339,
+        "r_ionic": 0.199,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "5": {
+      "II": {
+        "r_crystal": 0.192,
+        "r_ionic": 0.052,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "III": {
+        "r_crystal": 0.26,
+        "r_ionic": 0.12,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "7": {
+      "IV": {
+        "r_crystal": 0.22,
+        "r_ionic": 0.08,
+        "remark": "",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.41,
+        "r_ionic": 0.27,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "Cm": {
+    "3": {
+      "VI": {
+        "r_crystal": 1.11,
+        "r_ionic": 0.97,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "4": {
+      "VI": {
+        "r_crystal": 0.99,
+        "r_ionic": 0.85,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.09,
+        "r_ionic": 0.95,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "Co": {
+    "1": {
+      "II": {
+        "r_crystal": 0.627,
+        "r_ionic": 0.487,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "2": {
+      "II": {
+        "r_crystal": 0.552,
+        "r_ionic": 0.412,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "III": {
+        "r_crystal": 0.636,
+        "r_ionic": 0.496,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 0.72,
+        "r_ionic": 0.58,
+        "remark": "",
+        "spin": ""
+      },
+      "IX": {
+        "r_crystal": 1.135,
+        "r_ionic": 0.995,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.81,
+        "r_ionic": 0.67,
+        "remark": "",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.79,
+        "r_ionic": 0.65,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 0.922,
+        "r_ionic": 0.782,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.04,
+        "r_ionic": 0.9,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "3": {
+      "I": {
+        "r_crystal": 0.398,
+        "r_ionic": 0.258,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "III": {
+        "r_crystal": 0.55,
+        "r_ionic": 0.41,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 0.612,
+        "r_ionic": 0.472,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.666,
+        "r_ionic": 0.526,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.685,
+        "r_ionic": 0.545,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 0.795,
+        "r_ionic": 0.655,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "4": {
+      "IV": {
+        "r_crystal": 0.54,
+        "r_ionic": 0.4,
+        "remark": "",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.607,
+        "r_ionic": 0.467,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.67,
+        "r_ionic": 0.53,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "Cr": {
+    "2": {
+      "III": {
+        "r_crystal": 0.732,
+        "r_ionic": 0.592,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 0.791,
+        "r_ionic": 0.651,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.845,
+        "r_ionic": 0.705,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.87,
+        "r_ionic": 0.73,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 0.994,
+        "r_ionic": 0.854,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.09,
+        "r_ionic": 0.95,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "3": {
+      "II": {
+        "r_crystal": 0.515,
+        "r_ionic": 0.375,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 0.641,
+        "r_ionic": 0.501,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IX": {
+        "r_crystal": 1.004,
+        "r_ionic": 0.864,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.755,
+        "r_ionic": 0.615,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 0.829,
+        "r_ionic": 0.689,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "X": {
+        "r_crystal": 1.089,
+        "r_ionic": 0.949,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "4": {
+      "IV": {
+        "r_crystal": 0.55,
+        "r_ionic": 0.41,
+        "remark": "",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.625,
+        "r_ionic": 0.485,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.69,
+        "r_ionic": 0.55,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "5": {
+      "III": {
+        "r_crystal": 0.394,
+        "r_ionic": 0.254,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 0.485,
+        "r_ionic": 0.345,
+        "remark": "",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.561,
+        "r_ionic": 0.421,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.63,
+        "r_ionic": 0.49,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 0.71,
+        "r_ionic": 0.57,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "6": {
+      "IV": {
+        "r_crystal": 0.4,
+        "r_ionic": 0.26,
+        "remark": "",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.495,
+        "r_ionic": 0.355,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.58,
+        "r_ionic": 0.44,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "Cs": {
+    "1": {
+      "I": {
+        "r_crystal": 1.6,
+        "r_ionic": 1.46,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "II": {
+        "r_crystal": 1.647,
+        "r_ionic": 1.507,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "III": {
+        "r_crystal": 1.691,
+        "r_ionic": 1.551,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 1.733,
+        "r_ionic": 1.593,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IX": {
+        "r_crystal": 1.92,
+        "r_ionic": 1.78,
+        "remark": "",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 1.772,
+        "r_ionic": 1.632,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 1.81,
+        "r_ionic": 1.67,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 1.845,
+        "r_ionic": 1.705,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.88,
+        "r_ionic": 1.74,
+        "remark": "",
+        "spin": ""
+      },
+      "X": {
+        "r_crystal": 1.95,
+        "r_ionic": 1.81,
+        "remark": "",
+        "spin": ""
+      },
+      "XI": {
+        "r_crystal": 1.99,
+        "r_ionic": 1.85,
+        "remark": "",
+        "spin": ""
+      },
+      "XII": {
+        "r_crystal": 2.02,
+        "r_ionic": 1.88,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "Cu": {
+    "1": {
+      "II": {
+        "r_crystal": 0.6,
+        "r_ionic": 0.46,
+        "remark": "",
+        "spin": ""
+      },
+      "III": {
+        "r_crystal": 0.675,
+        "r_ionic": 0.535,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 0.74,
+        "r_ionic": 0.6,
+        "remark": "",
+        "spin": ""
+      },
+      "IX": {
+        "r_crystal": 1.253,
+        "r_ionic": 1.113,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.865,
+        "r_ionic": 0.725,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.91,
+        "r_ionic": 0.77,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 1.068,
+        "r_ionic": 0.928,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.163,
+        "r_ionic": 1.023,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "X": {
+        "r_crystal": 1.338,
+        "r_ionic": 1.198,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "2": {
+      "II": {
+        "r_crystal": 0.526,
+        "r_ionic": 0.386,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "III": {
+        "r_crystal": 0.615,
+        "r_ionic": 0.475,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 0.71,
+        "r_ionic": 0.57,
+        "remark": "",
+        "spin": ""
+      },
+      "IX": {
+        "r_crystal": 1.102,
+        "r_ionic": 0.962,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.79,
+        "r_ionic": 0.65,
+        "remark": "",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.87,
+        "r_ionic": 0.73,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 0.941,
+        "r_ionic": 0.801,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.021,
+        "r_ionic": 0.881,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "X": {
+        "r_crystal": 1.178,
+        "r_ionic": 1.038,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "XII": {
+        "r_crystal": 1.319,
+        "r_ionic": 1.179,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "3": {
+      "IV": {
+        "r_crystal": 0.592,
+        "r_ionic": 0.452,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.645,
+        "r_ionic": 0.505,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.68,
+        "r_ionic": 0.54,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 0.846,
+        "r_ionic": 0.706,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "XII": {
+        "r_crystal": 1.148,
+        "r_ionic": 1.008,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    }
+  },
+  "Dy": {
+    "2": {
+      "VI": {
+        "r_crystal": 1.21,
+        "r_ionic": 1.07,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 1.27,
+        "r_ionic": 1.13,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.33,
+        "r_ionic": 1.19,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "3": {
+      "II": {
+        "r_crystal": 0.803,
+        "r_ionic": 0.663,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "III": {
+        "r_crystal": 0.866,
+        "r_ionic": 0.726,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 0.928,
+        "r_ionic": 0.788,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IX": {
+        "r_crystal": 1.223,
+        "r_ionic": 1.083,
+        "remark": "",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.989,
+        "r_ionic": 0.849,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 1.052,
+        "r_ionic": 0.912,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 1.11,
+        "r_ionic": 0.97,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.167,
+        "r_ionic": 1.027,
+        "remark": "",
+        "spin": ""
+      },
+      "X": {
+        "r_crystal": 1.269,
+        "r_ionic": 1.129,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "XII": {
+        "r_crystal": 1.327,
+        "r_ionic": 1.187,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    }
+  },
+  "Er": {
+    "3": {
+      "II": {
+        "r_crystal": 0.776,
+        "r_ionic": 0.636,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "III": {
+        "r_crystal": 0.84,
+        "r_ionic": 0.7,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IX": {
+        "r_crystal": 1.202,
+        "r_ionic": 1.062,
+        "remark": "",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.965,
+        "r_ionic": 0.825,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 1.03,
+        "r_ionic": 0.89,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 1.085,
+        "r_ionic": 0.945,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.144,
+        "r_ionic": 1.004,
+        "remark": "",
+        "spin": ""
+      },
+      "X": {
+        "r_crystal": 1.243,
+        "r_ionic": 1.103,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    }
+  },
+  "Eu": {
+    "2": {
+      "I": {
+        "r_crystal": 0.982,
+        "r_ionic": 0.842,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "II": {
+        "r_crystal": 1.049,
+        "r_ionic": 0.909,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IX": {
+        "r_crystal": 1.44,
+        "r_ionic": 1.3,
+        "remark": "",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 1.239,
+        "r_ionic": 1.099,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 1.31,
+        "r_ionic": 1.17,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 1.34,
+        "r_ionic": 1.2,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.39,
+        "r_ionic": 1.25,
+        "remark": "",
+        "spin": ""
+      },
+      "X": {
+        "r_crystal": 1.49,
+        "r_ionic": 1.35,
+        "remark": "",
+        "spin": ""
+      },
+      "XI": {
+        "r_crystal": 1.545,
+        "r_ionic": 1.405,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "XII": {
+        "r_crystal": 1.592,
+        "r_ionic": 1.452,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "3": {
+      "I": {
+        "r_crystal": 0.785,
+        "r_ionic": 0.645,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "II": {
+        "r_crystal": 0.849,
+        "r_ionic": 0.709,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 0.972,
+        "r_ionic": 0.832,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IX": {
+        "r_crystal": 1.26,
+        "r_ionic": 1.12,
+        "remark": "",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 1.03,
+        "r_ionic": 0.89,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 1.087,
+        "r_ionic": 0.947,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 1.15,
+        "r_ionic": 1.01,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.206,
+        "r_ionic": 1.066,
+        "remark": "",
+        "spin": ""
+      },
+      "X": {
+        "r_crystal": 1.312,
+        "r_ionic": 1.172,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "XI": {
+        "r_crystal": 1.344,
+        "r_ionic": 1.204,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "XII": {
+        "r_crystal": 1.371,
+        "r_ionic": 1.231,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    }
+  },
+  "F": {
+    "-1": {
+      "II": {
+        "r_crystal": 1.145,
+        "r_ionic": 1.285,
+        "remark": "",
+        "spin": ""
+      },
+      "III": {
+        "r_crystal": 1.16,
+        "r_ionic": 1.3,
+        "remark": "",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 1.17,
+        "r_ionic": 1.31,
+        "remark": "",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 1.19,
+        "r_ionic": 1.33,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "7": {
+      "VI": {
+        "r_crystal": 0.22,
+        "r_ionic": 0.08,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "Fe": {
+    "1": {
+      "II": {
+        "r_crystal": 0.702,
+        "r_ionic": 0.562,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "2": {
+      "II": {
+        "r_crystal": 0.618,
+        "r_ionic": 0.478,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "III": {
+        "r_crystal": 0.697,
+        "r_ionic": 0.557,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 0.77,
+        "r_ionic": 0.63,
+        "remark": "",
+        "spin": ""
+      },
+      "IX": {
+        "r_crystal": 1.166,
+        "r_ionic": 1.026,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.784,
+        "r_ionic": 0.644,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.75,
+        "r_ionic": 0.61,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 0.924,
+        "r_ionic": 0.784,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.06,
+        "r_ionic": 0.92,
+        "remark": "",
+        "spin": ""
+      },
+      "X": {
+        "r_crystal": 1.26,
+        "r_ionic": 1.12,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "XII": {
+        "r_crystal": 1.402,
+        "r_ionic": 1.262,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "3": {
+      "III": {
+        "r_crystal": 0.582,
+        "r_ionic": 0.442,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 0.63,
+        "r_ionic": 0.49,
+        "remark": "",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.72,
+        "r_ionic": 0.58,
+        "remark": "",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.69,
+        "r_ionic": 0.55,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 0.806,
+        "r_ionic": 0.666,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 0.92,
+        "r_ionic": 0.78,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "4": {
+      "IV": {
+        "r_crystal": 0.564,
+        "r_ionic": 0.424,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.636,
+        "r_ionic": 0.496,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.725,
+        "r_ionic": 0.585,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "5": {
+      "IV": {
+        "r_crystal": 0.465,
+        "r_ionic": 0.325,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "6": {
+      "IV": {
+        "r_crystal": 0.39,
+        "r_ionic": 0.25,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "Fr": {
+    "1": {
+      "VI": {
+        "r_crystal": 1.94,
+        "r_ionic": 1.8,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "Ga": {
+    "3": {
+      "IV": {
+        "r_crystal": 0.61,
+        "r_ionic": 0.47,
+        "remark": "",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.69,
+        "r_ionic": 0.55,
+        "remark": "",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.76,
+        "r_ionic": 0.62,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 0.824,
+        "r_ionic": 0.684,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 0.89,
+        "r_ionic": 0.75,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    }
+  },
+  "Gd": {
+    "2": {
+      "VIII": {
+        "r_crystal": 1.339,
+        "r_ionic": 1.199,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "3": {
+      "I": {
+        "r_crystal": 0.751,
+        "r_ionic": 0.611,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "II": {
+        "r_crystal": 0.815,
+        "r_ionic": 0.675,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 0.943,
+        "r_ionic": 0.803,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IX": {
+        "r_crystal": 1.247,
+        "r_ionic": 1.107,
+        "remark": "",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 1.006,
+        "r_ionic": 0.866,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 1.078,
+        "r_ionic": 0.938,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 1.14,
+        "r_ionic": 1.0,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.193,
+        "r_ionic": 1.053,
+        "remark": "",
+        "spin": ""
+      },
+      "X": {
+        "r_crystal": 1.288,
+        "r_ionic": 1.148,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "XII": {
+        "r_crystal": 1.346,
+        "r_ionic": 1.206,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    }
+  },
+  "Ge": {
+    "2": {
+      "III": {
+        "r_crystal": 0.677,
+        "r_ionic": 0.537,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.87,
+        "r_ionic": 0.73,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "3": {
+      "IV": {
+        "r_crystal": 0.607,
+        "r_ionic": 0.467,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "4": {
+      "III": {
+        "r_crystal": 0.46,
+        "r_ionic": 0.32,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 0.53,
+        "r_ionic": 0.39,
+        "remark": "",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.599,
+        "r_ionic": 0.459,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.67,
+        "r_ionic": 0.53,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 0.72,
+        "r_ionic": 0.58,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 0.776,
+        "r_ionic": 0.636,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    }
+  },
+  "H": {
+    "1": {
+      "I": {
+        "r_crystal": -0.24,
+        "r_ionic": -0.38,
+        "remark": "",
+        "spin": ""
+      },
+      "II": {
+        "r_crystal": -0.04,
+        "r_ionic": -0.18,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "Hf": {
+    "4": {
+      "IV": {
+        "r_crystal": 0.72,
+        "r_ionic": 0.58,
+        "remark": "",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.85,
+        "r_ionic": 0.71,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 0.9,
+        "r_ionic": 0.76,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 0.97,
+        "r_ionic": 0.83,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "Hg": {
+    "1": {
+      "I": {
+        "r_crystal": 0.878,
+        "r_ionic": 0.738,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "II": {
+        "r_crystal": 0.994,
+        "r_ionic": 0.854,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "III": {
+        "r_crystal": 1.11,
+        "r_ionic": 0.97,
+        "remark": "",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 1.209,
+        "r_ionic": 1.069,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IX": {
+        "r_crystal": 1.539,
+        "r_ionic": 1.399,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 1.288,
+        "r_ionic": 1.148,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 1.33,
+        "r_ionic": 1.19,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 1.417,
+        "r_ionic": 1.277,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.48,
+        "r_ionic": 1.34,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "X": {
+        "r_crystal": 1.594,
+        "r_ionic": 1.454,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "2": {
+      "II": {
+        "r_crystal": 0.83,
+        "r_ionic": 0.69,
+        "remark": "",
+        "spin": ""
+      },
+      "III": {
+        "r_crystal": 0.963,
+        "r_ionic": 0.823,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 1.1,
+        "r_ionic": 0.96,
+        "remark": "",
+        "spin": ""
+      },
+      "IX": {
+        "r_crystal": 1.332,
+        "r_ionic": 1.192,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 1.146,
+        "r_ionic": 1.006,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 1.16,
+        "r_ionic": 1.02,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 1.239,
+        "r_ionic": 1.099,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.28,
+        "r_ionic": 1.14,
+        "remark": "",
+        "spin": ""
+      },
+      "X": {
+        "r_crystal": 1.383,
+        "r_ionic": 1.243,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "XII": {
+        "r_crystal": 1.491,
+        "r_ionic": 1.351,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    }
+  },
+  "Ho": {
+    "3": {
+      "II": {
+        "r_crystal": 0.79,
+        "r_ionic": 0.65,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "III": {
+        "r_crystal": 0.853,
+        "r_ionic": 0.713,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 0.915,
+        "r_ionic": 0.775,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IX": {
+        "r_crystal": 1.212,
+        "r_ionic": 1.072,
+        "remark": "",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.977,
+        "r_ionic": 0.837,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 1.041,
+        "r_ionic": 0.901,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 1.099,
+        "r_ionic": 0.959,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.155,
+        "r_ionic": 1.015,
+        "remark": "",
+        "spin": ""
+      },
+      "X": {
+        "r_crystal": 1.26,
+        "r_ionic": 1.12,
+        "remark": "",
+        "spin": ""
+      },
+      "XI": {
+        "r_crystal": 1.287,
+        "r_ionic": 1.147,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "XII": {
+        "r_crystal": 1.314,
+        "r_ionic": 1.174,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    }
+  },
+  "I": {
+    "-1": {
+      "VI": {
+        "r_crystal": 2.06,
+        "r_ionic": 2.2,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "5": {
+      "III": {
+        "r_crystal": 0.58,
+        "r_ionic": 0.44,
+        "remark": "",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 0.755,
+        "r_ionic": 0.615,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IX": {
+        "r_crystal": 1.309,
+        "r_ionic": 1.169,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.922,
+        "r_ionic": 0.782,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 1.09,
+        "r_ionic": 0.95,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 1.177,
+        "r_ionic": 1.037,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.253,
+        "r_ionic": 1.113,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "7": {
+      "IV": {
+        "r_crystal": 0.56,
+        "r_ionic": 0.42,
+        "remark": "",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.633,
+        "r_ionic": 0.493,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.67,
+        "r_ionic": 0.53,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 0.851,
+        "r_ionic": 0.711,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    }
+  },
+  "In": {
+    "1": {
+      "IX": {
+        "r_crystal": 1.625,
+        "r_ionic": 1.485,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "X": {
+        "r_crystal": 1.675,
+        "r_ionic": 1.535,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "2": {
+      "VI": {
+        "r_crystal": 1.164,
+        "r_ionic": 1.024,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 1.237,
+        "r_ionic": 1.097,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.302,
+        "r_ionic": 1.162,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "3": {
+      "III": {
+        "r_crystal": 0.696,
+        "r_ionic": 0.556,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 0.76,
+        "r_ionic": 0.62,
+        "remark": "",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.853,
+        "r_ionic": 0.713,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.94,
+        "r_ionic": 0.8,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 1.0,
+        "r_ionic": 0.86,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.06,
+        "r_ionic": 0.92,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "Ir": {
+    "3": {
+      "VI": {
+        "r_crystal": 0.82,
+        "r_ionic": 0.68,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "4": {
+      "IV": {
+        "r_crystal": 0.621,
+        "r_ionic": 0.481,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.765,
+        "r_ionic": 0.625,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "5": {
+      "VI": {
+        "r_crystal": 0.71,
+        "r_ionic": 0.57,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "6": {
+      "VI": {
+        "r_crystal": 0.672,
+        "r_ionic": 0.532,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    }
+  },
+  "K": {
+    "1": {
+      "I": {
+        "r_crystal": 1.341,
+        "r_ionic": 1.201,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "II": {
+        "r_crystal": 1.404,
+        "r_ionic": 1.264,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "III": {
+        "r_crystal": 1.459,
+        "r_ionic": 1.319,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 1.51,
+        "r_ionic": 1.37,
+        "remark": "",
+        "spin": ""
+      },
+      "IX": {
+        "r_crystal": 1.69,
+        "r_ionic": 1.55,
+        "remark": "",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 1.541,
+        "r_ionic": 1.401,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 1.52,
+        "r_ionic": 1.38,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 1.6,
+        "r_ionic": 1.46,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.65,
+        "r_ionic": 1.51,
+        "remark": "",
+        "spin": ""
+      },
+      "X": {
+        "r_crystal": 1.73,
+        "r_ionic": 1.59,
+        "remark": "",
+        "spin": ""
+      },
+      "XI": {
+        "r_crystal": 1.75,
+        "r_ionic": 1.61,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "XII": {
+        "r_crystal": 1.78,
+        "r_ionic": 1.64,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "La": {
+    "2": {
+      "IX": {
+        "r_crystal": 1.537,
+        "r_ionic": 1.397,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 1.389,
+        "r_ionic": 1.249,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.485,
+        "r_ionic": 1.345,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "X": {
+        "r_crystal": 1.591,
+        "r_ionic": 1.451,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "XII": {
+        "r_crystal": 1.689,
+        "r_ionic": 1.549,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "3": {
+      "I": {
+        "r_crystal": 0.863,
+        "r_ionic": 0.723,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "II": {
+        "r_crystal": 0.928,
+        "r_ionic": 0.788,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "III": {
+        "r_crystal": 0.992,
+        "r_ionic": 0.852,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 1.053,
+        "r_ionic": 0.913,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IX": {
+        "r_crystal": 1.356,
+        "r_ionic": 1.216,
+        "remark": "",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 1.113,
+        "r_ionic": 0.973,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 1.172,
+        "r_ionic": 1.032,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 1.24,
+        "r_ionic": 1.1,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.3,
+        "r_ionic": 1.16,
+        "remark": "",
+        "spin": ""
+      },
+      "X": {
+        "r_crystal": 1.41,
+        "r_ionic": 1.27,
+        "remark": "",
+        "spin": ""
+      },
+      "XI": {
+        "r_crystal": 1.439,
+        "r_ionic": 1.299,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "XII": {
+        "r_crystal": 1.5,
+        "r_ionic": 1.36,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "Li": {
+    "1": {
+      "I": {
+        "r_crystal": 0.589,
+        "r_ionic": 0.449,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "II": {
+        "r_crystal": 0.635,
+        "r_ionic": 0.495,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "III": {
+        "r_crystal": 0.683,
+        "r_ionic": 0.543,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 0.73,
+        "r_ionic": 0.59,
+        "remark": "",
+        "spin": ""
+      },
+      "IX": {
+        "r_crystal": 1.129,
+        "r_ionic": 0.989,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.813,
+        "r_ionic": 0.673,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.9,
+        "r_ionic": 0.76,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 0.978,
+        "r_ionic": 0.838,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.06,
+        "r_ionic": 0.92,
+        "remark": "",
+        "spin": ""
+      },
+      "X": {
+        "r_crystal": 1.194,
+        "r_ionic": 1.054,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "XII": {
+        "r_crystal": 1.307,
+        "r_ionic": 1.167,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    }
+  },
+  "Lu": {
+    "3": {
+      "II": {
+        "r_crystal": 0.76,
+        "r_ionic": 0.62,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "III": {
+        "r_crystal": 0.823,
+        "r_ionic": 0.683,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IX": {
+        "r_crystal": 1.172,
+        "r_ionic": 1.032,
+        "remark": "",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.942,
+        "r_ionic": 0.802,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 1.001,
+        "r_ionic": 0.861,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 1.059,
+        "r_ionic": 0.919,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.117,
+        "r_ionic": 0.977,
+        "remark": "",
+        "spin": ""
+      },
+      "X": {
+        "r_crystal": 1.222,
+        "r_ionic": 1.082,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    }
+  },
+  "Mg": {
+    "2": {
+      "III": {
+        "r_crystal": 0.618,
+        "r_ionic": 0.478,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 0.71,
+        "r_ionic": 0.57,
+        "remark": "",
+        "spin": ""
+      },
+      "IX": {
+        "r_crystal": 1.097,
+        "r_ionic": 0.957,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.8,
+        "r_ionic": 0.66,
+        "remark": "",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.86,
+        "r_ionic": 0.72,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 0.948,
+        "r_ionic": 0.808,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.03,
+        "r_ionic": 0.89,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "Mn": {
+    "2": {
+      "II": {
+        "r_crystal": 0.662,
+        "r_ionic": 0.522,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "III": {
+        "r_crystal": 0.739,
+        "r_ionic": 0.599,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 0.8,
+        "r_ionic": 0.66,
+        "remark": "",
+        "spin": ""
+      },
+      "IX": {
+        "r_crystal": 1.197,
+        "r_ionic": 1.057,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.89,
+        "r_ionic": 0.75,
+        "remark": "",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.81,
+        "r_ionic": 0.67,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 1.04,
+        "r_ionic": 0.9,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.1,
+        "r_ionic": 0.96,
+        "remark": "",
+        "spin": ""
+      },
+      "X": {
+        "r_crystal": 1.283,
+        "r_ionic": 1.143,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "XII": {
+        "r_crystal": 1.42,
+        "r_ionic": 1.28,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "3": {
+      "IV": {
+        "r_crystal": 0.66,
+        "r_ionic": 0.52,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.72,
+        "r_ionic": 0.58,
+        "remark": "",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.72,
+        "r_ionic": 0.58,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 0.83,
+        "r_ionic": 0.69,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 0.924,
+        "r_ionic": 0.784,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "XII": {
+        "r_crystal": 1.241,
+        "r_ionic": 1.101,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "4": {
+      "IV": {
+        "r_crystal": 0.53,
+        "r_ionic": 0.39,
+        "remark": "",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.625,
+        "r_ionic": 0.485,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.67,
+        "r_ionic": 0.53,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "5": {
+      "IV": {
+        "r_crystal": 0.47,
+        "r_ionic": 0.33,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "6": {
+      "IV": {
+        "r_crystal": 0.395,
+        "r_ionic": 0.255,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "7": {
+      "IV": {
+        "r_crystal": 0.39,
+        "r_ionic": 0.25,
+        "remark": "",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.6,
+        "r_ionic": 0.46,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "Mo": {
+    "3": {
+      "VI": {
+        "r_crystal": 0.83,
+        "r_ionic": 0.69,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "4": {
+      "VI": {
+        "r_crystal": 0.79,
+        "r_ionic": 0.65,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "5": {
+      "I": {
+        "r_crystal": 0.356,
+        "r_ionic": 0.216,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "III": {
+        "r_crystal": 0.518,
+        "r_ionic": 0.378,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 0.6,
+        "r_ionic": 0.46,
+        "remark": "",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.681,
+        "r_ionic": 0.541,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.75,
+        "r_ionic": 0.61,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "6": {
+      "II": {
+        "r_crystal": 0.368,
+        "r_ionic": 0.228,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "III": {
+        "r_crystal": 0.455,
+        "r_ionic": 0.315,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 0.55,
+        "r_ionic": 0.41,
+        "remark": "",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.64,
+        "r_ionic": 0.5,
+        "remark": "",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.73,
+        "r_ionic": 0.59,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 0.87,
+        "r_ionic": 0.73,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 0.919,
+        "r_ionic": 0.779,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    }
+  },
+  "N": {
+    "-3": {
+      "IV": {
+        "r_crystal": 1.32,
+        "r_ionic": 1.46,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "3": {
+      "VI": {
+        "r_crystal": 0.3,
+        "r_ionic": 0.16,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "5": {
+      "VI": {
+        "r_crystal": 0.27,
+        "r_ionic": 0.13,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "Na": {
+    "1": {
+      "I": {
+        "r_crystal": 0.958,
+        "r_ionic": 0.818,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "II": {
+        "r_crystal": 1.017,
+        "r_ionic": 0.877,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "III": {
+        "r_crystal": 1.069,
+        "r_ionic": 0.929,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 1.13,
+        "r_ionic": 0.99,
+        "remark": "",
+        "spin": ""
+      },
+      "IX": {
+        "r_crystal": 1.38,
+        "r_ionic": 1.24,
+        "remark": "",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 1.14,
+        "r_ionic": 1.0,
+        "remark": "",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 1.16,
+        "r_ionic": 1.02,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 1.26,
+        "r_ionic": 1.12,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.32,
+        "r_ionic": 1.18,
+        "remark": "",
+        "spin": ""
+      },
+      "X": {
+        "r_crystal": 1.434,
+        "r_ionic": 1.294,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "XI": {
+        "r_crystal": 1.484,
+        "r_ionic": 1.344,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "XII": {
+        "r_crystal": 1.53,
+        "r_ionic": 1.39,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "Nb": {
+    "2": {
+      "IV": {
+        "r_crystal": 0.895,
+        "r_ionic": 0.755,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.956,
+        "r_ionic": 0.816,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 1.024,
+        "r_ionic": 0.884,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "3": {
+      "IV": {
+        "r_crystal": 0.749,
+        "r_ionic": 0.609,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.805,
+        "r_ionic": 0.665,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.86,
+        "r_ionic": 0.72,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "4": {
+      "IV": {
+        "r_crystal": 0.689,
+        "r_ionic": 0.549,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.756,
+        "r_ionic": 0.616,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.82,
+        "r_ionic": 0.68,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 0.93,
+        "r_ionic": 0.79,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "5": {
+      "IV": {
+        "r_crystal": 0.62,
+        "r_ionic": 0.48,
+        "remark": "",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.703,
+        "r_ionic": 0.563,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.78,
+        "r_ionic": 0.64,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 0.83,
+        "r_ionic": 0.69,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 0.88,
+        "r_ionic": 0.74,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "Nd": {
+    "2": {
+      "IX": {
+        "r_crystal": 1.49,
+        "r_ionic": 1.35,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.43,
+        "r_ionic": 1.29,
+        "remark": "",
+        "spin": ""
+      },
+      "XII": {
+        "r_crystal": 1.645,
+        "r_ionic": 1.505,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "3": {
+      "I": {
+        "r_crystal": 0.828,
+        "r_ionic": 0.688,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "II": {
+        "r_crystal": 0.892,
+        "r_ionic": 0.752,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "III": {
+        "r_crystal": 0.954,
+        "r_ionic": 0.814,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 1.014,
+        "r_ionic": 0.874,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IX": {
+        "r_crystal": 1.303,
+        "r_ionic": 1.163,
+        "remark": "",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 1.072,
+        "r_ionic": 0.932,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 1.123,
+        "r_ionic": 0.983,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 1.189,
+        "r_ionic": 1.049,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.249,
+        "r_ionic": 1.109,
+        "remark": "",
+        "spin": ""
+      },
+      "X": {
+        "r_crystal": 1.356,
+        "r_ionic": 1.216,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "XI": {
+        "r_crystal": 1.389,
+        "r_ionic": 1.249,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "XII": {
+        "r_crystal": 1.41,
+        "r_ionic": 1.27,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "Ni": {
+    "1": {
+      "II": {
+        "r_crystal": 0.585,
+        "r_ionic": 0.445,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "2": {
+      "II": {
+        "r_crystal": 0.509,
+        "r_ionic": 0.369,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "III": {
+        "r_crystal": 0.59,
+        "r_ionic": 0.45,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 0.63,
+        "r_ionic": 0.49,
+        "remark": "",
+        "spin": ""
+      },
+      "IX": {
+        "r_crystal": 1.11,
+        "r_ionic": 0.97,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.77,
+        "r_ionic": 0.63,
+        "remark": "",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.83,
+        "r_ionic": 0.69,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 0.926,
+        "r_ionic": 0.786,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.018,
+        "r_ionic": 0.878,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "3": {
+      "IV": {
+        "r_crystal": 0.59,
+        "r_ionic": 0.45,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.7,
+        "r_ionic": 0.56,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "4": {
+      "VI": {
+        "r_crystal": 0.62,
+        "r_ionic": 0.48,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "No": {
+    "2": {
+      "VI": {
+        "r_crystal": 1.24,
+        "r_ionic": 1.1,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "Np": {
+    "2": {
+      "VI": {
+        "r_crystal": 1.24,
+        "r_ionic": 1.1,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "3": {
+      "VI": {
+        "r_crystal": 1.15,
+        "r_ionic": 1.01,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "4": {
+      "VI": {
+        "r_crystal": 1.01,
+        "r_ionic": 0.87,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.12,
+        "r_ionic": 0.98,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "5": {
+      "II": {
+        "r_crystal": 0.653,
+        "r_ionic": 0.513,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.822,
+        "r_ionic": 0.682,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.89,
+        "r_ionic": 0.75,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 0.962,
+        "r_ionic": 0.822,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.025,
+        "r_ionic": 0.885,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "6": {
+      "II": {
+        "r_crystal": 0.569,
+        "r_ionic": 0.429,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.758,
+        "r_ionic": 0.618,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.86,
+        "r_ionic": 0.72,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 0.932,
+        "r_ionic": 0.792,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 0.995,
+        "r_ionic": 0.855,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "7": {
+      "VI": {
+        "r_crystal": 0.85,
+        "r_ionic": 0.71,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "O": {
+    "-2": {
+      "II": {
+        "r_crystal": 1.21,
+        "r_ionic": 1.35,
+        "remark": "",
+        "spin": ""
+      },
+      "III": {
+        "r_crystal": 1.22,
+        "r_ionic": 1.36,
+        "remark": "",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 1.24,
+        "r_ionic": 1.38,
+        "remark": "",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 1.26,
+        "r_ionic": 1.4,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.28,
+        "r_ionic": 1.42,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "Os": {
+    "4": {
+      "VI": {
+        "r_crystal": 0.77,
+        "r_ionic": 0.63,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "5": {
+      "VI": {
+        "r_crystal": 0.715,
+        "r_ionic": 0.575,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "6": {
+      "V": {
+        "r_crystal": 0.63,
+        "r_ionic": 0.49,
+        "remark": "",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.685,
+        "r_ionic": 0.545,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "7": {
+      "V": {
+        "r_crystal": 0.603,
+        "r_ionic": 0.463,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.665,
+        "r_ionic": 0.525,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "8": {
+      "IV": {
+        "r_crystal": 0.53,
+        "r_ionic": 0.39,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "P": {
+    "3": {
+      "III": {
+        "r_crystal": 0.407,
+        "r_ionic": 0.267,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.58,
+        "r_ionic": 0.44,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "4": {
+      "III": {
+        "r_crystal": 0.301,
+        "r_ionic": 0.161,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 0.371,
+        "r_ionic": 0.231,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "5": {
+      "IV": {
+        "r_crystal": 0.31,
+        "r_ionic": 0.17,
+        "remark": "",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.43,
+        "r_ionic": 0.29,
+        "remark": "",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.52,
+        "r_ionic": 0.38,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "Pa": {
+    "3": {
+      "VI": {
+        "r_crystal": 1.18,
+        "r_ionic": 1.04,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "4": {
+      "VI": {
+        "r_crystal": 1.04,
+        "r_ionic": 0.9,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.15,
+        "r_ionic": 1.01,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "5": {
+      "IX": {
+        "r_crystal": 1.09,
+        "r_ionic": 0.95,
+        "remark": "",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.92,
+        "r_ionic": 0.78,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.05,
+        "r_ionic": 0.91,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "Pb": {
+    "2": {
+      "I": {
+        "r_crystal": 0.841,
+        "r_ionic": 0.701,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "II": {
+        "r_crystal": 0.936,
+        "r_ionic": 0.796,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "III": {
+        "r_crystal": 1.032,
+        "r_ionic": 0.892,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 1.12,
+        "r_ionic": 0.98,
+        "remark": "",
+        "spin": ""
+      },
+      "IX": {
+        "r_crystal": 1.49,
+        "r_ionic": 1.35,
+        "remark": "",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 1.229,
+        "r_ionic": 1.089,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 1.33,
+        "r_ionic": 1.19,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 1.37,
+        "r_ionic": 1.23,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.43,
+        "r_ionic": 1.29,
+        "remark": "",
+        "spin": ""
+      },
+      "X": {
+        "r_crystal": 1.54,
+        "r_ionic": 1.4,
+        "remark": "",
+        "spin": ""
+      },
+      "XI": {
+        "r_crystal": 1.59,
+        "r_ionic": 1.45,
+        "remark": "",
+        "spin": ""
+      },
+      "XII": {
+        "r_crystal": 1.63,
+        "r_ionic": 1.49,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "4": {
+      "IV": {
+        "r_crystal": 0.79,
+        "r_ionic": 0.65,
+        "remark": "",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.87,
+        "r_ionic": 0.73,
+        "remark": "",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.915,
+        "r_ionic": 0.775,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.08,
+        "r_ionic": 0.94,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "Pd": {
+    "1": {
+      "II": {
+        "r_crystal": 0.73,
+        "r_ionic": 0.59,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "2": {
+      "II": {
+        "r_crystal": 0.601,
+        "r_ionic": 0.461,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 0.78,
+        "r_ionic": 0.64,
+        "remark": "",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 1.0,
+        "r_ionic": 0.86,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 1.08,
+        "r_ionic": 0.94,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.164,
+        "r_ionic": 1.024,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "X": {
+        "r_crystal": 1.322,
+        "r_ionic": 1.182,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "3": {
+      "VI": {
+        "r_crystal": 0.9,
+        "r_ionic": 0.76,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "4": {
+      "VI": {
+        "r_crystal": 0.755,
+        "r_ionic": 0.615,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "Pm": {
+    "3": {
+      "IX": {
+        "r_crystal": 1.284,
+        "r_ionic": 1.144,
+        "remark": "",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 1.11,
+        "r_ionic": 0.97,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.233,
+        "r_ionic": 1.093,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "Po": {
+    "4": {
+      "VI": {
+        "r_crystal": 1.08,
+        "r_ionic": 0.94,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.22,
+        "r_ionic": 1.08,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "6": {
+      "VI": {
+        "r_crystal": 0.81,
+        "r_ionic": 0.67,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "Pr": {
+    "2": {
+      "VI": {
+        "r_crystal": 1.378,
+        "r_ionic": 1.238,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.466,
+        "r_ionic": 1.326,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "XII": {
+        "r_crystal": 1.665,
+        "r_ionic": 1.525,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "3": {
+      "I": {
+        "r_crystal": 0.844,
+        "r_ionic": 0.704,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "II": {
+        "r_crystal": 0.908,
+        "r_ionic": 0.768,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "III": {
+        "r_crystal": 0.971,
+        "r_ionic": 0.831,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 1.031,
+        "r_ionic": 0.891,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IX": {
+        "r_crystal": 1.319,
+        "r_ionic": 1.179,
+        "remark": "",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 1.088,
+        "r_ionic": 0.948,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 1.13,
+        "r_ionic": 0.99,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 1.205,
+        "r_ionic": 1.065,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.266,
+        "r_ionic": 1.126,
+        "remark": "",
+        "spin": ""
+      },
+      "X": {
+        "r_crystal": 1.372,
+        "r_ionic": 1.232,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "XI": {
+        "r_crystal": 1.406,
+        "r_ionic": 1.266,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "XII": {
+        "r_crystal": 1.434,
+        "r_ionic": 1.294,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "4": {
+      "V": {
+        "r_crystal": 0.922,
+        "r_ionic": 0.782,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.99,
+        "r_ionic": 0.85,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 1.043,
+        "r_ionic": 0.903,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.1,
+        "r_ionic": 0.96,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "Pt": {
+    "2": {
+      "II": {
+        "r_crystal": 0.602,
+        "r_ionic": 0.462,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 0.74,
+        "r_ionic": 0.6,
+        "remark": "",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.94,
+        "r_ionic": 0.8,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 1.063,
+        "r_ionic": 0.923,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.166,
+        "r_ionic": 1.026,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "4": {
+      "VI": {
+        "r_crystal": 0.765,
+        "r_ionic": 0.625,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "5": {
+      "VI": {
+        "r_crystal": 0.71,
+        "r_ionic": 0.57,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "6": {
+      "VI": {
+        "r_crystal": 0.657,
+        "r_ionic": 0.517,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    }
+  },
+  "Pu": {
+    "3": {
+      "IV": {
+        "r_crystal": 1.028,
+        "r_ionic": 0.888,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 1.081,
+        "r_ionic": 0.941,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 1.14,
+        "r_ionic": 1.0,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.25,
+        "r_ionic": 1.11,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "4": {
+      "VI": {
+        "r_crystal": 1.0,
+        "r_ionic": 0.86,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 1.06,
+        "r_ionic": 0.92,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.1,
+        "r_ionic": 0.96,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "5": {
+      "II": {
+        "r_crystal": 0.645,
+        "r_ionic": 0.505,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.88,
+        "r_ionic": 0.74,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.014,
+        "r_ionic": 0.874,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "6": {
+      "II": {
+        "r_crystal": 0.562,
+        "r_ionic": 0.422,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.85,
+        "r_ionic": 0.71,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 0.985,
+        "r_ionic": 0.845,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    }
+  },
+  "Ra": {
+    "2": {
+      "VIII": {
+        "r_crystal": 1.62,
+        "r_ionic": 1.48,
+        "remark": "",
+        "spin": ""
+      },
+      "XII": {
+        "r_crystal": 1.84,
+        "r_ionic": 1.7,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "Rb": {
+    "1": {
+      "I": {
+        "r_crystal": 1.345,
+        "r_ionic": 1.205,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "II": {
+        "r_crystal": 1.416,
+        "r_ionic": 1.276,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "III": {
+        "r_crystal": 1.484,
+        "r_ionic": 1.344,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 1.548,
+        "r_ionic": 1.408,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IX": {
+        "r_crystal": 1.77,
+        "r_ionic": 1.63,
+        "remark": "",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 1.606,
+        "r_ionic": 1.466,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 1.66,
+        "r_ionic": 1.52,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 1.7,
+        "r_ionic": 1.56,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.75,
+        "r_ionic": 1.61,
+        "remark": "",
+        "spin": ""
+      },
+      "X": {
+        "r_crystal": 1.8,
+        "r_ionic": 1.66,
+        "remark": "",
+        "spin": ""
+      },
+      "XI": {
+        "r_crystal": 1.83,
+        "r_ionic": 1.69,
+        "remark": "",
+        "spin": ""
+      },
+      "XII": {
+        "r_crystal": 1.86,
+        "r_ionic": 1.72,
+        "remark": "",
+        "spin": ""
+      },
+      "XIV": {
+        "r_crystal": 1.97,
+        "r_ionic": 1.83,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "Re": {
+    "4": {
+      "IV": {
+        "r_crystal": 0.63,
+        "r_ionic": 0.49,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.77,
+        "r_ionic": 0.63,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "5": {
+      "IV": {
+        "r_crystal": 0.581,
+        "r_ionic": 0.441,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.72,
+        "r_ionic": 0.58,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "6": {
+      "IV": {
+        "r_crystal": 0.539,
+        "r_ionic": 0.399,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.617,
+        "r_ionic": 0.477,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.69,
+        "r_ionic": 0.55,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "7": {
+      "IV": {
+        "r_crystal": 0.52,
+        "r_ionic": 0.38,
+        "remark": "",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.596,
+        "r_ionic": 0.456,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.67,
+        "r_ionic": 0.53,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 0.807,
+        "r_ionic": 0.667,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    }
+  },
+  "Rh": {
+    "3": {
+      "VI": {
+        "r_crystal": 0.805,
+        "r_ionic": 0.665,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 0.978,
+        "r_ionic": 0.838,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "4": {
+      "VI": {
+        "r_crystal": 0.74,
+        "r_ionic": 0.6,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "5": {
+      "VI": {
+        "r_crystal": 0.69,
+        "r_ionic": 0.55,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "Ru": {
+    "3": {
+      "IV": {
+        "r_crystal": 0.671,
+        "r_ionic": 0.531,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.82,
+        "r_ionic": 0.68,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "4": {
+      "VI": {
+        "r_crystal": 0.76,
+        "r_ionic": 0.62,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 0.825,
+        "r_ionic": 0.685,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 0.892,
+        "r_ionic": 0.752,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "5": {
+      "IV": {
+        "r_crystal": 0.569,
+        "r_ionic": 0.429,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.642,
+        "r_ionic": 0.502,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.705,
+        "r_ionic": 0.565,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "6": {
+      "IV": {
+        "r_crystal": 0.526,
+        "r_ionic": 0.386,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.609,
+        "r_ionic": 0.469,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.691,
+        "r_ionic": 0.551,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "7": {
+      "IV": {
+        "r_crystal": 0.52,
+        "r_ionic": 0.38,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "8": {
+      "IV": {
+        "r_crystal": 0.5,
+        "r_ionic": 0.36,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "S": {
+    "-2": {
+      "VI": {
+        "r_crystal": 1.7,
+        "r_ionic": 1.84,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "2": {
+      "I": {
+        "r_crystal": 0.623,
+        "r_ionic": 0.483,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "II": {
+        "r_crystal": 0.67,
+        "r_ionic": 0.53,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "III": {
+        "r_crystal": 0.719,
+        "r_ionic": 0.579,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 0.768,
+        "r_ionic": 0.628,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "3": {
+      "III": {
+        "r_crystal": 0.482,
+        "r_ionic": 0.342,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "4": {
+      "II": {
+        "r_crystal": 0.263,
+        "r_ionic": 0.123,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "III": {
+        "r_crystal": 0.328,
+        "r_ionic": 0.188,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.51,
+        "r_ionic": 0.37,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "5": {
+      "III": {
+        "r_crystal": 0.231,
+        "r_ionic": 0.091,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.496,
+        "r_ionic": 0.356,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "6": {
+      "IV": {
+        "r_crystal": 0.26,
+        "r_ionic": 0.12,
+        "remark": "",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.43,
+        "r_ionic": 0.29,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "Sb": {
+    "3": {
+      "III": {
+        "r_crystal": 0.818,
+        "r_ionic": 0.678,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 0.9,
+        "r_ionic": 0.76,
+        "remark": "",
+        "spin": ""
+      },
+      "IX": {
+        "r_crystal": 1.154,
+        "r_ionic": 1.014,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.94,
+        "r_ionic": 0.8,
+        "remark": "",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.9,
+        "r_ionic": 0.76,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 0.998,
+        "r_ionic": 0.858,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.072,
+        "r_ionic": 0.932,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "X": {
+        "r_crystal": 1.235,
+        "r_ionic": 1.095,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "5": {
+      "III": {
+        "r_crystal": 0.534,
+        "r_ionic": 0.394,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.682,
+        "r_ionic": 0.542,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.74,
+        "r_ionic": 0.6,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "Sc": {
+    "2": {
+      "VI": {
+        "r_crystal": 1.064,
+        "r_ionic": 0.924,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "3": {
+      "II": {
+        "r_crystal": 0.569,
+        "r_ionic": 0.429,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IX": {
+        "r_crystal": 1.081,
+        "r_ionic": 0.941,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.799,
+        "r_ionic": 0.659,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.885,
+        "r_ionic": 0.745,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 0.944,
+        "r_ionic": 0.804,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.01,
+        "r_ionic": 0.87,
+        "remark": "",
+        "spin": ""
+      },
+      "X": {
+        "r_crystal": 1.146,
+        "r_ionic": 1.006,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    }
+  },
+  "Se": {
+    "-2": {
+      "VI": {
+        "r_crystal": 1.84,
+        "r_ionic": 1.98,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "2": {
+      "I": {
+        "r_crystal": 0.659,
+        "r_ionic": 0.519,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "II": {
+        "r_crystal": 0.722,
+        "r_ionic": 0.582,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "III": {
+        "r_crystal": 0.786,
+        "r_ionic": 0.646,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.132,
+        "r_ionic": 0.992,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "4": {
+      "I": {
+        "r_crystal": 0.265,
+        "r_ionic": 0.125,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "III": {
+        "r_crystal": 0.412,
+        "r_ionic": 0.272,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 0.492,
+        "r_ionic": 0.352,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IX": {
+        "r_crystal": 0.929,
+        "r_ionic": 0.789,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.574,
+        "r_ionic": 0.434,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.64,
+        "r_ionic": 0.5,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 0.751,
+        "r_ionic": 0.611,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 0.843,
+        "r_ionic": 0.703,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "6": {
+      "III": {
+        "r_crystal": 0.34,
+        "r_ionic": 0.2,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 0.42,
+        "r_ionic": 0.28,
+        "remark": "",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.49,
+        "r_ionic": 0.35,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.56,
+        "r_ionic": 0.42,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "Si": {
+    "4": {
+      "IV": {
+        "r_crystal": 0.4,
+        "r_ionic": 0.26,
+        "remark": "",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.472,
+        "r_ionic": 0.332,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.54,
+        "r_ionic": 0.4,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 0.671,
+        "r_ionic": 0.531,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    }
+  },
+  "Sm": {
+    "2": {
+      "IX": {
+        "r_crystal": 1.46,
+        "r_ionic": 1.32,
+        "remark": "",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 1.31,
+        "r_ionic": 1.17,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 1.36,
+        "r_ionic": 1.22,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.41,
+        "r_ionic": 1.27,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "3": {
+      "I": {
+        "r_crystal": 0.798,
+        "r_ionic": 0.658,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "II": {
+        "r_crystal": 0.861,
+        "r_ionic": 0.721,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "III": {
+        "r_crystal": 0.924,
+        "r_ionic": 0.784,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 0.984,
+        "r_ionic": 0.844,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IX": {
+        "r_crystal": 1.272,
+        "r_ionic": 1.132,
+        "remark": "",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 1.042,
+        "r_ionic": 0.902,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 1.098,
+        "r_ionic": 0.958,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 1.16,
+        "r_ionic": 1.02,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.219,
+        "r_ionic": 1.079,
+        "remark": "",
+        "spin": ""
+      },
+      "X": {
+        "r_crystal": 1.325,
+        "r_ionic": 1.185,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "XI": {
+        "r_crystal": 1.358,
+        "r_ionic": 1.218,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "XII": {
+        "r_crystal": 1.38,
+        "r_ionic": 1.24,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "Sn": {
+    "2": {
+      "II": {
+        "r_crystal": 0.837,
+        "r_ionic": 0.697,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "III": {
+        "r_crystal": 0.922,
+        "r_ionic": 0.782,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 1.002,
+        "r_ionic": 0.862,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IX": {
+        "r_crystal": 1.335,
+        "r_ionic": 1.195,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 1.073,
+        "r_ionic": 0.933,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 1.139,
+        "r_ionic": 0.999,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 1.203,
+        "r_ionic": 1.063,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.268,
+        "r_ionic": 1.128,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "X": {
+        "r_crystal": 1.404,
+        "r_ionic": 1.264,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "4": {
+      "IV": {
+        "r_crystal": 0.69,
+        "r_ionic": 0.55,
+        "remark": "",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.76,
+        "r_ionic": 0.62,
+        "remark": "",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.83,
+        "r_ionic": 0.69,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 0.89,
+        "r_ionic": 0.75,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 0.95,
+        "r_ionic": 0.81,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "Sr": {
+    "2": {
+      "I": {
+        "r_crystal": 0.95,
+        "r_ionic": 0.81,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "II": {
+        "r_crystal": 1.031,
+        "r_ionic": 0.891,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "III": {
+        "r_crystal": 1.111,
+        "r_ionic": 0.971,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 1.186,
+        "r_ionic": 1.046,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IX": {
+        "r_crystal": 1.45,
+        "r_ionic": 1.31,
+        "remark": "",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 1.255,
+        "r_ionic": 1.115,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 1.32,
+        "r_ionic": 1.18,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 1.35,
+        "r_ionic": 1.21,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.4,
+        "r_ionic": 1.26,
+        "remark": "",
+        "spin": ""
+      },
+      "X": {
+        "r_crystal": 1.5,
+        "r_ionic": 1.36,
+        "remark": "",
+        "spin": ""
+      },
+      "XI": {
+        "r_crystal": 1.541,
+        "r_ionic": 1.401,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "XII": {
+        "r_crystal": 1.58,
+        "r_ionic": 1.44,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "Ta": {
+    "3": {
+      "VI": {
+        "r_crystal": 0.86,
+        "r_ionic": 0.72,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "4": {
+      "V": {
+        "r_crystal": 0.753,
+        "r_ionic": 0.613,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.82,
+        "r_ionic": 0.68,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "5": {
+      "IV": {
+        "r_crystal": 0.618,
+        "r_ionic": 0.478,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.699,
+        "r_ionic": 0.559,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.78,
+        "r_ionic": 0.64,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 0.83,
+        "r_ionic": 0.69,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 0.88,
+        "r_ionic": 0.74,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "Tb": {
+    "3": {
+      "I": {
+        "r_crystal": 0.752,
+        "r_ionic": 0.612,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "II": {
+        "r_crystal": 0.816,
+        "r_ionic": 0.676,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IX": {
+        "r_crystal": 1.235,
+        "r_ionic": 1.095,
+        "remark": "",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 1.001,
+        "r_ionic": 0.861,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 1.063,
+        "r_ionic": 0.923,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 1.12,
+        "r_ionic": 0.98,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.18,
+        "r_ionic": 1.04,
+        "remark": "",
+        "spin": ""
+      },
+      "X": {
+        "r_crystal": 1.281,
+        "r_ionic": 1.141,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "XII": {
+        "r_crystal": 1.34,
+        "r_ionic": 1.2,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "4": {
+      "V": {
+        "r_crystal": 0.843,
+        "r_ionic": 0.703,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.9,
+        "r_ionic": 0.76,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 0.964,
+        "r_ionic": 0.824,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.02,
+        "r_ionic": 0.88,
+        "remark": "",
+        "spin": ""
+      },
+      "XII": {
+        "r_crystal": 1.186,
+        "r_ionic": 1.046,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    }
+  },
+  "Tc": {
+    "4": {
+      "VI": {
+        "r_crystal": 0.785,
+        "r_ionic": 0.645,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "5": {
+      "VI": {
+        "r_crystal": 0.74,
+        "r_ionic": 0.6,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "7": {
+      "IV": {
+        "r_crystal": 0.51,
+        "r_ionic": 0.37,
+        "remark": "",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.609,
+        "r_ionic": 0.469,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.7,
+        "r_ionic": 0.56,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 0.864,
+        "r_ionic": 0.724,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    }
+  },
+  "Te": {
+    "-2": {
+      "VI": {
+        "r_crystal": 2.07,
+        "r_ionic": 2.21,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "4": {
+      "II": {
+        "r_crystal": 0.555,
+        "r_ionic": 0.415,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "III": {
+        "r_crystal": 0.66,
+        "r_ionic": 0.52,
+        "remark": "",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 0.8,
+        "r_ionic": 0.66,
+        "remark": "",
+        "spin": ""
+      },
+      "IX": {
+        "r_crystal": 1.248,
+        "r_ionic": 1.108,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.949,
+        "r_ionic": 0.809,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 1.11,
+        "r_ionic": 0.97,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 1.149,
+        "r_ionic": 1.009,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.202,
+        "r_ionic": 1.062,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "X": {
+        "r_crystal": 1.296,
+        "r_ionic": 1.156,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "5": {
+      "V": {
+        "r_crystal": 0.79,
+        "r_ionic": 0.65,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.9,
+        "r_ionic": 0.76,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "6": {
+      "IV": {
+        "r_crystal": 0.57,
+        "r_ionic": 0.43,
+        "remark": "",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.638,
+        "r_ionic": 0.498,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.7,
+        "r_ionic": 0.56,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 0.791,
+        "r_ionic": 0.651,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    }
+  },
+  "Th": {
+    "3": {
+      "XII": {
+        "r_crystal": 1.504,
+        "r_ionic": 1.364,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "4": {
+      "IV": {
+        "r_crystal": 0.937,
+        "r_ionic": 0.797,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IX": {
+        "r_crystal": 1.23,
+        "r_ionic": 1.09,
+        "remark": "",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.998,
+        "r_ionic": 0.858,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 1.08,
+        "r_ionic": 0.94,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 1.113,
+        "r_ionic": 0.973,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.19,
+        "r_ionic": 1.05,
+        "remark": "",
+        "spin": ""
+      },
+      "X": {
+        "r_crystal": 1.27,
+        "r_ionic": 1.13,
+        "remark": "",
+        "spin": ""
+      },
+      "XI": {
+        "r_crystal": 1.32,
+        "r_ionic": 1.18,
+        "remark": "",
+        "spin": ""
+      },
+      "XII": {
+        "r_crystal": 1.35,
+        "r_ionic": 1.21,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "Ti": {
+    "2": {
+      "IV": {
+        "r_crystal": 0.862,
+        "r_ionic": 0.722,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.929,
+        "r_ionic": 0.789,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 1.0,
+        "r_ionic": 0.86,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "3": {
+      "V": {
+        "r_crystal": 0.755,
+        "r_ionic": 0.615,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.81,
+        "r_ionic": 0.67,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 0.902,
+        "r_ionic": 0.762,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "4": {
+      "I": {
+        "r_crystal": 0.323,
+        "r_ionic": 0.183,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "II": {
+        "r_crystal": 0.402,
+        "r_ionic": 0.262,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "III": {
+        "r_crystal": 0.483,
+        "r_ionic": 0.343,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 0.56,
+        "r_ionic": 0.42,
+        "remark": "",
+        "spin": ""
+      },
+      "IX": {
+        "r_crystal": 0.936,
+        "r_ionic": 0.796,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.65,
+        "r_ionic": 0.51,
+        "remark": "",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.745,
+        "r_ionic": 0.605,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 0.88,
+        "r_ionic": 0.74,
+        "remark": "",
+        "spin": ""
+      },
+      "X": {
+        "r_crystal": 0.99,
+        "r_ionic": 0.85,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    }
+  },
+  "Tl": {
+    "1": {
+      "I": {
+        "r_crystal": 1.03,
+        "r_ionic": 0.89,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "II": {
+        "r_crystal": 1.158,
+        "r_ionic": 1.018,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "III": {
+        "r_crystal": 1.29,
+        "r_ionic": 1.15,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 1.418,
+        "r_ionic": 1.278,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IX": {
+        "r_crystal": 1.76,
+        "r_ionic": 1.62,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 1.532,
+        "r_ionic": 1.392,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 1.64,
+        "r_ionic": 1.5,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 1.685,
+        "r_ionic": 1.545,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.73,
+        "r_ionic": 1.59,
+        "remark": "",
+        "spin": ""
+      },
+      "X": {
+        "r_crystal": 1.79,
+        "r_ionic": 1.65,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "XI": {
+        "r_crystal": 1.82,
+        "r_ionic": 1.68,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "XII": {
+        "r_crystal": 1.84,
+        "r_ionic": 1.7,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "3": {
+      "I": {
+        "r_crystal": 0.633,
+        "r_ionic": 0.493,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "II": {
+        "r_crystal": 0.72,
+        "r_ionic": 0.58,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "III": {
+        "r_crystal": 0.806,
+        "r_ionic": 0.666,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 0.89,
+        "r_ionic": 0.75,
+        "remark": "",
+        "spin": ""
+      },
+      "IX": {
+        "r_crystal": 1.226,
+        "r_ionic": 1.086,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.962,
+        "r_ionic": 0.822,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 1.025,
+        "r_ionic": 0.885,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 1.099,
+        "r_ionic": 0.959,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.12,
+        "r_ionic": 0.98,
+        "remark": "",
+        "spin": ""
+      },
+      "XII": {
+        "r_crystal": 1.401,
+        "r_ionic": 1.261,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    }
+  },
+  "Tm": {
+    "2": {
+      "VI": {
+        "r_crystal": 1.17,
+        "r_ionic": 1.03,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 1.23,
+        "r_ionic": 1.09,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.287,
+        "r_ionic": 1.147,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "XII": {
+        "r_crystal": 1.49,
+        "r_ionic": 1.35,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "3": {
+      "II": {
+        "r_crystal": 0.764,
+        "r_ionic": 0.624,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "III": {
+        "r_crystal": 0.827,
+        "r_ionic": 0.687,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IX": {
+        "r_crystal": 1.192,
+        "r_ionic": 1.052,
+        "remark": "",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 1.02,
+        "r_ionic": 0.88,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 1.076,
+        "r_ionic": 0.936,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.134,
+        "r_ionic": 0.994,
+        "remark": "",
+        "spin": ""
+      },
+      "X": {
+        "r_crystal": 1.231,
+        "r_ionic": 1.091,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "XII": {
+        "r_crystal": 1.29,
+        "r_ionic": 1.15,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    }
+  },
+  "U": {
+    "3": {
+      "VI": {
+        "r_crystal": 1.165,
+        "r_ionic": 1.025,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "4": {
+      "IX": {
+        "r_crystal": 1.19,
+        "r_ionic": 1.05,
+        "remark": "",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 1.03,
+        "r_ionic": 0.89,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 1.09,
+        "r_ionic": 0.95,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.14,
+        "r_ionic": 1.0,
+        "remark": "",
+        "spin": ""
+      },
+      "XII": {
+        "r_crystal": 1.31,
+        "r_ionic": 1.17,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "5": {
+      "II": {
+        "r_crystal": 0.664,
+        "r_ionic": 0.524,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.834,
+        "r_ionic": 0.694,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.9,
+        "r_ionic": 0.76,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 0.98,
+        "r_ionic": 0.84,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.038,
+        "r_ionic": 0.898,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "6": {
+      "II": {
+        "r_crystal": 0.59,
+        "r_ionic": 0.45,
+        "remark": "",
+        "spin": ""
+      },
+      "III": {
+        "r_crystal": 0.624,
+        "r_ionic": 0.484,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 0.66,
+        "r_ionic": 0.52,
+        "remark": "",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.769,
+        "r_ionic": 0.629,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.87,
+        "r_ionic": 0.73,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 0.95,
+        "r_ionic": 0.81,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.0,
+        "r_ionic": 0.86,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "V": {
+    "2": {
+      "VI": {
+        "r_crystal": 0.93,
+        "r_ionic": 0.79,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "3": {
+      "III": {
+        "r_crystal": 0.589,
+        "r_ionic": 0.449,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 0.653,
+        "r_ionic": 0.513,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.716,
+        "r_ionic": 0.576,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.78,
+        "r_ionic": 0.64,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "4": {
+      "I": {
+        "r_crystal": 0.323,
+        "r_ionic": 0.183,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "II": {
+        "r_crystal": 0.403,
+        "r_ionic": 0.263,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "III": {
+        "r_crystal": 0.486,
+        "r_ionic": 0.346,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 0.571,
+        "r_ionic": 0.431,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.67,
+        "r_ionic": 0.53,
+        "remark": "",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.72,
+        "r_ionic": 0.58,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 0.86,
+        "r_ionic": 0.72,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "5": {
+      "I": {
+        "r_crystal": 0.223,
+        "r_ionic": 0.083,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "II": {
+        "r_crystal": 0.311,
+        "r_ionic": 0.171,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "III": {
+        "r_crystal": 0.403,
+        "r_ionic": 0.263,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 0.495,
+        "r_ionic": 0.355,
+        "remark": "",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.6,
+        "r_ionic": 0.46,
+        "remark": "",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.68,
+        "r_ionic": 0.54,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 0.77,
+        "r_ionic": 0.63,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    }
+  },
+  "W": {
+    "4": {
+      "VI": {
+        "r_crystal": 0.8,
+        "r_ionic": 0.66,
+        "remark": "",
+        "spin": ""
+      }
+    },
+    "5": {
+      "VI": {
+        "r_crystal": 0.76,
+        "r_ionic": 0.62,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 0.825,
+        "r_ionic": 0.685,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "6": {
+      "III": {
+        "r_crystal": 0.478,
+        "r_ionic": 0.338,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 0.56,
+        "r_ionic": 0.42,
+        "remark": "",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.65,
+        "r_ionic": 0.51,
+        "remark": "",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.74,
+        "r_ionic": 0.6,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 0.811,
+        "r_ionic": 0.671,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 0.877,
+        "r_ionic": 0.737,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    }
+  },
+  "Xe": {
+    "8": {
+      "IV": {
+        "r_crystal": 0.54,
+        "r_ionic": 0.4,
+        "remark": "",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.62,
+        "r_ionic": 0.48,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "Y": {
+    "2": {
+      "VI": {
+        "r_crystal": 1.207,
+        "r_ionic": 1.067,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "3": {
+      "II": {
+        "r_crystal": 0.752,
+        "r_ionic": 0.612,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "III": {
+        "r_crystal": 0.826,
+        "r_ionic": 0.686,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 0.899,
+        "r_ionic": 0.759,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IX": {
+        "r_crystal": 1.215,
+        "r_ionic": 1.075,
+        "remark": "",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.969,
+        "r_ionic": 0.829,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 1.04,
+        "r_ionic": 0.9,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 1.1,
+        "r_ionic": 0.96,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.159,
+        "r_ionic": 1.019,
+        "remark": "",
+        "spin": ""
+      },
+      "X": {
+        "r_crystal": 1.266,
+        "r_ionic": 1.126,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "XII": {
+        "r_crystal": 1.359,
+        "r_ionic": 1.219,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    }
+  },
+  "Yb": {
+    "2": {
+      "VI": {
+        "r_crystal": 1.16,
+        "r_ionic": 1.02,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 1.22,
+        "r_ionic": 1.08,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.28,
+        "r_ionic": 1.14,
+        "remark": "",
+        "spin": ""
+      },
+      "XII": {
+        "r_crystal": 1.476,
+        "r_ionic": 1.336,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    },
+    "3": {
+      "II": {
+        "r_crystal": 0.751,
+        "r_ionic": 0.611,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "III": {
+        "r_crystal": 0.815,
+        "r_ionic": 0.675,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IX": {
+        "r_crystal": 1.182,
+        "r_ionic": 1.042,
+        "remark": "",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.943,
+        "r_ionic": 0.803,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 1.008,
+        "r_ionic": 0.868,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 1.065,
+        "r_ionic": 0.925,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.125,
+        "r_ionic": 0.985,
+        "remark": "",
+        "spin": ""
+      },
+      "X": {
+        "r_crystal": 1.219,
+        "r_ionic": 1.079,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "XII": {
+        "r_crystal": 1.278,
+        "r_ionic": 1.138,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    }
+  },
+  "Zn": {
+    "2": {
+      "I": {
+        "r_crystal": 0.463,
+        "r_ionic": 0.323,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "II": {
+        "r_crystal": 0.554,
+        "r_ionic": 0.414,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "III": {
+        "r_crystal": 0.646,
+        "r_ionic": 0.506,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "IV": {
+        "r_crystal": 0.74,
+        "r_ionic": 0.6,
+        "remark": "",
+        "spin": ""
+      },
+      "IX": {
+        "r_crystal": 1.106,
+        "r_ionic": 0.966,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.82,
+        "r_ionic": 0.68,
+        "remark": "",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.88,
+        "r_ionic": 0.74,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 0.961,
+        "r_ionic": 0.821,
+        "remark": "ML Work",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 1.04,
+        "r_ionic": 0.9,
+        "remark": "",
+        "spin": ""
+      }
+    }
+  },
+  "Zr": {
+    "4": {
+      "IV": {
+        "r_crystal": 0.73,
+        "r_ionic": 0.59,
+        "remark": "",
+        "spin": ""
+      },
+      "IX": {
+        "r_crystal": 1.03,
+        "r_ionic": 0.89,
+        "remark": "",
+        "spin": ""
+      },
+      "V": {
+        "r_crystal": 0.8,
+        "r_ionic": 0.66,
+        "remark": "",
+        "spin": ""
+      },
+      "VI": {
+        "r_crystal": 0.86,
+        "r_ionic": 0.72,
+        "remark": "",
+        "spin": ""
+      },
+      "VII": {
+        "r_crystal": 0.92,
+        "r_ionic": 0.78,
+        "remark": "",
+        "spin": ""
+      },
+      "VIII": {
+        "r_crystal": 0.98,
+        "r_ionic": 0.84,
+        "remark": "",
+        "spin": ""
+      },
+      "X": {
+        "r_crystal": 1.088,
+        "r_ionic": 0.948,
+        "remark": "ML Work",
+        "spin": ""
+      }
+    }
+  }
+}
