@@ -123,7 +123,11 @@ def run_disorder_evaluation(
             sqs_structures = []
 
         for sqs in sqs_structures:
-            rr = relax_structure(sqs, calculator, fmax=fmax, max_steps=max_steps)
+            rr = relax_structure(
+                sqs, calculator,
+                fmax=fmax, max_steps=max_steps,
+                filter_type="None",  # position-only: matches compute_ordered_properties
+            )
             if rr.relaxation_converged:
                 props = compute_properties(
                     relaxed_structure=rr.relaxed_structure,
