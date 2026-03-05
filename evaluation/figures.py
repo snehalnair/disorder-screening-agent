@@ -474,6 +474,115 @@ def plot_sqs_variance(
 # ─────────────────────────────────────────────────────────────────────────────
 
 
+def plot_sqs_reliability(
+    rq2_results: dict,
+    output_path: str | pathlib.Path | None = None,
+    show: bool = False,
+) -> pathlib.Path:
+    """Fig 6: SQS realisation spread vs dopant-to-dopant resolution.
+
+    Shows every individual SQS voltage as a dot, sorted by disordered mean.
+    Colour-codes by convergence (n=5 full / n=3-4 partial / n=2 unreliable).
+    Adds a shaded band equal to ±1 SQS std per dopant to make clear that
+    adjacent ranks overlap — i.e. single-structure disorder calculations
+    cannot resolve the ordering within the band.
+    """
+    import matplotlib.pyplot as plt
+    import matplotlib.patches as mpatches
+    import numpy as np
+
+    plt.rcParams.update({"font.family": _SERIF})
+
+    rows = rq2_results.get("dopant_results", [])
+
+    data = []
+    for r in rows:
+        vs = [s.get("voltage") for s in r.get("sqs_realisations", [])
+              if s.get("voltage") is not None]
+        mean_v = r["disordered_mean"].get("voltage")
+        if vs and mean_v is not None:
+            data.append({
+                "dopant": r["dopant"],
+                "mean": mean_v,
+                "vals": vs,
+                "n": r["n_converged"],
+                "std": r["disordered_std"].get("voltage", 0.0),
+            })
+
+    if not data:
+        logger.warning("No SQS realisation voltage data — skipping Figure 6.")
+        return _FIGURES_DIR / "fig6_sqs_reliability.pdf"
+
+    data.sort(key=lambda x: -x["mean"])  # highest voltage first
+
+    dopants      = [d["dopant"] for d in data]
+    x_pos        = list(range(len(data)))
+    means        = [d["mean"] for d in data]
+    total_spread = max(means) - min(means)
+    mean_std     = float(np.mean([d["std"] for d in data]))
+
+    def _colour(n):
+        if n >= 5: return _COLORBLIND_PALETTE[0]
+        if n >= 3: return _COLORBLIND_PALETTE[4]
+        return _COLORBLIND_PALETTE[3]
+
+    fig, ax = plt.subplots(figsize=(_DOUBLE_COL_W, 3.8))
+
+    # Shaded ±1 std band per dopant
+    for xi, d in zip(x_pos, data):
+        ax.fill_between(
+            [xi - 0.4, xi + 0.4],
+            d["mean"] - d["std"], d["mean"] + d["std"],
+            alpha=0.18, color=_colour(d["n"]), linewidth=0,
+        )
+
+    # Individual SQS realisations
+    rng = np.random.default_rng(42)
+    for xi, d in zip(x_pos, data):
+        jitter = rng.uniform(-0.18, 0.18, len(d["vals"]))
+        ax.scatter(
+            [xi + j for j in jitter], d["vals"],
+            s=22, alpha=0.8, color=_colour(d["n"]), zorder=4,
+        )
+
+    # Mean markers
+    ax.scatter(x_pos, means, s=45, marker="D", color="#222222",
+               zorder=5, label="Disordered mean")
+
+    ax.annotate(
+        f"Mean within-dopant σ = {mean_std:.3f} V\n"
+        f"Total dopant spread   = {total_spread:.3f} V\n"
+        f"σ / spread = {mean_std/total_spread:.0%}",
+        xy=(0.02, 0.04), xycoords="axes fraction",
+        fontsize=7.5, va="bottom",
+        bbox=dict(boxstyle="round,pad=0.3", fc="white", ec="#cccccc", alpha=0.9),
+    )
+
+    ax.set_xticks(x_pos)
+    ax.set_xticklabels(dopants, fontsize=7.5, rotation=45, ha="right")
+    ax.set_ylabel("Voltage (V)", fontsize=9)
+    ax.set_title(
+        "SQS Realisation Spread vs Dopant-to-Dopant Resolution\n"
+        "(shaded = ±1σ; overlapping bands indicate indistinguishable ranks)",
+        fontsize=9,
+    )
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+
+    legend_handles = [
+        mpatches.Patch(color=_COLORBLIND_PALETTE[0], alpha=0.7, label="n = 5 (full)"),
+        mpatches.Patch(color=_COLORBLIND_PALETTE[4], alpha=0.7, label="n = 3–4 (partial)"),
+        mpatches.Patch(color=_COLORBLIND_PALETTE[3], alpha=0.7, label="n = 2 (unreliable)"),
+        plt.scatter([], [], s=45, marker="D", color="#222222", label="Mean"),
+    ]
+    ax.legend(handles=legend_handles, fontsize=7.5, loc="upper right")
+
+    plt.tight_layout()
+    out = _save_fig(fig, output_path or _FIGURES_DIR / "fig6_sqs_reliability.pdf", show)
+    plt.close(fig)
+    return out
+
+
 def save_all_figures(
     rq1_data: dict | None = None,
     rq2_data: dict | None = None,
@@ -515,6 +624,10 @@ def save_all_figures(
         p = plot_sqs_variance(rq2_data, output_path=out_dir / "fig5_sqs_variance.pdf", show=show)
         saved.append(p)
         logger.info("Figure 5 saved: %s", p)
+
+        p = plot_sqs_reliability(rq2_data, output_path=out_dir / "fig6_sqs_reliability.pdf", show=show)
+        saved.append(p)
+        logger.info("Figure 6 saved: %s", p)
 
     if accuracy_data and rq2_data:
         # Use property with best experimental coverage

@@ -1,5 +1,64 @@
 # Paper Draft Notes — Disorder-Aware NMC Dopant Screening
 
+## Reviewer / Presentation Feedback (2026-03-05) — ACTION ITEMS
+
+### Point 1: Convergence breakdown — Zr rank is unreliable
+n=2 dopants have huge 95% confidence intervals. Flag explicitly in any table or ranking.
+
+| Dopant | n | 95% CI (voltage) | Reliable? |
+|--------|---|-----------------|-----------|
+| Zr     | 2 | **±0.878 V**    | NO — CI wider than total dopant spread (0.130 V) |
+| Ta     | 2 | ±0.539 V        | NO |
+| Re     | 2 | ±0.227 V        | NO |
+| Mg     | 2 | ±0.213 V        | NO |
+| Fe     | 3 | ±0.100 V        | MARGINAL |
+| Ge     | 3 | ±0.095 V        | MARGINAL |
+| W      | 3 | ±0.033 V        | OK (low std) |
+
+**Critical**: Zr's two realisations were −3.467 V and −3.271 V (range 0.196 V). The mean −3.369 V
+is rank #1 in disordered ordering, but with a 95% CI of ±0.878 V, it could plausibly rank
+anywhere from #1 to last. Do NOT claim Zr is the top disorder-aware dopant without caveats.
+Zr is still notable for highest disorder sensitivity (8.5%), but the absolute rank is unreliable.
+
+### Point 2: Practical framing — lead with Cu and Sn, not PGMs
+- **Cu (n=4, CI ±0.062 V)**: earth-abundant, already studied in NMC, rank #5 disordered
+- **Sn (n=5, CI ±0.052 V)**: full convergence, small std, rank #5 disordered (tied Cu)
+- Ni (n=4): self-consistency check — correctly recovered by the pipeline (it's in NMC)
+- Pt and Ir: PGM, ~$50k/kg — note as computational result only, not synthesis targets
+
+Lead sentence: *"Among earth-abundant dopants, Cu and Sn emerge as the top novel targets
+with full or near-full SQS convergence, while Ni is correctly recovered as a self-consistency
+check (it is present in NMC)."*
+
+### Point 3: 29 unique elements → 22 simulated — full accounting
+
+| Step | Count | Removed | Reason |
+|------|-------|---------|--------|
+| Stage 3 survivors | 29 unique elements | — | 46 (element, OS) pairs collapsed |
+| Stage 4 viability | 24 | Cr, Sb, As, Os, U | Toxic / radioactive |
+| S excluded | 23 | S | Non-metal at octahedral Co site — unphysical |
+| Co self-substitution excluded | **22** | Co | Trivially the parent material |
+
+Total removed: 7 (5 toxicity/radioactivity + 1 non-metal + 1 self-substitution = 29 − 7 = 22 ✓)
+
+### Point 4: SQS variance — standalone methodological contribution (Fig 6)
+- Total dopant-to-dopant voltage spread: **0.130 V** across 22 dopants
+- Mean within-dopant SQS std: **0.050 V** (≈ 38% of total spread)
+- **All 22 dopants** have SQS std > average rank-to-rank resolution (0.006 V)
+- Top 10 dopants span only **0.070 V** — smaller than the SQS std of 15 of 22 dopants
+- Implication: exact rank within the top 10 is dominated by sampling noise
+
+Key claim for paper: *"A single disordered-cell calculation cannot reliably distinguish
+dopant rankings. The mean within-dopant SQS std (0.050 V) is 38% of the total
+dopant-to-dopant voltage spread, meaning most adjacent-rank pairs are statistically
+indistinguishable with n=1. At least n=3 realisations are needed to resolve ranks
+separated by > 0.1 V; for the top tier (Zr, Fe, Pt, W cluster within 0.030 V),
+even n=5 is insufficient."*
+
+Figure 6 (`fig6_sqs_reliability.pdf`) shows this directly.
+
+---
+
 ## Thesis Statement (UPDATED — 4×4×4 SQS on Kaggle T4, 2026-03-01)
 
 > Existing high-throughput dopant screening studies simulate ordered crystal structures,
@@ -7,9 +66,13 @@
 > that reduces the dopant search space by **83%** using chemical heuristics and produces
 > disorder-aware property predictions using machine-learned potentials on SQS supercells.
 > Applied to LiCoO2 cathode dopant screening (proxy for NMC Co site), we show that
-> disorder strongly disrupts voltage rankings (ρ = **−0.190**) while formation energy
-> rankings are preserved (ρ = **+0.881**, p = 0.004), demonstrating that the choice of
-> property governs whether ordered-cell screening is reliable.
+> disorder strongly disrupts voltage rankings (ρ = **−0.069**, n=22) while formation energy
+> rankings are preserved (ρ = **+0.956**, p < 0.001, n=22), demonstrating that the choice of
+> property governs whether ordered-cell screening is reliable. Furthermore, we show that
+> the mean within-dopant SQS variance (σ = 0.050 V) is 38% of the total dopant-to-dopant
+> voltage spread, demonstrating that single disordered-cell calculations are insufficient
+> to resolve dopant rankings — a methodological finding with broad implications for
+> disorder simulation practice.
 
 ### Filled-in values (from MACE-MPA-0, 4×4×4 supercell, Kaggle T4, 2026-03-01)
 
