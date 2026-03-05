@@ -76,9 +76,12 @@ class PruningRecord:
     stage3_passed: bool = False
     stage3_sub_probability: Optional[float] = None
 
-    # Stage 4
+    # Stage 4 — ML pre-screen (optional)
     stage4_passed: bool = False
     stage4_predicted_property: Optional[dict] = None
+
+    # Stage 4 — Viability filter (safety/regulatory)
+    stage4_viability_reason: Optional[str] = None   # e.g. "radioactive", "toxicity (carcinogen)"
 
     # Thresholds used (serialised as JSON in DB)
     thresholds_used: Optional[dict] = None

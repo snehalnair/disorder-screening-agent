@@ -11,13 +11,13 @@ from stages.registry import (
 )
 
 _REQUIRED_KEYS = {"name", "stage", "cost", "requires_gpu"}
-_EXPECTED_STAGE_IDS = {1, 2, 3, 4, "5a", "5b", "5c"}
+_EXPECTED_STAGE_IDS = {1, 2, 3, "4ml", "4v", "5a", "5b", "5c"}
 
 
 # ── Registry completeness ─────────────────────────────────────────────────────
 
 def test_all_stages_present():
-    """All 7 stages must be registered."""
+    """All 8 stages must be registered."""
     assert set(ALL_STAGES.keys()) == _EXPECTED_STAGE_IDS
 
 
@@ -32,7 +32,7 @@ def test_get_stage_metadata_returns_correct_entry():
     assert meta["name"] == "smact_filter"
     assert meta["stage"] == 1
 
-    meta4 = get_stage_metadata(4)
+    meta4 = get_stage_metadata("4ml")
     assert meta4["name"] == "ml_prescreen"
 
 
@@ -43,11 +43,11 @@ def test_get_stage_metadata_invalid_key_raises():
 
 # ── GPU stage detection ───────────────────────────────────────────────────────
 
-def test_get_gpu_stages_returns_4_5b_5c():
-    """Stage 4 (ML inference), 5b (MLIP relaxation), and 5c (property calc) require GPU."""
+def test_get_gpu_stages_returns_4ml_5b_5c():
+    """Stage 4ml (ML inference), 5b (MLIP relaxation), and 5c (property calc) require GPU."""
     gpu_stages = get_gpu_stages()
-    assert set(gpu_stages) == {4, "5b", "5c"}, (
-        f"Expected GPU stages {{4, 5b, 5c}}, got {set(gpu_stages)}"
+    assert set(gpu_stages) == {"4ml", "5b", "5c"}, (
+        f"Expected GPU stages {{4ml, 5b, 5c}}, got {set(gpu_stages)}"
     )
 
 
@@ -90,8 +90,8 @@ def test_cost_estimate_is_string():
 
 # ── Stage 4 metadata ──────────────────────────────────────────────────────────
 
-def test_stage4_has_caveat():
-    meta = get_stage_metadata(4)
+def test_stage4ml_has_caveat():
+    meta = get_stage_metadata("4ml")
     assert "caveat" in meta
     assert "ORDERED" in meta["caveat"]
 

@@ -1,0 +1,356 @@
+{
+  "_meta": {
+    "description": "Per-element safety and strategic metadata for the disorder-screening pipeline.",
+    "toxicity_classes": ["none", "low", "moderate", "high", "carcinogen"],
+    "toxicity_filter_threshold": "Elements with is_radioactive=true or is_toxic=true are removed by stage4_viability when constraints.non_toxic and constraints.non_radioactive are enabled.",
+    "sources": {
+      "toxicity": "IARC Monographs, NIOSH IDLH database, RoHS Directive 2011/65/EU, REACH SVHC list",
+      "eu_crm": "EU Critical Raw Materials Act 2023 (Annex I & II)",
+      "usgs": "USGS 2022 Critical Minerals List (US DOI)"
+    },
+    "cost_annotation": "Order-of-magnitude USD/kg for bulk oxide; annotation only, not used for filtering.",
+    "schema_version": "1.0"
+  },
+  "elements": {
+    "Al": {
+      "is_radioactive": false,
+      "is_toxic": false,
+      "toxicity_class": "none",
+      "toxicity_notes": "Safe; widely used in food packaging and pharmaceuticals.",
+      "synthesis_hazard": false,
+      "eu_crm_2023": false,
+      "usgs_criticality_2022": "not_critical",
+      "cost_annotation": "~2 USD/kg (abundant)"
+    },
+    "As": {
+      "is_radioactive": false,
+      "is_toxic": true,
+      "toxicity_class": "carcinogen",
+      "toxicity_notes": "IARC Group 1 carcinogen (inorganic arsenic). RoHS restricted. Severely restricts any commercial cathode application.",
+      "synthesis_hazard": true,
+      "eu_crm_2023": false,
+      "usgs_criticality_2022": "not_critical",
+      "cost_annotation": "~1-5 USD/kg"
+    },
+    "B": {
+      "is_radioactive": false,
+      "is_toxic": false,
+      "toxicity_class": "low",
+      "toxicity_notes": "Low acute toxicity. Boric acid is a mild irritant at high doses.",
+      "synthesis_hazard": false,
+      "eu_crm_2023": true,
+      "usgs_criticality_2022": "not_critical",
+      "cost_annotation": "~3 USD/kg"
+    },
+    "Bi": {
+      "is_radioactive": false,
+      "is_toxic": false,
+      "toxicity_class": "low",
+      "toxicity_notes": "Low toxicity; used medically (Pepto-Bismol). Less toxic than As or Sb.",
+      "synthesis_hazard": false,
+      "eu_crm_2023": true,
+      "usgs_criticality_2022": "not_critical",
+      "cost_annotation": "~6 USD/kg"
+    },
+    "Co": {
+      "is_radioactive": false,
+      "is_toxic": false,
+      "toxicity_class": "low",
+      "toxicity_notes": "IARC 2B (Co metal/sulfate dust). In oxide lattice at low concentration, risk is minimal. Host element in NMC.",
+      "synthesis_hazard": false,
+      "eu_crm_2023": true,
+      "usgs_criticality_2022": "critical",
+      "cost_annotation": "~30-60 USD/kg"
+    },
+    "Cr": {
+      "is_radioactive": false,
+      "is_toxic": true,
+      "toxicity_class": "moderate",
+      "toxicity_notes": "Cr3+ itself is benign, but NMC synthesis involves 700-900\u00b0C calcination in O2-rich atmosphere. Cr6+ (hexavalent chromium, chromates/dichromates) is an IARC Group 1 carcinogen and RoHS Annex II restricted substance. Oxidation of Cr3+ to Cr6+ under synthesis conditions is well-documented.",
+      "synthesis_hazard": true,
+      "eu_crm_2023": false,
+      "usgs_criticality_2022": "not_critical",
+      "cost_annotation": "~10 USD/kg"
+    },
+    "Cu": {
+      "is_radioactive": false,
+      "is_toxic": false,
+      "toxicity_class": "none",
+      "toxicity_notes": "Essential micronutrient. Toxic only at extremely high doses. No concern in battery context.",
+      "synthesis_hazard": false,
+      "eu_crm_2023": true,
+      "usgs_criticality_2022": "not_critical",
+      "cost_annotation": "~9 USD/kg"
+    },
+    "Fe": {
+      "is_radioactive": false,
+      "is_toxic": false,
+      "toxicity_class": "none",
+      "toxicity_notes": "Essential element. Safe in all battery contexts.",
+      "synthesis_hazard": false,
+      "eu_crm_2023": false,
+      "usgs_criticality_2022": "not_critical",
+      "cost_annotation": "~1 USD/kg (abundant)"
+    },
+    "Ga": {
+      "is_radioactive": false,
+      "is_toxic": false,
+      "toxicity_class": "low",
+      "toxicity_notes": "Low acute toxicity. Some concern for Ga compounds at very high doses, but safe at dopant concentrations.",
+      "synthesis_hazard": false,
+      "eu_crm_2023": true,
+      "usgs_criticality_2022": "critical",
+      "cost_annotation": "~200-400 USD/kg"
+    },
+    "Ge": {
+      "is_radioactive": false,
+      "is_toxic": false,
+      "toxicity_class": "low",
+      "toxicity_notes": "Low toxicity in oxide form. GeH4 is toxic but not relevant here.",
+      "synthesis_hazard": false,
+      "eu_crm_2023": true,
+      "usgs_criticality_2022": "critical",
+      "cost_annotation": "~1000-2000 USD/kg"
+    },
+    "Hf": {
+      "is_radioactive": false,
+      "is_toxic": false,
+      "toxicity_class": "low",
+      "toxicity_notes": "Low toxicity; similar chemistry to Zr which is biocompatible.",
+      "synthesis_hazard": false,
+      "eu_crm_2023": true,
+      "usgs_criticality_2022": "near_critical",
+      "cost_annotation": "~800-1500 USD/kg"
+    },
+    "Ir": {
+      "is_radioactive": false,
+      "is_toxic": false,
+      "toxicity_class": "low",
+      "toxicity_notes": "PGM; low acute toxicity in elemental and oxide forms. IrO2 is used in electrodes.",
+      "synthesis_hazard": false,
+      "eu_crm_2023": true,
+      "usgs_criticality_2022": "critical",
+      "cost_annotation": "~50,000-60,000 USD/kg"
+    },
+    "Mg": {
+      "is_radioactive": false,
+      "is_toxic": false,
+      "toxicity_class": "none",
+      "toxicity_notes": "Essential macronutrient. Completely safe.",
+      "synthesis_hazard": false,
+      "eu_crm_2023": true,
+      "usgs_criticality_2022": "not_critical",
+      "cost_annotation": "~2-4 USD/kg"
+    },
+    "Mn": {
+      "is_radioactive": false,
+      "is_toxic": false,
+      "toxicity_class": "low",
+      "toxicity_notes": "Essential element. Chronic inhalation of Mn dust (manganism) is a concern in manufacturing, but at oxide dopant concentrations the risk is minimal. Already present in NMC host.",
+      "synthesis_hazard": false,
+      "eu_crm_2023": true,
+      "usgs_criticality_2022": "critical",
+      "cost_annotation": "~2-5 USD/kg"
+    },
+    "Mo": {
+      "is_radioactive": false,
+      "is_toxic": false,
+      "toxicity_class": "low",
+      "toxicity_notes": "Low acute toxicity. Essential trace element. MoO3 dust is a mild irritant.",
+      "synthesis_hazard": false,
+      "eu_crm_2023": true,
+      "usgs_criticality_2022": "critical",
+      "cost_annotation": "~20-40 USD/kg"
+    },
+    "Nb": {
+      "is_radioactive": false,
+      "is_toxic": false,
+      "toxicity_class": "none",
+      "toxicity_notes": "Low toxicity; biocompatible (used in surgical implants).",
+      "synthesis_hazard": false,
+      "eu_crm_2023": true,
+      "usgs_criticality_2022": "critical",
+      "cost_annotation": "~40-60 USD/kg"
+    },
+    "Ni": {
+      "is_radioactive": false,
+      "is_toxic": false,
+      "toxicity_class": "low",
+      "toxicity_notes": "Ni metal is IARC 2B; some Ni compounds (NiSO4) are IARC Group 1 carcinogens. In oxide lattice at dopant concentrations, risk profile is low and consistent with NMC811 standard handling. REACH SVHC for soluble Ni compounds.",
+      "synthesis_hazard": false,
+      "eu_crm_2023": true,
+      "usgs_criticality_2022": "critical",
+      "cost_annotation": "~15-25 USD/kg"
+    },
+    "Os": {
+      "is_radioactive": false,
+      "is_toxic": true,
+      "toxicity_class": "high",
+      "toxicity_notes": "Osmium tetroxide (OsO4) forms spontaneously when Os-containing materials are heated in air. OsO4 is one of the most acutely toxic volatile compounds: TLV = 0.0002 mg/m3, IDLH = 0.001 ppm. NMC synthesis at 700-900\u00b0C in O2 atmosphere makes Os use extremely hazardous in any production setting.",
+      "synthesis_hazard": true,
+      "eu_crm_2023": true,
+      "usgs_criticality_2022": "critical",
+      "cost_annotation": "~30,000-40,000 USD/kg"
+    },
+    "Pt": {
+      "is_radioactive": false,
+      "is_toxic": false,
+      "toxicity_class": "none",
+      "toxicity_notes": "PGM; Pt metal is inert and safe. Some Pt complexes are allergens but Pt oxide is benign.",
+      "synthesis_hazard": false,
+      "eu_crm_2023": true,
+      "usgs_criticality_2022": "critical",
+      "cost_annotation": "~30,000-35,000 USD/kg"
+    },
+    "Re": {
+      "is_radioactive": false,
+      "is_toxic": false,
+      "toxicity_class": "none",
+      "toxicity_notes": "Low toxicity; rhenium compounds have low acute hazard.",
+      "synthesis_hazard": false,
+      "eu_crm_2023": true,
+      "usgs_criticality_2022": "critical",
+      "cost_annotation": "~3,000-5,000 USD/kg"
+    },
+    "Rh": {
+      "is_radioactive": false,
+      "is_toxic": false,
+      "toxicity_class": "low",
+      "toxicity_notes": "PGM; low toxicity in elemental and oxide forms.",
+      "synthesis_hazard": false,
+      "eu_crm_2023": true,
+      "usgs_criticality_2022": "critical",
+      "cost_annotation": "~150,000-200,000 USD/kg"
+    },
+    "Ru": {
+      "is_radioactive": false,
+      "is_toxic": false,
+      "toxicity_class": "low",
+      "toxicity_notes": "PGM; RuO4 can form at high temperature (volatile, mildly toxic) but less severe than OsO4. At typical synthesis temperatures, risk is manageable with standard fume hoods.",
+      "synthesis_hazard": false,
+      "eu_crm_2023": true,
+      "usgs_criticality_2022": "critical",
+      "cost_annotation": "~15,000-20,000 USD/kg"
+    },
+    "S": {
+      "is_radioactive": false,
+      "is_toxic": false,
+      "toxicity_class": "none",
+      "toxicity_notes": "Elemental sulfur is non-toxic. SO2 fumes during synthesis need ventilation but this is standard practice. Note: S5+ is a highly unusual oxidation state at a TM octahedral site.",
+      "synthesis_hazard": false,
+      "eu_crm_2023": false,
+      "usgs_criticality_2022": "not_critical",
+      "cost_annotation": "~0.1 USD/kg (abundant)"
+    },
+    "Sb": {
+      "is_radioactive": false,
+      "is_toxic": true,
+      "toxicity_class": "moderate",
+      "toxicity_notes": "IARC 2B possible carcinogen (antimony trioxide). RoHS Directive restricted substance. Sb compounds have moderate acute and chronic toxicity. Also confirmed_failed in NMC ground truth (phase separation above ~2%).",
+      "synthesis_hazard": true,
+      "eu_crm_2023": true,
+      "usgs_criticality_2022": "not_critical",
+      "cost_annotation": "~5-10 USD/kg"
+    },
+    "Sc": {
+      "is_radioactive": false,
+      "is_toxic": false,
+      "toxicity_class": "low",
+      "toxicity_notes": "Low toxicity; limited experimental data but no significant hazard identified.",
+      "synthesis_hazard": false,
+      "eu_crm_2023": true,
+      "usgs_criticality_2022": "critical",
+      "cost_annotation": "~3,000-4,000 USD/kg"
+    },
+    "Se": {
+      "is_radioactive": false,
+      "is_toxic": false,
+      "toxicity_class": "moderate",
+      "toxicity_notes": "Essential trace element but toxic at higher doses (selenosis). Environmental persistence concern. Not filtered by default — annotated for experimentalist awareness.",
+      "synthesis_hazard": false,
+      "eu_crm_2023": false,
+      "usgs_criticality_2022": "not_critical",
+      "cost_annotation": "~25-60 USD/kg"
+    },
+    "Sn": {
+      "is_radioactive": false,
+      "is_toxic": false,
+      "toxicity_class": "none",
+      "toxicity_notes": "SnO2 is used in food containers. Low toxicity in oxide form.",
+      "synthesis_hazard": false,
+      "eu_crm_2023": false,
+      "usgs_criticality_2022": "not_critical",
+      "cost_annotation": "~25-30 USD/kg"
+    },
+    "Ta": {
+      "is_radioactive": false,
+      "is_toxic": false,
+      "toxicity_class": "none",
+      "toxicity_notes": "Biocompatible; used in surgical implants. Very low toxicity.",
+      "synthesis_hazard": false,
+      "eu_crm_2023": true,
+      "usgs_criticality_2022": "critical",
+      "cost_annotation": "~150-200 USD/kg"
+    },
+    "Ti": {
+      "is_radioactive": false,
+      "is_toxic": false,
+      "toxicity_class": "none",
+      "toxicity_notes": "Biocompatible; used in medical implants and food colouring (TiO2).",
+      "synthesis_hazard": false,
+      "eu_crm_2023": true,
+      "usgs_criticality_2022": "near_critical",
+      "cost_annotation": "~10-15 USD/kg"
+    },
+    "U": {
+      "is_radioactive": true,
+      "is_toxic": true,
+      "toxicity_class": "carcinogen",
+      "toxicity_notes": "Alpha-emitting radioactive element (U-238 t1/2 = 4.5 Gyr; U-235 is fissile). Also chemically toxic (heavy metal nephrotoxin). Regulated as nuclear material in all jurisdictions. Completely incompatible with any commercial battery application.",
+      "synthesis_hazard": true,
+      "eu_crm_2023": false,
+      "usgs_criticality_2022": "not_critical",
+      "cost_annotation": "~100-150 USD/kg (regulated)"
+    },
+    "V": {
+      "is_radioactive": false,
+      "is_toxic": false,
+      "toxicity_class": "low",
+      "toxicity_notes": "V2O5 dust has NIOSH IDLH of 35 mg/m3; concern during powder handling. In sintered oxide lattice, risk is minimal. Widely used in vanadium redox flow batteries.",
+      "synthesis_hazard": false,
+      "eu_crm_2023": true,
+      "usgs_criticality_2022": "critical",
+      "cost_annotation": "~30-50 USD/kg"
+    },
+    "W": {
+      "is_radioactive": false,
+      "is_toxic": false,
+      "toxicity_class": "none",
+      "toxicity_notes": "Low toxicity; used in light bulb filaments and medical imaging. WO3 is essentially non-toxic.",
+      "synthesis_hazard": false,
+      "eu_crm_2023": true,
+      "usgs_criticality_2022": "critical",
+      "cost_annotation": "~35-50 USD/kg"
+    },
+    "Y": {
+      "is_radioactive": false,
+      "is_toxic": false,
+      "toxicity_class": "low",
+      "toxicity_notes": "Low toxicity; used in phosphors and ceramics.",
+      "synthesis_hazard": false,
+      "eu_crm_2023": true,
+      "usgs_criticality_2022": "critical",
+      "cost_annotation": "~30-50 USD/kg"
+    },
+    "Zr": {
+      "is_radioactive": false,
+      "is_toxic": false,
+      "toxicity_class": "none",
+      "toxicity_notes": "Biocompatible; used in dental ceramics and implants. ZrO2 is essentially inert.",
+      "synthesis_hazard": false,
+      "eu_crm_2023": false,
+      "usgs_criticality_2022": "not_critical",
+      "cost_annotation": "~35-50 USD/kg"
+    }
+  }
+}

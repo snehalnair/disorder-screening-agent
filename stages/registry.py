@@ -13,7 +13,8 @@ from __future__ import annotations
 from stages.stage1_smact import TOOL_METADATA as STAGE1_META
 from stages.stage2_radius import TOOL_METADATA as STAGE2_META
 from stages.stage3_substitution import TOOL_METADATA as STAGE3_META
-from stages.stage4_ml_prescreen import TOOL_METADATA as STAGE4_META
+from stages.stage4_ml_prescreen import TOOL_METADATA as STAGE4_ML_META
+from stages.stage4_viability import TOOL_METADATA as STAGE4V_META
 from stages.stage5.sqs_generator import TOOL_METADATA as STAGE5A_META
 from stages.stage5.mlip_relaxation import TOOL_METADATA as STAGE5B_META
 from stages.stage5.property_calculator import TOOL_METADATA as STAGE5C_META
@@ -24,7 +25,8 @@ ALL_STAGES: dict = {
     1: STAGE1_META,
     2: STAGE2_META,
     3: STAGE3_META,
-    4: STAGE4_META,
+    "4ml": STAGE4_ML_META,   # optional ML pre-screen (disabled by default)
+    "4v": STAGE4V_META,      # element viability filter (always-on by default)
     "5a": STAGE5A_META,
     "5b": STAGE5B_META,
     "5c": STAGE5C_META,

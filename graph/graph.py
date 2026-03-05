@@ -8,10 +8,10 @@ calculation, SimulationResult assembly, and dopant ranking.
 Graph topologies
 ----------------
 Pruning (Phase 1+):
-    stage1_smact → stage2_radius → stage3_substitution → END
+    stage1_smact → stage2_radius → stage3_substitution → stage4_viability → END
 
 Full pipeline (Phase 4+):
-    stage1_smact → stage2_radius → stage3_substitution
+    stage1_smact → stage2_radius → stage3_substitution → stage4_viability
         → compute_baseline → stage5_simulate → rank_and_report → END
 """
 
@@ -25,6 +25,7 @@ from graph.state import PipelineState
 from stages.stage1_smact import run_stage1_smact
 from stages.stage2_radius import run_stage2_radius
 from stages.stage3_substitution import run_stage3_substitution
+from stages.stage4_viability import run_stage4_viability
 
 logger = logging.getLogger(__name__)
 
@@ -48,11 +49,13 @@ def build_pruning_graph():
     g.add_node("stage1_smact", run_stage1_smact)
     g.add_node("stage2_radius", run_stage2_radius)
     g.add_node("stage3_substitution", run_stage3_substitution)
+    g.add_node("stage4_viability", run_stage4_viability)
 
     g.set_entry_point("stage1_smact")
     g.add_edge("stage1_smact", "stage2_radius")
     g.add_edge("stage2_radius", "stage3_substitution")
-    g.add_edge("stage3_substitution", END)
+    g.add_edge("stage3_substitution", "stage4_viability")
+    g.add_edge("stage4_viability", END)
 
     return g.compile()
 
@@ -174,9 +177,11 @@ def stage5_simulate_node(state: dict) -> dict:
     target_species: str = state.get("target_site_species", "")
     parent_formula: str = state.get("parent_formula", "")
 
-    # Prefer Stage 4 output; fall back to Stage 3
-    candidates: list[dict] = state.get("stage4_candidates") or state.get(
-        "stage3_candidates", []
+    # Prefer viability-filtered list; fall back to ML pre-screen output, then Stage 3
+    candidates: list[dict] = (
+        state.get("stage4_viability_candidates")
+        or state.get("stage4_candidates")
+        or state.get("stage3_candidates", [])
     )
 
     all_sim_results: list[SimulationResult] = []
@@ -481,6 +486,7 @@ def build_full_graph():
     g.add_node("stage1_smact", run_stage1_smact)
     g.add_node("stage2_radius", run_stage2_radius)
     g.add_node("stage3_substitution", run_stage3_substitution)
+    g.add_node("stage4_viability", run_stage4_viability)
 
     # Stage 5 nodes
     g.add_node("compute_baseline", compute_baseline_node)
@@ -492,7 +498,8 @@ def build_full_graph():
     g.set_entry_point("stage1_smact")
     g.add_edge("stage1_smact", "stage2_radius")
     g.add_edge("stage2_radius", "stage3_substitution")
-    g.add_edge("stage3_substitution", "compute_baseline")
+    g.add_edge("stage3_substitution", "stage4_viability")
+    g.add_edge("stage4_viability", "compute_baseline")
     g.add_edge("compute_baseline", "stage5_simulate")
     g.add_edge("stage5_simulate", "rank_and_report")
     g.add_edge("rank_and_report", "generate_summary")

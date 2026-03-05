@@ -44,8 +44,21 @@ pipeline:
   stage3_substitution:
     probability_threshold: 0.001
 
-  # ── Stage 4: ML pre-screen (optional) ────────────────────────────────────
-  # Set enabled: false to skip and route directly from Stage 3 to Stage 5.
+  # ── Stage 4 (viability): element safety + regulatory filter ───────────────
+  # Zero-cost metadata lookup against data/element_metadata.json.
+  # Removes radioactive/toxic elements before expensive Stage 5 simulations.
+  # Cost/scarcity (eu_crm_2023, usgs_criticality) are annotated but NOT filtered —
+  # leave that trade-off to the experimentalist (see final ranked report).
+  stage4_viability:
+    enabled: true
+    constraints:
+      non_radioactive: true         # removes U (and any other radioactive element)
+      non_toxic: true               # removes As, Cr, Os, Sb (is_toxic: true in metadata)
+    # Optional: override metadata JSON path (default: data/element_metadata.json)
+    # metadata_path: "data/element_metadata.json"
+
+  # ── Stage 4 (ML pre-screen): optional composition-based ML filter ─────────
+  # Set enabled: false to skip and route directly from Stage 4v to Stage 5.
   # model: roost | crabnet
   # max_threshold: max predicted value above the convex hull (eV/atom)
   stage4_ml:

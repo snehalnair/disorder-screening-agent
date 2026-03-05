@@ -48,6 +48,12 @@ class PipelineState(TypedDict, total=False):
     # Adds: ml_predicted_value
     stage4_candidates: NotRequired[list[dict]]
 
+    # ── Stage 4 viability output (element safety/regulatory filter) ───────────
+    # Adds: eu_crm_2023, toxicity_class, usgs_criticality, cost_annotation
+    stage4_viability_candidates: NotRequired[list[dict]]
+    # Filtered-out candidates with viability_rejection_reason (kept for audit trail)
+    stage4_viability_rejected: NotRequired[list[dict]]
+
     # ── Stage 5a output (generate_sqs) ───────────────────────────────────────
     # {"Al": [Structure, Structure, ...], "Ti": [...], ...}
     sqs_structures: NotRequired[dict[str, list[Structure]]]

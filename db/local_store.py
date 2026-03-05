@@ -70,6 +70,7 @@ CREATE TABLE IF NOT EXISTS pruning_records (
     stage3_sub_probability REAL,
     stage4_passed BOOLEAN,
     stage4_predicted_property TEXT,
+    stage4_viability_reason TEXT,
     thresholds_used TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -134,7 +135,19 @@ class LocalStore:
 
     def _apply_schema(self) -> None:
         self._con.executescript(_DDL)
+        self._migrate_schema()
         self._con.commit()
+
+    def _migrate_schema(self) -> None:
+        """Add columns introduced after initial schema creation (idempotent)."""
+        migrations = [
+            "ALTER TABLE pruning_records ADD COLUMN stage4_viability_reason TEXT",
+        ]
+        for sql in migrations:
+            try:
+                self._con.execute(sql)
+            except Exception:
+                pass  # column already exists
 
     # ── Pruning records ───────────────────────────────────────────────────────
 
@@ -164,6 +177,7 @@ class LocalStore:
                 r.get("stage3_sub_probability"),
                 r.get("stage4_passed", False),
                 _j(r.get("stage4_predicted_property")),
+                r.get("stage4_viability_reason"),
                 _j(r.get("thresholds_used")),
             ))
         self._con.executemany(
@@ -174,8 +188,8 @@ class LocalStore:
              stage2_passed, stage2_mismatch_pct,
              stage3_passed, stage3_sub_probability,
              stage4_passed, stage4_predicted_property,
-             thresholds_used)
-            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+             stage4_viability_reason, thresholds_used)
+            VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
             """,
             rows,
         )
