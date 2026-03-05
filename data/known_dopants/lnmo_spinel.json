@@ -1,0 +1,183 @@
+{
+  "metadata": {
+    "material_id": "lnmo_spinel",
+    "parent_material": "LiMn2O4 spinel (proxy for LiNi0.5Mn1.5O4)",
+    "proxy_note": "LiMn2O4 used as ordered proxy for LNMO, same as LiCoO2 proxy for NMC. Dopants substitute at Mn4+ (16d octahedral site).",
+    "host_element": "Mn",
+    "host_oxidation_state": 4,
+    "host_ionic_radius": 0.530,
+    "host_coordination": "octahedral",
+    "structure_file": "data/structures/lmo_spinel.cif",
+    "mp_id": "mp-22584",
+    "space_group": "Fd-3m",
+    "target_site": "16d",
+    "description": "Dopants at the Mn4+ octahedral (16d) site in LiNi0.5Mn1.5O4 spinel cathode",
+    "sources": [
+      "Zhong et al., J. Electrochem. Soc. 2002 (Co, Cr, Fe, Al, Ti, Cu, Mg survey)",
+      "Yi et al., J. Power Sources 2011 review (comprehensive doping survey)",
+      "Aravindan et al., Chem. Eur. J. 2015 (Al, Ti, Cr, Fe, Co, Cu, Mg)",
+      "Liu et al., Adv. Energy Mater. 2021 (site-specific engineering)",
+      "Kim et al., J. Electrochem. Soc. 2019 (Sc-doped LNMO)",
+      "Qi et al., J. Power Sources 2022 (Fe-Ti co-doping)"
+    ]
+  },
+  "dopants": {
+    "Al": {
+      "element": "Al",
+      "oxidation_state": 3,
+      "site": "Mn_octahedral_16d",
+      "mismatch_pct": 0.0,
+      "status": "confirmed_successful",
+      "effect": "Reduces Mn dissolution, improves high-temperature cycling stability, stabilises spinel framework",
+      "sources": ["Aravindan 2015", "Yi 2011 review", "Liu 2016 Al-coating+doping"]
+    },
+    "Ti": {
+      "element": "Ti",
+      "oxidation_state": 4,
+      "site": "Mn_octahedral_16d",
+      "mismatch_pct": 0.0,
+      "status": "confirmed_successful",
+      "effect": "Isovalent with Mn4+, structural stabilisation, common in Al-Ti co-doping studies",
+      "sources": ["Qi 2022 Fe-Ti", "Aravindan 2015", "Liu 2021 Al-Ti co-doping"]
+    },
+    "Fe": {
+      "element": "Fe",
+      "oxidation_state": 3,
+      "site": "Mn_octahedral_16d",
+      "mismatch_pct": 0.0,
+      "status": "confirmed_successful",
+      "effect": "Introduces Mn3+ content, adjusts P4332/Fd-3m ordering ratio, improves electronic conductivity",
+      "sources": ["Zhong 2002", "Yi 2011 review", "Qi 2022 Fe-Ti"]
+    },
+    "Co": {
+      "element": "Co",
+      "oxidation_state": 2,
+      "site": "Mn_octahedral_16d",
+      "mismatch_pct": 0.0,
+      "status": "confirmed_successful",
+      "effect": "Controls P4332 (ordered) vs Fd-3m (disordered) polymorph; most widely studied LNMO dopant",
+      "sources": ["Zhong 2002", "Yi 2011 review", "multiple reviews"]
+    },
+    "Cu": {
+      "element": "Cu",
+      "oxidation_state": 2,
+      "site": "Mn_octahedral_16d",
+      "mismatch_pct": 0.0,
+      "status": "confirmed_successful",
+      "effect": "Improves rate capability and electronic conductivity; Cu2+ enhances Ni2+/4+ redox",
+      "sources": ["Zhong 2002", "Yi 2011 review", "Al-Cu co-doping 2020"]
+    },
+    "Mg": {
+      "element": "Mg",
+      "oxidation_state": 2,
+      "site": "Mn_octahedral_16d",
+      "mismatch_pct": 0.0,
+      "status": "confirmed_successful",
+      "effect": "Reduces Jahn-Teller active Mn3+ content, improves structural stability",
+      "sources": ["Zhong 2002", "Yi 2011 review", "Aravindan 2015"]
+    },
+    "Cr": {
+      "element": "Cr",
+      "oxidation_state": 3,
+      "site": "Mn_octahedral_16d",
+      "mismatch_pct": 0.0,
+      "status": "confirmed_successful",
+      "effect": "Improves cycling stability and capacity retention; similar OS to Mn3+",
+      "note": "Excluded by Stage 4 viability (Cr6+ formation risk during calcination in O2)",
+      "sources": ["Zhong 2002", "Yi 2011 review"]
+    },
+    "V": {
+      "element": "V",
+      "oxidation_state": 3,
+      "site": "Mn_octahedral_16d",
+      "mismatch_pct": 0.0,
+      "status": "confirmed_successful",
+      "effect": "Multiple OS in operation (V3+/4+/5+), improves cycling; vanadium doping widely reported",
+      "sources": ["Yi 2011 review", "Electrical properties V-doped 2024", "multiple papers"]
+    },
+    "Zn": {
+      "element": "Zn",
+      "oxidation_state": 2,
+      "site": "Mn_octahedral_16d",
+      "mismatch_pct": 0.0,
+      "status": "confirmed_limited",
+      "effect": "Some improvement in cycling stability reported; less studied than Co/Cu/Mg",
+      "sources": ["ZnO-coated 2002 (surface not bulk)", "limited bulk studies"]
+    },
+    "Ga": {
+      "element": "Ga",
+      "oxidation_state": 3,
+      "site": "Mn_octahedral_16d",
+      "mismatch_pct": 0.0,
+      "status": "confirmed_limited",
+      "effect": "Structural stabilisation reported; modest electrochemical improvement",
+      "sources": ["Yi 2011 review"]
+    },
+    "Mo": {
+      "element": "Mo",
+      "oxidation_state": 6,
+      "site": "Mn_octahedral_16d",
+      "mismatch_pct": 0.0,
+      "status": "confirmed_limited",
+      "effect": "High OS substitution reported; improves Li-ion diffusion in some studies",
+      "sources": ["Yi 2011 review", "W/Mo doping 2025"]
+    },
+    "Zr": {
+      "element": "Zr",
+      "oxidation_state": 4,
+      "site": "Mn_octahedral_16d",
+      "mismatch_pct": 0.0,
+      "status": "confirmed_limited",
+      "effect": "Reported to improve structural stability; isovalent with Mn4+",
+      "sources": ["Yi 2011 review", "comparative studies"]
+    },
+    "Sc": {
+      "element": "Sc",
+      "oxidation_state": 3,
+      "site": "Mn_octahedral_16d",
+      "mismatch_pct": 0.0,
+      "status": "confirmed_limited",
+      "effect": "Induces cation disorder (promotes Fd-3m over P4332); improves rate at cost of ordering",
+      "sources": ["Kim et al. J. Electrochem. Soc. 2019"]
+    },
+    "La": {
+      "element": "La",
+      "oxidation_state": 3,
+      "site": "Mn_octahedral_16d",
+      "mismatch_pct": 0.0,
+      "status": "reported",
+      "effect": "Lanthanum doping improves electrochemical performance in recent studies; likely at grain boundaries or Mn site",
+      "sources": ["La-doped LNMO 2025"]
+    },
+    "Nb": {
+      "element": "Nb",
+      "oxidation_state": 5,
+      "site": "Mn_octahedral_16d",
+      "mismatch_pct": 0.0,
+      "status": "reported",
+      "effect": "High-valence substitution reported; limited data vs NMC where it is well-established",
+      "sources": ["comparative reviews"]
+    },
+    "W": {
+      "element": "W",
+      "oxidation_state": 6,
+      "site": "Mn_octahedral_16d",
+      "mismatch_pct": 0.0,
+      "status": "reported",
+      "effect": "High-valence W6+ substitution; cobalt-free LNMO with W doping reported 2025",
+      "sources": ["Progress on Co-free LNMO 2025"]
+    }
+  },
+  "summary": {
+    "total_dopants": 15,
+    "by_class": {
+      "confirmed_successful": 7,
+      "confirmed_limited": 5,
+      "reported": 3
+    },
+    "confirmed_successful_elements": ["Al", "Ti", "Fe", "Co", "Cu", "Mg", "V"],
+    "note_on_cr": "Cr is confirmed_successful but excluded by Stage 4 viability filter (toxic)",
+    "host_site": "Mn4+ at 16d octahedral in LiMn2O4/LNMO spinel",
+    "pipeline_target": "Substitute Mn4+ (r=0.530 A octahedral) in LiMn2O4 proxy structure"
+  }
+}

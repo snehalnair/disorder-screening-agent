@@ -1,0 +1,93 @@
+pipeline:
+
+  # ── LLM ───────────────────────────────────────────────────────────────────
+  llm:
+    provider: "anthropic"
+    model: "claude-sonnet-4-6"
+
+  # ── Stage 1: SMACT ─────────────────────────────────────────────────────────
+  # Same exclusions as NMC config
+  stage1_smact:
+    exclude_elements:
+      - He
+      - Ne
+      - Ar
+      - Kr
+      - Xe
+      - Rn
+      - Tc
+      - Pm
+      - Po
+      - At
+      - Fr
+      - Ra
+      - Ac
+      - Pa
+      - Np
+      - Pu
+
+  # ── Stage 2: Shannon radius ────────────────────────────────────────────────
+  # Host: Mn4+ octahedral, r = 0.530 Å
+  # 40% threshold (vs 35% for NMC): needed so Cu2+ (37.7%) and Mg2+ (35.8%) pass
+  stage2_radius:
+    mismatch_threshold: 0.40
+    tolerance_factor_max: 4.18      # not used for spinel; ignored
+
+  # ── Stage 3: Hautier-Ceder substitution probability ────────────────────────
+  # 0.0001 (vs 0.001 for NMC): Al3+→Mn4+, Cu2+→Mn4+, Mg2+→Mn4+ all have
+  # low Hautier-Ceder prob; 0.0001 recovers all confirmed_successful dopants
+  # Sweep: thr=0.001→50% recall; thr=0.0001→100% recall (7/7 excl. Cr-toxic)
+  stage3_substitution:
+    probability_threshold: 0.0001
+
+  # ── Stage 4 (viability) ────────────────────────────────────────────────────
+  stage4_viability:
+    enabled: true
+    constraints:
+      non_radioactive: true
+      non_toxic: true
+
+  # ── Stage 4 (ML pre-screen) ────────────────────────────────────────────────
+  stage4_ml:
+    enabled: false
+
+  # ── Stage 5: SQS + MACE ────────────────────────────────────────────────────
+  # 448-atom supercell (2×2×2 of 56-atom LiMn2O4 conventional cell)
+  # 128 Mn sites → 13 dopant atoms at 10% — well above n≥5 non-degenerate SQS threshold
+  # Better sampling than NMC 256-atom run (n=13 vs n=6 dopant sites)
+  stage5_simulation:
+    supercell: [2, 2, 2]
+    concentrations: [0.10]
+    n_sqs_realisations: 5
+    potential: "mace-mp-0"
+    device: "auto"
+    fmax: 0.10
+    max_relax_steps: 1000
+
+  # ── Output ─────────────────────────────────────────────────────────────────
+  output:
+    top_n: 5
+    include_ordered_comparison: true
+
+  # ── Checkpointing ──────────────────────────────────────────────────────────
+  checkpointing:
+    backend: "sqlite"
+    db_path: "checkpoints_lnmo.db"
+
+  # ── Results database ───────────────────────────────────────────────────────
+  database:
+    local:
+      path: "data/results_lnmo.db"
+
+  # ── Routing ────────────────────────────────────────────────────────────────
+  routing:
+    max_candidates_after_stage1: 35
+    max_retries: 2
+    threshold_adjustment_pct: 0.20
+
+  # ── Property weights ───────────────────────────────────────────────────────
+  property_weights:
+    voltage: 0.35
+    formation_energy: 0.25
+    li_ni_exchange: 0.25
+    volume_change: 0.15

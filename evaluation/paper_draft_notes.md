@@ -170,6 +170,38 @@ fundamentally differently under disorder — ordered-cell screening is reliable 
 | voltage | −0.333 | **−0.190** | 2×2×2 std≈0 (only 1 sub site); 4×4×4 is valid |
 | formation_energy | 0.738 | **+0.881** | 4×4×4 result is statistically significant (p=0.004) |
 
+### ⚠ Critical framing note for paper — "2×2×2" label is misleading
+
+**The problem with the original 2×2×2 run was never the multiplier. It was the dopant count.**
+
+- LiCoO₂ primitive cell (4 atoms) × 2×2×2 = **32 atoms, 8 Co sites**
+- At 10% doping: 0.8 → rounds to **1 substituted site**
+- With n_dopant = 1, there is only one way to place the atom — all 5 SQS realisations are
+  **identical**, std ≈ 0. The "disorder" simulation collapses to the ordered calculation.
+
+The 4×4×4 NMC run fixed this by reaching n_dopant = 6 (genuine pair-correlation optimisation).
+
+**LNMO supercell context:**
+- LiMn₂O₄ **conventional** cell (56 atoms) × 2×2×2 = **448 atoms, 128 Mn sites**
+- At 10% doping: **13 substituted sites** — well above the degenerate threshold
+- This is actually *better* SQS statistics than the NMC 4×4×4 run (13 dopants vs 6)
+
+**Do NOT say "2×2×2 supercell" in the paper for LNMO.** A reviewer will immediately flag the
+apparent contradiction with the NMC 2×2×2 critique. The correct framing:
+
+| System | Paper language | Parenthetical (methods only) |
+|--------|----------------|------------------------------|
+| NMC (invalid run) | "32-atom supercell (1 dopant site)" | (2×2×2 of 4-atom primitive cell) |
+| NMC (valid run) | "**256-atom supercell** (6 dopant sites)" | (4×4×4 of 4-atom primitive cell) |
+| LNMO | "**448-atom supercell** (13 dopant sites)" | (2×2×2 of 56-atom conventional cell) |
+
+**The explicit distinction to make in the LNMO methods section:**
+> "We employ a 448-atom supercell (2×2×2 repetition of the 56-atom LiMn₂O₄ conventional
+> cell) containing 128 Mn sites, of which 13 are substituted at 10% doping concentration.
+> This dopant count (n=13) substantially exceeds the n≥5 threshold identified in our NMC
+> analysis as necessary for non-degenerate SQS pair-correlation optimisation, and provides
+> superior sampling statistics to the NMC 256-atom run (n=6 dopant sites)."
+
 ---
 
 ## RQ3: Accuracy vs Experiment (REQUIRES MACE + RQ2 results)
