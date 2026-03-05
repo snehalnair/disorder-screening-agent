@@ -4,8 +4,9 @@ Usage (from project root):
     python scripts/merge_lnmo_results.py
 
 Expects:
-    evaluation/results/rq2_lnmo_batch1.json   — from Google Drive (11 dopants)
-    evaluation/results/rq2_lnmo_batch2.json   — from Google Drive (11 dopants)
+    evaluation/results/rq2_lnmo_batch1.json   — from Google Drive (8 dopants)
+    evaluation/results/rq2_lnmo_batch2.json   — from Google Drive (7 dopants)
+    evaluation/results/rq2_lnmo_batch3.json   — from Google Drive (7 dopants)
 
 Outputs:
     evaluation/results/rq2_lnmo_all22.json    — all 22 dopants merged
@@ -17,6 +18,7 @@ RESULTS     = ROOT / 'evaluation' / 'results'
 BATCH_FILES = [
     RESULTS / 'rq2_lnmo_batch1.json',
     RESULTS / 'rq2_lnmo_batch2.json',
+    RESULTS / 'rq2_lnmo_batch3.json',
 ]
 OUT_ALL = RESULTS / 'rq2_lnmo_all22.json'
 
