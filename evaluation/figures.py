@@ -731,9 +731,16 @@ def save_all_figures(
         logger.info("Figure 6 saved: %s", p)
 
     if accuracy_data and rq2_data:
-        # Use property with best experimental coverage
-        props = list(accuracy_data.get("mae_ordered", {}).keys())
-        best_prop = props[0] if props else "voltage"
+        # Use property with experimental per-dopant data (voltage is primary)
+        props_with_exp = {
+            prop
+            for row in accuracy_data.get("per_dopant", [])
+            for prop, vals in row.get("properties", {}).items()
+            if isinstance(vals, dict) and vals.get("experimental") is not None
+        }
+        best_prop = "voltage" if "voltage" in props_with_exp else (
+            next(iter(props_with_exp)) if props_with_exp else "voltage"
+        )
         p = plot_parity(accuracy_data, target_property=best_prop,
                         output_path=out_dir / "fig3_parity.pdf", show=show)
         saved.append(p)
@@ -781,8 +788,11 @@ def _enrich_rq2_data(results: dict) -> dict:
         props.discard("li_ni_exchange")  # often all-zero / near-zero; keep if present
         results["target_properties"] = sorted(props)
 
-    # Compute Spearman ρ per property if not already stored
-    if "spearman_rho" not in results:
+    # Compute Spearman ρ per property if missing or if stored n < actual dopant count
+    n_actual = len(results.get("dopant_results", []))
+    stored_rho = results.get("spearman_rho", {})
+    stored_n = next(iter(stored_rho.values()), {}).get("n", 0) if stored_rho else 0
+    if "spearman_rho" not in results or stored_n < n_actual:
         rho_dict: dict[str, dict] = {}
         for prop in results["target_properties"]:
             ord_v, dis_v, dopants = [], [], []
