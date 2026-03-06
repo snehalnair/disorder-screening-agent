@@ -128,7 +128,7 @@ Spearman ρ of rankings is the appropriate accuracy metric, not absolute MAE.
 | Default (all 3 stages) | **92.3%** | 46 | Baseline |
 | Remove Stage 2 | 92.3% | ~50–60 | Stage 2 adds precision only; zero recall cost at 0.35 threshold |
 | Remove Stage 3 | 92.3% | 85 | Stage 3 halves candidate count at zero recall cost |
-| Enable Stage 4 (mock) | TBD | <46 | Reduces compute if real ML model available |
+| Enable Stage 4b ML pre-screen | ✗ NOT APPLICABLE | — | Mock only (no trained checkpoint). Stage 4a viability already applied (29→24 elements). Note in paper: "Stage 4b is a framework capability; no domain-adapted GNN checkpoint was available." |
 
 ---
 
