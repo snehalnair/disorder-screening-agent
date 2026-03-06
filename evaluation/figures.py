@@ -688,6 +688,7 @@ def save_all_figures(
     accuracy_data: dict | None = None,
     lnmo_data: dict | None = None,
     output_dir: str | pathlib.Path = _FIGURES_DIR,
+    fmt: str = "pdf",
     show: bool = False,
 ) -> list[pathlib.Path]:
     """Generate and save all publication figures.
@@ -707,31 +708,33 @@ def save_all_figures(
     out_dir.mkdir(parents=True, exist_ok=True)
     saved = []
 
+    def _p(name: str) -> pathlib.Path:
+        return out_dir / f"{name}.{fmt}"
+
     if rq1_data:
         fc = rq1_data.get("funnel_counts", {})
-        p = plot_funnel_diagram(fc, output_path=out_dir / "fig1_funnel.pdf", show=show)
+        p = plot_funnel_diagram(fc, output_path=_p("fig1_funnel"), show=show)
         saved.append(p)
         logger.info("Figure 1 saved: %s", p)
 
     if rq2_data:
-        p = plot_ordered_vs_disordered(rq2_data, output_path=out_dir / "fig2_ordered_vs_disordered.pdf", show=show)
+        p = plot_ordered_vs_disordered(rq2_data, output_path=_p("fig2_ordered_vs_disordered"), show=show)
         saved.append(p)
         logger.info("Figure 2 saved: %s", p)
 
-        p = plot_disorder_heatmap(rq2_data, output_path=out_dir / "fig4_disorder_heatmap.pdf", show=show)
+        p = plot_disorder_heatmap(rq2_data, output_path=_p("fig4_disorder_heatmap"), show=show)
         saved.append(p)
         logger.info("Figure 4 saved: %s", p)
 
-        p = plot_sqs_variance(rq2_data, output_path=out_dir / "fig5_sqs_variance.pdf", show=show)
+        p = plot_sqs_variance(rq2_data, output_path=_p("fig5_sqs_variance"), show=show)
         saved.append(p)
         logger.info("Figure 5 saved: %s", p)
 
-        p = plot_sqs_reliability(rq2_data, output_path=out_dir / "fig6_sqs_reliability.pdf", show=show)
+        p = plot_sqs_reliability(rq2_data, output_path=_p("fig6_sqs_reliability"), show=show)
         saved.append(p)
         logger.info("Figure 6 saved: %s", p)
 
     if accuracy_data and rq2_data:
-        # Use property with experimental per-dopant data (voltage is primary)
         props_with_exp = {
             prop
             for row in accuracy_data.get("per_dopant", [])
@@ -742,20 +745,20 @@ def save_all_figures(
             next(iter(props_with_exp)) if props_with_exp else "voltage"
         )
         p = plot_parity(accuracy_data, target_property=best_prop,
-                        output_path=out_dir / "fig3_parity.pdf", show=show)
+                        output_path=_p("fig3_parity"), show=show)
         saved.append(p)
         logger.info("Figure 3 saved: %s", p)
 
     if rq2_data and lnmo_data:
         p = plot_cross_system_comparison(
             rq2_data, lnmo_data,
-            output_path=out_dir / "fig7_cross_system.pdf", show=show,
+            output_path=_p("fig7_cross_system"), show=show,
         )
         saved.append(p)
         logger.info("Figure 7 saved: %s", p)
 
     if lnmo_data:
-        lnmo_figs = plot_lnmo_figures(lnmo_data, output_dir=out_dir, show=show)
+        lnmo_figs = plot_lnmo_figures(lnmo_data, output_dir=out_dir, fmt=fmt, show=show)
         saved.extend(lnmo_figs)
 
     return saved
@@ -825,6 +828,7 @@ def _enrich_rq2_data(results: dict) -> dict:
 def plot_lnmo_figures(
     lnmo_results: dict,
     output_dir: str | pathlib.Path = _FIGURES_DIR,
+    fmt: str = "pdf",
     show: bool = False,
 ) -> list[pathlib.Path]:
     """Generate LNMO-specific figures (analogs of Figs 2, 4, 6 for the spinel system).
@@ -842,21 +846,21 @@ def plot_lnmo_figures(
 
     p = plot_ordered_vs_disordered(
         enriched, target_property="voltage",
-        output_path=out_dir / "fig8_lnmo_ordered_vs_disordered.pdf", show=show,
+        output_path=out_dir / f"fig8_lnmo_ordered_vs_disordered.{fmt}", show=show,
     )
     saved.append(p)
     logger.info("Figure 8 (LNMO ordered vs disordered) saved: %s", p)
 
     p = plot_sqs_reliability(
         enriched,
-        output_path=out_dir / "fig9_lnmo_sqs_reliability.pdf", show=show,
+        output_path=out_dir / f"fig9_lnmo_sqs_reliability.{fmt}", show=show,
     )
     saved.append(p)
     logger.info("Figure 9 (LNMO SQS reliability) saved: %s", p)
 
     p = plot_disorder_heatmap(
         enriched,
-        output_path=out_dir / "fig10_lnmo_disorder_heatmap.pdf", show=show,
+        output_path=out_dir / f"fig10_lnmo_disorder_heatmap.{fmt}", show=show,
     )
     saved.append(p)
     logger.info("Figure 10 (LNMO disorder heatmap) saved: %s", p)
@@ -916,6 +920,7 @@ if __name__ == "__main__":
     parser.add_argument("--lnmo", metavar="FILE", help="RQ2 LNMO results JSON (for Fig 7).")
     parser.add_argument("--accuracy", metavar="FILE", help="RQ3 accuracy results JSON.")
     parser.add_argument("--output", default=str(_FIGURES_DIR), metavar="DIR")
+    parser.add_argument("--format", default="pdf", choices=["pdf", "png"], help="Output format.")
     parser.add_argument("--show", action="store_true", help="Display figures interactively.")
     args = parser.parse_args()
 
@@ -930,6 +935,7 @@ if __name__ == "__main__":
         accuracy_data=accuracy_data,
         lnmo_data=lnmo_data,
         output_dir=args.output,
+        fmt=args.format,
         show=args.show,
     )
 

@@ -509,25 +509,57 @@ their recovery by the pipeline confirms the screen works as designed.
 
 ## Figure Plan
 
-| Figure | File | Status | Description |
-|--------|------|--------|-------------|
-| Fig 1 | fig1_funnel.pdf | ✓ GENERATED | Pruning funnel horizontal bar chart |
-| Fig 2 | fig2_ordered_vs_disordered.pdf | ✓ GENERATED | Grouped bar: ordered vs disordered for voltage (lowest ρ) |
-| Fig 3 | fig3_parity.pdf | ✓ GENERATED | Parity plot computed vs experimental voltage (ρ=0.619) |
-| Fig 4 | fig4_disorder_heatmap.pdf | ✓ GENERATED | Disorder sensitivity heatmap (voltage % and form_e %) |
-| Fig 5 | fig5_sqs_variance.pdf | ✓ GENERATED | SQS realisation variance box plot (all near-zero — note in caption) |
-| Fig 6 | fig6_sqs_reliability.pdf | ✓ GENERATED | NMC: SQS spread vs dopant-to-dopant resolution (σ/spread = 38%) |
-| Fig 7 | fig7_cross_system.pdf | ✓ GENERATED | **Key figure**: ordered vs disordered scatter NMC (ρ=−0.069) vs LNMO (ρ=+0.988) |
-| Fig 8 | fig8_lnmo_ordered_vs_disordered.pdf | ✓ GENERATED | LNMO: ordered vs disordered bar chart (ρ=+0.988, analog of Fig 2) |
-| Fig 9 | fig9_lnmo_sqs_reliability.pdf | ✓ GENERATED | LNMO: SQS scatter (σ=0.012V, 2% of spread — analog of Fig 6) |
-| Fig 10 | fig10_lnmo_disorder_heatmap.pdf | ✓ GENERATED | LNMO: disorder sensitivity heatmap (uniformly low — analog of Fig 4) |
+| Figure | Description |
+|--------|-------------|
+| Fig 1 | Pruning funnel — NMC (271→85→46 OS pairs) |
+| Fig 2 | NMC: ordered vs disordered voltage bar chart (ρ=−0.069, n=22) |
+| Fig 3 | NMC: parity plot computed vs experimental voltage |
+| Fig 4 | NMC: disorder sensitivity heatmap |
+| Fig 5 | NMC: SQS realisation variance box plot |
+| Fig 6 | NMC: SQS spread vs dopant-to-dopant resolution (σ/spread=38%) |
+| Fig 7 | **Key figure**: cross-system scatter NMC (ρ=−0.069) vs LNMO (ρ=+0.988) |
+| Fig 8 | LNMO: ordered vs disordered bar chart (ρ=+0.988) |
+| Fig 9 | LNMO: SQS reliability scatter (σ=0.012V, 2% of spread) |
+| Fig 10 | LNMO: disorder sensitivity heatmap (uniformly low) |
 
-All figures in `evaluation/figures/`. Regenerate all:
+### Fig 1 — Pruning Funnel
+![Fig 1](figures/fig1_funnel.png)
+
+### Fig 2 — NMC Ordered vs Disordered Voltage
+![Fig 2](figures/fig2_ordered_vs_disordered.png)
+
+### Fig 3 — Parity Plot (Computed vs Experimental)
+![Fig 3](figures/fig3_parity.png)
+
+### Fig 4 — NMC Disorder Sensitivity Heatmap
+![Fig 4](figures/fig4_disorder_heatmap.png)
+
+### Fig 5 — NMC SQS Realisation Variance
+![Fig 5](figures/fig5_sqs_variance.png)
+
+### Fig 6 — NMC SQS Reliability
+![Fig 6](figures/fig6_sqs_reliability.png)
+
+### Fig 7 — Cross-System Comparison (Key Figure)
+![Fig 7](figures/fig7_cross_system.png)
+
+### Fig 8 — LNMO Ordered vs Disordered Voltage
+![Fig 8](figures/fig8_lnmo_ordered_vs_disordered.png)
+
+### Fig 9 — LNMO SQS Reliability
+![Fig 9](figures/fig9_lnmo_sqs_reliability.png)
+
+### Fig 10 — LNMO Disorder Sensitivity Heatmap
+![Fig 10](figures/fig10_lnmo_disorder_heatmap.png)
+
+Regenerate all figures:
 ```bash
 python -m evaluation.figures \
+    --rq1 evaluation/results/rq1_report.json \
     --rq2 evaluation/results/rq2_disorder_all23.json \
     --lnmo evaluation/results/rq2_lnmo_all22.json \
-    --output evaluation/figures/
+    --accuracy evaluation/results/rq3_accuracy_444.json \
+    --output evaluation/figures/ --format png
 ```
 
 ---

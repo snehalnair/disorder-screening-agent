@@ -33,9 +33,8 @@ evaluation/results/rq2_disorder_444.json
 evaluation/results/rq3_accuracy_444.json
 evaluation/results/*.log
 
-# Generated figures (reproducible from results)
+# Generated figures (PDFs excluded; PNGs tracked for GitHub rendering)
 evaluation/figures/*.pdf
-evaluation/figures/*.png
 
 # Generated reports
 reports/
