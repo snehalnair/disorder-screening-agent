@@ -583,19 +583,120 @@ def plot_sqs_reliability(
     return out
 
 
+# ─────────────────────────────────────────────────────────────────────────────
+# Figure 7: Cross-system comparison (NMC vs LNMO)
+# ─────────────────────────────────────────────────────────────────────────────
+
+
+def plot_cross_system_comparison(
+    nmc_results: dict,
+    lnmo_results: dict,
+    output_path: str | pathlib.Path | None = None,
+    show: bool = False,
+) -> pathlib.Path:
+    """Fig 7: Ordered vs disordered voltage scatter for NMC and LNMO side-by-side.
+
+    Two panels sharing the same axes scale:
+    - Left (NMC layered): ρ ≈ −0.069 — random scatter, ordered ≠ disordered
+    - Right (LNMO spinel): ρ ≈ +0.988 — tight diagonal, ordered ≈ disordered
+
+    This is the central figure of the cross-system comparison.
+    """
+    import matplotlib.pyplot as plt
+    import numpy as np
+    from scipy import stats
+
+    plt.rcParams.update({"font.family": _SERIF})
+
+    def _extract(results: dict) -> tuple[list, list, list]:
+        """Return (dopants, ordered_v, disordered_v) for all rows with voltage data."""
+        dopants, ord_v, dis_v = [], [], []
+        for r in results.get("dopant_results", []):
+            ov = r["ordered"].get("voltage")
+            dv = r["disordered_mean"].get("voltage")
+            if ov is not None and dv is not None:
+                dopants.append(r["dopant"])
+                ord_v.append(ov)
+                dis_v.append(dv)
+        return dopants, ord_v, dis_v
+
+    nmc_dop, nmc_ord, nmc_dis = _extract(nmc_results)
+    lnmo_dop, lnmo_ord, lnmo_dis = _extract(lnmo_results)
+
+    def _rho(x, y):
+        if len(x) < 3:
+            return float("nan"), float("nan")
+        r, p = stats.spearmanr(x, y)
+        return float(r), float(p)
+
+    nmc_rho, nmc_p = _rho(nmc_ord, nmc_dis)
+    lnmo_rho, lnmo_p = _rho(lnmo_ord, lnmo_dis)
+
+    fig, axes = plt.subplots(1, 2, figsize=(_DOUBLE_COL_W, 3.4))
+
+    for ax, dopants, ord_v, dis_v, title, rho, pval, color, system in [
+        (axes[0], nmc_dop, nmc_ord, nmc_dis,
+         "NMC (layered LiCoO₂ proxy)", nmc_rho, nmc_p,
+         _COLORBLIND_PALETTE[0], "nmc"),
+        (axes[1], lnmo_dop, lnmo_ord, lnmo_dis,
+         "LNMO (spinel LiMn₂O₄ proxy)", lnmo_rho, lnmo_p,
+         _COLORBLIND_PALETTE[2], "lnmo"),
+    ]:
+        ax.scatter(ord_v, dis_v, s=40, color=color, alpha=0.8, zorder=4)
+
+        # Label each point
+        for dop, ox, dy in zip(dopants, ord_v, dis_v):
+            ax.annotate(dop, (ox, dy), textcoords="offset points",
+                        xytext=(3, 2), fontsize=5.5, color="#444444")
+
+        # y = x reference line
+        all_v = ord_v + dis_v
+        vmin, vmax = min(all_v) - 0.02, max(all_v) + 0.02
+        ref = np.linspace(vmin, vmax, 100)
+        ax.plot(ref, ref, "k--", linewidth=0.8, alpha=0.5, label="y = x")
+
+        p_str = "p < 0.001" if pval < 0.001 else f"p = {pval:.3f}"
+        sig_str = "" if pval < 0.05 else " (n.s.)"
+        ax.set_title(title, fontsize=9, pad=4)
+        ax.set_xlabel("Ordered voltage (V)", fontsize=8)
+        ax.set_ylabel("Disordered voltage (V)", fontsize=8)
+        ax.set_xlim(vmin, vmax)
+        ax.set_ylim(vmin, vmax)
+        ax.set_aspect("equal")
+        ax.annotate(
+            f"Spearman ρ = {rho:.3f}\n{p_str}{sig_str}\nn = {len(dopants)}",
+            xy=(0.05, 0.95), xycoords="axes fraction",
+            fontsize=7.5, va="top",
+            bbox=dict(boxstyle="round,pad=0.3", fc="white", ec="#cccccc", alpha=0.9),
+        )
+        ax.spines["top"].set_visible(False)
+        ax.spines["right"].set_visible(False)
+
+    fig.suptitle(
+        "Ordered vs Disordered Voltage: Structure-Dependent Disorder Sensitivity",
+        fontsize=10, y=1.02,
+    )
+    plt.tight_layout()
+    out = _save_fig(fig, output_path or _FIGURES_DIR / "fig7_cross_system.pdf", show)
+    plt.close(fig)
+    return out
+
+
 def save_all_figures(
     rq1_data: dict | None = None,
     rq2_data: dict | None = None,
     accuracy_data: dict | None = None,
+    lnmo_data: dict | None = None,
     output_dir: str | pathlib.Path = _FIGURES_DIR,
     show: bool = False,
 ) -> list[pathlib.Path]:
-    """Generate and save all 5 publication figures.
+    """Generate and save all publication figures.
 
     Args:
         rq1_data:      RQ1 report dict (for funnel diagram).
-        rq2_data:      RQ2 results dict (for Figs 2, 4, 5).
+        rq2_data:      RQ2 results dict (for Figs 2, 4, 5, 6).
         accuracy_data: RQ3 accuracy dict (for Fig 3).
+        lnmo_data:     LNMO RQ2 results dict (for Fig 7 cross-system).
         output_dir:    Directory to write PDFs.
         show:          Display each figure interactively.
 
@@ -637,6 +738,14 @@ def save_all_figures(
                         output_path=out_dir / "fig3_parity.pdf", show=show)
         saved.append(p)
         logger.info("Figure 3 saved: %s", p)
+
+    if rq2_data and lnmo_data:
+        p = plot_cross_system_comparison(
+            rq2_data, lnmo_data,
+            output_path=out_dir / "fig7_cross_system.pdf", show=show,
+        )
+        saved.append(p)
+        logger.info("Figure 7 saved: %s", p)
 
     return saved
 
@@ -689,7 +798,8 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description="Generate paper figures.")
     parser.add_argument("--rq1", metavar="FILE", help="RQ1 report JSON.")
-    parser.add_argument("--rq2", metavar="FILE", help="RQ2 disorder results JSON.")
+    parser.add_argument("--rq2", metavar="FILE", help="RQ2 disorder results JSON (NMC).")
+    parser.add_argument("--lnmo", metavar="FILE", help="RQ2 LNMO results JSON (for Fig 7).")
     parser.add_argument("--accuracy", metavar="FILE", help="RQ3 accuracy results JSON.")
     parser.add_argument("--output", default=str(_FIGURES_DIR), metavar="DIR")
     parser.add_argument("--show", action="store_true", help="Display figures interactively.")
@@ -697,12 +807,14 @@ if __name__ == "__main__":
 
     rq1_data = json.load(open(args.rq1)) if args.rq1 else None
     rq2_data = json.load(open(args.rq2)) if args.rq2 else None
+    lnmo_data = json.load(open(args.lnmo)) if args.lnmo else None
     accuracy_data = json.load(open(args.accuracy)) if args.accuracy else None
 
     saved = save_all_figures(
         rq1_data=rq1_data,
         rq2_data=rq2_data,
         accuracy_data=accuracy_data,
+        lnmo_data=lnmo_data,
         output_dir=args.output,
         show=args.show,
     )

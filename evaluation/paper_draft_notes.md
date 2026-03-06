@@ -391,11 +391,14 @@ their recovery by the pipeline confirms the screen works as designed.
 | Fig 3 | fig3_parity.pdf | ✓ GENERATED | Parity plot computed vs experimental voltage (ρ=0.619) |
 | Fig 4 | fig4_disorder_heatmap.pdf | ✓ GENERATED | Disorder sensitivity heatmap (voltage % and form_e %) |
 | Fig 5 | fig5_sqs_variance.pdf | ✓ GENERATED | SQS realisation variance box plot (all near-zero — note in caption) |
+| Fig 6 | fig6_sqs_reliability.pdf | ✓ GENERATED | SQS spread vs dopant-to-dopant resolution (σ/spread = 38%) |
+| Fig 7 | fig7_cross_system.pdf | ✓ GENERATED | **Key figure**: ordered vs disordered scatter NMC (ρ=−0.069) vs LNMO (ρ=+0.988) |
 
-All figures in `evaluation/figures/`. Regenerate (4×4×4):
+All figures in `evaluation/figures/`. Regenerate all (including Fig 7):
 ```bash
 python -m evaluation.figures \
-    --rq2 evaluation/results/rq2_disorder_444.json \
+    --rq2 evaluation/results/rq2_disorder_all23.json \
+    --lnmo evaluation/results/rq2_lnmo_all22.json \
     --output evaluation/figures/
 ```
 
