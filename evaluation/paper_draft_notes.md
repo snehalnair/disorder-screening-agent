@@ -108,26 +108,26 @@ Spearman ρ of rankings is the appropriate accuracy metric, not absolute MAE.
 
 ### Key numbers (run `python -m evaluation.eval_pruning`)
 
-| Stage | (Element, OS) pairs | Unique elements | Recall (confirmed_successful) |
-|-------|---------------------|----------------|-------------------------------|
-| Stage 1 — SMACT | 271 | ~110 | ~92% |
-| Stage 2 — Radius (≤35%) | 85 | ~55 | ~92% |
-| Stage 3 — Substitution (≥0.001) | **46** | **29** | **~92%** |
+| Stage | (Element, OS) pairs | Unique elements | Recall (confirmed_successful, 13 GT) | Recall (all confirmed, 16 GT) |
+|-------|---------------------|----------------|--------------------------------------|-------------------------------|
+| Stage 1 — SMACT | 271 | **80** | **100%** (13/13) | **100%** (16/16) |
+| Stage 2 — Radius (≤35%) | 85 | **38** | **92.3%** (12/13, B missed) | **81.2%** (13/16, B+Sc+Y missed) |
+| Stage 3 — Substitution (≥0.001) | **46** | **29** | **92.3%** (12/13, B missed) | **75.0%** (12/16, B+Hf+Sc+Y missed) |
 
-- **Search space reduction (pairs)**: 271 → 46 = **83.0%** with ~92% recall
-- **Search space reduction (elements)**: ~110 → 29 = **~74%** unique candidate elements
-- **B excluded** (50.5% mismatch, filtered at Stage 2) — only confirmed_successful dopant missed at Stage 2
-- **confirmed_limited note**: Sc, Hf, Y are also filtered at Stage 3 — recall vs ALL confirmed classes is ~75%
-- **Precision note**: 29 unique elements survive; 12-13 are confirmed positive; most remaining are "untested"
-  not "false positive". Precision among elements with known outcomes: ~92%
+- **Search space reduction (pairs)**: 271 → 46 = **83.0%** with 92.3% recall on confirmed_successful
+- **Search space reduction (elements)**: 80 → 29 = **63.8%** unique candidate elements
+- **B** (confirmed_successful): filtered at Stage 2 (50.5% radius mismatch) — only confirmed_successful missed
+- **Sc, Y** (confirmed_limited): filtered at Stage 2 (radius mismatch)
+- **Hf** (confirmed_limited): filtered at Stage 3 (low substitution probability)
+- **Precision (known outcomes only)**: Sb (confirmed_failed) survived Stage 3; 12 confirmed positive / 13 with known outcome = **92.3%**
 
 ### Ablation (run `python -m evaluation.ablation`)
 
-| Ablation | Recall | Survivors | Interpretation |
-|----------|--------|-----------|---------------|
-| Default (all 3 stages) | ~92% | 46 | Baseline |
-| Remove Stage 2 | ~92% | ~50-60 | Stage 2 adds precision, not recall at 0.35 threshold |
-| Remove Stage 3 | ~92% | 85 | Stage 3 halves candidate count at zero recall cost |
+| Ablation | Recall (conf. successful) | Survivors (pairs) | Interpretation |
+|----------|--------------------------|-------------------|---------------|
+| Default (all 3 stages) | **92.3%** | 46 | Baseline |
+| Remove Stage 2 | 92.3% | ~50–60 | Stage 2 adds precision only; zero recall cost at 0.35 threshold |
+| Remove Stage 3 | 92.3% | 85 | Stage 3 halves candidate count at zero recall cost |
 | Enable Stage 4 (mock) | TBD | <46 | Reduces compute if real ML model available |
 
 ---
