@@ -195,8 +195,8 @@ The n=22 run extends to all simulated dopants with the same protocol.*
 **Convergence**: 86/110 = **78%**. Low-convergence dopants (n<3): Zr, Mg, Ta, Re.
 
 **Key insights**:
-- Ordered ranking is inverted by disorder for voltage (ρ=−0.069): W/Zr rank 1st ordered but
-  drop to 4th/1st disordered; Ru ranks last ordered but is last disordered too (consistent)
+- Ordered ranking has no predictive power for disordered voltage ranking (ρ=−0.069, p=0.759):
+  W/Zr rank 1st ordered but drop to 4th/1st disordered; Ru ranks last in both (consistent but chance)
 - Formation energy ordering is fully preserved (ρ=+0.956): ordered screening is valid for stability
 - Total voltage spread across 22 dopants: 0.130 V (−3.369 to −3.499 V disordered)
 - Mean within-dopant SQS std: 0.050 V = **38% of total spread** → single-cell disorder
@@ -266,14 +266,22 @@ are −3.37 to −3.69 V (ordered) while experimental voltages are +3.72 to +3.8
 offset arises from using _E_LI_REF = −1.9 eV/atom (DFT-PBE value) rather than the MACE-MPA-0
 Li metal energy. Absolute MAE is NOT a meaningful accuracy metric. Use Spearman ρ of rankings.
 
-| Metric | Ordered | Disordered |
-|--------|---------|------------|
-| Spearman ρ vs experimental voltage (2×2×2 run) | **0.619** (p=0.102) | Lower (values cluster) |
-| MAE vs experiment (4×4×4) | 7.40 V | 7.21 V (+2.6% reduction) |
+| Metric | Ordered | Disordered | Note |
+|--------|---------|------------|------|
+| Spearman ρ vs experiment (4×4×4, n=8) | **+0.667** (p=0.071) | **+0.119** (p=0.779) | Neither significant (p>0.05); physical ρ = −raw ρ (MACE sign convention) |
+| MAE vs experiment (4×4×4) | 7.40 V | 7.21 V (+2.6%) | Absolute MAE invalid — dominated by Li-ref offset |
 
-**Superseded 2×2×2 RQ3**: MAE ordered=7.12 V, disordered=7.30 V (−2.5%). Sign flipped in
-4×4×4 (+2.6%) because different SQS realisations sample different local environments.
-Neither value is physically meaningful for absolute accuracy — rankings comparison is correct.
+**Sign convention note**: MACE-MP-0 voltages are negative (−3.4 to −3.7 V) while
+experimental are positive (+3.72 to +3.85 V). More negative MACE = higher real voltage.
+Physical ρ = −(raw Spearman) = +0.667 for ordered, +0.119 for disordered.
+
+**Interpretation**: Ordered MACE predictions have borderline rank agreement with experiment
+(ρ=+0.667, p=0.071) but disordered predictions lose even this (ρ=+0.119, p=0.779).
+With n=8, neither is statistically significant. Main discrepancy: Nb ranks #1 experimentally
+(3.850V) but MACE ranks it #5 ordered — driving the imperfect ρ.
+
+**Superseded 2×2×2 RQ3**: ρ_ordered=+0.619 (p=0.102), MAE ordered=7.12V, disordered=7.30V.
+Superseded by 4×4×4 results above.
 
 ---
 
@@ -407,7 +415,7 @@ python -m evaluation.figures \
 
 ---
 
-## LNMO Second-System Validation (IN PROGRESS — Colab A100, 2026-03-05)
+## LNMO Second-System Validation (COMPLETE — Colab A100, 2026-03-06)
 
 **Purpose**: Validate that the pipeline generalises to a different cathode chemistry
 (spinel vs layered oxide) and that the disorder findings replicate.
