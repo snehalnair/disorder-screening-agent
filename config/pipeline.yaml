@@ -76,8 +76,9 @@ pipeline:
                                     # MACE-MP-0: pip install mace-torch
                                     # Works on CUDA, Apple MPS (M1/M2/M3), and CPU
     device: "auto"                  # auto (CUDA→MPS→CPU) | cuda | mps | cpu
-    fmax: 0.05                      # force convergence threshold (eV/Å)
-    max_relax_steps: 500
+    fmax: 0.10                      # force convergence threshold (eV/Å)
+                                    # standardised with LNMO evaluation (was 0.05 — caused 78% convergence)
+    max_relax_steps: 1000           # standardised with LNMO evaluation (was 500)
 
   # ── Output ────────────────────────────────────────────────────────────────
   output:

@@ -635,6 +635,14 @@ high-performing dopants.
 
 ### Cross-system comparison (NMC vs LNMO) — FINAL
 
+#### Convergence criteria
+
+| System | Supercell | Atoms | Dopant sites at 10% | fmax (eV/Å) | max_relax_steps | Convergence definition |
+|--------|-----------|-------|---------------------|------------|-----------------|------------------------|
+| NMC (original) | 4×4×4 of 4-atom primitive | **256** | 6 | 0.05 | 500 | max(\|F\|) < 0.05 eV/Å |
+| NMC (rerun) | 4×4×4 of 4-atom primitive | **256** | 6 | **0.10** | **1000** | max(\|F\|) < 0.10 eV/Å |
+| LNMO | 2×2×2 of 56-atom conventional | **448** | 13 | 0.10 | 1000 | max(\|F\|) < 0.10 eV/Å |
+
 | Metric | NMC (layered) | LNMO (spinel) | Implication |
 |--------|--------------|---------------|-------------|
 | Spearman ρ voltage | −0.069 (p=0.759) | **+0.988** (p<0.001) | Ordered screening invalid/valid |
