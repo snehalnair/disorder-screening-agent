@@ -747,6 +747,110 @@ def save_all_figures(
         saved.append(p)
         logger.info("Figure 7 saved: %s", p)
 
+    if lnmo_data:
+        lnmo_figs = plot_lnmo_figures(lnmo_data, output_dir=out_dir, show=show)
+        saved.extend(lnmo_figs)
+
+    return saved
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Figure 8: LNMO ordered vs disordered (analog of Fig 2)
+# Figure 9: LNMO SQS reliability (analog of Fig 6)
+# Figure 10: LNMO disorder heatmap (analog of Fig 4)
+# ─────────────────────────────────────────────────────────────────────────────
+
+
+def _enrich_rq2_data(results: dict) -> dict:
+    """Inject missing ``target_properties`` and ``spearman_rho`` into an rq2 dict.
+
+    The LNMO merged JSON omits these fields (they exist in the batch files but
+    the merge script does not forward them).  This function computes them from
+    the dopant_results so that existing plot functions work unchanged.
+    """
+    from scipy import stats as _stats
+
+    results = dict(results)  # shallow copy — don't mutate caller's dict
+
+    # Infer target_properties from the union of ordered/disordered_mean keys
+    if "target_properties" not in results:
+        props: set[str] = set()
+        for r in results.get("dopant_results", []):
+            props.update(r.get("ordered", {}).keys())
+            props.update(r.get("disordered_mean", {}).keys())
+        props.discard("li_ni_exchange")  # often all-zero / near-zero; keep if present
+        results["target_properties"] = sorted(props)
+
+    # Compute Spearman ρ per property if not already stored
+    if "spearman_rho" not in results:
+        rho_dict: dict[str, dict] = {}
+        for prop in results["target_properties"]:
+            ord_v, dis_v, dopants = [], [], []
+            for r in results.get("dopant_results", []):
+                ov = r["ordered"].get(prop)
+                dv = r["disordered_mean"].get(prop)
+                if ov is not None and dv is not None:
+                    ord_v.append(ov)
+                    dis_v.append(dv)
+                    dopants.append(r["dopant"])
+            if len(ord_v) >= 3:
+                rho, pval = _stats.spearmanr(ord_v, dis_v)
+                interp = ("High correlation — disorder has minor effect on ranking"
+                          if abs(rho) >= 0.8
+                          else "Low correlation — disorder strongly changes ranking")
+                rho_dict[prop] = {
+                    "rho": float(rho), "pvalue": float(pval),
+                    "n": len(ord_v), "dopants": dopants,
+                    "interpretation": interp,
+                }
+            else:
+                rho_dict[prop] = {"rho": float("nan"), "pvalue": float("nan"),
+                                  "n": len(ord_v), "dopants": dopants,
+                                  "interpretation": "Insufficient data"}
+        results["spearman_rho"] = rho_dict
+
+    return results
+
+
+def plot_lnmo_figures(
+    lnmo_results: dict,
+    output_dir: str | pathlib.Path = _FIGURES_DIR,
+    show: bool = False,
+) -> list[pathlib.Path]:
+    """Generate LNMO-specific figures (analogs of Figs 2, 4, 6 for the spinel system).
+
+    Produces:
+    - fig8_lnmo_ordered_vs_disordered.pdf  (analog of Fig 2)
+    - fig9_lnmo_sqs_reliability.pdf         (analog of Fig 6)
+    - fig10_lnmo_disorder_heatmap.pdf       (analog of Fig 4)
+    """
+    out_dir = pathlib.Path(output_dir)
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    enriched = _enrich_rq2_data(lnmo_results)
+    saved = []
+
+    p = plot_ordered_vs_disordered(
+        enriched, target_property="voltage",
+        output_path=out_dir / "fig8_lnmo_ordered_vs_disordered.pdf", show=show,
+    )
+    saved.append(p)
+    logger.info("Figure 8 (LNMO ordered vs disordered) saved: %s", p)
+
+    p = plot_sqs_reliability(
+        enriched,
+        output_path=out_dir / "fig9_lnmo_sqs_reliability.pdf", show=show,
+    )
+    saved.append(p)
+    logger.info("Figure 9 (LNMO SQS reliability) saved: %s", p)
+
+    p = plot_disorder_heatmap(
+        enriched,
+        output_path=out_dir / "fig10_lnmo_disorder_heatmap.pdf", show=show,
+    )
+    saved.append(p)
+    logger.info("Figure 10 (LNMO disorder heatmap) saved: %s", p)
+
     return saved
 
 
@@ -806,8 +910,8 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     rq1_data = json.load(open(args.rq1)) if args.rq1 else None
-    rq2_data = json.load(open(args.rq2)) if args.rq2 else None
-    lnmo_data = json.load(open(args.lnmo)) if args.lnmo else None
+    rq2_data = _enrich_rq2_data(json.load(open(args.rq2))) if args.rq2 else None
+    lnmo_data = _enrich_rq2_data(json.load(open(args.lnmo))) if args.lnmo else None
     accuracy_data = json.load(open(args.accuracy)) if args.accuracy else None
 
     saved = save_all_figures(
