@@ -378,7 +378,7 @@ their recovery by the pipeline confirms the screen works as designed.
 | 4 | Disorder disrupts voltage ranking (ρ < 0.8) | Table 2 (RQ2) | ✓ CONFIRMED: voltage ρ=−0.190 (4×4×4); formation_energy ρ=+0.881 (preserved) |
 | 5 | Ordered vs disordered accuracy vs experiment | Table 3 (RQ3) | ✓ DONE: MAE reduction +2.6%; abs MAE invalid (Li ref offset) |
 | 6 | SQS realisation variance is meaningful | Fig 5, Table 1 | ✓ CONFIRMED (4×4×4): voltage std 0.013–0.098 V across 5 realisations |
-| 7 | Relaxation improves prediction accuracy | Ablation 5 table | ⏳ Optional — requires additional MACE runs |
+| 7 | ~~Relaxation improves prediction accuracy~~ | ~~Ablation 5~~ | ✗ DROPPED — Li-ref MAE offset (~7 V) dominates; claim is untestable with current metric. Replaced by limitation note: "fixed-cell relaxation (positions only); full cell optimisation deferred to future work." |
 
 ---
 
