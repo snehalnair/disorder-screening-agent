@@ -59,20 +59,28 @@ Figure 6 (`fig6_sqs_reliability.pdf`) shows this directly.
 
 ---
 
-## Thesis Statement (UPDATED — 4×4×4 SQS on Kaggle T4, 2026-03-01)
+## Thesis Statement (FINAL — NMC + LNMO complete, 2026-03-06)
 
 > Existing high-throughput dopant screening studies simulate ordered crystal structures,
 > but synthesised materials are disordered. We present a hierarchical screening pipeline
 > that reduces the dopant search space by **83%** using chemical heuristics and produces
 > disorder-aware property predictions using machine-learned potentials on SQS supercells.
-> Applied to LiCoO2 cathode dopant screening (proxy for NMC Co site), we show that
-> disorder strongly disrupts voltage rankings (ρ = **−0.069**, n=22) while formation energy
-> rankings are preserved (ρ = **+0.956**, p < 0.001, n=22), demonstrating that the choice of
-> property governs whether ordered-cell screening is reliable. Furthermore, we show that
-> the mean within-dopant SQS variance (σ = 0.050 V) is 38% of the total dopant-to-dopant
-> voltage spread, demonstrating that single disordered-cell calculations are insufficient
-> to resolve dopant rankings — a methodological finding with broad implications for
-> disorder simulation practice.
+> Applied to two cathode systems — layered LiCoO2 (proxy for NMC) and spinel LiMn2O4
+> (proxy for LNMO) — we show that disorder sensitivity is structure-dependent: in the
+> layered oxide, disorder destroys the voltage ranking signal (ρ = **−0.069**, p=0.759,
+> n=22 — no predictive power) while formation energy rankings are preserved
+> (ρ = **+0.956**, p<0.001); in the spinel, both voltage and formation energy rankings are
+> fully preserved under disorder (ρ_voltage = **+0.988**, ρ_form_e = **+1.000**, both p<0.001,
+> n=22). This demonstrates that the validity of ordered-cell screening cannot be assumed
+> and must be validated per material class. Furthermore, the mean within-dopant SQS
+> variance in the layered oxide (σ = 0.050 V, 38% of total dopant spread) demonstrates
+> that single disordered-cell calculations are insufficient to resolve rankings in systems
+> where disorder matters — a finding that does not apply to the spinel (σ = 0.012 V, 2%),
+> confirming that the spinel is intrinsically more robust to chemical disorder.
+>
+> ⚠ Language note: Do NOT write "disorder inverts rankings" — the NMC ρ is near zero and
+> NOT statistically significant (p=0.759). The correct claim is "disorder destroys the
+> ranking signal" or "ordered rankings have no predictive power for disordered rankings".
 
 ### Filled-in values (from MACE-MPA-0, 4×4×4 supercell, Kaggle T4, 2026-03-01)
 
@@ -130,14 +138,20 @@ Spearman ρ of rankings is the appropriate accuracy metric, not absolute MAE.
 
 | Property | Spearman ρ | p-value | n | Interpretation |
 |----------|-----------|---------|---|---------------|
-| voltage | **−0.069** | 0.759 | 22 | No correlation — disorder fully disrupts voltage ranking |
-| formation_energy | **+0.956** | <0.001 | 22 | Very high correlation — formation energy ranking preserved |
+| voltage | **−0.069** | 0.759 | 22 | ⚠ NOT significant — disorder destroys ranking signal |
+| formation_energy | **+0.956** | <0.001 | 22 | Very high correlation — formation energy preserved |
 | li_ni_exchange | N/A | N/A | 0 | LiCoO2 parent has no Ni |
 | volume_change | 0 | — | 22 | All zeros — position-only relaxation (cell fixed) |
 
-**Key finding**: With n=22, the formation energy result strengthens (ρ=+0.956, p<0.001) while
-voltage remains disrupted (ρ=−0.069). The property-dependent behaviour is robust across both
-known and novel dopants.
+**Key finding**: Voltage ρ = −0.069 is NOT statistically significant (p=0.759). The correct
+interpretation is that ordered-cell voltage rankings have **zero predictive power** for
+disordered rankings — not that they are inverted. The slightly negative sign is noise.
+Formation energy rankings are strongly preserved (ρ=+0.956, p<0.001).
+
+**⚠ Language correction**: Earlier drafts said "disorder inverts voltage rankings" — this
+came from the degenerate 2×2×2 run (ρ=−0.333, artifact of 1 dopant site). The valid
+4×4×4 results (ρ=−0.190, p=0.651 for n=8; ρ=−0.069, p=0.759 for n=22) are both
+non-significant. Say "destroys the signal" or "no predictive power", not "inverts".
 
 ### Spearman ρ — KNOWN-8 SUBSET (4×4×4 Kaggle T4 — methodological validation run)
 
@@ -282,15 +296,17 @@ learning interatomic potential. We compute four battery-relevant properties (ave
 discharge voltage, Li/Ni antisite exchange energy, formation energy, and volume change)
 and compare ordered versus disordered predictions.
 
-Across all 22 simulated dopants, disorder strongly disrupts voltage rankings
-(Spearman ρ = **−0.069**, n=22, p=0.759) while formation energy rankings are fully
-preserved (ρ = **+0.956**, n=22, p<0.001). This property-dependent behaviour demonstrates
-that ordered-cell screening is reliable for stability assessment but unreliable for
-electrochemical performance ranking. The mean within-dopant SQS variance (σ = 0.050 V)
-equals 38% of the total dopant-to-dopant voltage spread (0.130 V), demonstrating that
-single disordered-cell calculations are insufficient to resolve dopant rankings.
-Among novel candidates, Cu and Sn emerge as the most promising earth-abundant targets
-with full or near-full SQS convergence (n=4–5/5).
+Applied to two cathode systems, we show that disorder sensitivity is structure-dependent.
+In the layered oxide (LiCoO2 proxy for NMC), disorder destroys the voltage ranking signal
+(Spearman ρ = **−0.069**, p=0.759, n=22 — not significant; ordered rankings have no
+predictive power) while formation energy rankings are fully preserved (ρ = **+0.956**,
+p<0.001). In the spinel (LiMn2O4 proxy for LNMO), both voltage and formation energy
+rankings are preserved under disorder (ρ_voltage = **+0.988**, ρ_form_e = **+1.000**,
+both p<0.001, n=22), demonstrating that ordered-cell screening is valid for LNMO but
+not for NMC. The mean within-dopant SQS variance in the layered oxide (σ = 0.050 V,
+38% of total spread) demonstrates that single disordered-cell calculations are
+insufficient to resolve rankings where disorder matters. Among novel NMC candidates,
+Cu and Sn emerge as the top earth-abundant synthesis targets.
 
 The pipeline is fully automated, reproducible via a CLI interface, and validated on
 two cathode systems (LiCoO2 proxy for NMC; LiMn2O4 proxy for LNMO spinel).
@@ -400,25 +416,70 @@ at 10%. MACE-MP-0, fmax=0.10 eV/Å, 5 SQS realisations. Colab A100 (~8h total).
 **Known dopants (validation)**: Al, Co, Cu, Fe, Mg, Ti, V (7 confirmed_successful)
 **Novel candidates**: Hf, Ir, Mo, Nb, Ni, Pd, Pt, Re, Rh, Ru, Sn, Ta, W, Zn, Zr (15)
 
-### Results so far (Batch 1, partial — 2026-03-05)
+### Spearman ρ — LNMO RESULTS (COMPLETE — n=22, Colab A100, 2026-03-06)
 
-| Dopant | Ordered (V) | Dis. mean (V) | Std (V) | Sensitivity | n |
-|--------|-------------|---------------|---------|-------------|---|
-| Al | −3.947 | −3.985 | 0.008 | 0.9% | 5/5 ✓ |
-| Co, Cu, Fe, Hf, Ir, Mg, Mo | — | — | — | — | pending |
+| Property | Spearman ρ | p-value | n | Interpretation |
+|----------|-----------|---------|---|---------------|
+| voltage | **+0.988** | <0.001 | 22 | Ordered ranking fully preserved under disorder |
+| formation_energy | **+1.000** | <0.001 | 22 | Perfect preservation |
+| volume_change | 0 | — | 22 | All zeros — position-only relaxation |
 
-**Early observation (Al)**: Voltage std=0.008 V is much tighter than NMC Al (0.043 V).
-LNMO 448-atom supercell with 13 dopant sites gives better SQS sampling than NMC 256-atom
-with 6 dopant sites — consistent with the methodological framing.
+**Key finding**: LNMO is the opposite of NMC. Ordered-cell screening is **valid** for
+the spinel — rankings are preserved with near-perfect fidelity. The SQS variance is
+4× tighter (σ=0.012 V vs 0.050 V) and represents only 2% of the total voltage spread
+(vs 38% for NMC). Convergence was perfect: 110/110 = 100%.
 
-### Expected findings (to fill in after batches complete)
+**⚠ Expectation vs reality**: The expected finding was "near zero / negative ρ" (replicate
+NMC). The actual result is +0.988. This is a stronger and more interesting result than
+expected — it shows that the NMC finding does NOT generalise to all cathodes, and that
+disorder sensitivity is intrinsically material-dependent.
 
-| Metric | Expected | Rationale |
-|--------|----------|-----------|
-| Spearman ρ voltage | Near zero / negative | Should replicate NMC finding |
-| Spearman ρ formation_energy | > 0.9 | Should replicate NMC finding |
-| SQS std (voltage) | < NMC (tighter) | More dopant sites → better SQS statistics |
-| Convergence | > 78% | Larger cell, more dopants → fewer strained SQS |
+### All-22 LNMO ordered vs disordered voltages
 
-Results file (when complete): `evaluation/results/rq2_lnmo_all22.json`
-Merge command: `python scripts/merge_lnmo_results.py`
+| Rank | Dopant | Category | Ordered (V) | Dis. mean (V) | Std (V) | Sens | n |
+|------|--------|----------|-------------|---------------|---------|------|---|
+| 1 | Mg | known | −4.117 | −4.137 | 0.012 | 0.5% | 5/5 |
+| 2 | **Zn** | novel | −4.022 | −4.031 | 0.007 | 0.2% | 5/5 |
+| 3 | Al | known | −3.947 | −3.985 | 0.008 | 0.9% | 5/5 |
+| 4 | **Ni** | novel | −3.935 | −3.951 | 0.004 | 0.4% | 5/5 |
+| 5 | Co | known | −3.835 | −3.818 | 0.006 | 0.4% | 5/5 |
+| 6 | Cu | known | −3.827 | −3.818 | 0.007 | 0.2% | 5/5 |
+| 7 | Fe | known | −3.807 | −3.801 | 0.003 | 0.2% | 5/5 |
+| 8 | Ti | known | −3.735 | −3.714 | 0.009 | 0.6% | 5/5 |
+| 9 | V | known | −3.666 | −3.655 | 0.012 | 0.3% | 5/5 |
+| 10 | **Rh** | novel | −3.668 | −3.654 | 0.007 | 0.4% | 5/5 |
+| 11 | **Sn** | novel | −3.657 | −3.618 | 0.014 | 1.1% | 5/5 |
+| 12 | **Ru** | novel | −3.608 | −3.597 | 0.006 | 0.3% | 5/5 |
+| 13 | **Hf** | novel | −3.623 | −3.581 | 0.008 | 1.1% | 5/5 |
+| 14 | **Pd** | novel | −3.600 | −3.580 | 0.022 | 0.6% | 5/5 |
+| 15 | **Zr** | novel | −3.577 | −3.564 | 0.011 | 0.4% | 5/5 |
+| 16 | **Pt** | novel | −3.579 | −3.543 | 0.009 | 1.0% | 5/5 |
+| 17 | **Nb** | novel | −3.505 | −3.468 | 0.009 | 1.0% | 5/5 |
+| 18 | **Ta** | novel | −3.519 | −3.465 | 0.022 | 1.5% | 5/5 |
+| 19 | **Re** | novel | −3.420 | −3.441 | 0.012 | 0.6% | 5/5 |
+| 20 | **Mo** | novel | −3.488 | −3.407 | 0.060 | 2.3% | 5/5 |
+| 21 | W | novel | −3.392 | −3.399 | 0.008 | 0.2% | 5/5 |
+| 22 | **Ir** | novel | −3.502 | −3.381 | 0.010 | 3.4% | 5/5 |
+
+**Validation**: 7 confirmed-successful known dopants occupy ranks 1, 3, 5, 6, 7, 8, 9 —
+top 9 contains 7 known dopants. Strong validation that the pipeline correctly identifies
+high-performing dopants.
+
+**Novel LNMO synthesis targets** (earth-abundant, good convergence):
+- **Zn** (rank 2, −4.031 V): confirmed_limited in GT — correctly recovered and ranked highly
+- **Sn** (rank 11, −3.618 V): best novel candidate without GT precedent, full convergence
+- **Mo** outlier: std=0.060 V (all others ≤0.022 V) — uniquely disorder-sensitive in spinel
+
+### Cross-system comparison (NMC vs LNMO) — FINAL
+
+| Metric | NMC (layered) | LNMO (spinel) | Implication |
+|--------|--------------|---------------|-------------|
+| Spearman ρ voltage | −0.069 (p=0.759) | **+0.988** (p<0.001) | Ordered screening invalid/valid |
+| Spearman ρ form. energy | +0.956 (p<0.001) | **+1.000** (p<0.001) | Both systems agree |
+| Mean SQS std (voltage) | 0.050 V | **0.012 V** | Spinel 4× more robust |
+| Std / total spread | 38% | **2%** | SQS noise negligible in spinel |
+| Mean disorder sensitivity | ~4–5% | **0.8%** | 5× lower in spinel |
+| Total voltage spread | 0.130 V | **0.755 V** | Spinel has wider dopant discrimination |
+| Convergence | 78% | **100%** | Spinel geometrically more accommodating |
+
+Results file: `evaluation/results/rq2_lnmo_all22.json`

@@ -1,0 +1,460 @@
+{
+  "concentration": 0.1,
+  "mlip": "mace-mp-0",
+  "n_sqs_realisations": 5,
+  "supercell": [
+    2,
+    2,
+    2
+  ],
+  "target_properties": [
+    "formation_energy",
+    "li_ni_exchange",
+    "voltage",
+    "volume_change"
+  ],
+  "host": "LiMn2O4_spinel",
+  "target_species": "Mn",
+  "dopant_results": [
+    {
+      "dopant": "Al",
+      "ordered": {
+        "formation_energy": -6.83929837898891,
+        "voltage": -3.947343845649377,
+        "volume_change": 0.0
+      },
+      "disordered_mean": {
+        "formation_energy": -6.839495149176601,
+        "voltage": -3.9845859018099317,
+        "volume_change": 0.0
+      },
+      "disordered_std": {
+        "formation_energy": 0.0008467909559377732,
+        "voltage": 0.008367704727246694,
+        "volume_change": 0.0
+      },
+      "disordered_n": {
+        "formation_energy": 5,
+        "voltage": 5,
+        "volume_change": 5
+      },
+      "n_converged": 5,
+      "disorder_sensitivity": {
+        "formation_energy": 2.877052246993116e-05,
+        "voltage": 0.009434712965682417
+      },
+      "sqs_realisations": [
+        {
+          "formation_energy": -6.838043625392899,
+          "voltage": -3.973860903283301,
+          "volume_change": 0.0
+        },
+        {
+          "formation_energy": -6.839723609190186,
+          "voltage": -3.997486697170045,
+          "volume_change": 0.0
+        },
+        {
+          "formation_energy": -6.839693028293949,
+          "voltage": -3.9893676024448497,
+          "volume_change": 0.0
+        },
+        {
+          "formation_energy": -6.840664057513613,
+          "voltage": -3.977823233830469,
+          "volume_change": 0.0
+        },
+        {
+          "formation_energy": -6.8393514254923575,
+          "voltage": -3.9843910723209945,
+          "volume_change": 0.0
+        }
+      ]
+    },
+    {
+      "dopant": "Co",
+      "ordered": {
+        "formation_energy": -6.721606462725187,
+        "voltage": -3.834940642375648,
+        "volume_change": 0.0
+      },
+      "disordered_mean": {
+        "formation_energy": -6.719713609805216,
+        "voltage": -3.817687638049489,
+        "volume_change": 0.0
+      },
+      "disordered_std": {
+        "formation_energy": 0.0007376326244226397,
+        "voltage": 0.005613749080341269,
+        "volume_change": 0.0
+      },
+      "disordered_n": {
+        "formation_energy": 5,
+        "voltage": 5,
+        "volume_change": 5
+      },
+      "n_converged": 5,
+      "disorder_sensitivity": {
+        "formation_energy": 0.00028160722149797585,
+        "voltage": 0.004498897358544494
+      },
+      "sqs_realisations": [
+        {
+          "formation_energy": -6.719860220572388,
+          "voltage": -3.81523756136142,
+          "volume_change": 0.0
+        },
+        {
+          "formation_energy": -6.719931223277129,
+          "voltage": -3.8225359789675353,
+          "volume_change": 0.0
+        },
+        {
+          "formation_energy": -6.72036848257966,
+          "voltage": -3.8258766884800424,
+          "volume_change": 0.0
+        },
+        {
+          "formation_energy": -6.720126970121318,
+          "voltage": -3.813968059090121,
+          "volume_change": 0.0
+        },
+        {
+          "formation_energy": -6.718281152475583,
+          "voltage": -3.8108199023483267,
+          "volume_change": 0.0
+        }
+      ]
+    },
+    {
+      "dopant": "Cu",
+      "ordered": {
+        "formation_energy": -6.64243246427841,
+        "voltage": -3.8269152430897067,
+        "volume_change": 0.0
+      },
+      "disordered_mean": {
+        "formation_energy": -6.64008176823113,
+        "voltage": -3.8175631450865866,
+        "volume_change": 0.0
+      },
+      "disordered_std": {
+        "formation_energy": 0.0006178132098778836,
+        "voltage": 0.006819312825920821,
+        "volume_change": 0.0
+      },
+      "disordered_n": {
+        "formation_energy": 5,
+        "voltage": 5,
+        "volume_change": 5
+      },
+      "n_converged": 5,
+      "disorder_sensitivity": {
+        "formation_energy": 0.00035389084645145487,
+        "voltage": 0.002443769304796403
+      },
+      "sqs_realisations": [
+        {
+          "formation_energy": -6.640500967492181,
+          "voltage": -3.81412139886786,
+          "volume_change": 0.0
+        },
+        {
+          "formation_energy": -6.640216917811033,
+          "voltage": -3.820313128797727,
+          "volume_change": 0.0
+        },
+        {
+          "formation_energy": -6.639417398408036,
+          "voltage": -3.806281374153605,
+          "volume_change": 0.0
+        },
+        {
+          "formation_energy": -6.640932716160693,
+          "voltage": -3.8262094232970427,
+          "volume_change": 0.0
+        },
+        {
+          "formation_energy": -6.639340841283706,
+          "voltage": -3.820890400316698,
+          "volume_change": 0.0
+        }
+      ]
+    },
+    {
+      "dopant": "Fe",
+      "ordered": {
+        "formation_energy": -6.748706886568125,
+        "voltage": -3.807484679435922,
+        "volume_change": 0.0
+      },
+      "disordered_mean": {
+        "formation_energy": -6.748309807334972,
+        "voltage": -3.8012988423153855,
+        "volume_change": 0.0
+      },
+      "disordered_std": {
+        "formation_energy": 0.00028238969135501086,
+        "voltage": 0.0029821691157192565,
+        "volume_change": 0.0
+      },
+      "disordered_n": {
+        "formation_energy": 5,
+        "voltage": 5,
+        "volume_change": 5
+      },
+      "n_converged": 5,
+      "disorder_sensitivity": {
+        "formation_energy": 5.8837824760653124e-05,
+        "voltage": 0.001624651874227045
+      },
+      "sqs_realisations": [
+        {
+          "formation_energy": -6.747768917266287,
+          "voltage": -3.7984067768590166,
+          "volume_change": 0.0
+        },
+        {
+          "formation_energy": -6.74853620556879,
+          "voltage": -3.8066556067770763,
+          "volume_change": 0.0
+        },
+        {
+          "formation_energy": -6.748521585810282,
+          "voltage": -3.801831045146271,
+          "volume_change": 0.0
+        },
+        {
+          "formation_energy": -6.748312295197912,
+          "voltage": -3.8009479420302967,
+          "volume_change": 0.0
+        },
+        {
+          "formation_energy": -6.748410032831592,
+          "voltage": -3.798652840764268,
+          "volume_change": 0.0
+        }
+      ]
+    },
+    {
+      "dopant": "Hf",
+      "ordered": {
+        "formation_energy": -7.018392134834828,
+        "voltage": -3.6229751014641765,
+        "volume_change": 0.0
+      },
+      "disordered_mean": {
+        "formation_energy": -7.017706167471177,
+        "voltage": -3.5813700979307823,
+        "volume_change": 0.0
+      },
+      "disordered_std": {
+        "formation_energy": 0.00046300180594396515,
+        "voltage": 0.008300467117279544,
+        "volume_change": 0.0
+      },
+      "disordered_n": {
+        "formation_energy": 5,
+        "voltage": 5,
+        "volume_change": 5
+      },
+      "n_converged": 5,
+      "disorder_sensitivity": {
+        "formation_energy": 9.77385347630442e-05,
+        "voltage": 0.011483657041026872
+      },
+      "sqs_realisations": [
+        {
+          "formation_energy": -7.017349680484005,
+          "voltage": -3.5769311628598346,
+          "volume_change": 0.0
+        },
+        {
+          "formation_energy": -7.018444676390244,
+          "voltage": -3.588892815391907,
+          "volume_change": 0.0
+        },
+        {
+          "formation_energy": -7.017886666302159,
+          "voltage": -3.5929148690971062,
+          "volume_change": 0.0
+        },
+        {
+          "formation_energy": -7.017101967208605,
+          "voltage": -3.5703198929947164,
+          "volume_change": 0.0
+        },
+        {
+          "formation_energy": -7.017747846970872,
+          "voltage": -3.577791749310349,
+          "volume_change": 0.0
+        }
+      ]
+    },
+    {
+      "dopant": "Ir",
+      "ordered": {
+        "formation_energy": -6.766801767781099,
+        "voltage": -3.50192003817981,
+        "volume_change": 0.0
+      },
+      "disordered_mean": {
+        "formation_energy": -6.764964624626603,
+        "voltage": -3.3812141737865105,
+        "volume_change": 0.0
+      },
+      "disordered_std": {
+        "formation_energy": 0.00012711704553155923,
+        "voltage": 0.009585785469038283,
+        "volume_change": 0.0
+      },
+      "disordered_n": {
+        "formation_energy": 5,
+        "voltage": 5,
+        "volume_change": 5
+      },
+      "n_converged": 5,
+      "disorder_sensitivity": {
+        "formation_energy": 0.0002714935677949914,
+        "voltage": 0.034468481026779484
+      },
+      "sqs_realisations": [
+        {
+          "formation_energy": -6.765009601525806,
+          "voltage": -3.3745780855237215,
+          "volume_change": 0.0
+        },
+        {
+          "formation_energy": -6.764715213146026,
+          "voltage": -3.3732320709441823,
+          "volume_change": 0.0
+        },
+        {
+          "formation_energy": -6.76506700879336,
+          "voltage": -3.395374588382657,
+          "volume_change": 0.0
+        },
+        {
+          "formation_energy": -6.765036566896965,
+          "voltage": -3.390133938316558,
+          "volume_change": 0.0
+        },
+        {
+          "formation_energy": -6.764994732770857,
+          "voltage": -3.372752185765434,
+          "volume_change": 0.0
+        }
+      ]
+    },
+    {
+      "dopant": "Mg",
+      "ordered": {
+        "formation_energy": -6.718652507719589,
+        "voltage": -4.116629552151762,
+        "volume_change": 0.0
+      },
+      "disordered_mean": {
+        "formation_energy": -6.713505100219169,
+        "voltage": -4.136629844275189,
+        "volume_change": 0.0
+      },
+      "disordered_std": {
+        "formation_energy": 0.0023274756334859836,
+        "voltage": 0.01167931513461659,
+        "volume_change": 0.0
+      },
+      "disordered_n": {
+        "formation_energy": 5,
+        "voltage": 5,
+        "volume_change": 5
+      },
+      "n_converged": 5,
+      "disorder_sensitivity": {
+        "formation_energy": 0.0007661368845175168,
+        "voltage": 0.004858414358166644
+      },
+      "sqs_realisations": [
+        {
+          "formation_energy": -6.7104212169237,
+          "voltage": -4.141729364089633,
+          "volume_change": 0.0
+        },
+        {
+          "formation_energy": -6.711042747889593,
+          "voltage": -4.120476991947461,
+          "volume_change": 0.0
+        },
+        {
+          "formation_energy": -6.716100680502188,
+          "voltage": -4.126438842845351,
+          "volume_change": 0.0
+        },
+        {
+          "formation_energy": -6.714521092246019,
+          "voltage": -4.152978916908742,
+          "volume_change": 0.0
+        },
+        {
+          "formation_energy": -6.715439763534346,
+          "voltage": -4.14152510558476,
+          "volume_change": 0.0
+        }
+      ]
+    },
+    {
+      "dopant": "Mo",
+      "ordered": {
+        "formation_energy": -6.7822884155527365,
+        "voltage": -3.4875729787873326,
+        "volume_change": 0.0
+      },
+      "disordered_mean": {
+        "formation_energy": -6.780498511570724,
+        "voltage": -3.4073618386723536,
+        "volume_change": 0.0
+      },
+      "disordered_std": {
+        "formation_energy": 0.0012360826885015404,
+        "voltage": 0.059680291159490396,
+        "volume_change": 0.0
+      },
+      "disordered_n": {
+        "formation_energy": 5,
+        "voltage": 5,
+        "volume_change": 5
+      },
+      "n_converged": 5,
+      "disorder_sensitivity": {
+        "formation_energy": 0.0002639085618812519,
+        "voltage": 0.022999128793247295
+      },
+      "sqs_realisations": [
+        {
+          "formation_energy": -6.779316750910604,
+          "voltage": -3.347899817090527,
+          "volume_change": 0.0
+        },
+        {
+          "formation_energy": -6.779269038116199,
+          "voltage": -3.359784772225828,
+          "volume_change": 0.0
+        },
+        {
+          "formation_energy": -6.781886653097467,
+          "voltage": -3.4757715855429923,
+          "volume_change": 0.0
+        },
+        {
+          "formation_energy": -6.7820780098090285,
+          "voltage": -3.4840497174415703,
+          "volume_change": 0.0
+        },
+        {
+          "formation_energy": -6.77994210592032,
+          "voltage": -3.3693033010608517,
+          "volume_change": 0.0
+        }
+      ]
+    }
+  ]
+}
