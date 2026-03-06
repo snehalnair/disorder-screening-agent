@@ -104,6 +104,123 @@ Spearman ρ of rankings is the appropriate accuracy metric, not absolute MAE.
 
 ---
 
+## Metrics — Definitions, Rationale, and Calculation
+
+### 1. Recall and Precision (RQ1)
+
+**Definition**:
+- **Recall** = (GT positives that survive the pipeline) / (total GT positives)
+- **Precision (known)** = (GT positives that survive) / (all survivors with *known* experimental outcome)
+  — excludes "untested" elements from the denominator; these are not false positives, just uncharacterised
+
+**Why these metrics**: The pipeline is a *filter*, not a classifier. A missed true positive (low recall)
+is costly — it means discarding a genuinely useful dopant before simulation. A false positive (low
+precision) is cheap — it just adds compute at Stage 5. We therefore optimise for recall ≥ 90% while
+minimising survivors count (proxy for compute cost).
+
+**Ground truth sets used**:
+- `confirmed_successful` (13 dopants): primary recall target — dopants with clear experimental benefit
+- `all confirmed` (16 dopants): includes `confirmed_limited` (partial benefit) — secondary check
+
+**Calculation** (`evaluation/eval_pruning.py`):
+```python
+recall = n_recalled / n_gt_positives
+precision_known = n_recalled / (n_recalled + n_confirmed_failed_that_survived)
+```
+
+---
+
+### 2. Spearman Rank Correlation ρ (RQ2 and RQ3)
+
+**Definition**: Non-parametric rank correlation between two ordered lists.
+ρ = 1 − (6 Σdᵢ²) / (n(n²−1)) where dᵢ = difference in ranks for item i.
+
+**Why Spearman over Pearson**:
+- Pearson requires normally distributed residuals and is sensitive to outliers (Zr with n=2 is a strong outlier)
+- Spearman is robust to outliers and monotonic non-linearities
+- Appropriate when absolute values are unreliable (7V Li-reference offset in MACE) — only *rankings* are meaningful
+
+**Why ρ over MAE for RQ3**: MACE-MP-0 voltages have a ~7V systematic offset vs experiment due to
+mismatched Li reference energy (MACE uses universal reference; experiment/DFT-PBE uses Li metal).
+MAE = 7.4V is dominated by this offset and tells us nothing about prediction quality. Spearman ρ
+measures whether the *ranking* of dopants is preserved, which is the operationally relevant question
+for screening (we want to identify which dopants are *better*, not predict absolute voltages).
+
+**Statistical significance**: p-value from the two-tailed t-test (H₀: ρ = 0). Threshold p < 0.05.
+With n=8 (known-8 subset), the test has low power — ρ must exceed ~0.74 to be significant.
+With n=22, threshold drops to ~0.43. Our NMC voltage ρ = −0.069 (p=0.759) is far from significant.
+
+**Used for**:
+- RQ2: ρ(ordered voltage, disordered voltage) — does disorder preserve rankings?
+- RQ3: ρ(MACE voltage, experimental voltage) — does MACE predict the right ranking vs experiment?
+
+**Sign convention for RQ3**: MACE voltages are negative (−3.4 to −3.7V) while experimental are
+positive (+3.7 to +3.9V). More negative MACE = higher physical voltage. Physical ρ = −(raw ρ).
+This is noted in all tables; reported ρ values are the physically meaningful (negated) form.
+
+**Calculation** (`scipy.stats.spearmanr`):
+```python
+from scipy import stats
+rho, pvalue = stats.spearmanr(ordered_values, disordered_values)
+```
+
+---
+
+### 3. Disorder Sensitivity (RQ2)
+
+**Definition**: Fractional shift in a property value between the ordered cell and the
+disordered SQS mean:
+
+```
+sensitivity = |disordered_mean − ordered_value| / |ordered_value|
+```
+
+Reported as a percentage. Captures the *magnitude* of disorder-induced change, independently
+of whether ρ is positive or negative.
+
+**Why this metric**: ρ captures *rank consistency* across all dopants; disorder sensitivity
+captures *how much a specific dopant's value moves*. Both are needed:
+- High ρ + low sensitivity: disorder is negligible (LNMO case)
+- Low ρ + high sensitivity: disorder dominates rankings (NMC voltage case)
+- Low ρ + low sensitivity: rankings are reshuffled but values barely change (degenerate case)
+
+**Guarded against ordered_value = 0** to avoid division-by-zero (volume_change is always 0,
+so sensitivity is undefined and excluded from heatmaps).
+
+**Calculation** (`ranking/ranker.py`):
+```python
+sensitivity = abs(disordered_mean - ordered_val) / abs(ordered_val)
+```
+
+---
+
+### 4. SQS Realisation Variance and 95% Confidence Interval
+
+**Definition**: Within-dopant spread across n independent SQS realisations:
+- **std**: sample standard deviation of the n property values
+- **95% CI**: ±t(α/2, n−1) × std / √n  (Student's t, two-tailed)
+
+**Why n realisations**: A single SQS realisation samples one specific short-range order
+configuration. The spread across realisations quantifies how sensitive the property is
+to the specific atomic arrangement — i.e., whether a single disordered-cell calculation
+is representative.
+
+**Reported in paper**: Mean within-dopant SQS std (σ) and the ratio σ / total_spread,
+which quantifies whether sampling noise exceeds the dopant-to-dopant signal.
+
+| System | Mean σ | Total spread | σ / spread | Interpretation |
+|--------|--------|-------------|------------|----------------|
+| NMC (layered) | 0.050 V | 0.130 V | **38%** | Noise ≈ signal — n=1 is unreliable |
+| LNMO (spinel) | 0.012 V | 0.755 V | **2%** | Noise negligible — n=1 is sufficient |
+
+**95% CI calculation**:
+```python
+from scipy import stats
+ci = stats.t.ppf(0.975, df=n-1) * std / (n**0.5)
+```
+
+---
+
 ## RQ1: Pruning Recall and Precision (CONFIRMED — no MACE needed)
 
 ### Key numbers (run `python -m evaluation.eval_pruning`)
