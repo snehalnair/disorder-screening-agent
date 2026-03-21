@@ -60,6 +60,12 @@ The overall voltage ranking correlation is rho = -0.33 (p = 0.42) — **not stat
 
 Notably, the tight clustering of disordered voltages (0.023 V range) matches experimental reality (~0.1 V range across dopants) much better than the ordered spread (0.47 V range).
 
+**Two important caveats on this result:**
+
+1. **The "disordered" simulation is not yet true disorder statistics.** At 10% doping in a 32-atom cell (8 TM sites), only 1 site is substituted. All 5 SQS realisations are geometrically identical — there is only one way to place one atom in an 8-site sublattice once symmetry is accounted for (inter-realisation standard deviation is ~10⁻¹⁰ eV). What we are actually comparing is two specific single-site placements (the ordered "farthest-first" site vs the SQS-selected site), not a statistically averaged disordered ensemble vs an ordered configuration. True SQS variance requires at least 2-3 substituted sites, achievable with a 4x4x4 supercell (6-7 substitutions at 10%) or higher doping concentration.
+
+2. **The Zr anomaly may be a cell-size artefact rather than a disorder effect.** In a 32-atom cell, the single Zr atom at the ordered position interacts with its own periodic images ~5.7 Å away, creating an artificial local geometry. Zr's anomalous ordered-cell voltage (-3.734 V vs -3.27 V for others) might vanish in a larger supercell even without SQS — making the narrative "disorder corrects the ranking" potentially misleading. Phase 2 includes an explicit control: comparing ordered-cell voltages at 2x2x2 vs 4x4x4 to isolate the cell-size effect from the disorder effect.
+
 ### Properties Held Fixed in Phase 1
 
 Two important properties were not computed and carry 40% of the composite ranking weight:
@@ -78,7 +84,7 @@ Phase 1 was a proof-of-concept on a simplified system. We are transparent about 
 | Limitation | Impact | Phase 2 Fix |
 |------------|--------|-------------|
 | **LiCoO2 proxy, not NMC811** | Cannot compute Li/Ni exchange energy (the most disorder-sensitive property — requires Ni in the structure) | Implement NMC811 parent CIF |
-| **32-atom supercell, 1 substituted site** | SQS realisations are geometrically equivalent — no inter-realisation variance | Use 4x4x4 supercell (256 atoms, 64 TM sites, 6-7 substitutions at 10%) |
+| **32-atom supercell, 1 substituted site** | All 5 SQS realisations are geometrically identical (std ~10⁻¹⁰ eV) — we are comparing two single-site placements, not ordered vs disordered ensembles | Use 4x4x4 supercell (256 atoms, 64 TM sites, 6-7 substitutions at 10%) where SQS realisations are genuinely distinct |
 | **Only 8 dopants evaluated** | Voltage result not statistically significant at n=8 | Evaluate all 29 pipeline survivors |
 | **Position-only relaxation** | Volume change = 0 for all dopants; formation energy may be biased for size-mismatched dopants | Enable cell relaxation (FrechetCellFilter) |
 | **Zr anomaly could be cell-size artefact** | Cannot distinguish "disorder corrects ranking" from "larger cells correct ranking" | Compare ordered 2x2x2 vs 4x4x4 as control |
