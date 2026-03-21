@@ -60,6 +60,15 @@ The overall voltage ranking correlation is rho = -0.33 (p = 0.42) — **not stat
 
 Notably, the tight clustering of disordered voltages (0.023 V range) matches experimental reality (~0.1 V range across dopants) much better than the ordered spread (0.47 V range).
 
+### Properties Held Fixed in Phase 1
+
+Two important properties were not computed and carry 40% of the composite ranking weight:
+
+- **Volume change on delithiation (15% weight):** Position-only relaxation was used throughout — atomic positions were optimised but the simulation cell was held rigid. Volume change is therefore identically zero for all dopants. This also introduces a bias in formation energy for size-mismatched dopants (e.g., Zr, Mg), whose lattice strain cannot relax.
+- **Li/Ni exchange energy (25% weight):** This is the energy cost of swapping Li and Ni between their respective layers — the most direct computational proxy for Li/Ni antisite disorder, which controls capacity fade in NMC cathodes. It requires Ni in the parent structure and could not be computed using the LiCoO2 proxy. Based on the Fritz Haber Institute findings, Li/Ni exchange energy is expected to show the largest disorder sensitivity of any property in the pipeline.
+
+These are not optional refinements. They are the properties most likely to differentiate dopants in a disorder-aware screen, and their absence means Phase 1 results rest on only two of the four target properties (voltage and formation energy). Computing them is the primary objective of Phase 2.
+
 ---
 
 ## Honest Assessment of Phase 1 Limitations

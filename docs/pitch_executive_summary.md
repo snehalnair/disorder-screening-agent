@@ -20,6 +20,8 @@ A hierarchical screening pipeline that filters 271 candidate dopant combinations
 
 **Suggestive:** Zirconium — which ordered-cell screening would rank as the standout voltage champion (+0.46 V above the field) — collapses to the middle of the pack in disordered simulations, indistinguishable from Al, Ti, Mg, Ga, and Fe. The overall voltage ranking correlation (rho = -0.33) is not yet statistically significant at n=8 dopants, but the disordered voltage spread (0.023 V) matches experimental reality (~0.1 V) far better than the ordered spread (0.47 V).
 
+**Not yet computed:** Volume change on delithiation and Li/Ni exchange energy were held fixed in Phase 1. Position-only relaxation (no cell relaxation) means volume change is identically zero for all dopants. Li/Ni exchange energy — the most disorder-sensitive and commercially relevant property — requires Ni in the parent structure and could not be computed using the LiCoO2 proxy. These two properties carry 40% of the composite ranking weight (volume: 15%, Li/Ni exchange: 25%) and are expected to show the largest disorder sensitivity. They are the primary targets of Phase 2.
+
 ## Phase 1 Limitations and Phase 2 Fixes
 
 | Phase 1 Limitation | Phase 2 Fix | Timeline |
