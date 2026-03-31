@@ -61,7 +61,8 @@ pipeline:
     n_sqs_realisations: 8           # increased from 5→8 for robust statistics
     potential: "mace-mp-0"
     device: "auto"
-    fmax: 0.10
+    fmax: 0.10                      # ordered baseline: tight convergence
+    fmax_sqs: 0.15                  # SQS realisations: looser for speed
     max_relax_steps: 1000
 
   # ── Output ─────────────────────────────────────────────────────────────────

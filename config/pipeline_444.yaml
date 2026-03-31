@@ -63,7 +63,8 @@ pipeline:
                                     # MACE-MP-0: pip install mace-torch
                                     # Works on CUDA, Apple MPS (M1/M2/M3), and CPU
     device: "auto"                  # auto (CUDA→MPS→CPU) | cuda | mps | cpu
-    fmax: 0.10                      # loosened for 256-atom cell (0.05 too tight)
+    fmax: 0.10                      # ordered baseline: tight convergence
+    fmax_sqs: 0.15                  # SQS realisations: looser for speed (rankings robust to small force residuals)
     max_relax_steps: 1000           # doubled from 500 — larger cell needs more steps
 
   # ── Output ────────────────────────────────────────────────────────────────

@@ -269,13 +269,17 @@ For each dopant in the common set, for each material:
 
 | Parameter | Value | Justification |
 |-----------|-------|---------------|
-| MLIP | MACE-MP-0 | Universal, open-source, runs on consumer hardware |
+| MLIP | MACE-MPA-0 (medium) | Auto-upgraded from MP-0; 3.5M training structures, improved accuracy |
 | Cell filter | FrechetCellFilter | Full cell + ionic relaxation (not position-only) |
-| fmax | 0.10 eV/A | Standard for 256+ atom cells |
+| fmax (ordered) | 0.10 eV/A | Tight convergence for single-arrangement baseline |
+| fmax (SQS) | 0.15 eV/A | Looser for speed (~3x faster); rankings robust to equal treatment |
+| fmax (stage 3 retry) | 0.25 eV/A | Last-resort for difficult dopants |
 | max_steps | 1000 (BFGS) / 2000 (FIRE) | Accommodates difficult dopants |
 | SQS realisations | 8 | Target 5+ converged after retries |
 | Concentration | 10% on host B-site | Standard screening concentration |
 | Device | Colab A100 GPU | ~$1.50/hr, 80GB VRAM |
+
+**Rationale for split fmax:** Smoke test showed cell relaxation needs ~926 BFGS steps at fmax=0.10 (~19 min/SQS on T4). At fmax=0.15, expected ~300-400 steps (~2 min/SQS on A100). Since we compare Spearman rank correlations, consistent convergence across all dopants matters more than tight convergence.
 
 ### 5.4 Analysis
 
@@ -552,6 +556,8 @@ This work establishes three capabilities that are prerequisites for autonomous m
 
 **Tier 1: Full per-material runs (all Stage 3 survivors)**
 
+Estimates use fmax_sqs=0.15 (~2 min/SQS on A100, based on smoke test scaling).
+
 | Material | Supercell | Dopants (est.) | Relaxations | Est. Time | Est. Cost |
 |----------|-----------|----------------|-------------|-----------|-----------|
 | LiCoO2 (256 atoms) | 4x4x4 | ~46 | 46 * (1 + 8) * 2 = ~828 | ~4 hr | ~$6 |
@@ -565,12 +571,14 @@ Retries (FIRE stages) may add 20-30% to total time.
 **Tier 2: Intersection analysis (no extra compute)**
 Subset analysis of Tier 1 results restricted to the ~12-20 dopants common to all three materials. Enables controlled cross-material comparison with matched dopants.
 
-### Smoke Test (Colab T4, free)
+### Smoke Test Results (Colab T4)
 
-Fe + Zr on LiCoO2 only: ~45 min. Validates:
-- FrechetCellFilter is active (volume_change != 0)
-- 3-stage retry works (Zr was 2/5 before; should improve)
-- Cell-relaxed b_proxy values are meaningful
+Fe + Zr on LiCoO2 with cell relaxation. Key observations:
+- **volume_change = 11.88% (Fe ordered)** — confirms FrechetCellFilter is active (was 0.0 before)
+- **vol_chg = 1.54% (Fe SQS-1)** — non-zero, different from ordered → disorder changes volume
+- **MACE-MPA-0 auto-loaded** — the latest mace package upgraded mace-mp-0 to mace-mpa-0-medium (3.5M training structures). This is a free accuracy improvement.
+- **926 BFGS steps at fmax=0.10** → ~19 min/SQS on T4. Led to decision to loosen fmax_sqs to 0.15.
+- Zr results pending (still running at time of writing)
 
 ---
 

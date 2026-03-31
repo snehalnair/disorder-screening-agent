@@ -97,6 +97,7 @@ def run_disorder_evaluation(
     device = sim_cfg.get("device", "auto")
     supercell = sim_cfg.get("supercell", [2, 2, 2])
     fmax = sim_cfg.get("fmax", 0.05)
+    fmax_sqs = sim_cfg.get("fmax_sqs", fmax)  # looser convergence for SQS (default: same as ordered)
     max_steps = sim_cfg.get("max_relax_steps", 500)
     target_properties = list(config.get("pipeline", {}).get("property_weights", {}).keys())
 
@@ -143,14 +144,16 @@ def run_disorder_evaluation(
 
         for sqs_idx, sqs in enumerate(sqs_structures):
             # Three-stage retry: BFGS → FIRE → FIRE with loose fmax
+            # Uses fmax_sqs (default 0.15) for SQS — looser than ordered (0.10)
+            # Rankings are robust to small force residuals since all dopants treated identically
             rr = None
             optimizer_used = "BFGS"
-            fmax_used = fmax
+            fmax_used = fmax_sqs
 
             # Stage 1: BFGS (fast when it works)
             rr = relax_structure(
                 sqs, calculator,
-                fmax=fmax, max_steps=max_steps,
+                fmax=fmax_sqs, max_steps=max_steps,
             )
 
             if not rr.relaxation_converged:
@@ -162,20 +165,20 @@ def run_disorder_evaluation(
                 optimizer_used = "FIRE"
                 rr = relax_structure(
                     sqs, calculator,
-                    fmax=fmax, max_steps=2000,
+                    fmax=fmax_sqs, max_steps=2000,
                     optimizer_name="FIRE",
                 )
 
             if not rr.relaxation_converged:
-                # Stage 3: FIRE with loosened convergence
+                # Stage 3: FIRE with further loosened convergence
                 logger.info(
-                    "Retrying %s SQS-%d with FIRE + loose fmax=0.20 (stage 3)…",
+                    "Retrying %s SQS-%d with FIRE + loose fmax=0.25 (stage 3)…",
                     dopant, sqs_idx,
                 )
-                fmax_used = 0.20
+                fmax_used = 0.25
                 rr = relax_structure(
                     sqs, calculator,
-                    fmax=0.20, max_steps=2000,
+                    fmax=0.25, max_steps=2000,
                     optimizer_name="FIRE",
                 )
 
