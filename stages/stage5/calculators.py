@@ -138,8 +138,14 @@ class MACECalculator(MLIPCalculator):
 
     def __init__(self, device: str = "auto") -> None:
         self._device = _detect_device() if device == "auto" else device
+        self._cached_calc = None
 
     def get_calculator(self):
+        # Return cached calculator if already loaded — avoids reloading the
+        # ~100 MB MACE model on every single-point energy call.
+        if self._cached_calc is not None:
+            return self._cached_calc
+
         try:
             from mace.calculators import mace_mp
         except ImportError:
@@ -152,15 +158,17 @@ class MACECalculator(MLIPCalculator):
         # CPU (still fast on M1/M2/M3 for < 200 atoms) and warn the user.
         if self._device == "mps":
             try:
-                return mace_mp(default_dtype="float32", device="mps")
+                self._cached_calc = mace_mp(default_dtype="float32", device="mps")
             except (TypeError, RuntimeError):
                 import logging as _logging
                 _logging.getLogger(__name__).warning(
                     "MACE-MP-0: MPS float64 incompatibility — falling back to CPU. "
                     "On M1/M2/M3, CPU relaxations typically take 2–10 min per structure."
                 )
-                return mace_mp(default_dtype="float64", device="cpu")
-        return mace_mp(default_dtype="float64", device=self._device)
+                self._cached_calc = mace_mp(default_dtype="float64", device="cpu")
+        else:
+            self._cached_calc = mace_mp(default_dtype="float64", device=self._device)
+        return self._cached_calc
 
     def get_name(self) -> str:
         return "mace-mp-0"
