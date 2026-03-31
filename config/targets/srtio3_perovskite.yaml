@@ -1,0 +1,30 @@
+# Material target configuration for SrTiO3 perovskite
+# Methodological control: d0 Ti4+, no spin risk, no Li, well-studied dopant literature
+
+material_id: "srtio3_perovskite"
+display_name: "SrTiO3 (Cubic Perovskite)"
+structure_type: "Perovskite (Pm-3m)"
+space_group: "Pm-3m (221)"
+target_site: "B-site octahedral (replacing Ti4+)"
+
+# Elements that are part of the host structure (not dopants)
+base_elements: ["Sr", "Ti", "O"]
+
+# Materials Project query parameters
+mp_query:
+  elements: ["Sr", "Ti", "O"]
+  spacegroup_number: 221        # Pm-3m
+
+# Semantic Scholar search queries
+s2_queries:
+  broad:
+    - "SrTiO3 B-site doping substitution"
+    - "strontium titanate dopant properties"
+    - "perovskite oxide doping dielectric"
+    - "SrTiO3 transition metal doping"
+  failure:
+    - "SrTiO3 dopant solubility limit"
+    - "strontium titanate doping phase separation"
+
+# Bootstrap ground truth
+bootstrap_file: "config/targets/bootstrap/srtio3_perovskite.json"

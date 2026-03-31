@@ -58,7 +58,7 @@ pipeline:
   stage5_simulation:
     supercell: [4, 4, 4]            # supercell expansion along a, b, c
     concentrations: [0.05, 0.10]    # dopant site fractions to evaluate
-    n_sqs_realisations: 3           # number of SQS realisations per (dopant, concentration)
+    n_sqs_realisations: 8           # increased from 3→5→8 for robust statistics with convergence failures
     potential: "mace-mp-0"          # mace-mp-0 | mattersim | mock
                                     # MACE-MP-0: pip install mace-torch
                                     # Works on CUDA, Apple MPS (M1/M2/M3), and CPU
@@ -95,8 +95,10 @@ pipeline:
 
   # ── Property weights for composite ranking score ──────────────────────────
   # Values must sum to 1.0. Set a weight to 0 to exclude a property.
+  # li_ni_exchange removed (no Ni in LiCoO2 host → always None)
+  # Weights redistributed to voltage, formation_energy, volume_change
   property_weights:
-    voltage: 0.35
-    formation_energy: 0.25
-    li_ni_exchange: 0.25
-    volume_change: 0.15
+    voltage: 0.40
+    formation_energy: 0.35
+    li_ni_exchange: 0.00
+    volume_change: 0.25

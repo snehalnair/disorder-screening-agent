@@ -96,8 +96,13 @@ def _remove_species(structure, species: str):
     return s
 
 
-def _quick_relax(structure, calculator, max_steps: int = 100):
-    """Fast position-only relaxation for delithiated structures."""
+def _quick_relax(structure, calculator, max_steps: int = 200):
+    """Quick cell + ionic relaxation for delithiated structures.
+
+    Uses FrechetCellFilter (default) so that volume_change reflects
+    real lattice response to delithiation.  max_steps raised from 100
+    to 200 to accommodate the extra degrees of freedom.
+    """
     from stages.stage5.mlip_relaxation import relax_structure
 
     result = relax_structure(
@@ -105,7 +110,7 @@ def _quick_relax(structure, calculator, max_steps: int = 100):
         calculator=calculator,
         fmax=0.1,          # looser criterion for quick relaxation
         max_steps=max_steps,
-        filter_type="None",
+        # Uses default filter_type="FrechetCellFilter" for cell + ionic relaxation.
     )
     return result.relaxed_structure
 
@@ -240,15 +245,20 @@ def compute_volume_change(
 
     |V_delith - V_lith| / V_lith × 100
 
+    For Li-containing structures, this measures structural stability under cycling.
+    For non-Li structures (e.g. SrTiO3), falls back to doping_volume_change
+    (volume distortion from doping relative to undoped parent).
+
     Returns
     -------
     float
-        Volume change in percent (non-negative), or None if delithiation fails.
+        Volume change in percent (non-negative), or None if calculation fails.
     """
     n_li = sum(1 for s in structure if s.species_string == "Li")
+
     if n_li == 0:
-        logger.warning("compute_volume_change: no Li found — returning None.")
-        return None
+        # Fall back to doping volume change for non-Li systems
+        return compute_doping_volume_change(structure, calculator, **kwargs)
 
     v_lith = structure.volume
     delith = _remove_species(structure, "Li")
@@ -268,6 +278,50 @@ def compute_volume_change(
         return None
 
     return float(abs(v_delith - v_lith) / v_lith * 100.0)
+
+
+def compute_doping_volume_change(
+    structure,
+    calculator,
+    **kwargs,
+) -> Optional[float]:
+    """
+    Compute volume distortion from doping relative to undoped parent (%).
+
+    |V_doped - V_parent| / V_parent × 100
+
+    Used for non-battery systems (e.g. SrTiO3) where delithiation volume
+    change is not applicable. Measures how much the dopant strains the lattice.
+
+    Requires ``parent_structure`` in kwargs and assumes it has been expanded
+    to the same supercell size as the doped structure.
+
+    Returns
+    -------
+    float
+        Volume change in percent (non-negative), or None if parent not available.
+    """
+    parent = kwargs.get("parent_structure")
+    if parent is None:
+        logger.warning("compute_doping_volume_change: no parent_structure in kwargs — returning None.")
+        return None
+
+    # The parent_structure from kwargs is the primitive cell.
+    # Estimate supercell volume by atom count ratio.
+    n_doped = len(structure)
+    n_parent = len(parent)
+    if n_parent == 0:
+        return None
+
+    # Scale parent volume to same number of formula units
+    scale = n_doped / n_parent
+    v_parent_scaled = parent.volume * scale
+    v_doped = structure.volume
+
+    if v_parent_scaled == 0:
+        return None
+
+    return float(abs(v_doped - v_parent_scaled) / v_parent_scaled * 100.0)
 
 
 def compute_lattice_params(
@@ -426,13 +480,14 @@ def compute_ordered_properties(
     for idx in chosen:
         ordered.replace(idx, dopant_element)
 
-    # ── 5. Relax ──────────────────────────────────────────────────────
+    # ── 5. Relax (cell + ionic via FrechetCellFilter) ────────────────
     relax_res = relax_structure(
         structure=ordered,
         calculator=calculator,
         fmax=fmax,
         max_steps=max_steps,
-        filter_type="None",
+        # Uses default filter_type="FrechetCellFilter" for cell + ionic relaxation.
+        # Must match the filter used in eval_disorder.py SQS relaxations.
     )
 
     # ── 6. Compute properties ─────────────────────────────────────────

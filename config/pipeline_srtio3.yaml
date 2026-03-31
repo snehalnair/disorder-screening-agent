@@ -6,7 +6,6 @@ pipeline:
     model: "claude-sonnet-4-6"
 
   # ── Stage 1: SMACT ─────────────────────────────────────────────────────────
-  # Same exclusions as NMC config
   stage1_smact:
     exclude_elements:
       - He
@@ -27,38 +26,29 @@ pipeline:
       - Pu
 
   # ── Stage 2: Shannon radius ────────────────────────────────────────────────
-  # Host: Mn4+ octahedral, r = 0.530 Å
-  # 40% threshold (vs 35% for NMC): needed so Cu2+ (37.7%) and Mg2+ (35.8%) pass
+  # Host: Ti4+ octahedral, r = 0.605 Å
+  # 35% threshold: matches LiCoO2 config for consistency
+  # Ti4+ is close to Co3+ (0.545 Å), so similar mismatch window
   stage2_radius:
-    mismatch_threshold: 0.40
-    tolerance_factor_max: 4.18      # not used for spinel; ignored
+    mismatch_threshold: 0.35
+    tolerance_factor_max: 4.18      # Bartel τ — used for perovskites
 
   # ── Stage 3: Hautier-Ceder substitution probability ────────────────────────
-  # 0.0001 (vs 0.001 for NMC): Al3+→Mn4+, Cu2+→Mn4+, Mg2+→Mn4+ all have
-  # low Hautier-Ceder prob; 0.0001 recovers all confirmed_successful dopants
-  # Sweep: thr=0.001→50% recall; thr=0.0001→100% recall (7/7 excl. Cr-toxic)
   stage3_substitution:
-    probability_threshold: 0.0001
-
-  # ── Stage 4 (viability) ────────────────────────────────────────────────────
-  stage4_viability:
-    enabled: true
-    constraints:
-      non_radioactive: true
-      non_toxic: true
+    probability_threshold: 0.001
 
   # ── Stage 4 (ML pre-screen) ────────────────────────────────────────────────
   stage4_ml:
     enabled: false
 
   # ── Stage 5: SQS + MACE ────────────────────────────────────────────────────
-  # 448-atom supercell (2×2×2 of 56-atom LiMn2O4 conventional cell)
-  # 128 Mn sites → 13 dopant atoms at 10% — well above n≥5 non-degenerate SQS threshold
-  # Better sampling than NMC 256-atom run (n=13 vs n=6 dopant sites)
+  # 4×4×4 supercell of 5-atom primitive cell = 320 atoms
+  # 64 Ti B-sites → 6-7 dopant atoms at 10%
+  # Same number of target sites as LiCoO2 (64 Co sites) → matched comparison
   stage5_simulation:
-    supercell: [2, 2, 2]
+    supercell: [4, 4, 4]
     concentrations: [0.10]
-    n_sqs_realisations: 8           # increased from 5→8 for robust statistics
+    n_sqs_realisations: 8
     potential: "mace-mp-0"
     device: "auto"
     fmax: 0.10
@@ -72,12 +62,12 @@ pipeline:
   # ── Checkpointing ──────────────────────────────────────────────────────────
   checkpointing:
     backend: "sqlite"
-    db_path: "checkpoints_lnmo.db"
+    db_path: "checkpoints_srtio3.db"
 
   # ── Results database ───────────────────────────────────────────────────────
   database:
     local:
-      path: "data/results_lnmo.db"
+      path: "data/results_srtio3.db"
 
   # ── Routing ────────────────────────────────────────────────────────────────
   routing:
@@ -86,10 +76,11 @@ pipeline:
     threshold_adjustment_pct: 0.20
 
   # ── Property weights ───────────────────────────────────────────────────────
-  # li_ni_exchange removed (no Ni in LiMn2O4 host → always None)
-  # Weights redistributed to voltage, formation_energy, volume_change
+  # SrTiO3 has no Li → voltage and li_ni_exchange are not applicable
+  # Use formation_energy (stability) and volume_change (structural tolerance)
+  # band_gap would be ideal but not yet implemented
   property_weights:
-    voltage: 0.40
-    formation_energy: 0.35
+    voltage: 0.00
+    formation_energy: 0.50
     li_ni_exchange: 0.00
-    volume_change: 0.25
+    volume_change: 0.50

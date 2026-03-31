@@ -50,7 +50,7 @@ _ALL_STAGE3_DOPANTS = [
 ]
 
 _DEFAULT_CONCENTRATION = 0.10  # 10% on Co site
-_DEFAULT_N_SQS = 5
+_DEFAULT_N_SQS = 8  # increased from 5 for better statistics (buffer for convergence failures)
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -141,12 +141,44 @@ def run_disorder_evaluation(
             logger.warning("SQS generation failed for %s: %s", dopant, exc)
             sqs_structures = []
 
-        for sqs in sqs_structures:
+        for sqs_idx, sqs in enumerate(sqs_structures):
+            # Three-stage retry: BFGS → FIRE → FIRE with loose fmax
+            rr = None
+            optimizer_used = "BFGS"
+            fmax_used = fmax
+
+            # Stage 1: BFGS (fast when it works)
             rr = relax_structure(
                 sqs, calculator,
                 fmax=fmax, max_steps=max_steps,
-                filter_type="None",  # position-only: matches compute_ordered_properties
             )
+
+            if not rr.relaxation_converged:
+                # Stage 2: FIRE (robust for difficult energy landscapes)
+                logger.info(
+                    "Retrying %s SQS-%d with FIRE optimizer (stage 2)…",
+                    dopant, sqs_idx,
+                )
+                optimizer_used = "FIRE"
+                rr = relax_structure(
+                    sqs, calculator,
+                    fmax=fmax, max_steps=2000,
+                    optimizer_name="FIRE",
+                )
+
+            if not rr.relaxation_converged:
+                # Stage 3: FIRE with loosened convergence
+                logger.info(
+                    "Retrying %s SQS-%d with FIRE + loose fmax=0.20 (stage 3)…",
+                    dopant, sqs_idx,
+                )
+                fmax_used = 0.20
+                rr = relax_structure(
+                    sqs, calculator,
+                    fmax=0.20, max_steps=2000,
+                    optimizer_name="FIRE",
+                )
+
             if rr.relaxation_converged:
                 props = compute_properties(
                     relaxed_structure=rr.relaxed_structure,
@@ -155,11 +187,24 @@ def run_disorder_evaluation(
                     target_properties=target_properties,
                     final_energy_per_atom=rr.final_energy_per_atom,
                 )
-                sqs_props_list.append({
+                sqs_entry = {
                     k: v for k, v in props.items() if isinstance(v, (int, float))
-                })
+                }
+                # Convergence metadata
+                sqs_entry["_convergence"] = {
+                    "converged": True,
+                    "optimizer_used": optimizer_used,
+                    "fmax_used": fmax_used,
+                    "relaxation_steps": rr.relaxation_steps,
+                    "max_force_final": float(rr.max_force_final)
+                        if rr.max_force_final is not None else None,
+                }
+                sqs_props_list.append(sqs_entry)
             else:
-                logger.warning("SQS relaxation aborted for %s: %s", dopant, rr.abort_reason)
+                logger.warning(
+                    "SQS relaxation failed for %s SQS-%d after 3 retry stages: %s",
+                    dopant, sqs_idx, rr.abort_reason,
+                )
 
         # Aggregate disordered results
         disordered_mean = {}
@@ -328,6 +373,7 @@ if __name__ == "__main__":
     parser.add_argument("--results", metavar="FILE", help="Load pre-computed results JSON.")
     parser.add_argument("--save", metavar="FILE", help="Save results JSON after running MACE.")
     parser.add_argument("--dopants", nargs="+", default=_DEFAULT_DOPANTS, metavar="EL")
+    parser.add_argument("--target-species", default="Co", help="Host element being substituted (default: Co).")
     parser.add_argument("--conc", type=float, default=_DEFAULT_CONCENTRATION)
     parser.add_argument("--n-sqs", type=int, default=_DEFAULT_N_SQS)
     parser.add_argument("--structure", metavar="FILE", help="Path to parent structure CIF/POSCAR.")
@@ -350,6 +396,7 @@ if __name__ == "__main__":
         results = run_disorder_evaluation(
             parent_structure=parent_struct,
             dopants=args.dopants,
+            target_species=args.target_species,
             concentration=args.conc,
             n_sqs=args.n_sqs,
             config_path=args.config,
