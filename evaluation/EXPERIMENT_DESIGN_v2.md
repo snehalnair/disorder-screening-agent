@@ -176,22 +176,28 @@ If rho is significantly below 1.0: ordered screening gives wrong rankings; disor
 
 ---
 
-## 4. Dopant Selection: Pipeline-Derived Common Set
+## 4. Dopant Selection: Two-Tier Design
+
+### Overview
+
+The experiment uses a **two-tier dopant design** to answer two distinct questions:
+
+| Tier | Dopant set | Question answered | Statistical power |
+|------|-----------|-------------------|-------------------|
+| **Tier 1: Full per-material** | All Stage 3 survivors (~35-46 per material) | Does disorder change rankings for *this* material? | Spearman rho at n=35-46 |
+| **Tier 2: Controlled intersection** | Intersection of all 3 materials' survivors (~12-20) | Does disorder affect different structures *differently*? | Same dopants across all 3 materials |
+
+**Why both tiers?** Running only the intersection (Tier 2) would answer the cross-material question but cripple the per-material analysis — Spearman rho with n=15 is fragile (a single outlier can flip significance). Running all survivors per material gives robust per-material statistics AND the intersection is a controlled subset analysis within the larger dataset.
 
 ### Methodology: No Cherry-Picking
 
-The dopant set is determined entirely by the computational pipeline, not by the researcher. For each material independently:
+The dopant sets are determined entirely by the computational pipeline:
 
-1. **Stage 1 (SMACT filter):** Screen all elements Z=1-103 for charge neutrality and electronegativity ordering against the host structure (~80 survivors)
-2. **Stage 2 (Shannon radius):** Filter by ionic radius mismatch to the host site (~50 survivors)
-3. **Stage 3 (Hautier-Ceder):** Substitution probability from data-mined crystal structures (~40 survivors)
-4. **Intersection:** The final dopant set is the intersection of all three materials' Stage 3 survivors
-
-This is methodologically stronger than hand-selection because:
-- The pipeline makes the selection, not the researcher
-- Each material's chemical constraints are respected
-- Reviewers cannot claim bias in dopant selection
-- The pipeline code is open-source and the selection is reproducible
+1. **Stage 1 (SMACT filter):** Screen all elements Z=1-103 for charge neutrality and electronegativity ordering (~80 survivors)
+2. **Stage 2 (Shannon radius):** Filter by ionic radius mismatch to host site (~50 survivors)
+3. **Stage 3 (Hautier-Ceder):** Substitution probability from data-mined structures (~40 survivors)
+4. **Tier 1:** Run Stage 5 (SQS + MACE) on ALL Stage 3 survivors per material
+5. **Tier 2:** Identify intersection of Stage 3 survivors across all 3 materials for controlled cross-material comparison
 
 ### Stage 1-3 Parameters
 
@@ -200,15 +206,27 @@ This is methodologically stronger than hand-selection because:
 | Host site | Co3+ (0.545 A) | Mn4+ (0.530 A) | Ti4+ (0.605 A) |
 | Radius threshold | 35% | 40% | 35% |
 | Substitution prob. threshold | 0.001 | 0.0001 | 0.001 |
-| Expected survivors | ~46 | ~40 | ~35-45 |
-| **Expected intersection** | **~12-20 dopants** |
+| Expected Tier 1 survivors | ~46 | ~40 | ~35-45 |
+| **Expected Tier 2 intersection** | **~12-20 dopants** |
 
 The LiMn2O4 thresholds are deliberately looser (40% radius, 0.0001 probability) to recover all 7 experimentally confirmed dopants (Cu2+ at 37.7% mismatch, Mg2+ at 35.8%).
 
-### Expected Common Survivors
+### Expected Common Survivors (Tier 2)
 Based on preliminary Stage 1-3 runs: Al, Ti, Fe, Cr, Mg, Zr, Nb, W, V, Ni, Cu, Zn, Ga, Sn, Ta.
 
 The exact set will be determined by running the pipeline. We commit to using whatever the intersection produces.
+
+### Analysis by Tier
+
+**Tier 1 (per-material, all survivors):**
+- Spearman rho (ordered vs disordered) at n=35-46 per material — robust per-material finding
+- b_proxy scatter plot with 40+ points — can fit trend lines
+- Full convergence statistics
+
+**Tier 2 (intersection, controlled comparison):**
+- Same Spearman rho restricted to intersection subset — if rho_full ≈ rho_intersection, finding is robust to dopant selection
+- Cross-material b_proxy violin plot — which structure type has highest arrangement sensitivity?
+- Matched comparison: same dopant in layered vs spinel vs perovskite
 
 ---
 
@@ -530,17 +548,22 @@ This work establishes three capabilities that are prerequisites for autonomous m
 
 ## 11. Computational Budget
 
-### Production Runs (Colab A100, ~$1.50/hr)
+### Production Runs — Two-Tier Design (Colab A100, ~$1.50/hr)
 
-| Material | Supercell | Dopants | Relaxations | Est. Time | Est. Cost |
-|----------|-----------|---------|-------------|-----------|-----------|
-| LiCoO2 (256 atoms) | 4x4x4 | ~15 | 15 * (1 + 8) * 2 = ~270 | ~1.5 hr | ~$2.25 |
-| LiMn2O4 (448 atoms) | 2x2x2 | ~15 | 15 * (1 + 8) * 2 = ~270 | ~3 hr | ~$4.50 |
-| SrTiO3 (320 atoms) | 4x4x4 | ~15 | 15 * (1 + 8) = ~135 | ~1 hr | ~$1.50 |
-| **Total** | | | **~675 + retries** | **~6 hr** | **~$8-10** |
+**Tier 1: Full per-material runs (all Stage 3 survivors)**
 
-SrTiO3 has fewer relaxations: no delithiation step needed (no voltage calculation).
+| Material | Supercell | Dopants (est.) | Relaxations | Est. Time | Est. Cost |
+|----------|-----------|----------------|-------------|-----------|-----------|
+| LiCoO2 (256 atoms) | 4x4x4 | ~46 | 46 * (1 + 8) * 2 = ~828 | ~4 hr | ~$6 |
+| LiMn2O4 (448 atoms) | 2x2x2 | ~40 | 40 * (1 + 8) * 2 = ~720 | ~7 hr | ~$11 |
+| SrTiO3 (320 atoms) | 4x4x4 | ~38 | 38 * (1 + 8) = ~342 | ~2.5 hr | ~$4 |
+| **Total** | | **~124** | **~1,890 + retries** | **~15 hr** | **~$23** |
+
+SrTiO3 has fewer relaxations: no delithiation step (no voltage calculation).
 Retries (FIRE stages) may add 20-30% to total time.
+
+**Tier 2: Intersection analysis (no extra compute)**
+Subset analysis of Tier 1 results restricted to the ~12-20 dopants common to all three materials. Enables controlled cross-material comparison with matched dopants.
 
 ### Smoke Test (Colab T4, free)
 
@@ -556,7 +579,7 @@ Fe + Zr on LiCoO2 only: ~45 min. Validates:
 | Week | Task |
 |------|------|
 | Week 1 | Smoke test (Fe+Zr on Colab T4). Run Stages 1-3 for all 3 materials. Determine common dopant set. |
-| Week 2 | Full production runs: LiCoO2 + LiMn2O4 + SrTiO3 on Colab A100 (~6 hours total). |
+| Week 2 | Full Tier 1 production: all Stage 3 survivors for LiCoO2 + LiMn2O4 + SrTiO3 on Colab A100 (~15 hours, ~$23). |
 | Week 3 | Extract DFT ground truth from Yao 2025, JPS 2025, SrTiO3 literature. Compute 4 rho values per material. |
 | Week 4 | Post-processing: b_proxy analysis, convergence plots, cross-system comparison figures. |
 | Week 5-6 | Write paper draft. |
