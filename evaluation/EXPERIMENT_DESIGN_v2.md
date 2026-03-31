@@ -333,7 +333,17 @@ For each dopant in the common set, for each material:
 | Spin treatment | None | Known limitation |
 | GGA+U mixing | Uncorrected in training data | Systematic error for TM oxides |
 
-**Critical gap:** No published benchmark exists for MACE-MP-0 intercalation voltage prediction. This paper would be the first systematic assessment.
+**Prior MLIP voltage work (none directly comparable):**
+- Alghamdi et al. (arXiv:2511.22504, 2025): MACE-r2scan for post-lithium cathode screening (Na, K, Mg, Ca-ion). Voltage accuracy +/-1.2V — coarse screening, not dopant ranking. MACE used as pre-filter, refined with DFT+U. No disorder effects studied.
+- CHGNet on disordered rocksalt (arXiv:2506.20605): Fine-tuned (system-specific, 88K structures), not zero-shot universal MLIP.
+- Petersen et al. (Adv. Intell. Discovery 2026): Benchmarks MACE-MP-0, CHGNet, M3GNet on Na polyanion cathodes. MACE best among universal MLIPs but system-specific models win.
+- Known issue: CHGNet and M3GNet fail on LiFePO4 voltage profile (predict solid solution instead of two-phase).
+
+**Our unique contribution:** First benchmark of a zero-shot universal MLIP for dopant-resolved intercalation voltage in Li-ion cathodes, and the first to quantify disorder's impact on such predictions.
+
+**Recommended framing:** "While recent work has deployed MACE foundation models for coarse voltage screening of post-lithium cathodes (Alghamdi et al. 2025), no study has benchmarked universal MLIPs for dopant-resolved intercalation voltage in Li-ion cathodes or quantified the impact of chemical disorder on such predictions."
+
+**MACE-MPA-0:** Released December 2024 (v0.3.9), trained on 3.5M structures (MPtraj + sAlex). Significantly improved accuracy on Matbench Discovery. Drop-in replacement for MACE-MP-0. Consider using as upgrade if time permits.
 
 ### 6.4 Validation Metrics
 
@@ -468,9 +478,9 @@ Covering layered + spinel + perovskite makes the paper relevant to:
 
 A battery-only paper is cited by battery researchers. A cross-structure paper is cited by the entire computational materials community.
 
-### 9.4 First MLIP Voltage Benchmark
+### 9.4 First Disorder-Aware MLIP Voltage Benchmark for Li-Ion Cathodes
 
-No published work benchmarks a universal MLIP for intercalation voltage prediction. By validating MACE-MP-0 against DFT and experiment for two cathode systems, this becomes the reference for anyone using MLIPs for battery screening — a rapidly growing field.
+While Alghamdi et al. (2025) used MACE for coarse voltage screening of post-lithium cathodes (+/-1.2V accuracy, used as DFT pre-filter), no work benchmarks a universal MLIP for dopant-resolved voltage in Li-ion cathodes — the dominant battery chemistry. Our paper uniquely shows that MLIP voltage predictions are reliable for spinel (rho=0.99) but not for layered (rho=-0.07) when disorder is accounted for. This is both a benchmark and a warning: MLIP-based screening accuracy depends on the structure type and whether disorder is modelled.
 
 ### 9.5 Reproducible on a Laptop
 
@@ -648,6 +658,11 @@ Fe + Zr on LiCoO2 only: ~45 min. Validates:
 14. **J. Am. Chem. Soc.** (2025). Al at Ti and Sr sites in SrTiO3 — formation energies.
 15. **Materialia** (2023). La, Nb in SrTiO3 — in-gap states, local structures.
 
+### MLIP Voltage Benchmarks (Related Work)
+16. **Alghamdi, A. et al.** (2025). "Screening novel cathode materials using MACE." arXiv:2511.22504. — MACE-r2scan for post-lithium cathode screening; +/-1.2V accuracy; no disorder study.
+17. **Petersen, J. et al.** (2026). "Limitations of Foundation Models in Energy Materials Simulations." *Adv. Intell. Discovery*. — MACE-MP-0 vs CHGNet vs M3GNet on Na polyanion cathodes.
+18. **arXiv:2506.20605** (2025). CHGNet on disordered rocksalt Mn-rich cathodes — fine-tuned (88K structures), not zero-shot.
+
 ### Other
-16. **Bartel, C.J. et al.** (2019). "New tolerance factor for perovskite stability." *Sci. Adv.* 5, eaav0693. — Bartel tolerance factor.
-17. **Lotfi, S. et al.** (2024). "Challenges in High-Throughput Inorganic Materials Prediction." *PRX Energy* 3, 011002. — 2/3 of GNoME "novel" materials were known disordered phases.
+19. **Bartel, C.J. et al.** (2019). "New tolerance factor for perovskite stability." *Sci. Adv.* 5, eaav0693. — Bartel tolerance factor.
+20. **Lotfi, S. et al.** (2024). "Challenges in High-Throughput Inorganic Materials Prediction." *PRX Energy* 3, 011002. — 2/3 of GNoME "novel" materials were known disordered phases.
