@@ -8,7 +8,7 @@
 
 ## Abstract
 
-Over 80% of computationally predicted inorganic materials are likely to be disordered when synthesised (Jakob et al., Adv. Mater. 2025; Lotfi et al., PRX Energy 2024 showed two-thirds of GNoME "novel" materials were actually known disordered phases misidentified as ordered). Yet every major computational screening platform — GNoME (Merchant et al., Nature 2023), MatterGen (Zeni et al., Nature 2025), and hundreds of DFT screening studies — assumes perfectly ordered crystal structures. This assumption is untested: no systematic study has measured whether dopant property rankings change when disorder is properly accounted for.
+73% of experimentally characterised inorganic materials exhibit substitutional disorder (ICSD), and >80% of computationally predicted materials are likely to be disordered when synthesised (Jakob et al., Adv. Mater. 2025). Two-thirds of GNoME's "novel" materials were actually known disordered phases misidentified as ordered (Lotfi et al., PRX Energy 2024). Yet every major computational screening platform — GNoME (Merchant et al., Nature 2023), MatterGen (Zeni et al., Nature 2025), and hundreds of DFT screening studies — assumes perfectly ordered crystal structures. This assumption is untested: no systematic study has measured whether dopant property rankings change when disorder is properly accounted for.
 
 We quantify this "disorder gap" across three crystal structure types: LiCoO2 (layered, R-3m), LiMn2O4 (spinel, Fd-3m), and SrTiO3 (perovskite, Pm-3m). For each material, we compare dopant rankings from conventional ordered-cell screening against disorder-averaged rankings from multiple SQS (Special Quasirandom Structure) realisations using the MACE-MP-0 universal machine learning interatomic potential.
 
@@ -154,7 +154,7 @@ If rho is significantly below 1.0: ordered screening gives wrong rankings; disor
 | Applications | Thin-film substrates, photocatalysis, thermoelectrics, memristors |
 | Spin risk | **None** — Ti4+ is d0, Sr2+ is closed-shell |
 | Key properties | Formation energy, doping volume change (no voltage — not a battery) |
-| Validation | SimplySQS (Lebeda et al. 2025): MACE on (Pb,Sr)TiO3 within 1-4% of experiment |
+| Validation | SimplySQS (Lebeda et al. 2025): MACE MATPES-r2SCAN-0 on (Pb,Sr)TiO3, lattice params <1% error (cubic), <4% (tetragonal), 320-atom supercell |
 | DFT literature | Extensive — La, Nb, V, Fe, Cr, Al, Mg B-site dopants well-studied |
 
 **Why SrTiO3:** The methodological control. Zero spin risk means any disorder effects we observe cannot be attributed to MACE's magnetic limitations. If the disorder effect is consistent between LiCoO2 (low spin risk) and SrTiO3 (zero spin risk), the finding is robust. Perovskite corner-sharing connectivity is fundamentally different from both layered edge-sharing (LiCoO2) and spinel mixed connectivity (LiMn2O4). Extends findings beyond batteries to general materials science.
@@ -281,29 +281,30 @@ For each dopant in the common set, for each material:
 
 **LiCoO2 — Yao et al. (2025)**
 - "Stepwise Screening of Doping Elements for High-Voltage LiCoO2 via Materials Genome Approach"
-- *Advanced Energy Materials*, 2502026
-- 63 dopant elements screened through 4 DFT criteria: structural stability, thermodynamic stability, kinetic stability (Li migration), and electrochemical stability (voltage window)
-- Reports: lattice strain, oxygen release energy, cation mixing energy, voltage window
-- Experimental validation: Sb-doped and Ge-doped LiCoO2 synthesised and tested
-- **Use:** Compare MACE formation energy and voltage rankings to DFT rankings for overlapping dopants. This is the largest single-host DFT screening study in the literature.
-
-**LiCoO2 — Urban et al. (2017)**
-- *Phys. Rev. Materials* or *Adv. Energy Mater.*
-- 14 dopants: defect formation energies and solubility limits in LiCoO2
-- **Use:** Validate MACE defect energetics for subset of dopants
+- *Adv. Energy Mater.* 2502026. DOI: 10.1002/aenm.202502026
+- **63 dopant elements** screened through 5-step pruning: chemo-mechanical lattice strain (volume change), oxygen release tendency, cation mixing energy, kinetic stability (Li migration), electrochemical stability (voltage window)
+- Final dopants passing all screens: **Sb and Ge** (experimentally validated — both showed reduced lattice contraction, fewer intergranular microcracks, less surface rock-salt formation vs undoped LCO)
+- **Use:** Compare MACE formation energy and voltage rankings to DFT rankings for overlapping dopants. Largest single-host DFT screening study in the literature. Full paper contains intermediate screening data per dopant at each step.
 
 **LiMn2O4 — J. Power Sources (2025)**
-- "Computational design of multi-element-doped LiMn2O4"
-- 12 dopants (Mg, Al, Ti, V, Cr, Fe, Ni, Cu, Zn, Zr, Nb, W)
-- 148 DFT configurations evaluated
-- Reports: average intercalation voltage and volume change per configuration
-- **Use:** Direct comparison of MACE voltage rankings to DFT voltage rankings. Overlap with our common dopant set enables the strongest validation.
+- "Computational design of multi-element-doped LiMn2O4 spinel cathodes for high-voltage and stable lithium-ion batteries"
+- *J. Power Sources* 652, 237541. DOI: S0378775325013850
+- **12 dopants** at Mn site: Mg, Al, Ti, V, Cr, Fe, Ni, Cu, Zn, Zr, Nb, W
+- **148 configurations** evaluated via DFT + AIMD on 320-atom supercells (SQS-generated)
+- Properties: average Li intercalation voltage, unit cell volume change (Delta-V), lattice distortion
+- Threshold criteria: voltage > 4.0V AND volume change < 30.5 cubic Angstroms
+- **117 multi-doped compositions** passed both criteria
+- Optimal single dopants for voltage + stability: **Cr, Fe, Zn, Mg, W**
+- Best co-doping: Cr/Fe/Ni preferentially stabilises Mn3+/Mn4+ redox couple
+- **Use:** Direct comparison of MACE voltage rankings to DFT voltage rankings. The 12-dopant set has near-complete overlap with our expected common dopant set. **Strongest single validation source** — same host, same dopants, same property (voltage).
 
-**SrTiO3 — Literature compilation**
-- Extensive DFT literature on B-site doping of SrTiO3 for thermoelectrics and photocatalysis
-- Key dopants with published DFT formation energies: La, Nb, V, Fe, Cr, Al, Mg, Zr, Ta, W
-- **Use:** Validate MACE formation energy for the non-battery system
-- **Key challenge:** No single paper reports all dopants; will require compilation from multiple sources
+**SrTiO3 — Literature compilation (no single comprehensive source)**
+- **3d TM dopants (V, Cr, Mn, Fe, Co, Ni, Cu at Ti site):** J. Magn. Magn. Mater. (2020). DFT+U study; formation energy increases monotonically with atomic number Z, V@Ti most favourable.
+- **Nb, Zr, Mo, Hf, Ta, W, Re at Ti site:** Hybrid DFT band gap engineering study (arXiv:2105.14165).
+- **Al at Ti site:** J. Am. Chem. Soc. (2025). Formation energies in oxygen-poor limit.
+- **La, Nb in SrTiO3:** Materialia (2023). In-gap states and local structures; Nb prefers Ti site.
+- **Mn at Ti site:** J. Phys. Chem. C (2014). GGA+U + interatomic potentials, defect formation energies.
+- **Use:** Compilation needed. The 3d TM study covers 7 dopants; remaining require individual papers. **Key challenge acknowledged:** no single ground-truth ranking table exists for SrTiO3.
 
 ### 6.2 Experimental Validation
 
@@ -328,7 +329,7 @@ For each dopant in the common set, for each material:
 | Energy MAE (validation) | ~20 meV/atom | Batatia et al. 2024 |
 | Force MAE (validation) | ~45 meV/A | Batatia et al. 2024 |
 | Matbench Discovery hull distance | F1=0.59, MAE~60 meV/atom | matbench-discovery leaderboard |
-| SrTiO3 lattice parameters | Within 1-4% of experiment | SimplySQS (Lebeda et al. 2025) |
+| (Pb,Sr)TiO3 lattice params | Within 1-4% of experiment | SimplySQS (Lebeda et al. 2025), using MACE MATPES-r2SCAN-0 |
 | Spin treatment | None | Known limitation |
 | GGA+U mixing | Uncorrected in training data | Systematic error for TM oxides |
 
@@ -430,8 +431,8 @@ With 6 dopant atoms (LiCoO2), the number of distinct configurations is C(64,6) ~
 **Mitigation:** Report SQS convergence plot (running mean vs n). Standard practice: 6-8x primitive cell is sufficient for property convergence in metallic alloys (Wong & Tan 2018). For ionic systems, convergence may be slower (Jiang 2014) — we report this honestly.
 
 **L8: Heterovalent ionic SQS convergence.**
-Jiang (2014, arXiv:1408.6875) showed that SQS properties may not converge for heterovalent ionic systems because long-range electrostatic interactions extend beyond the SQS periodicity.
-**Mitigation:** Our systems ARE heterovalent. 256-448 atoms is large by literature standards. Multiple realisations partially compensate. Explicitly acknowledged as a fundamental SQS limitation.
+Jiang (PRB 91, 024106, 2015; arXiv:1408.6875) showed that SQS properties do not converge with supercell size in heterovalent ionic systems (tested on MgAl2O4 spinel, ZnSnP2 chalcopyrite). Root cause: correlation functions of long-range clusters larger than the supercell period are unoptimised, and electrostatic interactions in charge-mismatched systems are long-range. They proposed 1/N extrapolation to estimate the infinite-size disordered limit.
+**Mitigation:** Our systems ARE heterovalent (aliovalent doping). 256-448 atoms is large by literature standards. Multiple realisations partially compensate. We report SQS convergence plots and acknowledge this limitation explicitly. The 1/N extrapolation scheme could be applied as a post-hoc correction if convergence is poor.
 
 **L9: SQS generation quality.**
 pymatgen SQSTransformation often fails, falling back to manual pair-correlation sampling. The quality of this fallback is not reported.
@@ -623,11 +624,11 @@ Fe + Zr on LiCoO2 only: ~45 min. Validates:
 ### Core SQS and Methodology
 1. **Zunger, A. et al.** (1990). "Special quasirandom structures." *Phys. Rev. Lett.* 65, 353. — The foundational SQS method.
 2. **Wong, J.J. & Tan, T.L.** (2018). "SQS convergence in 2D MXene alloys." *J. Phys.: Condens. Matter*. — 6-8x primitive cell sufficient for property convergence.
-3. **Jiang, C.** (2014). "SQS convergence for heterovalent ionic systems." arXiv:1408.6875. — Fundamental SQS limitation for ionic systems.
+3. **Jiang, C.** (2015). "Special quasirandom structure in heterovalent ionic systems." *Phys. Rev. B* 91, 024106. arXiv:1408.6875. — SQS properties don't converge for heterovalent systems; proposes 1/N extrapolation.
 
 ### The Disorder Problem (Our Paper Addresses These)
 4. **Lotfi, S. et al.** (2024). "Challenges in High-Throughput Inorganic Materials Prediction and Autonomous Synthesis." *PRX Energy* 3, 011002. — Two-thirds of GNoME "novel" materials were known disordered phases misidentified as ordered.
-5. **Jakob, J., Walsh, A., Reuter, K. & Margraf, J.T.** (2025). "Learning Crystallographic Disorder: Bridging Prediction and Experiment in Materials Discovery." *Adv. Mater.*, 2514226. — >80% of GNoME predictions likely disordered in practice. ML classifiers trained on ICSD.
+5. **Jakob, J., Walsh, A., Reuter, K. & Margraf, J.T.** (2025). "Learning Crystallographic Disorder: Bridging Prediction and Experiment in Materials Discovery." *Adv. Mater.* e2514226. DOI: 10.1002/adma.202514226. — ICSD: 73% substitutional disorder, 46% positional; ML classifiers predict >80% of GNoME materials would be disordered experimentally. 90% accuracy for disorder classification from composition alone.
 
 ### Screening Platforms That Assume Order
 6. **Merchant, A. et al.** (2023). "Scaling deep learning for materials discovery." *Nature* 624, 80-85. — GNoME; explicitly 0K ordered structures.
@@ -635,11 +636,18 @@ Fe + Zr on LiCoO2 only: ~45 min. Validates:
 
 ### MLIP
 8. **Batatia, I. et al.** (2024). "MACE-MP-0: A Universal Machine Learning Interatomic Potential." — The MLIP we use.
-9. **Lebeda, T. et al.** (2025). "SimplySQS." — MACE validated on (Pb,Sr)TiO3 perovskite; lattice params within 1-4% of experiment.
+9. **Lebeda, M. et al.** (2025). "SimplySQS: An Automated and Reproducible Workflow for SQS Generation with ATAT." arXiv:2510.18020. — MACE MATPES-r2SCAN-0 validated on (Pb,Sr)TiO3; lattice params <1% error (cubic), <4% (tetragonal), 320-atom supercell. Correctly reproduced cubic-to-tetragonal phase transition.
 
 ### DFT Ground Truth
 10. **Yao, X. et al.** (2025). "Stepwise Screening of Doping Elements for High-Voltage LiCoO2." *Adv. Energy Mater.* 2502026. — 63 dopants, DFT ground truth.
-11. **J. Power Sources** (2025). "Computational design of multi-element-doped LiMn2O4." — 12 dopants, DFT voltage + volume.
+11. **J. Power Sources** 652, 237541 (2025). "Computational design of multi-element-doped LiMn2O4 spinel cathodes." — 12 dopants, 148 configs, DFT+AIMD voltage + volume on 320-atom SQS supercells.
+
+### SrTiO3 DFT Ground Truth
+12. **J. Magn. Magn. Mater.** (2020). 3d TM-doped SrTiO3 (V, Cr, Mn, Fe, Co, Ni, Cu at Ti site). DFT+U; formation energy increases with Z.
+13. **arXiv:2105.14165**. Hybrid DFT: Nb, Zr, Mo, Hf, Ta, W, Re at Ti site — band gap engineering.
+14. **J. Am. Chem. Soc.** (2025). Al at Ti and Sr sites in SrTiO3 — formation energies.
+15. **Materialia** (2023). La, Nb in SrTiO3 — in-gap states, local structures.
 
 ### Other
-12. **Bartel, C.J. et al.** (2019). "New tolerance factor for perovskite stability." *Sci. Adv.* 5, eaav0693. — Bartel tolerance factor.
+16. **Bartel, C.J. et al.** (2019). "New tolerance factor for perovskite stability." *Sci. Adv.* 5, eaav0693. — Bartel tolerance factor.
+17. **Lotfi, S. et al.** (2024). "Challenges in High-Throughput Inorganic Materials Prediction." *PRX Energy* 3, 011002. — 2/3 of GNoME "novel" materials were known disordered phases.
