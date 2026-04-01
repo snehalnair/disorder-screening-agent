@@ -150,6 +150,24 @@ def remove_all_li(atoms):
     return new_atoms, n_li
 
 
+class _NumpyEncoder(json.JSONEncoder):
+    """Handle numpy/torch float32 → Python float for JSON."""
+    def default(self, obj):
+        if isinstance(obj, (np.integer,)):
+            return int(obj)
+        if isinstance(obj, (np.floating,)):
+            return float(obj)
+        if isinstance(obj, np.ndarray):
+            return obj.tolist()
+        try:
+            import torch
+            if isinstance(obj, torch.Tensor):
+                return obj.item()
+        except ImportError:
+            pass
+        return super().default(obj)
+
+
 def _save_checkpoint(out_path, results, device, n_sqs):
     """Save incremental checkpoint after each dopant."""
     output = {
@@ -161,7 +179,7 @@ def _save_checkpoint(out_path, results, device, n_sqs):
         "dopant_results": results,
     }
     with open(out_path, "w") as f:
-        json.dump(output, f, indent=2)
+        json.dump(output, f, indent=2, cls=_NumpyEncoder)
 
 
 def run_benchmark(device="cpu", dopants=None, n_sqs=5):
@@ -219,14 +237,14 @@ def run_benchmark(device="cpu", dopants=None, n_sqs=5):
 
         dt = time.time() - t0
         results[dopant] = {
-            "voltage_ordered": v_ord,
+            "voltage_ordered": float(v_ord),
             "voltage_disordered_mean": float(np.mean(sqs_voltages)) if sqs_voltages else None,
             "voltage_disordered_std": float(np.std(sqs_voltages)) if sqs_voltages else None,
-            "ef_ordered": ef_ord,
+            "ef_ordered": float(ef_ord),
             "ef_disordered_mean": float(np.mean(sqs_efs)) if sqs_efs else None,
             "ef_disordered_std": float(np.std(sqs_efs)) if sqs_efs else None,
             "n_sqs_converged": len(sqs_voltages),
-            "time_s": dt,
+            "time_s": float(dt),
         }
         print(f"  [{dopant:4s}] V_ord={v_ord:.3f}  V_dis={np.mean(sqs_voltages):.3f}+/-{np.std(sqs_voltages):.3f}  "
               f"Ef_ord={ef_ord:.3f}  ({dt:.0f}s)")
