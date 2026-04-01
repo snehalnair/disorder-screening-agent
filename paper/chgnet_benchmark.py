@@ -150,6 +150,20 @@ def remove_all_li(atoms):
     return new_atoms, n_li
 
 
+def _save_checkpoint(out_path, results, device, n_sqs):
+    """Save incremental checkpoint after each dopant."""
+    output = {
+        "mlip": "CHGNet",
+        "material": "LiCoO2",
+        "n_dopants": len(results),
+        "n_sqs": n_sqs,
+        "device": device,
+        "dopant_results": results,
+    }
+    with open(out_path, "w") as f:
+        json.dump(output, f, indent=2)
+
+
 def run_benchmark(device="cpu", dopants=None, n_sqs=5):
     """Run CHGNet benchmark on LCO dopants."""
     calc = get_chgnet_calc(device)
@@ -164,8 +178,19 @@ def run_benchmark(device="cpu", dopants=None, n_sqs=5):
     print(f"  Parent: {len(parent_struct)} atoms")
     print()
 
+    # Load existing results (checkpoint resume)
+    out_path = OUT_DIR / "chgnet_benchmark.json"
     results = {}
+    if out_path.exists():
+        existing = json.load(open(out_path))
+        results = existing.get("dopant_results", {})
+        print(f"  Resuming: {len(results)} dopants already done, skipping them.\n")
+
     for dopant in dopants:
+        if dopant in results and "error" not in results[dopant]:
+            print(f"  [{dopant:4s}] CACHED — skipping")
+            continue
+
         t0 = time.time()
 
         # --- Ordered ---
@@ -205,6 +230,9 @@ def run_benchmark(device="cpu", dopants=None, n_sqs=5):
         }
         print(f"  [{dopant:4s}] V_ord={v_ord:.3f}  V_dis={np.mean(sqs_voltages):.3f}+/-{np.std(sqs_voltages):.3f}  "
               f"Ef_ord={ef_ord:.3f}  ({dt:.0f}s)")
+
+        # Checkpoint save after each dopant
+        _save_checkpoint(out_path, results, device, n_sqs)
 
     # --- Compute correlations ---
     print(f"\n{'=' * 70}")

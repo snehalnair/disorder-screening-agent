@@ -295,8 +295,19 @@ def run_clustering_analysis(device="cpu", dopants=None, mc_steps=20000):
     print(f"  MC steps: {mc_steps}")
     print(f"{'=' * 70}\n")
 
+    # Load existing results (checkpoint resume)
+    mc_out_path = OUT_DIR / "mc_clustering_results.json"
     all_results = {}
+    if mc_out_path.exists():
+        existing = json.load(open(mc_out_path))
+        all_results = existing.get("dopant_results", {})
+        print(f"  Resuming: {len(all_results)} dopants already done, skipping them.\n")
+
     for dopant in dopants:
+        if dopant in all_results and "error" not in all_results[dopant]:
+            print(f"  [{dopant:4s}] CACHED — skipping")
+            continue
+
         t0 = time.time()
         print(f"  [{dopant:4s}] Computing pair interaction... ", end="", flush=True)
 
@@ -337,6 +348,17 @@ def run_clustering_analysis(device="cpu", dopants=None, mc_steps=20000):
             dt = time.time() - t0
             print(f"FAILED: {e}  ({dt:.0f}s)")
             all_results[dopant] = {"error": str(e), "time_s": dt}
+
+        # Checkpoint save after each dopant
+        _ckpt = {
+            "material": "LiCoO2",
+            "mlip": "MACE-MP-0",
+            "n_tm_sites": n_tm,
+            "mc_steps": mc_steps,
+            "dopant_results": all_results,
+        }
+        with open(mc_out_path, "w") as f:
+            json.dump(_ckpt, f, indent=2)
 
     # --- Summary ---
     print(f"\n{'=' * 70}")

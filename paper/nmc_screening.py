@@ -165,8 +165,19 @@ def run_nmc_screening(device="cpu", dopants=None, n_sqs=5):
     print(f"  NMC811 SCREENING: {len(dopants)} dopants, {n_sqs} SQS each")
     print(f"{'=' * 70}\n")
 
+    # Load existing results (checkpoint resume)
+    out_path = OUT_DIR / "nmc811_results.json"
     results = {}
+    if out_path.exists():
+        existing = json.load(open(out_path))
+        results = existing.get("dopant_results", {})
+        print(f"  Resuming: {len(results)} dopants already done, skipping them.\n")
+
     for dopant in dopants:
+        if dopant in results and "error" not in results[dopant]:
+            print(f"  [{dopant:4s}] CACHED — skipping")
+            continue
+
         t0 = time.time()
         try:
             # --- Ordered ---
@@ -211,6 +222,20 @@ def run_nmc_screening(device="cpu", dopants=None, n_sqs=5):
             dt = time.time() - t0
             print(f"  [{dopant:4s}] FAILED: {e}  ({dt:.0f}s)")
             results[dopant] = {"error": str(e), "time_s": dt}
+
+        # Checkpoint save after each dopant
+        _checkpoint = {
+            "material": "NMC811 (LiNi0.8Mn0.1Co0.1O2)",
+            "structure": "layered R-3m",
+            "mlip": "MACE-MP-0",
+            "n_dopants": len(results),
+            "n_sqs": n_sqs,
+            "supercell": [4, 4, 4],
+            "n_atoms": len(parent_struct),
+            "dopant_results": results,
+        }
+        with open(out_path, "w") as f:
+            json.dump(_checkpoint, f, indent=2)
 
     # --- Correlations ---
     print(f"\n{'=' * 70}")
