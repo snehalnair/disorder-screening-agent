@@ -44,6 +44,8 @@ We computed formation energy, voltage, and volume change for each dopant in both
 | SrTiO₃ | Perovskite | 20 | +1.00 [+0.98, +1.00] | — | +0.94 [+0.80, +0.99] | — |
 | CeO₂ | Fluorite | 9 | +1.00 [+1.00, +1.00] | — | +1.00 [+1.00, +1.00] | +0.97 [+0.74, +1.00] |
 
+![Figure 1. Spearman ρ heatmap showing disorder sensitivity by material and property. Bold values indicate 95% CI excludes zero. Voltage rankings in layered cathodes (LiCoO₂, LiNiO₂) are destroyed, while formation energy is universally preserved.](figures/fig1_heatmap.png)
+
 Two patterns emerge. First, **formation energy rankings are universally preserved** (ρ = 0.76–1.00 across all materials). This is physically expected: substitution formation energy is dominated by local bond energies at the dopant site, which are largely insensitive to the arrangement of distant dopant atoms in the supercell.
 
 Second, **voltage rankings in layered cathodes are selectively destroyed**. LiCoO₂ shows ρ = −0.25 (p = 0.29), indicating that the ordered ranking has no predictive power for the disordered ranking — the correlation is indistinguishable from zero. LiNiO₂ confirms this pattern (ρ = +0.21, p = 0.61). Critically, this is not a ranking inversion but a complete loss of signal: ordered voltage rankings in layered cathodes are uninformative about disordered voltage rankings. In contrast, the spinel LiMn₂O₄ preserves voltage rankings nearly perfectly (ρ = +0.95). This structure-type dependence suggests that the sensitivity arises from the two-dimensional lithium transport pathways in the layered R̄3m structure, where long-range dopant–dopant interactions across the lithium slab significantly modulate the delithiation energy landscape.
@@ -67,6 +69,8 @@ The practical impact of ranking perturbations depends on how they propagate thro
 The Jaccard similarity — the ratio of shared candidates to total unique candidates between the two pipelines — drops precipitously from 0.76 at Gate 1 to **0.14 at Gate 3** (Fig. 2). The ordered pipeline selects {Al, Ge, V, Zr} as finalists; the disorder-aware pipeline selects {Cr, Ge, Ni, Rh}. Only Ge appears in both. A researcher following the ordered pipeline would synthesise three dopants (Al, V, Zr) that do not survive disorder-aware selection, while missing three (Cr, Ni, Rh) that do.
 
 This error amplification is a generic property of sequential pruning: each gate operates on a shrinking candidate pool, so even small ranking perturbations at early gates propagate into large selection differences at later gates. The formation energy gate (Jaccard 0.76) appears safe in isolation, but the two candidates it swaps (Al/Ta out, Ni/Sn in) cascade through subsequent gates to produce almost entirely different finalists.
+
+![Figure 2. Sequential pruning pipeline for LiCoO₂ (n = 21 dopants). Top: candidate counts at each gate for ordered (blue) and disordered (amber) pipelines. Bottom: Jaccard similarity drops from 1.0 to 0.20, showing that small early perturbations cascade into near-complete finalist divergence.](figures/fig2_pipeline_funnel.png)
 
 ### Validation against published DFT data
 
@@ -101,6 +105,8 @@ Voltage rankings, in contrast, involve a global energy difference between fully 
 
 The spinel structure, despite also being a cathode material with Li intercalation, preserves voltage rankings (ρ = 0.95). This may reflect the three-dimensional lithium transport network in the Fd̄3m structure, which distributes delithiation energetics more isotropically and reduces the sensitivity to specific dopant arrangements on the octahedral sublattice.
 
+![Figure 5. Phase-space map for ordered screening safety. Materials are positioned by voltage ranking preservation (Spearman ρ, x-axis) and Li transport dimensionality (y-axis). 2D layered cathodes fall in the "danger zone" where disorder-aware screening is required; 3D structures (spinel, perovskite, fluorite) fall in the "safe zone."](figures/fig5_phase_space.png)
+
 ### Dopant–dopant interactions explain the structure-type dependence
 
 To test the mechanistic hypothesis above, we computed the pairwise dopant–dopant interaction energy E_int(r) = E(AB) − E(A) − E(B) + E(0) for Al substitution at transition-metal sites in LiCoO₂ (3×3×2 supercell, 72 atoms, 18 Co sites) and LiMn₂O₄ (2×2×1 supercell, 224 atoms, 64 Mn sites) using single-point MACE-MP-0 energies (Table 5).
@@ -123,6 +129,8 @@ To test the mechanistic hypothesis above, we computed the pairwise dopant–dopa
 The critical difference is the **sign** of the nearest-neighbour interaction. In layered LiCoO₂, the NN interaction is strongly attractive (−128 meV), meaning dopant clustering is energetically favoured. Different SQS realisations sample different degrees of clustering — some place dopant pairs at NN distance, others force them apart — creating large configuration-to-configuration energy variation that propagates directly into voltage spread. In spinel LiMn₂O₄, the NN interaction is strongly repulsive (+145 meV), so dopants are energetically driven to disperse regardless of which specific SQS configuration is chosen. This natural self-ordering means that all SQS realisations converge to similar dispersed arrangements with similar energies, explaining the preserved voltage ranking (ρ = 0.95).
 
 Beyond the NN shell, LiCoO₂ interactions decay rapidly to <4 meV by 5 Å (the layered geometry creates a gap in Co–Co distances from 5 to 14 Å). LiMn₂O₄ shows persistent oscillatory interactions (4–20 meV) out to 9.5 Å, but these are small relative to the NN term and centred near zero, consistent with Friedel-like screening in the three-dimensional spinel network. The interaction spread (max − min of |E_int|) is ~128 meV for LiCoO₂ and ~155 meV for LiMn₂O₄, both exceeding 20 meV, indicating high sensitivity to dopant placement in absolute terms — but only the attractive (clustering-prone) layered system translates this into ranking disruption.
+
+![Figure 4. Dopant–dopant interaction energy E_int vs pair distance for Al substitution in LiCoO₂ (layered, blue) and LiMn₂O₄ (spinel, amber). The critical difference is the sign at nearest-neighbour distance: attractive (−128 meV) in layered vs repulsive (+145 meV) in spinel. Grey band indicates ±20 meV noise floor.](figures/fig4_interaction_energy.png)
 
 This asymmetry also has implications for the representativeness of SQS configurations themselves. The attractive NN interaction in LiCoO₂ implies that at finite synthesis temperatures, configurational entropy competes with the clustering driving force: the equilibrium dopant distribution may exhibit short-range order (partial clustering) rather than the fully random distribution that SQS targets. If so, the ordered model — which forces maximum dopant separation — represents a best-case scenario that is even further from the thermodynamic equilibrium configuration than a random SQS, and the true "disorder gap" for layered cathodes may be larger than our SQS-based estimate. In LiMn₂O₄, by contrast, the repulsive NN interaction means that the random and equilibrium distributions are both dispersed, making the ordered model coincidentally realistic and SQS unnecessary.
 
@@ -160,6 +168,8 @@ This hybrid approach effectively **de-risks** the screening pipeline: the cheap 
 ### Ordered voltages sit in the tail of the disordered distribution
 
 For 7 of 21 LiCoO₂ dopants, the ordered voltage value lies in the statistical tail (|z| > 1.5) of the SQS distribution (Fig. 3). Notably, the five dopants with the most negative ordered voltage (Ga, Al, Cu, Sn, Sb) all have z-scores below −1.9, meaning their ordered voltage is more extreme than any of the 5 SQS realisations. Conversely, Ti — which ranks lowest in ordered voltage — has z = +2.6, sitting at the opposite tail. This asymmetry explains why the ordered voltage ranking has no predictive power: the ordered configuration systematically overpredicts voltage for some dopants and underpredicts it for others, with no consistent direction.
+
+![Figure 3. Ordered voltage (diamonds) vs SQS distribution (blue circles and error bars) for each LiCoO₂ dopant, sorted by z-score. Red diamonds indicate dopants where the ordered value lies in the statistical tail (|z| > 1.5) of the disordered distribution. The top-ranked ordered voltages (Al, Cu, Ga) all have z < −3, while Ti has z = +2.3.](figures/fig3_voltage_distributions.png)
 
 ### Cost and accessibility
 
