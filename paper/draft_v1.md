@@ -124,6 +124,8 @@ The critical difference is the **sign** of the nearest-neighbour interaction. In
 
 Beyond the NN shell, LiCoO₂ interactions decay rapidly to <4 meV by 5 Å (the layered geometry creates a gap in Co–Co distances from 5 to 14 Å). LiMn₂O₄ shows persistent oscillatory interactions (4–20 meV) out to 9.5 Å, but these are small relative to the NN term and centred near zero, consistent with Friedel-like screening in the three-dimensional spinel network. The interaction spread (max − min of |E_int|) is ~128 meV for LiCoO₂ and ~155 meV for LiMn₂O₄, both exceeding 20 meV, indicating high sensitivity to dopant placement in absolute terms — but only the attractive (clustering-prone) layered system translates this into ranking disruption.
 
+This asymmetry also has implications for the representativeness of SQS configurations themselves. The attractive NN interaction in LiCoO₂ implies that at finite synthesis temperatures, configurational entropy competes with the clustering driving force: the equilibrium dopant distribution may exhibit short-range order (partial clustering) rather than the fully random distribution that SQS targets. If so, the ordered model — which forces maximum dopant separation — represents a best-case scenario that is even further from the thermodynamic equilibrium configuration than a random SQS, and the true "disorder gap" for layered cathodes may be larger than our SQS-based estimate. In LiMn₂O₄, by contrast, the repulsive NN interaction means that the random and equilibrium distributions are both dispersed, making the ordered model coincidentally realistic and SQS unnecessary.
+
 ### Error amplification in sequential pipelines
 
 The cascading Jaccard similarity drop (0.76 → 0.23 → 0.14) through successive pruning gates reveals a structural vulnerability in sequential screening pipelines. Each gate applies a hard threshold to a shrinking candidate pool, so a dopant that narrowly passes Gate 1 in the ordered ranking but narrowly fails in the disordered ranking is permanently lost — and so are all downstream selections that depended on its presence.
@@ -152,6 +154,8 @@ We tested several hybrid strategies that combine ordered pre-filtering with targ
 | Hybrid A | Ordered Ef+Vol gates, SQS voltage only | Cr, Fe, Ge, Ta | 0.33 | 61 | 42% |
 
 Strategy F achieves Jaccard = 0.60 with the full SQS gold standard — recovering 3 of 4 correct finalists (Cr, Ge, Ni) while substituting Ti for Rh — compared to 0.14 for the pure ordered approach. The key design principle is: **use ordered cells only for properties that are disorder-robust (formation energy), and deploy SQS for all disorder-sensitive properties (voltage, volume), avoiding hard intermediate gates that amplify errors.**
+
+This hybrid approach effectively **de-risks** the screening pipeline: the cheap ordered method is used precisely where it is safe (formation energy, ρ ≥ 0.76), and the more expensive disorder-aware method is deployed precisely where it is critical (voltage, ρ ≈ 0 in layered cathodes). The result is near-optimal accuracy at substantially reduced cost — a practical recipe that high-throughput researchers can adopt immediately with existing MLIP infrastructure.
 
 ### Ordered voltages sit in the tail of the disordered distribution
 
@@ -191,7 +195,7 @@ Parent structures were expanded to supercells of 256 atoms (4×4×4 for layered,
 
 ### MACE-MP-0 simulations
 
-All energy evaluations and geometry optimisations were performed using the MACE-MP-0 universal MLIP¹¹ with float64 precision. Structures were relaxed (both atomic positions and cell parameters) using the BFGS optimiser with a force convergence criterion of 0.15 eV/Å, with FIRE as a fallback for non-convergent cases. Automated monitoring aborted simulations exhibiting energy divergence (>50 eV/atom), volume explosion (>±50%), or force spikes (>100 eV/Å).
+All energy evaluations and geometry optimisations were performed using the MACE-MP-0 universal MLIP¹¹ with float64 precision. Although the Materials Project training set consists predominantly of ordered structures, MACE's many-body equivariant message-passing architecture constructs local atomic descriptors from the actual neighbourhood geometry, enabling accurate energy prediction for local environments not explicitly present in the training data. This transferability to disordered configurations is supported by MACE-MP-0's strong performance on liquid and amorphous phase benchmarks¹¹ˌ¹⁷, and by our own validation showing ρ = 0.77 correlation between MACE and DFT formation energies across 20 dopants (Table 3). Structures were relaxed (both atomic positions and cell parameters) using the BFGS optimiser with a force convergence criterion of 0.15 eV/Å, with FIRE as a fallback for non-convergent cases. Automated monitoring aborted simulations exhibiting energy divergence (>50 eV/atom), volume explosion (>±50%), or force spikes (>100 eV/Å).
 
 ### Property calculations
 
