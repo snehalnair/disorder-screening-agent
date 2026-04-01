@@ -34,15 +34,15 @@ Our central finding is that the disorder sensitivity of dopant rankings is **pro
 
 We computed formation energy, voltage, and volume change for each dopant in both ordered and SQS-disordered supercells across all five materials (Table 1, Fig. 1). The Spearman rank correlation coefficient (ρ) between ordered and disordered rankings serves as our primary metric: ρ = 1.0 indicates identical rankings, ρ = 0 indicates no correlation, and ρ = −1.0 indicates complete inversion.
 
-**Table 1. Spearman ρ between ordered and disordered dopant rankings.**
+**Table 1. Spearman ρ between ordered and disordered dopant rankings, with bootstrapped 95% confidence intervals (10,000 resamples).**
 
-| Material | Structure | n | Formation Energy ρ | Voltage ρ | Volume Change ρ | O-vacancy ρ |
+| Material | Structure | n | Formation Energy ρ [95% CI] | Voltage ρ [95% CI] | Volume Change ρ [95% CI] | O-vacancy ρ [95% CI] |
 |---|---|---|---|---|---|---|
-| LiCoO₂ | Layered | 20 | +0.76 | **−0.25** | +0.09 | — |
-| LiNiO₂ | Layered | 8 | +0.83 | **+0.21** | +0.79 | — |
-| LiMn₂O₄ | Spinel | 12 | +1.00 | +0.95 | +0.84 | — |
-| SrTiO₃ | Perovskite | 20 | +1.00 | — | +0.94 | — |
-| CeO₂ | Fluorite | 9 | +1.00 | — | +1.00 | +0.97 |
+| LiCoO₂ | Layered | 20 | +0.76 [+0.43, +0.94] | **−0.25 [−0.63, +0.19]** | +0.09 [−0.37, +0.55] | — |
+| LiNiO₂ | Layered | 8 | +0.83 [+0.24, +1.00] | **+0.21 [−0.73, +0.92]** | +0.79 [+0.22, +1.00] | — |
+| LiMn₂O₄ | Spinel | 12 | +1.00 [+1.00, +1.00] | +0.95 [+0.72, +1.00] | +0.84 [+0.46, +0.98] | — |
+| SrTiO₃ | Perovskite | 20 | +1.00 [+0.98, +1.00] | — | +0.94 [+0.80, +0.99] | — |
+| CeO₂ | Fluorite | 9 | +1.00 [+1.00, +1.00] | — | +1.00 [+1.00, +1.00] | +0.97 [+0.74, +1.00] |
 
 Two patterns emerge. First, **formation energy rankings are universally preserved** (ρ = 0.76–1.00 across all materials). This is physically expected: substitution formation energy is dominated by local bond energies at the dopant site, which are largely insensitive to the arrangement of distant dopant atoms in the supercell.
 
@@ -56,13 +56,13 @@ Volume change rankings follow a mixed pattern: destroyed in LiCoO₂ (ρ = 0.09)
 
 The practical impact of ranking perturbations depends on how they propagate through the screening pipeline. Modern dopant screening studies⁴⁻⁶ employ sequential pruning: candidates are progressively filtered through a series of property-based gates, each eliminating dopants below a threshold. We simulated this cascade using our LiCoO₂ data (n = 21 dopants) with three gates modelled on the Yao et al. pipeline⁴: formation energy (Gate 1), volume/lattice strain (Gate 2), and voltage (Gate 3).
 
-**Table 2. Pipeline divergence at each pruning gate (LiCoO₂, n = 21 dopants).**
+**Table 2. Pipeline divergence at each pruning gate (LiCoO₂, n = 21 dopants). Monte Carlo 95% CI from 1,000 trials with SQS resampling.**
 
-| Gate | Property | Survivors | Jaccard Similarity | Overlap |
+| Gate | Property | Survivors | Jaccard [95% CI] | Overlap |
 |---|---|---|---|---|
-| 1 | Formation energy | 15 | 0.76 | 13/15 agree |
-| 2 | Volume change | 8 | 0.23 | 3/8 agree |
-| 3 | Voltage | 4 | **0.14** | **1/4 agree** |
+| 1 | Formation energy | 15 | 0.76 [0.67, 0.88] | 13/15 agree |
+| 2 | Volume change | 8 | 0.23 [0.07, 0.33] | 3/8 agree |
+| 3 | Voltage | 4 | **0.14 [0.00, 0.33]** | **1/4 agree** |
 
 The Jaccard similarity — the ratio of shared candidates to total unique candidates between the two pipelines — drops precipitously from 0.76 at Gate 1 to **0.14 at Gate 3** (Fig. 2). The ordered pipeline selects {Al, Ge, V, Zr} as finalists; the disorder-aware pipeline selects {Cr, Ge, Ni, Rh}. Only Ge appears in both. A researcher following the ordered pipeline would synthesise three dopants (Al, V, Zr) that do not survive disorder-aware selection, while missing three (Cr, Ni, Rh) that do.
 
@@ -105,7 +105,11 @@ The spinel structure, despite also being a cathode material with Li intercalatio
 
 The cascading Jaccard similarity drop (0.76 → 0.23 → 0.14) through successive pruning gates reveals a structural vulnerability in sequential screening pipelines. Each gate applies a hard threshold to a shrinking candidate pool, so a dopant that narrowly passes Gate 1 in the ordered ranking but narrowly fails in the disordered ranking is permanently lost — and so are all downstream selections that depended on its presence.
 
-This amplification effect is not specific to our choice of gates or thresholds. It is a mathematical consequence of composing hard binary filters on correlated but non-identical rankings. Any sequential screening pipeline — including those used for alloy design¹³, photovoltaic absorbers¹⁴, and catalyst discovery¹⁵ — is susceptible to the same amplification when the underlying property predictions carry ranking uncertainty from unmodelled disorder.
+This amplification effect is robust to the choice of gate thresholds. We swept all three gate sizes across ±20% of the Yao-equivalent proportions (54 threshold combinations). The final-gate Jaccard similarity remains below 0.33 in all cases and below 0.30 in 96% of cases (Supplementary Table S1). The amplification is therefore not an artefact of a specific threshold choice but a generic property of the sequential pruning architecture.
+
+To further quantify the uncertainty, we performed Monte Carlo propagation of SQS sampling noise through the pipeline (1,000 trials, resampling SQS realisations within each dopant). The ordered pipeline deterministically selects {Al, Ge, V, Zr}. Not a single Monte Carlo trial (0/1,000) reproduced this exact set. The most probable disordered finalist, Ni, appears in 87% of trials; the ordered finalist Al appears in only 4%. The Jaccard similarity distribution across trials has a median of 0.14 (95% CI: [0.00, 0.33]), confirming that the pipeline divergence is statistically robust and not driven by a few borderline dopants.
+
+This amplification effect is not specific to our system. It is a mathematical consequence of composing hard binary filters on correlated but non-identical rankings. Any sequential screening pipeline — including those used for alloy design¹³, photovoltaic absorbers¹⁴, and catalyst discovery¹⁵ — is susceptible to the same amplification when the underlying property predictions carry ranking uncertainty from unmodelled disorder.
 
 Our finding suggests that ranking-sensitive gates (those applied to properties with low disorder tolerance, such as voltage in layered systems) should be replaced by continuous scoring functions that propagate uncertainty, or that disorder-aware simulations should be applied before any hard-threshold pruning.
 
