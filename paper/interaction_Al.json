@@ -1,0 +1,169 @@
+{
+  "dopant": "Al",
+  "device": "cpu",
+  "materials": {
+    "LiCoO2": {
+      "structure": "layered",
+      "supercell": [
+        3,
+        3,
+        2
+      ],
+      "results": [
+        {
+          "distance": 2.875,
+          "site_i": 18,
+          "site_j": 20,
+          "E_interaction_eV": -0.128384,
+          "E_interaction_meV": -128.4,
+          "E0": -163.026955,
+          "EA": -163.941915,
+          "EB": -163.941915,
+          "EAB": -164.985259
+        },
+        {
+          "distance": 4.98,
+          "site_i": 18,
+          "site_j": 28,
+          "E_interaction_eV": 0.003839,
+          "E_interaction_meV": 3.8,
+          "E0": -163.026955,
+          "EA": -163.941915,
+          "EB": -163.941915,
+          "EAB": -164.853037
+        },
+        {
+          "distance": 14.2,
+          "site_i": 18,
+          "site_j": 19,
+          "E_interaction_eV": 0.0006,
+          "E_interaction_meV": 0.6,
+          "E0": -163.026955,
+          "EA": -163.941915,
+          "EB": -163.941915,
+          "EAB": -164.856276
+        },
+        {
+          "distance": 14.488,
+          "site_i": 18,
+          "site_j": 35,
+          "E_interaction_eV": 0.000596,
+          "E_interaction_meV": 0.6,
+          "E0": -163.026955,
+          "EA": -163.941915,
+          "EB": -163.941915,
+          "EAB": -164.85628
+        },
+        {
+          "distance": 15.048,
+          "site_i": 18,
+          "site_j": 29,
+          "E_interaction_eV": 0.000559,
+          "E_interaction_meV": 0.6,
+          "E0": -163.026955,
+          "EA": -163.941915,
+          "EB": -163.941915,
+          "EAB": -164.856317
+        }
+      ]
+    },
+    "LiMn2O4": {
+      "structure": "spinel",
+      "supercell": [
+        2,
+        2,
+        1
+      ],
+      "results": [
+        {
+          "distance": 2.852,
+          "site_i": 35,
+          "site_j": 36,
+          "E_interaction_eV": 0.144938,
+          "E_interaction_meV": 144.9,
+          "E0": -1520.34288,
+          "EA": -1521.499266,
+          "EB": -1521.499266,
+          "EAB": -1522.510714
+        },
+        {
+          "distance": 4.939,
+          "site_i": 35,
+          "site_j": 76,
+          "E_interaction_eV": -0.010472,
+          "E_interaction_meV": -10.5,
+          "E0": -1520.34288,
+          "EA": -1521.499266,
+          "EB": -1521.499266,
+          "EAB": -1522.666124
+        },
+        {
+          "distance": 5.703,
+          "site_i": 35,
+          "site_j": 80,
+          "E_interaction_eV": 0.004103,
+          "E_interaction_meV": 4.1,
+          "E0": -1520.34288,
+          "EA": -1521.499266,
+          "EB": -1521.499266,
+          "EAB": -1522.65155
+        },
+        {
+          "distance": 6.376,
+          "site_i": 33,
+          "site_j": 60,
+          "E_interaction_eV": 0.009851,
+          "E_interaction_meV": 9.9,
+          "E0": -1520.34288,
+          "EA": -1521.499266,
+          "EB": -1521.499266,
+          "EAB": -1522.645801
+        },
+        {
+          "distance": 7.544,
+          "site_i": 35,
+          "site_j": 52,
+          "E_interaction_eV": 0.019521,
+          "E_interaction_meV": 19.5,
+          "E0": -1520.34288,
+          "EA": -1521.499266,
+          "EB": -1521.499266,
+          "EAB": -1522.636131
+        },
+        {
+          "distance": 8.065,
+          "site_i": 32,
+          "site_j": 33,
+          "E_interaction_eV": 0.004547,
+          "E_interaction_meV": 4.5,
+          "E0": -1520.34288,
+          "EA": -1521.499266,
+          "EB": -1521.499266,
+          "EAB": -1522.651105
+        },
+        {
+          "distance": 8.555,
+          "site_i": 32,
+          "site_j": 41,
+          "E_interaction_eV": 0.003853,
+          "E_interaction_meV": 3.9,
+          "E0": -1520.34288,
+          "EA": -1521.499266,
+          "EB": -1521.499266,
+          "EAB": -1522.651799
+        },
+        {
+          "distance": 9.457,
+          "site_i": 40,
+          "site_j": 46,
+          "E_interaction_eV": 0.00658,
+          "E_interaction_meV": 6.6,
+          "E0": -1520.34288,
+          "EA": -1521.499266,
+          "EB": -1521.499266,
+          "EAB": -1522.649072
+        }
+      ]
+    }
+  }
+}

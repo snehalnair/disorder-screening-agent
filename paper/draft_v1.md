@@ -101,6 +101,29 @@ Voltage rankings, in contrast, involve a global energy difference between fully 
 
 The spinel structure, despite also being a cathode material with Li intercalation, preserves voltage rankings (ρ = 0.95). This may reflect the three-dimensional lithium transport network in the Fd̄3m structure, which distributes delithiation energetics more isotropically and reduces the sensitivity to specific dopant arrangements on the octahedral sublattice.
 
+### Dopant–dopant interactions explain the structure-type dependence
+
+To test the mechanistic hypothesis above, we computed the pairwise dopant–dopant interaction energy E_int(r) = E(AB) − E(A) − E(B) + E(0) for Al substitution at transition-metal sites in LiCoO₂ (3×3×2 supercell, 72 atoms, 18 Co sites) and LiMn₂O₄ (2×2×1 supercell, 224 atoms, 64 Mn sites) using single-point MACE-MP-0 energies (Table 5).
+
+**Table 5. Dopant–dopant interaction energy (Al→TM site) as a function of pair distance.**
+
+| Distance (Å) | LiCoO₂ E_int (meV) | LiMn₂O₄ E_int (meV) |
+|---|---|---|
+| 2.9 (NN) | **−128** | **+145** |
+| 5.0 | +4 | −11 |
+| 5.7 | — | +4 |
+| 6.4 | — | +10 |
+| 7.5 | — | +20 |
+| 8.1 | — | +5 |
+| 8.6 | — | +4 |
+| 9.5 | — | +7 |
+| 14.2 | +1 | — |
+| 15.0 | +1 | — |
+
+The critical difference is the **sign** of the nearest-neighbour interaction. In layered LiCoO₂, the NN interaction is strongly attractive (−128 meV), meaning dopant clustering is energetically favoured. Different SQS realisations sample different degrees of clustering — some place dopant pairs at NN distance, others force them apart — creating large configuration-to-configuration energy variation that propagates directly into voltage spread. In spinel LiMn₂O₄, the NN interaction is strongly repulsive (+145 meV), so dopants are energetically driven to disperse regardless of which specific SQS configuration is chosen. This natural self-ordering means that all SQS realisations converge to similar dispersed arrangements with similar energies, explaining the preserved voltage ranking (ρ = 0.95).
+
+Beyond the NN shell, LiCoO₂ interactions decay rapidly to <4 meV by 5 Å (the layered geometry creates a gap in Co–Co distances from 5 to 14 Å). LiMn₂O₄ shows persistent oscillatory interactions (4–20 meV) out to 9.5 Å, but these are small relative to the NN term and centred near zero, consistent with Friedel-like screening in the three-dimensional spinel network. The interaction spread (max − min of |E_int|) is ~128 meV for LiCoO₂ and ~155 meV for LiMn₂O₄, both exceeding 20 meV, indicating high sensitivity to dopant placement in absolute terms — but only the attractive (clustering-prone) layered system translates this into ranking disruption.
+
 ### Error amplification in sequential pipelines
 
 The cascading Jaccard similarity drop (0.76 → 0.23 → 0.14) through successive pruning gates reveals a structural vulnerability in sequential screening pipelines. Each gate applies a hard threshold to a shrinking candidate pool, so a dopant that narrowly passes Gate 1 in the ordered ranking but narrowly fails in the disordered ranking is permanently lost — and so are all downstream selections that depended on its presence.
@@ -179,6 +202,10 @@ All energy evaluations and geometry optimisations were performed using the MACE-
 **Volume change** was computed as the percentage change in relaxed cell volume relative to the undoped parent structure at the same supercell size.
 
 **Oxygen vacancy formation energy** (CeO₂ only) was computed as E_vac = E_defect + E_O_ref − E_pristine, where E_defect is the energy of the structure with one O atom removed (nearest to the dopant site) after relaxation, E_O_ref = −4.93 eV is the reference oxygen energy, and E_pristine is the energy of the intact structure.
+
+### Dopant–dopant interaction energy
+
+The pairwise dopant–dopant interaction energy was defined as E_int = E(AB) − E(A) − E(B) + E(0), where E(0) is the energy of the undoped supercell, E(A) and E(B) are energies with a single dopant at sites i and j respectively, and E(AB) is the energy with dopants at both sites. All energies are single-point MACE-MP-0 evaluations at the unrelaxed geometry. Pairs were binned by distance (0.1 Å resolution) and one representative per bin was computed. LiCoO₂ used a 3×3×2 supercell (72 atoms, 18 Co sites, 5 distance bins from 2.9–15.0 Å); LiMn₂O₄ used a 2×2×1 supercell (224 atoms, 64 Mn sites, 8 distance bins from 2.9–9.5 Å).
 
 ### Statistical analysis
 

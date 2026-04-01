@@ -60,20 +60,16 @@ def compute_pair_distances(struct, indices):
     return sorted(pairs, key=lambda x: x[2])
 
 
-def relax_structure(atoms, calc, fmax=0.15, max_steps=200):
-    """Quick position-only relaxation (no cell relaxation for speed)."""
+def single_point_energy(atoms, calc):
+    """Compute single-point energy (no relaxation — fast)."""
+    atoms = atoms.copy()
     atoms.calc = calc
-    opt = BFGS(atoms, logfile=None)
-    try:
-        opt.run(fmax=fmax, steps=max_steps)
-    except Exception as e:
-        print(f"    Relaxation failed: {e}", end="")
-    return atoms, True
+    return atoms.get_potential_energy()
 
 
-def compute_interaction_energy(struct_undoped, target_species, dopant, site_i, site_j, calc, relax=True):
+def compute_interaction_energy(struct_undoped, target_species, dopant, site_i, site_j, calc):
     """
-    Compute dopant-dopant interaction energy:
+    Compute dopant-dopant interaction energy (single-point, no relaxation):
     E_int = E(AB) - E(A) - E(B) + E(0)
 
     where:
@@ -86,43 +82,23 @@ def compute_interaction_energy(struct_undoped, target_species, dopant, site_i, s
 
     # E(0): undoped
     s0 = struct_undoped.copy()
-    a0 = adaptor.get_atoms(s0)
-    if relax:
-        a0, _ = relax_structure(a0, calc)
-    else:
-        a0.calc = calc
-    E0 = a0.get_potential_energy()
+    E0 = single_point_energy(adaptor.get_atoms(s0), calc)
 
     # E(A): dopant at site i
     sA = struct_undoped.copy()
     sA.replace(site_i, dopant)
-    aA = adaptor.get_atoms(sA)
-    if relax:
-        aA, _ = relax_structure(aA, calc)
-    else:
-        aA.calc = calc
-    EA = aA.get_potential_energy()
+    EA = single_point_energy(adaptor.get_atoms(sA), calc)
 
     # E(B): dopant at site j
     sB = struct_undoped.copy()
     sB.replace(site_j, dopant)
-    aB = adaptor.get_atoms(sB)
-    if relax:
-        aB, _ = relax_structure(aB, calc)
-    else:
-        aB.calc = calc
-    EB = aB.get_potential_energy()
+    EB = single_point_energy(adaptor.get_atoms(sB), calc)
 
     # E(AB): dopant at both sites
     sAB = struct_undoped.copy()
     sAB.replace(site_i, dopant)
     sAB.replace(site_j, dopant)
-    aAB = adaptor.get_atoms(sAB)
-    if relax:
-        aAB, _ = relax_structure(aAB, calc)
-    else:
-        aAB.calc = calc
-    EAB = aAB.get_potential_energy()
+    EAB = single_point_energy(adaptor.get_atoms(sAB), calc)
 
     E_int = EAB - EA - EB + E0
     return E_int, {"E0": E0, "EA": EA, "EB": EB, "EAB": EAB}
@@ -160,7 +136,7 @@ def run_material(name, cif_path, supercell, target_species, dopant, calc, max_pa
         print(f"  [{idx+1}/{len(selected)}] d={dist:.2f} Å (sites {site_i},{site_j})...", end="", flush=True)
 
         E_int, energies = compute_interaction_energy(
-            struct, target_species, dopant, site_i, site_j, calc, relax=True
+            struct, target_species, dopant, site_i, site_j, calc
         )
 
         dt = time.time() - t0
@@ -210,11 +186,11 @@ def main():
     }
 
     # ── LiMn₂O₄ (spinel) ──
-    # 1×1×1 = 56 atoms (already 8 formula units), 16 Mn sites
+    # 2×2×1 = 224 atoms, 64 Mn sites — enough range for interaction decay
     lmo_results = run_material(
         name="LiMn₂O₄ (spinel Fd-3m)",
         cif_path=DATA_DIR / "lmo_spinel.cif",
-        supercell=[1, 1, 1],  # already 56 atoms
+        supercell=[2, 2, 1],  # 224 atoms, need range for decay comparison
         target_species="Mn",
         dopant=args.dopant,
         calc=calc,
@@ -222,7 +198,7 @@ def main():
     )
     output["materials"]["LiMn2O4"] = {
         "structure": "spinel",
-        "supercell": [1, 1, 1],
+        "supercell": [2, 2, 1],
         "results": lmo_results,
     }
 
