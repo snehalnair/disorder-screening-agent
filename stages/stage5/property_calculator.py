@@ -61,6 +61,11 @@ TOOL_METADATA = {
 # Reference Li chemical potential (bcc Li metal, standard DFT value) eV/atom
 _E_LI_REF = -1.9
 
+# Reference O₂ energy (MACE-MPA-0 value for isolated O₂ molecule / 2) eV/atom
+# Standard DFT value for O₂: ~ -4.93 eV/atom (PBE). MACE may differ slightly
+# but cancels in relative rankings (all dopants use the same reference).
+_E_O_REF = -4.93
+
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Helpers
@@ -206,6 +211,76 @@ def compute_average_voltage(
 
     voltage = -(e_delith - e_lith + e_li_ref_total) / n_li
     return float(voltage)
+
+
+def compute_oxygen_vacancy_energy(
+    structure,
+    calculator,
+    **kwargs,
+) -> Optional[float]:
+    """
+    Compute oxygen vacancy formation energy (eV).
+
+    E_vac = E(structure - 1 O) + E_O_ref - E(structure)
+
+    Removes the O atom nearest to a dopant site (most relevant vacancy)
+    and computes the energy cost. Lower = easier to form vacancies =
+    better ionic conductor / more catalytically active.
+
+    For CeO₂ doping studies, this is the primary screening property
+    (analogous to voltage for battery cathodes).
+
+    Returns
+    -------
+    float
+        Vacancy formation energy in eV, or None if no O present.
+    """
+    o_sites = [i for i, s in enumerate(structure) if s.species_string == "O"]
+    if not o_sites:
+        logger.warning("compute_oxygen_vacancy_energy: no O found — returning None.")
+        return None
+
+    # Find dopant sites (non-host, non-O atoms that aren't Sr/Ba/Li etc.)
+    # Heuristic: find the minority non-O species that isn't the majority cation
+    species_counts = {}
+    for s in structure:
+        sp = s.species_string
+        if sp != "O":
+            species_counts[sp] = species_counts.get(sp, 0) + 1
+
+    if not species_counts:
+        logger.warning("compute_oxygen_vacancy_energy: no cations found — returning None.")
+        return None
+
+    # Dopant = least frequent non-O species
+    dopant_sp = min(species_counts, key=species_counts.get)
+    dopant_sites = [i for i, s in enumerate(structure) if s.species_string == dopant_sp]
+
+    # Find O nearest to any dopant
+    best_o = None
+    best_dist = float("inf")
+    for o_idx in o_sites:
+        for d_idx in dopant_sites:
+            d = structure.get_distance(o_idx, d_idx)
+            if d < best_dist:
+                best_dist = d
+                best_o = o_idx
+
+    if best_o is None:
+        return None
+
+    e_pristine = _get_energy(structure, calculator)
+
+    # Remove one O
+    defect = structure.copy()
+    defect.remove_sites([best_o])
+
+    # Quick relax the defect structure
+    defect_relaxed = _quick_relax(defect, calculator, max_steps=200)
+    e_defect = _get_energy(defect_relaxed, calculator)
+
+    e_vac = e_defect + _E_O_REF - e_pristine
+    return float(e_vac)
 
 
 def compute_formation_energy_above_hull(
@@ -357,6 +432,7 @@ PROPERTY_REGISTRY: dict[str, callable] = {
     "voltage": compute_average_voltage,
     "formation_energy": compute_formation_energy_above_hull,
     "volume_change": compute_volume_change,
+    "oxygen_vacancy": compute_oxygen_vacancy_energy,
     "lattice_params": compute_lattice_params,
 }
 
