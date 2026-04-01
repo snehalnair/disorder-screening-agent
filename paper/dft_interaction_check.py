@@ -5,26 +5,25 @@ DFT (Quantum ESPRESSO) validation of dopant–dopant interaction energy sign.
 Generates 4 QE input files for E_int at the NN distance in LiCoO₂:
   E_int = E(AB) - E(A) - E(B) + E(0)
 
-Uses the same 3×3×2 supercell (72 atoms) and site indices as the MACE
-calculation, with single-point (SCF only, no relaxation) to match protocol.
+Uses the same 3×3×2 supercell (72 atoms) as the MACE calculation,
+with single-point SCF (no relaxation) to match protocol.
+
+Optimized for Colab single-core: ultrasoft pseudopotentials,
+ecutwfc=35 Ry, Gamma-only k-point.
 
 Usage on Colab:
-  # 1. Install QE
-  !apt-get -qq install quantum-espresso  # OR conda install -c conda-forge qe
-
-  # 2. Download SSSP pseudopotentials
+  # 1. Install QE + pseudopotentials
+  !apt-get -qq install quantum-espresso
+  !pip install -q pymatgen numpy scipy
   !mkdir -p pseudo
-  !wget -q -P pseudo https://pseudopotentials.quantum-espresso.org/upf_files/Li.pbe-s-kjpaw_psl.1.0.0.UPF
-  !wget -q -P pseudo https://pseudopotentials.quantum-espresso.org/upf_files/Co.pbe-spn-kjpaw_psl.0.3.1.UPF
-  !wget -q -P pseudo https://pseudopotentials.quantum-espresso.org/upf_files/O.pbe-n-kjpaw_psl.1.0.0.UPF
-  !wget -q -P pseudo https://pseudopotentials.quantum-espresso.org/upf_files/Al.pbe-n-kjpaw_psl.1.0.0.UPF
+  !wget -q -P pseudo https://pseudopotentials.quantum-espresso.org/upf_files/Li.pbe-s-rrkjus_psl.1.0.0.UPF
+  !wget -q -P pseudo https://pseudopotentials.quantum-espresso.org/upf_files/Co.pbe-spn-rrkjus_psl.0.3.1.UPF
+  !wget -q -P pseudo https://pseudopotentials.quantum-espresso.org/upf_files/O.pbe-n-rrkjus_psl.1.0.0.UPF
+  !wget -q -P pseudo https://pseudopotentials.quantum-espresso.org/upf_files/Al.pbe-n-rrkjus_psl.1.0.0.UPF
 
-  # 3. Generate inputs and run
-  !python dft_interaction_check.py --generate
+  # 2. Generate inputs and run
+  !python paper/dft_interaction_check.py --generate
   !bash run_qe.sh
-
-  # 4. Parse results
-  !python dft_interaction_check.py --parse
 """
 
 import argparse
@@ -37,30 +36,33 @@ SCRIPT_DIR = pathlib.Path(__file__).resolve().parent
 PROJECT_DIR = SCRIPT_DIR.parent
 DATA_DIR = PROJECT_DIR / "data" / "structures"
 
-# QE parameters — tuned for speed on Colab single-core
-ECUTWFC = 40.0    # Ry, wavefunction cutoff (reduced from 50)
-ECUTRHO = 320.0   # Ry, charge density cutoff
-KPOINTS = [2, 2, 2]  # Gamma-centered grid
+# ---------- QE parameters (optimized for speed on Colab) ----------
+ECUTWFC = 35.0     # Ry — sufficient for USPP (vs 50 for PAW)
+ECUTRHO = 280.0    # Ry — 8× ecutwfc for ultrasoft
+CONV_THR = 1.0e-5  # Relaxed but fine for energy differences
+MIXING_BETA = 0.3  # Conservative mixing for spin-polarized metals
+ELECTRON_MAXSTEP = 200
 PSEUDO_DIR = "./pseudo"
-CONV_THR = 1.0e-5  # Relaxed convergence (still fine for energy differences)
 
-# Hubbard U for Co 3d (standard Materials Project value)
+# 3×3×2 supercell = 72 atoms, 18 Co sites, ~11% doping with 2 dopants
+SUPERCELL = [3, 3, 2]
+
+# Hubbard U for Co 3d (Materials Project standard)
 HUBBARD_U_CO = 3.32  # eV
 
-# Supercell size — use 2x2x1 (24 atoms) for speed, NN pair still valid
-SUPERCELL = [2, 2, 1]
-
-# Pseudopotential filenames (SSSP PBE PAW)
+# Ultrasoft pseudopotentials (PSlibrary PBE RRKJUS)
 PSEUDOS = {
-    "Li": "Li.pbe-s-kjpaw_psl.1.0.0.UPF",
-    "Co": "Co.pbe-spn-kjpaw_psl.0.3.1.UPF",
-    "O":  "O.pbe-n-kjpaw_psl.1.0.0.UPF",
-    "Al": "Al.pbe-n-kjpaw_psl.1.0.0.UPF",
+    "Li": "Li.pbe-s-rrkjus_psl.1.0.0.UPF",
+    "Co": "Co.pbe-spn-rrkjus_psl.0.3.1.UPF",
+    "O":  "O.pbe-n-rrkjus_psl.1.0.0.UPF",
+    "Al": "Al.pbe-n-rrkjus_psl.1.0.0.UPF",
 }
+
+MASSES = {"Li": 6.941, "Co": 58.933, "O": 15.999, "Al": 26.982}
 
 
 def build_supercell():
-    """Build supercell and return structure."""
+    """Build 3×3×2 LCO supercell."""
     from pymatgen.core import Structure
     struct = Structure.from_file(str(DATA_DIR / "lco_parent.cif"))
     struct.make_supercell(SUPERCELL)
@@ -71,13 +73,12 @@ def build_supercell():
 def get_nn_pair(struct):
     """Find the NN Co–Co pair by scanning all Co-Co distances."""
     co_sites = [i for i, sp in enumerate(struct.species) if str(sp) == "Co"]
-    print(f"Co sites: {co_sites}")
+    print(f"Co sites: {len(co_sites)} total")
 
-    # Find actual NN pair
     min_dist = 999.0
     best_pair = (co_sites[0], co_sites[1])
     for i, si in enumerate(co_sites):
-        for sj in co_sites[i+1:]:
+        for sj in co_sites[i + 1:]:
             d = struct.get_distance(si, sj)
             if d < min_dist:
                 min_dist = d
@@ -90,35 +91,32 @@ def get_nn_pair(struct):
     return si, sj, dist
 
 
-def struct_to_qe_input(struct, prefix, label):
+def struct_to_qe_input(struct, prefix):
     """Convert pymatgen Structure to QE pw.x input string."""
     lattice = struct.lattice
     species_list = [str(sp) for sp in struct.species]
     unique_species = sorted(set(species_list))
 
-    # Determine if we need Hubbard U (only if Co is present)
     has_co = "Co" in unique_species
-    has_al = "Al" in unique_species
-
     nat = len(struct)
     ntyp = len(unique_species)
 
-    # Count electrons to set nbnd (rough estimate)
-    # For metallic systems, add some empty bands
-    nbnd = None  # Let QE decide
-
     lines = []
+
+    # &CONTROL
     lines.append("&CONTROL")
     lines.append(f"  calculation = 'scf'")
     lines.append(f"  prefix = '{prefix}'")
     lines.append(f"  outdir = './tmp_{prefix}'")
     lines.append(f"  pseudo_dir = '{PSEUDO_DIR}'")
-    lines.append(f"  tprnfor = .true.")
+    lines.append(f"  tprnfor = .false.")
     lines.append(f"  tstress = .false.")
     lines.append(f"  verbosity = 'low'")
+    lines.append(f"  disk_io = 'low'")
     lines.append("/")
     lines.append("")
 
+    # &SYSTEM
     lines.append("&SYSTEM")
     lines.append(f"  ibrav = 0")
     lines.append(f"  nat = {nat}")
@@ -129,48 +127,48 @@ def struct_to_qe_input(struct, prefix, label):
     lines.append(f"  smearing = 'mv'")
     lines.append(f"  degauss = 0.02")
     lines.append(f"  nspin = 2")
-    lines.append(f"  starting_magnetization(1) = 0.0")  # placeholder
+    # Set starting magnetization for Co
+    for i, sp in enumerate(unique_species):
+        if sp == "Co":
+            lines.append(f"  starting_magnetization({i + 1}) = 0.5")
     if has_co:
-        co_idx = unique_species.index("Co") + 1
-        lines.append(f"  starting_magnetization({co_idx}) = 0.5")
         lines.append(f"  lda_plus_u = .true.")
         for i, sp in enumerate(unique_species):
             if sp == "Co":
-                lines.append(f"  Hubbard_U({i+1}) = {HUBBARD_U_CO}")
+                lines.append(f"  Hubbard_U({i + 1}) = {HUBBARD_U_CO}")
     lines.append("/")
     lines.append("")
 
+    # &ELECTRONS
     lines.append("&ELECTRONS")
     lines.append(f"  conv_thr = {CONV_THR}")
-    lines.append(f"  mixing_beta = 0.3")
-    lines.append(f"  electron_maxstep = 200")
+    lines.append(f"  mixing_beta = {MIXING_BETA}")
+    lines.append(f"  electron_maxstep = {ELECTRON_MAXSTEP}")
+    lines.append(f"  diagonalization = 'david'")
     lines.append("/")
     lines.append("")
 
-    # Cell parameters in angstrom
+    # CELL_PARAMETERS
     lines.append("CELL_PARAMETERS angstrom")
     for vec in lattice.matrix:
         lines.append(f"  {vec[0]:16.10f} {vec[1]:16.10f} {vec[2]:16.10f}")
     lines.append("")
 
-    # Atomic species
+    # ATOMIC_SPECIES
     lines.append("ATOMIC_SPECIES")
-    # Atomic masses (approximate)
-    masses = {"Li": 6.941, "Co": 58.933, "O": 15.999, "Al": 26.982}
     for sp in unique_species:
-        lines.append(f"  {sp:4s} {masses.get(sp, 1.0):10.4f} {PSEUDOS[sp]}")
+        lines.append(f"  {sp:4s} {MASSES.get(sp, 1.0):10.4f} {PSEUDOS[sp]}")
     lines.append("")
 
-    # Atomic positions in crystal coordinates
+    # ATOMIC_POSITIONS
     lines.append("ATOMIC_POSITIONS crystal")
-    for i, (sp, site) in enumerate(zip(species_list, struct.sites)):
+    for sp, site in zip(species_list, struct.sites):
         fc = site.frac_coords
         lines.append(f"  {sp:4s} {fc[0]:16.10f} {fc[1]:16.10f} {fc[2]:16.10f}")
     lines.append("")
 
-    # K-points
-    lines.append(f"K_POINTS automatic")
-    lines.append(f"  {KPOINTS[0]} {KPOINTS[1]} {KPOINTS[2]}  0 0 0")
+    # K_POINTS — Gamma only for 72-atom cell (big speedup)
+    lines.append("K_POINTS gamma")
     lines.append("")
 
     return "\n".join(lines)
@@ -184,8 +182,7 @@ def generate_inputs():
     configs = {}
 
     # E(0): undoped
-    s0 = struct.copy()
-    configs["e0_undoped"] = s0
+    configs["e0_undoped"] = struct.copy()
 
     # E(A): dopant at site i only
     sA = struct.copy()
@@ -206,31 +203,44 @@ def generate_inputs():
     out_dir = pathlib.Path("qe_inputs")
     out_dir.mkdir(exist_ok=True)
 
-    run_script = ["#!/bin/bash", "set -e", ""]
+    run_lines = [
+        "#!/bin/bash",
+        "set -e",
+        "START=$(date +%s)",
+        "",
+    ]
 
     for name, s in configs.items():
-        inp = struct_to_qe_input(s, name, name)
+        inp = struct_to_qe_input(s, name)
         inp_file = out_dir / f"{name}.in"
         with open(inp_file, "w") as f:
             f.write(inp)
         print(f"  Written: {inp_file}")
 
-        # Add to run script
-        run_script.append(f"echo '=== Running {name} ==='")
-        run_script.append(f"mkdir -p tmp_{name}")
-        run_script.append(f"pw.x < {out_dir}/{name}.in > {out_dir}/{name}.out 2>&1")
-        run_script.append(f"echo '  Done: {name}'")
-        run_script.append("")
+        run_lines.append(f"echo '=== Running {name} ==='")
+        run_lines.append(f"T0=$(date +%s)")
+        run_lines.append(f"mkdir -p tmp_{name}")
+        run_lines.append(f"pw.x < {out_dir}/{name}.in > {out_dir}/{name}.out 2>&1")
+        run_lines.append(f"T1=$(date +%s)")
+        run_lines.append(f"echo \"  Done: {name}  ($(($T1 - $T0))s)\"")
+        run_lines.append("")
 
-    run_script.append("echo 'All 4 calculations complete.'")
-    run_script.append("python3 dft_interaction_check.py --parse")
+    run_lines.append("END=$(date +%s)")
+    run_lines.append("echo \"\"")
+    run_lines.append("echo \"All 4 calculations complete in $(($END - $START))s.\"")
+    run_lines.append("echo \"\"")
+    run_lines.append("python3 paper/dft_interaction_check.py --parse")
 
     with open("run_qe.sh", "w") as f:
-        f.write("\n".join(run_script))
+        f.write("\n".join(run_lines))
+
     print(f"\n  Run script: run_qe.sh")
     print(f"  NN distance: {dist:.3f} Å")
-    print(f"  Supercell: {SUPERCELL} = {len(configs['e0_undoped'])} atoms, {KPOINTS} k-grid")
-    print(f"  Expected time: ~10-20 min on Colab (serial pw.x)")
+    print(f"  Supercell: {SUPERCELL} = {len(struct)} atoms")
+    print(f"  Pseudopotentials: ultrasoft (RRKJUS)")
+    print(f"  ecutwfc = {ECUTWFC} Ry, ecutrho = {ECUTRHO} Ry")
+    print(f"  K-points: Gamma only")
+    print(f"  Expected time: ~30-60 min on Colab (serial pw.x)")
 
 
 def parse_outputs():
@@ -246,20 +256,26 @@ def parse_outputs():
 
         text = out_file.read_text()
 
-        # Check convergence
         if "convergence NOT achieved" in text:
             print(f"  WARNING: {name} did NOT converge!")
 
-        # Extract total energy (last occurrence of "!" line)
         matches = re.findall(r"!\s+total energy\s+=\s+([-\d.]+)\s+Ry", text)
         if not matches:
             print(f"  ERROR: No energy found in {out_file}")
+            # Show last few lines for debugging
+            tail = text.strip().split("\n")[-10:]
+            for line in tail:
+                print(f"    {line}")
             return
 
         e_ry = float(matches[-1])
         e_ev = e_ry * 13.605698  # Ry -> eV
         energies[name] = e_ev
         print(f"  {name:15s}: {e_ry:16.8f} Ry = {e_ev:16.6f} eV")
+
+    if len(energies) < 4:
+        print("  ERROR: Not all calculations converged.")
+        return
 
     E0 = energies["e0_undoped"]
     EA = energies["eA_site_i"]
@@ -269,25 +285,33 @@ def parse_outputs():
     E_int_eV = EAB - EA - EB + E0
     E_int_meV = E_int_eV * 1000
 
-    print(f"\n{'='*60}")
-    print(f"  E_int (DFT PBE+U) = {E_int_meV:+.1f} meV")
-    print(f"  E_int (MACE-MP-0) = -128.4 meV  (from unrelaxed single-point)")
-    print(f"{'='*60}")
+    print(f"\n{'=' * 60}")
+    print(f"  E_int (DFT PBE+U)  = {E_int_meV:+.1f} meV")
+    print(f"  E_int (MACE-MP-0)  = -128.4 meV")
+    print(f"{'=' * 60}")
 
     if E_int_meV < 0:
-        print(f"\n  NN interaction is ATTRACTIVE in DFT → CONFIRMS MACE sign ✓")
+        print(f"\n  NN interaction is ATTRACTIVE in DFT")
+        print(f"  --> CONFIRMS MACE sign")
     else:
-        print(f"\n  NN interaction is REPULSIVE in DFT → CONTRADICTS MACE sign ✗")
+        print(f"\n  NN interaction is REPULSIVE in DFT")
+        print(f"  --> CONTRADICTS MACE sign")
+
+    sign_match = (E_int_meV < 0)
+    ratio = E_int_meV / -128.4 if abs(E_int_meV) > 0.1 else 0.0
 
     result = {
-        "method": "DFT PBE+U (QE, PAW, SCF only)",
-        "system": "LiCoO2 3x3x2 supercell (72 atoms)",
+        "method": "DFT PBE+U (QE, USPP, SCF only, Gamma-only)",
+        "system": "LiCoO2 3x3x2 supercell",
+        "n_atoms": 72,
+        "n_co_sites": 18,
+        "dopant_concentration_pct": 11.1,
         "dopant": "Al",
-        "pair": "NN (~2.9 Å)",
-        "sites": [18, 20],
+        "pair": "NN",
+        "distance_ang": 2.875,
         "ecutwfc_Ry": ECUTWFC,
         "ecutrho_Ry": ECUTRHO,
-        "kpoints": KPOINTS,
+        "kpoints": "gamma",
         "Hubbard_U_Co_eV": HUBBARD_U_CO,
         "E0_eV": E0,
         "EA_eV": EA,
@@ -296,10 +320,11 @@ def parse_outputs():
         "E_int_eV": E_int_eV,
         "E_int_meV": round(E_int_meV, 1),
         "MACE_E_int_meV": -128.4,
+        "sign_match": sign_match,
+        "DFT_over_MACE_ratio": round(ratio, 2),
     }
 
     out_path = pathlib.Path("paper") / "dft_interaction_result.json"
-    # If running from repo root
     if not out_path.parent.exists():
         out_path = pathlib.Path("dft_interaction_result.json")
     with open(out_path, "w") as f:
@@ -309,8 +334,10 @@ def parse_outputs():
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--generate", action="store_true", help="Generate QE input files")
-    parser.add_argument("--parse", action="store_true", help="Parse QE outputs")
+    parser.add_argument("--generate", action="store_true",
+                        help="Generate QE input files")
+    parser.add_argument("--parse", action="store_true",
+                        help="Parse QE outputs and compute E_int")
     args = parser.parse_args()
 
     if args.generate:
@@ -318,10 +345,6 @@ if __name__ == "__main__":
     elif args.parse:
         parse_outputs()
     else:
-        print("Usage: --generate to create inputs, --parse to extract results")
-        print("\nFull workflow on Colab:")
-        print("  1. !apt-get -qq install quantum-espresso")
-        print("  2. !mkdir -p pseudo && download pseudopotentials (see docstring)")
-        print("  3. !python dft_interaction_check.py --generate")
-        print("  4. !bash run_qe.sh")
-        print("  5. !python dft_interaction_check.py --parse")
+        print("Usage:")
+        print("  --generate   Create QE input files + run script")
+        print("  --parse      Extract energies and compute E_int")
