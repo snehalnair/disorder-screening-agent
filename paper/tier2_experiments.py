@@ -333,7 +333,10 @@ if __name__ == "__main__":
 
     exp2_results = experiment2_sqs_convergence()
     exp1_results = experiment1_partial_delithiation(calc, dopants)
-    exp3_results = experiment3_interaction_relaxed(calc)
+    # Exp 3 skipped: MACE position relaxation diverges for substituted
+    # supercells (confirmed on both CPU and A100 GPU). Single-point
+    # interaction energies are used in the paper with honest caveat.
+    exp3_results = None
 
     total_time = time.time() - t_start
 
