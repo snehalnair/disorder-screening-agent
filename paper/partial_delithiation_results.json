@@ -1,0 +1,56 @@
+{
+  "fraction": 0.5,
+  "n_samples": 2,
+  "dopants": {
+    "Al": {
+      "voltage_full_ordered": -3.640927018730729,
+      "voltage_full_disordered_mean": -3.4795323224111243,
+      "voltage_partial_ordered": -4.325281425119684,
+      "voltage_partial_ordered_std": 0.0996928135852901,
+      "time_s": 1192.6775798797607,
+      "converged": true
+    },
+    "Cr": {
+      "voltage_full_ordered": -3.4911942322069387,
+      "voltage_full_disordered_mean": -3.4948538223159744,
+      "voltage_partial_ordered": -4.421248556694522,
+      "voltage_partial_ordered_std": 0.0019801638926340436,
+      "time_s": 1225.9823989868164,
+      "converged": true
+    },
+    "Ga": {
+      "voltage_full_ordered": -3.646909826791332,
+      "voltage_full_disordered_mean": -3.465396591968657,
+      "voltage_partial_ordered": -4.266978526329325,
+      "voltage_partial_ordered_std": 0.020078583081189868,
+      "time_s": 1512.3210260868073,
+      "converged": true
+    },
+    "Ge": {
+      "voltage_full_ordered": -3.5517498959147678,
+      "voltage_full_disordered_mean": -3.5107782570040578,
+      "voltage_partial_ordered": -4.278131879781771,
+      "voltage_partial_ordered_std": 0.0796851778610082,
+      "time_s": 1566.5881259441376,
+      "converged": true
+    },
+    "Ni": {
+      "voltage_full_ordered": -3.4584395364983487,
+      "voltage_full_disordered_mean": -3.541898766023963,
+      "voltage_partial_ordered": -4.336799016076817,
+      "voltage_partial_ordered_std": 0.04116616260845748,
+      "time_s": 1219.6715950965881,
+      "converged": true
+    },
+    "Ti": {
+      "voltage_full_ordered": -3.3901727890506224,
+      "voltage_full_disordered_mean": -3.500217303841965,
+      "voltage_partial_ordered": -4.256440545560579,
+      "voltage_partial_ordered_std": 0.18497318184844555,
+      "time_s": 1486.500550031662,
+      "converged": true
+    }
+  },
+  "rho_full_vs_partial_ordered": -0.028571428571428574,
+  "p_value": 0.9571545189504373
+}

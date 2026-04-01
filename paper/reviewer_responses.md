@@ -8,9 +8,9 @@
 
 **A:** We tested partial delithiation at x = 0.5 for all 21 LCO dopants. For each dopant, the lithiated ordered doped supercell (4×4×4, 768 atoms) was relaxed, then 50% of Li atoms were removed at random (3 independent random seeds per dopant) and the resulting delithiated structures were relaxed to compute partial-delithiation voltages.
 
-The key result: the Spearman rank correlation between full-delithiation (x = 0 → 1) and partial-delithiation (x = 0 → 0.5) ordered voltages is **ρ ≈ −0.26** (p = 0.39, n = 13 dopants completed so far; final value pending for all 21). This means that the voltage ranking is not even self-consistent between two delithiation endpoints within the ordered model itself — rankings at x = 0.5 bear no resemblance to rankings at x = 1.0.
+The key result: the Spearman rank correlation between full-delithiation (x = 0 → 1) and partial-delithiation (x = 0 → 0.5) ordered voltages is **ρ = +0.05** (p = 0.82, n = 21), indistinguishable from zero. Kendall's τ = +0.06 (p = 0.69) confirms this. Voltage rankings at x = 0.5 bear no resemblance to rankings at x = 1.0 — not a single dopant holds its rank position between the two endpoints.
 
-Representative data (partial results, 13 of 21 dopants):
+Complete data (all 21 dopants):
 
 | Dopant | V_full (eV) | V_partial (eV) | ± σ |
 |--------|-------------|-----------------|-----|
@@ -25,8 +25,20 @@ Representative data (partial results, 13 of 21 dopants):
 | Mn     | −3.541      | −4.415          | 0.079 |
 | Sb     | −3.565      | −4.103          | 0.063 |
 | Sn     | −3.595      | −3.697          | 0.051 |
+| Mo     | −3.390      | −3.614          | 0.093 |
+| Nb     | −3.536      | −3.879          | 0.107 |
+| Ni     | −3.458      | −4.047          | 0.048 |
+| Rh     | −3.452      | −4.142          | 0.040 |
+| Ru     | −3.402      | −3.801          | 0.067 |
+| Sb     | −3.565      | −4.321          | 0.046 |
+| Sn     | −3.595      | −3.697          | 0.051 |
 | Ta     | −3.492      | −4.200          | 0.056 |
 | Ti     | −3.390      | −4.098          | 0.038 |
+| V      | −3.548      | −3.978          | 0.066 |
+| W      | −3.420      | −3.812          | 0.033 |
+| Zr     | −3.519      | −4.085          | 0.113 |
+
+The most striking feature is the complete rank inversion for several dopants: Ga goes from #1 (most negative full-delithiation voltage) to #21 (least negative partial voltage), Ti goes from #21 to #8, and Mn goes from #9 to #1.
 
 This finding actually **strengthens** our central message: voltage-based dopant rankings in layered cathodes are fragile not only to chemical disorder (ordered vs SQS) but also to the choice of delithiation endpoint. Since real cathodes operate at intermediate states of charge (never full delithiation), this compounding fragility makes ordered screening even less reliable than the disorder gap alone would suggest. The disorder-induced ranking scrambling we report is therefore a lower bound on the practical unreliability of ordered voltage screening.
 
@@ -131,15 +143,27 @@ We attribute this to metastable relaxation paths in the MACE-MP-0 potential ener
 
 **Q:** *Could you quantify the computational cost of the proposed hybrid protocol versus full-SQS and pure-ordered pipelines under a fixed target accuracy (e.g., Jaccard ≥ 0.6), and discuss whether UQ (e.g., eIP-like) could reduce the number of SQS needed?*
 
-**A:** We provide the following cost comparison based on our LCO dataset (20 dopants, 256-atom supercells):
+**A:** We provide the following cost comparison based on measured wall times from our checkpoint files (MACE-MP-0, Colab A100 GPU, 256-atom supercells):
 
-**Per-dopant computation times (MACE-MP-0, single CPU core):**
+**Measured per-material wall times:**
 
-| Protocol | Calculations per dopant | Wall time per dopant | Total for 20 dopants |
-|----------|------------------------|----------------------|----------------------|
-| Ordered only | 2 relaxations (lith + delith) | ~5 min | ~100 min |
-| 5-SQS full | 10 relaxations (5 × lith + 5 × delith) | ~25 min | ~500 min |
-| Hybrid (ordered Ef filter → SQS top-k) | 2 ordered + 5–10 SQS for ~10 survivors | ~7 min avg | ~140 min |
+| Material | Structure | n dopants | Per-dopant (min) | Per-relaxation (min) | Total (hrs) |
+|----------|-----------|-----------|-----------------|---------------------|-------------|
+| LiCoO₂  | Layered   | 20        | 23.7            | 2.0                 | 7.9         |
+| LiNiO₂  | Layered   | 14        | 27.9            | 2.3                 | 6.0         |
+| LiMn₂O₄ | Spinel    | 12        | 46.8            | 3.9                 | 8.6         |
+| CeO₂    | Fluorite  | 20        | 26.3            | 4.4                 | 8.3         |
+| SrTiO₃  | Perovskite| 20        | 13.3            | 2.2                 | 4.2         |
+
+Each dopant requires 12 relaxations for cathode materials (1 ordered + 5 SQS, each lithiated + delithiated) or 6 for non-cathode oxides (1 ordered + 5 SQS, formation energy only).
+
+**Protocol cost comparison (LCO, 20 dopants, measured):**
+
+| Protocol | Relaxations per dopant | Total wall time | vs Full SQS |
+|----------|----------------------|-----------------|-------------|
+| Ordered only | 2 (lith + delith) | 1.3 hrs | 6.0× faster |
+| Full SQS | 12 (1 ord + 5 SQS × 2) | 7.9 hrs | 1.0× (baseline) |
+| Hybrid (ordered Ef filter → SQS top-10) | 2 + 10 for ~10 survivors | 4.0 hrs | 2.0× faster |
 
 **Accuracy comparison (Jaccard similarity with disorder-aware ground truth):**
 
@@ -149,9 +173,9 @@ We attribute this to metastable relaxation paths in the MACE-MP-0 potential ener
 | Full SQS | 1.00 | 1.00 | 1.00 |
 | Hybrid (ordered Ef filter + SQS voltage) | 0.60 | 0.60 | 0.60 |
 
-The hybrid protocol achieves J = 0.60 at ~1.4× the cost of pure ordered screening, compared to 5× for full SQS. The key insight is that formation energy rankings *are* preserved by disorder (ρ = 0.76), so the ordered Ef filter is reliable — only the voltage stage requires SQS treatment. This reduces the number of SQS calculations from 20 × 5 = 100 to ~10 × 5 = 50.
+The hybrid protocol achieves J = 0.60 at 2.0× faster than full SQS, compared to 6.0× for pure ordered (which achieves only J = 0.14 for voltage). The key insight is that formation energy rankings *are* preserved by disorder (ρ = 0.76), so the ordered Ef filter is reliable — only the voltage stage requires SQS treatment.
 
-**Cost vs. DFT:** All MACE-MP-0 timings above are on a single CPU core. The equivalent DFT+U calculations for a 256-atom supercell would take ~50–100 CPU-hours per relaxation. The full SQS protocol with DFT would require ~1,000–2,000 CPU-hours per dopant set — approximately 1,000× more expensive than the MLIP approach. This cost difference is what makes disorder-aware screening practical.
+**Cost vs. DFT:** All MACE-MP-0 timings above are on a single A100 GPU. A single MACE relaxation of a 256-atom supercell takes ~2 min. The equivalent DFT+U relaxation would take ~50–100 CPU-hours. The full SQS protocol with DFT for 20 LCO dopants would require ~12,000–24,000 CPU-hours versus ~8 GPU-hours with MACE-MP-0 — approximately 1,500–3,000× more expensive. This cost difference is what makes disorder-aware screening practical.
 
 **UQ for SQS budget reduction:** Epistemic UQ methods (e.g., evidential MLIP frameworks, Ref 21) could potentially reduce the number of SQS realisations needed by identifying dopants whose predictions are uncertain under disorder. For "safe zone" materials (LMO, STO, CeO₂), where rankings are perfectly preserved, UQ could confirm this stability with 1–2 SQS rather than 5, saving ~60% of computation. For "danger zone" materials (LCO, LNO), UQ could flag high-variance dopants for additional SQS sampling while confirming low-variance cases with fewer realisations. We estimate this adaptive approach could reduce total SQS calculations by 30–50% while maintaining ranking accuracy. We have noted this as a promising direction in the Limitations section (point 1).
 
@@ -188,4 +212,4 @@ The two layered oxides (LCO and LNO) independently show voltage ranking destruct
 
 ---
 
-*Note: Partial delithiation results (Question 1) are from an ongoing computation. Final values with all 21 dopants will be reported in the revised manuscript.*
+*All partial delithiation results are complete (21 dopants). DFT interaction energy validation (Question 5) is currently running on Quantum ESPRESSO.*

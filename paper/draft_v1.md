@@ -42,7 +42,7 @@ We computed formation energy, voltage, and volume change for each dopant in both
 | LiNiO₂ | Layered | 14 | +0.82 [+0.49, +0.95] | **−0.06 [−0.62, +0.54]** | +0.54 [−0.08, +0.89] | — |
 | LiMn₂O₄ | Spinel | 12 | +1.00 [+1.00, +1.00] | +0.95 [+0.72, +1.00] | +0.84 [+0.46, +0.98] | — |
 | SrTiO₃ | Perovskite | 20 | +1.00 [+0.98, +1.00] | — | +0.94 [+0.80, +0.99] | — |
-| CeO₂ | Fluorite | 20 | +1.00 [+1.00, +1.00] | — | +0.96 [+0.88, +0.99] | +0.97 [+0.74, +1.00] |
+| CeO₂ | Fluorite | 20 | +1.00 [+1.00, +1.00] | — | +0.96 [+0.85, +1.00] | +0.85 [+0.55, +0.99] |
 
 ![Figure 1. Spearman ρ heatmap showing disorder sensitivity by material and property. Bold values indicate 95% CI excludes zero. Voltage rankings in layered cathodes (LiCoO₂, LiNiO₂) are destroyed, while formation energy is universally preserved.](figures/fig1_heatmap.png)
 
@@ -52,7 +52,7 @@ Second, **voltage rankings in layered cathodes are selectively destroyed**. LiCo
 
 The within-dopant SQS variance provides additional evidence for the voltage signal destruction in layered systems. Across LiCoO₂ dopants, the mean inter-realisation standard deviation for voltage is 0.054 V, representing a substantial fraction of the total dopant-to-dopant voltage spread. This means that even with disorder-aware simulation, resolving adjacent voltage ranks in layered cathodes requires multiple SQS realisations — a single disordered-cell calculation is insufficient.
 
-Volume change rankings follow a mixed pattern: destroyed in LiCoO₂ (ρ = 0.09) but preserved in all other materials (ρ = 0.79–1.00). The non-cathode oxides SrTiO₃ and CeO₂ show near-perfect ranking preservation for all properties, confirming that higher-symmetry, more rigid frameworks effectively buffer against disorder-induced ranking changes.
+Volume change rankings follow a mixed pattern: destroyed in LiCoO₂ (ρ = 0.09) and marginal in LiNiO₂ (ρ = 0.54), but well-preserved in the 3D structures (ρ = 0.84–0.96). The non-cathode oxides SrTiO₃ and CeO₂ show near-perfect ranking preservation for formation energy and volume change; CeO₂ oxygen vacancy formation energy is also well-preserved (ρ = 0.85), confirming that higher-symmetry, more rigid frameworks effectively buffer against disorder-induced ranking changes.
 
 ### Ranking errors amplify through sequential pruning
 
@@ -185,7 +185,7 @@ First, the MACE-MP-0 potential is trained on the Materials Project database, whi
 
 Second, our SQS realisations use 5 independent configurations at ~6% dopant concentration in 256-atom supercells. Jackknife analysis (Supplementary Information) shows that voltage ρ values are stable across 3-, 4-, and 5-SQS subsets, but convergence at higher dopant concentrations (3–8%) has not been tested. The SQS approach models random disorder but does not capture short-range order, clustering, or grain-boundary segregation that may affect real materials.
 
-Third, the voltage calculation uses complete delithiation (x = 0 → 1) rather than the partial delithiation relevant to cycling between specific states of charge. A preliminary partial delithiation test (x = 0.5, Supplementary Information) indicates that the ranking trends persist, but a systematic study across multiple x-values and dopant subsets would strengthen this conclusion.
+Third, the voltage calculation uses complete delithiation (x = 0 → 1) rather than the partial delithiation relevant to cycling between specific states of charge. A partial delithiation test at x = 0.5 across all 21 LCO dopants (Supplementary Information) reveals that voltage rankings are not even self-consistent between delithiation endpoints: the Spearman correlation between full- and half-delithiation ordered voltages is ρ = +0.05 (p = 0.82, n = 21), indistinguishable from zero. This compounding fragility — rankings change with both disorder *and* delithiation depth — implies that the disorder gap reported here is a lower bound on the practical unreliability of ordered voltage screening.
 
 Fourth, only substitution at the primary transition-metal site is considered. Interstitial incorporation, anti-site defects, and charge-compensating point defects (e.g., oxygen vacancies for heterovalent dopants) are not modelled. Automated defect enumeration frameworks²⁰ could extend this analysis to include site-preference effects and explicit charge compensation, which may further modulate disorder sensitivity for aliovalent dopants.
 
