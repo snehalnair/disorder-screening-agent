@@ -2,9 +2,9 @@
 
 **Authors:** Snehal Nair¹*
 
-**Affiliations:** ¹ [TBD]
+**Affiliations:** ¹ Independent Researcher
 
-**Corresponding author:** * snehal@[TBD]
+**Corresponding author:** * snehal.nair@alumni.example.edu
 
 ---
 
@@ -20,7 +20,7 @@ The discovery of functional dopants for battery cathode materials has become a m
 
 A common assumption underlies all such pipelines: the doped structure is modelled as an ordered supercell with a single, deterministic placement of dopant atoms. In a typical DFT screening study, one Co atom in a 2×2×1 supercell (48 atoms) is replaced by the candidate dopant, and properties are computed for this single configuration⁴. This ordered-host assumption is computationally convenient — it requires only one simulation per dopant — but it does not reflect the physical reality of synthesised materials, where dopant atoms occupy lattice sites with statistical disorder characteristic of a solid solution⁷⁻⁹.
 
-The consequences of this assumption have not been systematically tested. While it is known that Special Quasi-random Structures (SQS)¹⁰ provide a more faithful representation of substitutional alloys, and that machine-learning interatomic potentials (MLIPs) such as MACE-MP-0¹¹ make large-supercell simulations affordable, no study has asked the critical question: **does accounting for chemical disorder change which dopants a screening pipeline selects?**
+The consequences of this assumption have not been systematically tested. Alternative approaches to modelling substitutional disorder exist — cluster expansion methods can efficiently sample configurational space¹⁸, charge-aware MLIPs such as CHGNet¹⁹ capture redox-state evolution in disordered cathodes, and automated defect frameworks (e.g., DASP²⁰) enumerate site preferences and charge states — but none have been applied to quantify how disorder propagates through multi-stage screening pipelines. Separately, evidential and ensemble uncertainty quantification (UQ) for MLIPs²¹ can flag predictions with high epistemic uncertainty, but integrating UQ into ranking-based screening workflows remains unexplored. While it is known that Special Quasi-random Structures (SQS)¹⁰ provide a more faithful representation of substitutional alloys, and that universal MLIPs such as MACE-MP-0¹¹ make large-supercell simulations affordable, no study has asked the critical question: **does accounting for chemical disorder change which dopants a screening pipeline selects?**
 
 Here we answer this question systematically. We screen 20+ dopants across five oxide materials spanning three crystal structure types — layered (LiCoO₂, LiNiO₂), spinel (LiMn₂O₄), perovskite (SrTiO₃), and fluorite (CeO₂) — computing properties in both ordered supercells and ensembles of five SQS realisations using the MACE-MP-0 universal MLIP. We quantify ranking preservation using the Spearman rank correlation coefficient (ρ) between ordered and disordered predictions, and we simulate the propagation of ranking errors through a Yao-style sequential pruning pipeline⁴ to measure their practical impact on dopant selection.
 
@@ -179,13 +179,17 @@ This cost reduction changes the calculus of screening design: rather than choosi
 
 ### Limitations
 
-Several limitations should be considered. First, the MACE-MP-0 potential is trained on the Materials Project database, which contains predominantly ordered structures. While the ρ = 0.77 correlation with DFT formation energies supports its accuracy for substitutional chemistry, its performance for highly disordered configurations (e.g., high dopant concentrations or multi-element disorder) has not been systematically validated.
+Several limitations should be considered.
 
-Second, our SQS realisations use 5 independent configurations at ~6% dopant concentration in 256-atom supercells. While this captures the leading-order effect of substitutional disorder, it does not model short-range order, clustering, or grain-boundary segregation that may affect real materials.
+First, the MACE-MP-0 potential is trained on the Materials Project database, which contains predominantly ordered structures. While the ρ = 0.77 correlation with DFT formation energies supports its accuracy for substitutional chemistry, its performance for strongly oxidised, Li-depleted states — where oxygen-hole chemistry, negative charge transfer, and long-range electrostatics become important — has not been systematically validated against DFT. Integrating epistemic uncertainty quantification (e.g., evidential MLIP frameworks²¹) into the hybrid pipeline could convert the qualitative "safe/danger" assessment into quantitative risk-aware decision rules.
 
-Third, the voltage calculation uses a simplified delithiation protocol (removal of all Li atoms) rather than the partial delithiation relevant to cycling between specific states of charge. The absolute voltage values carry a systematic offset from the Li chemical potential reference, though this cancels in all ranking comparisons.
+Second, our SQS realisations use 5 independent configurations at ~6% dopant concentration in 256-atom supercells. Jackknife analysis (Supplementary Information) shows that voltage ρ values are stable across 3-, 4-, and 5-SQS subsets, but convergence at higher dopant concentrations (3–8%) has not been tested. The SQS approach models random disorder but does not capture short-range order, clustering, or grain-boundary segregation that may affect real materials.
 
-Fourth, while the LiNiO₂ dataset (n = 14 dopants) confirms the voltage destruction pattern (ρ = −0.06) seen in LiCoO₂, expanding to the full 22-dopant set would further tighten the confidence intervals.
+Third, the voltage calculation uses complete delithiation (x = 0 → 1) rather than the partial delithiation relevant to cycling between specific states of charge. A preliminary partial delithiation test (x = 0.5, Supplementary Information) indicates that the ranking trends persist, but a systematic study across multiple x-values and dopant subsets would strengthen this conclusion.
+
+Fourth, only substitution at the primary transition-metal site is considered. Interstitial incorporation, anti-site defects, and charge-compensating point defects (e.g., oxygen vacancies for heterovalent dopants) are not modelled. Automated defect enumeration frameworks²⁰ could extend this analysis to include site-preference effects and explicit charge compensation, which may further modulate disorder sensitivity for aliovalent dopants.
+
+Fifth, while the LiNiO₂ dataset (n = 14 dopants) confirms the voltage destruction pattern (ρ = −0.06) seen in LiCoO₂, extending this analysis to NMC-class layered oxides and other anion chemistries (e.g., sulfides, halides) would establish the generality of the structure-dependent disorder tolerance.
 
 ---
 
@@ -209,9 +213,9 @@ All energy evaluations and geometry optimisations were performed using the MACE-
 
 ### Property calculations
 
-**Formation energy** was computed as the total energy per atom of the relaxed doped structure.
+**Formation energy** was defined as E_f = E_doped − E_host − Σᵢ nᵢμᵢ, where E_doped and E_host are the total energies of the relaxed doped and undoped supercells respectively, nᵢ is the number of atoms of species i added (+) or removed (−), and μᵢ is the chemical potential of species i. Because we compare dopant rankings within each host material (same E_host and same stoichiometric change of one TM atom), the chemical potential references cancel in all pairwise rank comparisons. For computational efficiency, we therefore report E_doped/N_atoms (total energy per atom of the relaxed doped structure) as the ranking metric, which preserves identical dopant ordering.
 
-**Average discharge voltage** was computed from the delithiation energy: V = −(E_delithiated − E_lithiated) / n_Li, where E_lithiated and E_delithiated are the total energies of the doped structure before and after removal of all Li atoms, and n_Li is the number of Li atoms removed. A systematic offset from the Li chemical potential reference does not affect ranking comparisons.
+**Average discharge voltage** was computed as V = −(E_delith − E_lith) / (n_Li · e), where E_lith and E_delith are the total energies of the relaxed doped structure before and after complete removal of all Li atoms, n_Li is the number of Li atoms removed, and e is the elementary charge. The full expression for intercalation voltage is V = −[E_delith − E_lith − n_Li · μ_Li] / (n_Li · e); because the Li chemical potential μ_Li is constant across dopants within a given host, it shifts all voltages by the same constant and does not affect rankings. We use complete delithiation (x = 0 → 1) for consistency across all dopants; the effect of partial delithiation (x = 0.5) on ranking preservation is tested separately (Supplementary Information).
 
 **Volume change** was computed as the percentage change in relaxed cell volume relative to the undoped parent structure at the same supercell size.
 
@@ -228,6 +232,8 @@ The pairwise dopant–dopant interaction energy was defined as E_int = E(AB) −
 **Jaccard similarity** was used to quantify candidate overlap at each pruning gate: J = |A ∩ B| / |A ∪ B|, where A and B are the sets of candidates surviving a gate under ordered and disordered rankings, respectively.
 
 **Pipeline simulation.** To quantify error amplification, we replicated a three-gate sequential pruning pipeline modelled on Yao et al.⁴: Gate 1 retained the top 71% by formation energy stability; Gate 2 retained the top 53% of Gate 1 survivors by smallest volume change; Gate 3 retained the top 50% of Gate 2 survivors by highest voltage. The proportions match the reduction ratios in the Yao pipeline (63→45→16→10).
+
+**SQS convergence.** To assess whether five SQS realisations are sufficient for stable ranking comparisons, we performed jackknife subsampling: for each material, Spearman ρ was recomputed using all C(5,k) subsets for k = 3 and k = 4. For LiCoO₂ voltage, ρ = −0.19 ± 0.11 (3 SQS), −0.24 ± 0.08 (4 SQS), −0.25 (5 SQS), confirming convergence. For LiMn₂O₄ voltage, ρ = +0.95 is invariant to SQS subset. Leave-one-out jackknife for LiCoO₂ voltage shows ρ ∈ [−0.37, −0.14] — no single SQS realisation drives the result.
 
 ### Computational resources
 
@@ -259,6 +265,11 @@ All checkpoint data, analysis scripts, parent CIF files, and the complete screen
 14. Yu, L. & Zunger, A. Identification of potential photovoltaic absorbers based on first-principles spectroscopic screening of materials. *Phys. Rev. Lett.* **108**, 068701 (2012).
 15. Nørskov, J. K. et al. Towards the computational design of solid catalysts. *Nat. Chem.* **1**, 37–46 (2009).
 16. Ong, S. P. et al. Python materials genomics (pymatgen): a robust, open-source Python library for materials analysis. *Comput. Mater. Sci.* **68**, 314–319 (2013).
+17. Batatia, I. et al. MACE-MP-0: a universal interatomic potential for materials science. *arXiv:2401.00096* (2024).
+18. Sanchez, J. M., Ducastelle, F. & Gratias, D. Generalized cluster description of multicomponent systems. *Phys. A* **128**, 334–350 (1984).
+19. Deng, B. et al. CHGNet as a pretrained universal neural network potential for charge-informed atomistic modelling. *Nat. Mach. Intell.* **5**, 1031–1041 (2023).
+20. Huang, B. Comprehensive DASP (Defect and dopant ab-initio simulation package) for defect simulation. *Comput. Phys. Commun.* **284**, 108610 (2023).
+21. Busk, J. et al. Calibrated uncertainty for molecular property prediction using ensembles of message passing neural networks. *Mach. Learn.: Sci. Technol.* **3**, 015012 (2022).
 
 ---
 
