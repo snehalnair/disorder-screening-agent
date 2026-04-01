@@ -1,0 +1,38 @@
+[
+  {
+    "label": "NN (~2.9 \u00c5)",
+    "sites": [
+      18,
+      20
+    ],
+    "E_int_unrelaxed_meV": -128.4,
+    "E_int_relaxed_meV": 72234.6,
+    "delta_meV": 72363.0,
+    "time_unrelaxed_s": 2.7,
+    "time_relaxed_s": 368.4
+  },
+  {
+    "label": "medium (~5.0 \u00c5)",
+    "sites": [
+      18,
+      28
+    ],
+    "E_int_unrelaxed_meV": 3.8,
+    "E_int_relaxed_meV": 105178.6,
+    "delta_meV": 105174.8,
+    "time_unrelaxed_s": 2.5,
+    "time_relaxed_s": 337.6
+  },
+  {
+    "label": "far (~14.2 \u00c5)",
+    "sites": [
+      18,
+      19
+    ],
+    "E_int_unrelaxed_meV": 0.6,
+    "E_int_relaxed_meV": 130700.3,
+    "delta_meV": 130699.7,
+    "time_unrelaxed_s": 2.5,
+    "time_relaxed_s": 225.5
+  }
+]
