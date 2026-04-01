@@ -42,7 +42,7 @@ We computed formation energy, voltage, and volume change for each dopant in both
 | LiNiO₂ | Layered | 14 | +0.82 [+0.49, +0.95] | **−0.06 [−0.62, +0.54]** | +0.54 [−0.08, +0.89] | — |
 | LiMn₂O₄ | Spinel | 12 | +1.00 [+1.00, +1.00] | +0.95 [+0.72, +1.00] | +0.84 [+0.46, +0.98] | — |
 | SrTiO₃ | Perovskite | 20 | +1.00 [+0.98, +1.00] | — | +0.94 [+0.80, +0.99] | — |
-| CeO₂ | Fluorite | 15 | +1.00 [+1.00, +1.00] | — | +0.94 [+0.80, +0.99] | +0.97 [+0.74, +1.00] |
+| CeO₂ | Fluorite | 20 | +1.00 [+1.00, +1.00] | — | +0.96 [+0.88, +0.99] | +0.97 [+0.74, +1.00] |
 
 ![Figure 1. Spearman ρ heatmap showing disorder sensitivity by material and property. Bold values indicate 95% CI excludes zero. Voltage rankings in layered cathodes (LiCoO₂, LiNiO₂) are destroyed, while formation energy is universally preserved.](figures/fig1_heatmap.png)
 
