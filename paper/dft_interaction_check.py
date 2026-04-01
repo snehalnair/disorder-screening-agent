@@ -8,18 +8,18 @@ Generates 4 QE input files for E_int at the NN distance in LiCoO₂:
 Uses the same 3×3×2 supercell (72 atoms) as the MACE calculation,
 with single-point SCF (no relaxation) to match protocol.
 
-Optimized for Colab single-core: ultrasoft pseudopotentials,
-ecutwfc=35 Ry, Gamma-only k-point.
+Optimized for Colab single-core: PAW pseudopotentials,
+ecutwfc=40 Ry, Gamma-only k-point.
 
 Usage on Colab:
   # 1. Install QE + pseudopotentials
   !apt-get -qq install quantum-espresso
   !pip install -q pymatgen numpy scipy
   !mkdir -p pseudo
-  !wget -q -P pseudo https://pseudopotentials.quantum-espresso.org/upf_files/Li.pbe-s-rrkjus_psl.1.0.0.UPF
-  !wget -q -P pseudo https://pseudopotentials.quantum-espresso.org/upf_files/Co.pbe-spn-rrkjus_psl.0.3.1.UPF
-  !wget -q -P pseudo https://pseudopotentials.quantum-espresso.org/upf_files/O.pbe-n-rrkjus_psl.1.0.0.UPF
-  !wget -q -P pseudo https://pseudopotentials.quantum-espresso.org/upf_files/Al.pbe-n-rrkjus_psl.1.0.0.UPF
+  !wget -q -P pseudo https://pseudopotentials.quantum-espresso.org/upf_files/Li.pbe-s-kjpaw_psl.1.0.0.UPF
+  !wget -q -P pseudo https://pseudopotentials.quantum-espresso.org/upf_files/Co.pbe-spn-kjpaw_psl.0.3.1.UPF
+  !wget -q -P pseudo https://pseudopotentials.quantum-espresso.org/upf_files/O.pbe-n-kjpaw_psl.1.0.0.UPF
+  !wget -q -P pseudo https://pseudopotentials.quantum-espresso.org/upf_files/Al.pbe-n-kjpaw_psl.1.0.0.UPF
 
   # 2. Generate inputs and run
   !python paper/dft_interaction_check.py --generate
@@ -37,8 +37,8 @@ PROJECT_DIR = SCRIPT_DIR.parent
 DATA_DIR = PROJECT_DIR / "data" / "structures"
 
 # ---------- QE parameters (optimized for speed on Colab) ----------
-ECUTWFC = 35.0     # Ry — sufficient for USPP (vs 50 for PAW)
-ECUTRHO = 280.0    # Ry — 8× ecutwfc for ultrasoft
+ECUTWFC = 40.0     # Ry — reduced from 50 for PAW
+ECUTRHO = 320.0    # Ry — 8× ecutwfc for PAW
 CONV_THR = 1.0e-5  # Relaxed but fine for energy differences
 MIXING_BETA = 0.3  # Conservative mixing for spin-polarized metals
 ELECTRON_MAXSTEP = 200
@@ -50,12 +50,12 @@ SUPERCELL = [3, 3, 2]
 # Hubbard U for Co 3d (Materials Project standard)
 HUBBARD_U_CO = 3.32  # eV
 
-# Ultrasoft pseudopotentials (PSlibrary PBE RRKJUS)
+# PAW pseudopotentials (PSlibrary PBE KJPAW — confirmed available)
 PSEUDOS = {
-    "Li": "Li.pbe-s-rrkjus_psl.1.0.0.UPF",
-    "Co": "Co.pbe-spn-rrkjus_psl.0.3.1.UPF",
-    "O":  "O.pbe-n-rrkjus_psl.1.0.0.UPF",
-    "Al": "Al.pbe-n-rrkjus_psl.1.0.0.UPF",
+    "Li": "Li.pbe-s-kjpaw_psl.1.0.0.UPF",
+    "Co": "Co.pbe-spn-kjpaw_psl.0.3.1.UPF",
+    "O":  "O.pbe-n-kjpaw_psl.1.0.0.UPF",
+    "Al": "Al.pbe-n-kjpaw_psl.1.0.0.UPF",
 }
 
 MASSES = {"Li": 6.941, "Co": 58.933, "O": 15.999, "Al": 26.982}
@@ -237,7 +237,7 @@ def generate_inputs():
     print(f"\n  Run script: run_qe.sh")
     print(f"  NN distance: {dist:.3f} Å")
     print(f"  Supercell: {SUPERCELL} = {len(struct)} atoms")
-    print(f"  Pseudopotentials: ultrasoft (RRKJUS)")
+    print(f"  Pseudopotentials: PAW (KJPAW)")
     print(f"  ecutwfc = {ECUTWFC} Ry, ecutrho = {ECUTRHO} Ry")
     print(f"  K-points: Gamma only")
     print(f"  Expected time: ~30-60 min on Colab (serial pw.x)")
@@ -301,7 +301,7 @@ def parse_outputs():
     ratio = E_int_meV / -128.4 if abs(E_int_meV) > 0.1 else 0.0
 
     result = {
-        "method": "DFT PBE+U (QE, USPP, SCF only, Gamma-only)",
+        "method": "DFT PBE+U (QE, PAW, SCF only, Gamma-only)",
         "system": "LiCoO2 3x3x2 supercell",
         "n_atoms": 72,
         "n_co_sites": 18,
