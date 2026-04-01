@@ -697,3 +697,88 @@ Fe + Zr on LiCoO2 with cell relaxation. Key observations:
 ### Other
 19. **Bartel, C.J. et al.** (2019). "New tolerance factor for perovskite stability." *Sci. Adv.* 5, eaav0693. — Bartel tolerance factor.
 20. **Lotfi, S. et al.** (2024). "Challenges in High-Throughput Inorganic Materials Prediction." *PRX Energy* 3, 011002. — 2/3 of GNoME "novel" materials were known disordered phases.
+
+---
+
+## Appendix A: Dopant Site Selection — Ordered vs Disordered
+
+This appendix details the two dopant placement strategies whose property rankings we compare.
+The difference in site *arrangement* — not site *identity* — is the core experimental variable.
+
+### A.1 Common Setup
+
+Both strategies start identically:
+
+1. **Build supercell** from the parent primitive cell (e.g., 4×4×4 → 320 atoms for LiCoO₂).
+2. **Identify target sites** by string-matching `site.species_string == target_species` (e.g., `"Co"`, `"Mn"`, `"Ti"`). All sites of that element are treated equally — no crystallographic site preference is applied.
+3. **Calculate dopant count**: `n_dopant = round(concentration × n_target)` (e.g., round(0.10 × 64) = 6 atoms at 10% on 64 Co sites).
+
+### A.2 Ordered Baseline: Farthest-First Selection
+
+**Function:** `compute_ordered_properties()` in `stages/stage5/property_calculator.py`
+
+The ordered baseline uses a **greedy farthest-first algorithm** to place dopants:
+
+1. Start with the first candidate site.
+2. Add the site that **maximises the minimum distance** to all already-selected sites.
+3. Repeat until `n_dopant` sites are chosen.
+
+**Result:** Dopants are placed as far apart as possible in the supercell. This is the implicit assumption in most screening studies — a single, maximally-dispersed configuration representing the dilute limit where dopant–dopant interactions are negligible.
+
+**Properties:**
+- Deterministic: always produces the same arrangement for a given supercell.
+- Maximises dopant separation → suppresses clustering and short-range disorder effects.
+- One structure per dopant → one property value per dopant.
+
+### A.3 Disordered: SQS (Special Quasirandom Structures)
+
+**Function:** `generate_sqs()` in `stages/stage5/sqs_generator.py`
+
+SQS structures approximate a truly random substitutional alloy in a periodic supercell (Zunger et al., 1990).
+
+**Primary method — pymatgen SQSTransformation (ATAT mcsqs):**
+
+1. Create a disordered supercell with mixed-occupancy target sites: `{target: 1−c, dopant: c}`.
+2. Call `SQSTransformation` which uses the ATAT `mcsqs` algorithm to optimise pair-correlation functions.
+3. The resulting structure minimises the deviation of pair correlations from the ideal random alloy across multiple coordination shells.
+4. Generate `n_realisations` (default 8) independent SQS structures.
+
+**Fallback method — random sampling with pair-correlation scoring:**
+
+If `SQSTransformation` is unavailable or fails:
+
+1. For each realisation, try 1,000 random selections of `n_dopant` sites from the target indices.
+2. Score each trial by L² deviation from ideal random-alloy pair statistics:
+   - Ideal: P(dopant–dopant) = c², P(dopant–host) = 2c(1−c)
+   - Actual: counted from nearest-neighbour pairs (cutoff 5.0 Å)
+3. Keep the trial with the lowest deviation score.
+
+**Properties:**
+- Stochastic: each realisation has a different dopant arrangement.
+- Allows dopant clustering — some realisations will have nearby dopants, capturing short-range disorder effects and local strain.
+- Multiple structures per dopant → mean ± std property values → statistical measure of arrangement sensitivity.
+
+### A.4 The Experimental Variable
+
+| Aspect | Ordered (baseline) | Disordered (SQS) |
+|--------|-------------------|-------------------|
+| **Site identity** | All `target_species` sites | Same |
+| **Dopant count** | `round(c × n_target)` | Same |
+| **Arrangement strategy** | Farthest-first (max separation) | SQS pair-correlation optimisation |
+| **Dopant clustering** | Forbidden by construction | Allowed (statistically representative) |
+| **Physics captured** | Dilute limit, long-range only | Short-range disorder, local strain, clustering |
+| **Realisations** | 1 | 8 (mean ± std) |
+| **Deterministic?** | Yes | No (stochastic) |
+
+The **Spearman ρ** between ordered and disordered property rankings measures whether the idealised farthest-first assumption preserves the correct dopant ranking. The **arrangement sensitivity** (b_proxy = |P_ordered − P_disordered_mean|) quantifies the magnitude of the disorder effect per dopant.
+
+### A.5 Why This Comparison Matters
+
+Most screening studies implicitly use something equivalent to farthest-first: a single "reasonable" dopant arrangement, often hand-placed or using the smallest unique supercell. If farthest-first and SQS-averaged rankings agree (ρ ≈ 1), the ordered assumption is safe. If they disagree (ρ ≪ 1), screening studies for that material may be recommending the wrong dopants.
+
+Preliminary results show this is structure-dependent:
+- **LiCoO₂ voltage:** ρ = −0.07 → ordered ranking is essentially uncorrelated with disordered ranking
+- **LiMn₂O₄ voltage:** ρ = +0.99 → ordered ranking is preserved
+- **Formation energy:** ρ > 0.88 in both → robust to disorder
+
+This means the answer to "does disorder matter?" depends on *which property* and *which crystal structure* — precisely what our systematic study quantifies.
