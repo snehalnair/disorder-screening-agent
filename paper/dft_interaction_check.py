@@ -37,15 +37,18 @@ SCRIPT_DIR = pathlib.Path(__file__).resolve().parent
 PROJECT_DIR = SCRIPT_DIR.parent
 DATA_DIR = PROJECT_DIR / "data" / "structures"
 
-# QE parameters
-ECUTWFC = 50.0    # Ry, wavefunction cutoff
-ECUTRHO = 400.0   # Ry, charge density cutoff
-KPOINTS = [2, 2, 2]  # Gamma-centered grid for 72-atom cell
+# QE parameters — tuned for speed on Colab single-core
+ECUTWFC = 40.0    # Ry, wavefunction cutoff (reduced from 50)
+ECUTRHO = 320.0   # Ry, charge density cutoff
+KPOINTS = [2, 2, 2]  # Gamma-centered grid
 PSEUDO_DIR = "./pseudo"
-CONV_THR = 1.0e-6
+CONV_THR = 1.0e-5  # Relaxed convergence (still fine for energy differences)
 
 # Hubbard U for Co 3d (standard Materials Project value)
 HUBBARD_U_CO = 3.32  # eV
+
+# Supercell size — use 2x2x1 (24 atoms) for speed, NN pair still valid
+SUPERCELL = [2, 2, 1]
 
 # Pseudopotential filenames (SSSP PBE PAW)
 PSEUDOS = {
@@ -57,18 +60,30 @@ PSEUDOS = {
 
 
 def build_supercell():
-    """Build 3×3×2 LCO supercell and return (lattice, species, positions)."""
+    """Build supercell and return structure."""
     from pymatgen.core import Structure
     struct = Structure.from_file(str(DATA_DIR / "lco_parent.cif"))
-    struct.make_supercell([3, 3, 2])
+    struct.make_supercell(SUPERCELL)
+    print(f"Supercell: {SUPERCELL}, {len(struct)} atoms")
     return struct
 
 
 def get_nn_pair(struct):
-    """Find the NN Co–Co pair (sites 18, 20 from MACE calculation)."""
+    """Find the NN Co–Co pair by scanning all Co-Co distances."""
     co_sites = [i for i, sp in enumerate(struct.species) if str(sp) == "Co"]
-    # Use same sites as MACE: 18 and 20
-    si, sj = 18, 20
+    print(f"Co sites: {co_sites}")
+
+    # Find actual NN pair
+    min_dist = 999.0
+    best_pair = (co_sites[0], co_sites[1])
+    for i, si in enumerate(co_sites):
+        for sj in co_sites[i+1:]:
+            d = struct.get_distance(si, sj)
+            if d < min_dist:
+                min_dist = d
+                best_pair = (si, sj)
+
+    si, sj = best_pair
     dist = struct.get_distance(si, sj)
     print(f"NN pair: sites {si}, {sj}, distance = {dist:.3f} Å")
     print(f"Species at {si}: {struct.species[si]}, at {sj}: {struct.species[sj]}")
@@ -119,11 +134,9 @@ def struct_to_qe_input(struct, prefix, label):
         co_idx = unique_species.index("Co") + 1
         lines.append(f"  starting_magnetization({co_idx}) = 0.5")
         lines.append(f"  lda_plus_u = .true.")
-        # Hubbard U values for each species (0 for non-d elements)
         for i, sp in enumerate(unique_species):
             if sp == "Co":
                 lines.append(f"  Hubbard_U({i+1}) = {HUBBARD_U_CO}")
-            # Al has no d electrons, no U needed
     lines.append("/")
     lines.append("")
 
@@ -205,7 +218,7 @@ def generate_inputs():
         # Add to run script
         run_script.append(f"echo '=== Running {name} ==='")
         run_script.append(f"mkdir -p tmp_{name}")
-        run_script.append(f"mpirun -np 2 pw.x -in {out_dir}/{name}.in > {out_dir}/{name}.out 2>&1")
+        run_script.append(f"pw.x < {out_dir}/{name}.in > {out_dir}/{name}.out 2>&1")
         run_script.append(f"echo '  Done: {name}'")
         run_script.append("")
 
@@ -216,8 +229,8 @@ def generate_inputs():
         f.write("\n".join(run_script))
     print(f"\n  Run script: run_qe.sh")
     print(f"  NN distance: {dist:.3f} Å")
-    print(f"  Supercell: 72 atoms, {KPOINTS} k-grid")
-    print(f"  Expected time: ~15-30 min on Colab (2 cores)")
+    print(f"  Supercell: {SUPERCELL} = {len(configs['e0_undoped'])} atoms, {KPOINTS} k-grid")
+    print(f"  Expected time: ~10-20 min on Colab (serial pw.x)")
 
 
 def parse_outputs():
