@@ -113,6 +113,27 @@ This amplification effect is not specific to our system. It is a mathematical co
 
 Our finding suggests that ranking-sensitive gates (those applied to properties with low disorder tolerance, such as voltage in layered systems) should be replaced by continuous scoring functions that propagate uncertainty, or that disorder-aware simulations should be applied before any hard-threshold pruning.
 
+### From critique to correction: a hybrid screening protocol
+
+Rather than simply demonstrating that ordered screening fails, we propose and test a practical alternative. The key insight is that formation energy is safe to compute with ordered cells (ρ ≥ 0.76), so it can serve as a cheap pre-filter before the more expensive disorder-aware simulation.
+
+We tested several hybrid strategies that combine ordered pre-filtering with targeted SQS simulation (Table 4). The most effective approach replaces sequential hard-threshold gates with a single ordered Ef pre-filter followed by continuous SQS-based scoring of survivors: ordered Ef selects the top 71% of dopants (Gate 1, which is robust), then all survivors are scored by a weighted combination of SQS voltage and SQS volume change — without further hard gates.
+
+**Table 4. Hybrid pipeline strategies for LiCoO₂ (n = 21 dopants, selecting top 4).**
+
+| Strategy | Description | Finals | Jaccard vs full SQS | Cost (sims) | Savings |
+|---|---|---|---|---|---|
+| Pure ordered | All gates use ordered values | Al, Ge, V, Zr | 0.14 | 21 | baseline |
+| Full SQS | All properties from 5 SQS | Cr, Ge, Ni, Rh | 1.00 | 105 | — |
+| **Hybrid F** | **Ordered Ef filter → SQS continuous scoring** | **Cr, Ge, Ni, Ti** | **0.60** | **96** | **9%** |
+| Hybrid A | Ordered Ef+Vol gates, SQS voltage only | Cr, Fe, Ge, Ta | 0.33 | 61 | 42% |
+
+Strategy F achieves Jaccard = 0.60 with the full SQS gold standard — recovering 3 of 4 correct finalists (Cr, Ge, Ni) while substituting Ti for Rh — compared to 0.14 for the pure ordered approach. The key design principle is: **use ordered cells only for properties that are disorder-robust (formation energy), and deploy SQS for all disorder-sensitive properties (voltage, volume), avoiding hard intermediate gates that amplify errors.**
+
+### Ordered voltages sit in the tail of the disordered distribution
+
+For 7 of 21 LiCoO₂ dopants, the ordered voltage value lies in the statistical tail (|z| > 1.5) of the SQS distribution (Fig. 3). Notably, the five dopants with the most negative ordered voltage (Ga, Al, Cu, Sn, Sb) all have z-scores below −1.9, meaning their ordered voltage is more extreme than any of the 5 SQS realisations. Conversely, Ti — which ranks lowest in ordered voltage — has z = +2.6, sitting at the opposite tail. This asymmetry explains why the ordered voltage ranking has no predictive power: the ordered configuration systematically overpredicts voltage for some dopants and underpredicts it for others, with no consistent direction.
+
 ### Cost and accessibility
 
 A key enabler of this work is the MACE-MP-0 universal MLIP, which reduces the per-dopant simulation cost from hours (DFT) to minutes (MLIP), making disorder-aware screening with multiple SQS realisations computationally practical. The full LiCoO₂ screening (21 dopants × 5 SQS + 21 ordered = 126 simulations in 256-atom supercells) completed in approximately 2 hours on a single A100 GPU. The equivalent DFT calculation — 126 relaxations of 256-atom cells — would require approximately 6 months of continuous HPC time.
