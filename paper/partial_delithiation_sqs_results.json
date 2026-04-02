@@ -1,0 +1,301 @@
+{
+  "material": "LiCoO2",
+  "delithiation_fraction": 0.5,
+  "n_sqs": 5,
+  "n_li_seeds": 3,
+  "device": "cuda",
+  "dopant_results": {
+    "Al": {
+      "voltage_partial_ordered": -1.7672307650343493,
+      "voltage_partial_ordered_std": 0.4431087554419452,
+      "voltage_partial_disordered_mean": -4.191820787668318,
+      "voltage_partial_disordered_std": 0.19315405227110644,
+      "voltage_partial_sqs_values": [
+        -4.114985227795192,
+        -4.2184336937284845,
+        -4.168823108328714,
+        -3.9644115423100597,
+        -4.492450366179138
+      ],
+      "n_sqs_converged": 5,
+      "time_s": 556.4345543384552
+    },
+    "Cr": {
+      "voltage_partial_ordered": -1.4131620211995697,
+      "voltage_partial_ordered_std": 0.2408478659330495,
+      "voltage_partial_disordered_mean": -4.174743927183356,
+      "voltage_partial_disordered_std": 0.23518273618276195,
+      "voltage_partial_sqs_values": [
+        -3.8577837591866078,
+        -4.32406979981162,
+        -4.246142762814354,
+        -4.012204011005228,
+        -4.433519303098971
+      ],
+      "n_sqs_converged": 5,
+      "time_s": 487.5259974002838
+    },
+    "Cu": {
+      "voltage_partial_ordered": -4.280556702800523,
+      "voltage_partial_ordered_std": 0.12725886865376448,
+      "voltage_partial_disordered_mean": -3.472166519627622,
+      "voltage_partial_disordered_std": 0.691692368522989,
+      "voltage_partial_sqs_values": [
+        -2.795214007950129,
+        -4.455449583702032,
+        -3.118961015920524,
+        -3.9215090816285976,
+        -3.0696989089368274
+      ],
+      "n_sqs_converged": 5,
+      "time_s": 505.5749628543854
+    },
+    "Fe": {
+      "voltage_partial_ordered": -2.136364586138023,
+      "voltage_partial_ordered_std": 0.2524431577129076,
+      "voltage_partial_disordered_mean": -3.4873261311716233,
+      "voltage_partial_disordered_std": 0.6653204127191497,
+      "voltage_partial_sqs_values": [
+        -3.8297418212826173,
+        -4.185984281335718,
+        -3.5331046372802444,
+        -3.478929680358253,
+        -2.4088702356012863
+      ],
+      "n_sqs_converged": 5,
+      "time_s": 545.8901655673981
+    },
+    "Ga": {
+      "voltage_partial_ordered": -1.861832050802331,
+      "voltage_partial_ordered_std": 0.10760606555454293,
+      "voltage_partial_disordered_mean": -3.615836598826508,
+      "voltage_partial_disordered_std": 0.857203398402466,
+      "voltage_partial_sqs_values": [
+        -2.7111800986916514,
+        -4.2967511527266895,
+        -4.678357099437255,
+        -2.899447232309447,
+        -3.493447410967498
+      ],
+      "n_sqs_converged": 5,
+      "time_s": 465.9562277793884
+    },
+    "Ge": {
+      "voltage_partial_ordered": -1.3679937661143,
+      "voltage_partial_ordered_std": 0.14324355705198408,
+      "voltage_partial_disordered_mean": -3.6765672237278317,
+      "voltage_partial_disordered_std": 0.8224661075693778,
+      "voltage_partial_sqs_values": [
+        -3.116823615840259,
+        -4.769035509906836,
+        -3.1819131946373918,
+        -2.9670267094789495,
+        -4.3480370887757225
+      ],
+      "n_sqs_converged": 5,
+      "time_s": 490.57844376564026
+    },
+    "Ir": {
+      "error": "all voltage seeds diverged (ordered)"
+    },
+    "Mg": {
+      "voltage_partial_ordered": -1.4568582953642872,
+      "voltage_partial_ordered_std": 0.20153800284881984,
+      "voltage_partial_disordered_mean": -4.052324592372441,
+      "voltage_partial_disordered_std": 0.3075777593967713,
+      "voltage_partial_sqs_values": [
+        -3.6959617213745486,
+        -4.38507168860823,
+        -4.365858199116562,
+        -3.9209981599113948,
+        -3.893733192851471
+      ],
+      "n_sqs_converged": 5,
+      "time_s": 565.8478994369507
+    },
+    "Mn": {
+      "voltage_partial_ordered": -4.33686851747031,
+      "voltage_partial_ordered_std": 0.070447466425772,
+      "voltage_partial_disordered_mean": -3.835370131328925,
+      "voltage_partial_disordered_std": 0.2961670101976724,
+      "voltage_partial_sqs_values": [
+        -3.86235642038942,
+        -4.101230417621307,
+        -4.13295512872692,
+        -3.6312259880870443,
+        -3.449082701819935
+      ],
+      "n_sqs_converged": 5,
+      "time_s": 473.1232602596283
+    },
+    "Mo": {
+      "voltage_partial_ordered": -1.5193159531125768,
+      "voltage_partial_ordered_std": 0.18185140359801516,
+      "voltage_partial_disordered_mean": -2.569196789838462,
+      "voltage_partial_disordered_std": 0.09240467224073776,
+      "voltage_partial_sqs_values": [
+        -2.599765917948332,
+        -2.4683046456367936,
+        -2.5268034440561733,
+        -2.681913151712548
+      ],
+      "n_sqs_converged": 4,
+      "time_s": 479.316379070282
+    },
+    "Nb": {
+      "voltage_partial_ordered": -2.2078030155481003,
+      "voltage_partial_ordered_std": 0.3882141055461846,
+      "voltage_partial_disordered_mean": -2.2278236761671684,
+      "voltage_partial_disordered_std": 0.6558319511143018,
+      "voltage_partial_sqs_values": [
+        -2.0798754374901653,
+        -1.904449372855914,
+        -1.892509675496323,
+        -3.391482606680976,
+        -1.8708012883124638
+      ],
+      "n_sqs_converged": 5,
+      "time_s": 499.188738822937
+    },
+    "Ni": {
+      "voltage_partial_ordered": -1.3891762051844787,
+      "voltage_partial_ordered_std": 0.3810348607011674,
+      "voltage_partial_disordered_mean": -4.746175388777257,
+      "voltage_partial_disordered_std": 0.09381057151689771,
+      "voltage_partial_sqs_values": [
+        -4.761273216438446,
+        -4.590153763509188,
+        -4.741444909151773,
+        -4.8182815258666905,
+        -4.8197235289201865
+      ],
+      "n_sqs_converged": 5,
+      "time_s": 505.5609178543091
+    },
+    "Rh": {
+      "error": "all voltage seeds diverged (ordered)"
+    },
+    "Ru": {
+      "voltage_partial_ordered": -4.005558163672253,
+      "voltage_partial_ordered_std": 0.06449063022432833,
+      "voltage_partial_disordered_mean": -3.774362133927923,
+      "voltage_partial_disordered_std": 0.9333087369345767,
+      "voltage_partial_sqs_values": [
+        -4.399384497856434,
+        -4.043165267788953,
+        -4.006078102164009,
+        -4.291924365274299,
+        -2.1312584365559224
+      ],
+      "n_sqs_converged": 5,
+      "time_s": 596.9997317790985
+    },
+    "Sb": {
+      "voltage_partial_ordered": -1.9862590044869304,
+      "voltage_partial_ordered_std": 0.03078066926895427,
+      "voltage_partial_disordered_mean": -3.0813710512819306,
+      "voltage_partial_disordered_std": 2.1763710782622776,
+      "voltage_partial_sqs_values": [
+        0.806695854125499,
+        -4.116266146935039,
+        -4.198846587634048,
+        -3.9090955655265156,
+        -3.9893428104395503
+      ],
+      "n_sqs_converged": 5,
+      "time_s": 488.2844309806824
+    },
+    "Sc": {
+      "voltage_partial_ordered": -3.745291955678649,
+      "voltage_partial_ordered_std": 0.10241711449765126,
+      "voltage_partial_disordered_mean": -3.2811504179797,
+      "voltage_partial_disordered_std": 1.5464321861205121,
+      "voltage_partial_sqs_values": [
+        -4.6307838865984925,
+        -4.358330870372935,
+        -4.222323401670377,
+        -1.7122815027394722,
+        -1.4820324285172202
+      ],
+      "n_sqs_converged": 5,
+      "time_s": 506.8810999393463
+    },
+    "Sn": {
+      "voltage_partial_ordered": -1.9376175278443404,
+      "voltage_partial_ordered_std": 0.06253602360321521,
+      "voltage_partial_disordered_mean": -3.1843951879895607,
+      "voltage_partial_disordered_std": 1.4246251912985313,
+      "voltage_partial_sqs_values": [
+        -2.3078948535399806,
+        -4.828202201018276,
+        -2.4170885094104273
+      ],
+      "n_sqs_converged": 3,
+      "time_s": 578.3408689498901
+    },
+    "Ta": {
+      "voltage_partial_ordered": -1.9294835780989323,
+      "voltage_partial_ordered_std": 0.12528160865418086,
+      "voltage_partial_disordered_mean": -3.8575706968300802,
+      "voltage_partial_disordered_std": 0.4307109283847653,
+      "voltage_partial_sqs_values": [
+        -4.3908739980858895,
+        -3.5619699209389255,
+        -4.01844451022249,
+        -3.4589943580730154
+      ],
+      "n_sqs_converged": 4,
+      "time_s": 539.4279453754425
+    },
+    "Ti": {
+      "voltage_partial_ordered": -3.9635392215899063,
+      "voltage_partial_ordered_std": 0.04098969152568438,
+      "voltage_partial_disordered_mean": -4.246188979756962,
+      "voltage_partial_disordered_std": 0.12359569059430615,
+      "voltage_partial_sqs_values": [
+        -4.401513451079518,
+        -4.273842746369938,
+        -4.216656109761608,
+        -4.060911641687874,
+        -4.278020949885872
+      ],
+      "n_sqs_converged": 5,
+      "time_s": 534.1561901569366
+    },
+    "V": {
+      "voltage_partial_ordered": -1.385419251368346,
+      "voltage_partial_ordered_std": 0.1455912607880487,
+      "voltage_partial_disordered_mean": -3.851111011890441,
+      "voltage_partial_disordered_std": 0.47592841409380077,
+      "voltage_partial_sqs_values": [
+        -4.020565447342068,
+        -3.743593633044982,
+        -4.553902070814779,
+        -3.668041724595873,
+        -3.269452183654506
+      ],
+      "n_sqs_converged": 5,
+      "time_s": 578.5642457008362
+    },
+    "Zr": {
+      "voltage_partial_ordered": -1.8949465127986231,
+      "voltage_partial_ordered_std": 0.08827213268088221,
+      "voltage_partial_disordered_mean": -3.5390117753544565,
+      "voltage_partial_disordered_std": 0.6207594938640266,
+      "voltage_partial_sqs_values": [
+        -3.307873468797046,
+        -3.0729574802818878,
+        -2.915472132826237,
+        -4.26926837601139,
+        -4.129487418855722
+      ],
+      "n_sqs_converged": 5,
+      "time_s": 529.9376344680786
+    }
+  },
+  "voltage_partial_rho": -0.3192982456140351,
+  "voltage_partial_p": 0.1826959462168637,
+  "n_dopants_ranked": 19,
+  "voltage_full_rho": NaN,
+  "voltage_full_p": NaN
+}

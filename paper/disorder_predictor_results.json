@@ -2,20 +2,20 @@
   "risk_formula": "R = property_scope \u00d7 sublattice_anisotropy + 0.3 \u00d7 (n_TM - 1)",
   "risk_threshold": 1.0,
   "rho_threshold": 0.5,
-  "n_observations": 16,
-  "accuracy": 0.9375,
+  "n_observations": 26,
+  "accuracy": 0.8461538461538461,
   "specificity": 1.0,
   "precision_safe": 1.0,
-  "recall_safe": 0.9166666666666666,
+  "recall_safe": 0.7647058823529411,
   "false_safe": 0,
-  "false_unsafe": 1,
-  "risk_rho_correlation": -0.6953126747297294,
-  "risk_rho_p_value": 0.0027864934049537564,
+  "false_unsafe": 4,
+  "risk_rho_correlation": -0.6764980139018248,
+  "risk_rho_p_value": 0.0003936675289579443,
   "confusion": {
-    "TP": 11,
-    "TN": 4,
+    "TP": 16,
+    "TN": 6,
     "FP": 0,
-    "FN": 1
+    "FN": 4
   },
   "structural_descriptors": {
     "LiCoO2": {
@@ -52,6 +52,24 @@
       "anisotropy": 1.0,
       "nn_tm_dist": 3.826,
       "nn_count": 12,
+      "n_tm": 1
+    },
+    "LiFePO4": {
+      "anisotropy": 1.21,
+      "nn_tm_dist": 3.87,
+      "nn_count": 4,
+      "n_tm": 1
+    },
+    "NASICON": {
+      "anisotropy": 1.15,
+      "nn_tm_dist": 4.42,
+      "nn_count": 6,
+      "n_tm": 1
+    },
+    "NaCoO2": {
+      "anisotropy": 1.9,
+      "nn_tm_dist": 2.85,
+      "nn_count": 6,
       "n_tm": 1
     }
   },
@@ -214,6 +232,116 @@
       "rho": 0.85,
       "actual": "safe",
       "predicted": "safe",
+      "correct": true
+    },
+    {
+      "name": "LiFePO_4 E_f",
+      "material": "LiFePO4",
+      "property": "Ef",
+      "risk_score": 0.0,
+      "rho": 1.0,
+      "actual": "safe",
+      "predicted": "safe",
+      "correct": true
+    },
+    {
+      "name": "LiFePO_4 V",
+      "material": "LiFePO4",
+      "property": "voltage",
+      "risk_score": 1.21,
+      "rho": 0.99,
+      "actual": "safe",
+      "predicted": "unsafe",
+      "correct": false
+    },
+    {
+      "name": "LiFePO_4 \\DeltaV",
+      "material": "LiFePO4",
+      "property": "dV",
+      "risk_score": 1.21,
+      "rho": 0.79,
+      "actual": "safe",
+      "predicted": "unsafe",
+      "correct": false
+    },
+    {
+      "name": "NASICON E_f",
+      "material": "NASICON",
+      "property": "Ef",
+      "risk_score": 0.0,
+      "rho": 0.72,
+      "actual": "safe",
+      "predicted": "safe",
+      "correct": true
+    },
+    {
+      "name": "NASICON V",
+      "material": "NASICON",
+      "property": "voltage",
+      "risk_score": 1.15,
+      "rho": 0.77,
+      "actual": "safe",
+      "predicted": "unsafe",
+      "correct": false
+    },
+    {
+      "name": "NASICON \\DeltaV",
+      "material": "NASICON",
+      "property": "dV",
+      "risk_score": 1.15,
+      "rho": -0.04,
+      "actual": "unsafe",
+      "predicted": "unsafe",
+      "correct": true
+    },
+    {
+      "name": "NaCoO_2 E_f",
+      "material": "NaCoO2",
+      "property": "Ef",
+      "risk_score": 0.0,
+      "rho": 0.79,
+      "actual": "safe",
+      "predicted": "safe",
+      "correct": true
+    },
+    {
+      "name": "NaCoO_2 V",
+      "material": "NaCoO2",
+      "property": "voltage",
+      "risk_score": 1.9,
+      "rho": 0.23,
+      "actual": "unsafe",
+      "predicted": "unsafe",
+      "correct": true
+    },
+    {
+      "name": "NaCoO_2 \\DeltaV",
+      "material": "NaCoO2",
+      "property": "dV",
+      "risk_score": 1.9,
+      "rho": -0.01,
+      "actual": "unsafe",
+      "predicted": "unsafe",
+      "correct": true
+    },
+    {
+      "name": "LiCoO_2 V(x=0.5)",
+      "material": "LiCoO2",
+      "property": "V_x05",
+      "risk_score": 1.94,
+      "rho": -0.32,
+      "actual": "unsafe",
+      "predicted": "unsafe",
+      "correct": true
+    },
+    {
+      "name": "LiCoO_2 V(x=0.25)",
+      "material": "LiCoO2",
+      "property": "V_x025",
+      "risk_score": 1.94,
+      "rho": -0.07,
+      "actual": "unsafe",
+      "predicted": "unsafe",
       "correct": true
     }
   ]

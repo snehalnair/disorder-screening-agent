@@ -6,6 +6,13 @@ langchain-anthropic>=0.3.0
 # Materials science
 pymatgen>=2024.1.0
 smact>=2.7.0
+ase>=3.22.0
+mace-torch>=0.3.0
+
+# Numerical / plotting
+numpy>=1.24.0
+scipy>=1.10.0
+matplotlib>=3.7.0
 
 # Config + utilities
 pyyaml>=6.0.0

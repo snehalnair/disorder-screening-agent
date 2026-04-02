@@ -99,11 +99,30 @@ STRUCTURE_DATA = {
         "anisotropy": 1.00,
         "n_tm": 1,
     },
+    "LiFePO4": {
+        "structure": "olivine Pnma",
+        "a": 10.33, "b": 6.01, "c": 4.69,
+        "nn_tm_dist": 3.87,        # Fe-Fe NN
+        "interlayer_dist": 4.69,    # next shell
+        "nn_count": 4,
+        "anisotropy": 1.21,
+        "n_tm": 1,
+    },
+    "NASICON": {
+        "structure": "NASICON R-3c",
+        "a": 8.73, "c": 21.85,
+        "nn_tm_dist": 4.42,        # V-V NN
+        "interlayer_dist": 5.10,    # next shell
+        "nn_count": 6,
+        "anisotropy": 1.15,
+        "n_tm": 1,
+    },
 }
 
 # ── Dataset ──────────────────────────────────────────────────────────────
 # (material, property, property_scope, rho)
 OBSERVATIONS = [
+    # Original 5 materials
     ("LiCoO2",  "Ef",      0,  0.76),
     ("LiCoO2",  "voltage", 1, -0.25),
     ("LiCoO2",  "dV",      1,  0.09),
@@ -120,6 +139,16 @@ OBSERVATIONS = [
     ("CeO2",    "Ef",      0,  1.00),
     ("CeO2",    "dV",      1,  0.96),
     ("CeO2",    "E_Ovac",  0,  0.85),
+    # Out-of-sample: LiFePO4 (olivine)
+    ("LiFePO4", "Ef",      0,  1.00),
+    ("LiFePO4", "voltage", 1,  0.99),
+    ("LiFePO4", "dV",      1,  0.79),
+    # Out-of-sample: NASICON Na3V2(PO4)3
+    ("NASICON",  "Ef",      0,  0.72),
+    ("NASICON",  "voltage", 1,  0.77),
+    ("NASICON",  "dV",      1, -0.04),
+    # Partial delithiation (LiCoO2 at x=0.5)
+    ("LiCoO2",  "V_x05",   1, -0.32),
 ]
 
 RHO_THRESHOLD = 0.50
@@ -130,6 +159,7 @@ PROP_LABELS = {
     "voltage": "V",
     "dV": "$\\Delta$V",
     "E_Ovac": "E$_{\\mathrm{Ovac}}$",
+    "V_x05": "V(x=0.5)",
 }
 
 MAT_LABELS = {
@@ -139,6 +169,8 @@ MAT_LABELS = {
     "LiMn2O4": "LiMn$_2$O$_4$",
     "SrTiO3": "SrTiO$_3$",
     "CeO2": "CeO$_2$",
+    "LiFePO4": "LiFePO$_4$",
+    "NASICON": "NASICON",
 }
 
 
