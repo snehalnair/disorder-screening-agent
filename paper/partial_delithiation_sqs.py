@@ -111,8 +111,12 @@ def get_calc(device="cpu"):
     return calc
 
 
-def build_ordered_structure(dopant, supercell=(4, 4, 4)):
-    """Build ordered doped LiCoO₂ supercell from parent CIF."""
+def build_ordered_structure(dopant, supercell=(3, 3, 2), n_dopant=2):
+    """Build ordered doped LiCoO₂ supercell from parent CIF.
+
+    Uses farthest-first placement for n_dopant substitutions (maximises
+    dopant–dopant distance = ordered limit).
+    """
     from pymatgen.core import Structure
     from pymatgen.io.ase import AseAtomsAdaptor
 
@@ -123,18 +127,31 @@ def build_ordered_structure(dopant, supercell=(4, 4, 4)):
     struct = Structure.from_file(str(cif_path))
     struct.make_supercell(list(supercell))
 
-    # Replace one Co with dopant (site 0 = ordered)
     co_sites = [i for i, sp in enumerate(struct.species) if str(sp) == "Co"]
     if not co_sites:
         raise ValueError("No Co sites found in supercell")
 
-    struct.replace(co_sites[0], dopant)
+    # Farthest-first placement
+    chosen = [co_sites[0]]
+    for _ in range(n_dopant - 1):
+        best_site, best_min_dist = None, -1
+        for s in co_sites:
+            if s in chosen:
+                continue
+            min_d = min(struct.get_distance(s, c) for c in chosen)
+            if min_d > best_min_dist:
+                best_min_dist = min_d
+                best_site = s
+        chosen.append(best_site)
+
+    for s in chosen:
+        struct.replace(s, dopant)
 
     atoms = AseAtomsAdaptor.get_atoms(struct)
     return atoms, struct
 
 
-def build_sqs_structures(dopant, n_realisations=5, supercell=(4, 4, 4)):
+def build_sqs_structures(dopant, n_realisations=5, supercell=(3, 3, 2), n_dopant=2):
     """Generate SQS doped LiCoO₂ structures."""
     from pymatgen.core import Structure
 
@@ -149,7 +166,7 @@ def build_sqs_structures(dopant, n_realisations=5, supercell=(4, 4, 4)):
     parent_prim = Structure.from_file(str(cif_path))
     co_sites = [i for i, sp in enumerate(struct.species) if str(sp) == "Co"]
     n_co = len(co_sites)
-    conc = 1.0 / n_co  # single dopant
+    conc = n_dopant / n_co  # ~11% for 2/18
 
     try:
         sqs_list = generate_sqs(
@@ -163,14 +180,14 @@ def build_sqs_structures(dopant, n_realisations=5, supercell=(4, 4, 4)):
         )
     except Exception as e:
         print(f"    SQS generation failed ({e}), using random placement fallback")
-        sqs_list = _random_sqs_fallback(struct, dopant, co_sites, n_realisations)
+        sqs_list = _random_sqs_fallback(struct, dopant, co_sites, n_realisations, n_dopant)
 
     from pymatgen.io.ase import AseAtomsAdaptor
     adaptor = AseAtomsAdaptor()
     return [adaptor.get_atoms(s) for s in sqs_list]
 
 
-def _random_sqs_fallback(struct, dopant, co_sites, n_realisations):
+def _random_sqs_fallback(struct, dopant, co_sites, n_realisations, n_dopant=2):
     """Fallback: random dopant placement if SQS generator fails."""
     import random as rng
     from pymatgen.core import Structure
@@ -179,8 +196,9 @@ def _random_sqs_fallback(struct, dopant, co_sites, n_realisations):
     for seed in range(n_realisations):
         s = struct.copy()
         rng.seed(seed + 42)
-        site = rng.choice(co_sites)
-        s.replace(site, dopant)
+        sites = rng.sample(co_sites, n_dopant)
+        for site in sites:
+            s.replace(site, dopant)
         structures.append(s)
     return structures
 
@@ -331,6 +349,11 @@ def main():
             v_ord, v_ord_std = compute_voltage_partial(
                 atoms_ord_relax, calc, args.fraction, N_LI_SEEDS
             )
+            if v_ord is None:
+                print(f"    Ordered V_partial: ALL SEEDS DIVERGED — skipping dopant")
+                results["dopant_results"][dopant] = {"error": "all voltage seeds diverged (ordered)"}
+                save_checkpoint(results)
+                continue
             print(f"    Ordered V_partial: {v_ord:.4f} +/- {v_ord_std:.4f}")
 
             # ── SQS structures ──
@@ -347,14 +370,23 @@ def main():
                 v_sqs, v_sqs_std = compute_voltage_partial(
                     sqs_relax, calc, args.fraction, N_LI_SEEDS
                 )
-                sqs_voltages.append(float(v_sqs))
-                print(f"    SQS {idx+1} V_partial: {v_sqs:.4f}")
+                if v_sqs is not None:
+                    sqs_voltages.append(float(v_sqs))
+                    print(f"    SQS {idx+1} V_partial: {v_sqs:.4f}")
+                else:
+                    print(f"    SQS {idx+1} V_partial: ALL SEEDS DIVERGED")
+
+            if not sqs_voltages:
+                print(f"  No valid SQS voltages — skipping dopant")
+                results["dopant_results"][dopant] = {"error": "all SQS voltage seeds diverged"}
+                save_checkpoint(results)
+                continue
 
             results["dopant_results"][dopant] = {
                 "voltage_partial_ordered": float(v_ord),
                 "voltage_partial_ordered_std": float(v_ord_std),
                 "voltage_partial_disordered_mean": float(np.mean(sqs_voltages)),
-                "voltage_partial_disordered_std": float(np.std(sqs_voltages)),
+                "voltage_partial_disordered_std": float(np.std(sqs_voltages, ddof=1)) if len(sqs_voltages) > 1 else 0.0,
                 "voltage_partial_sqs_values": [float(v) for v in sqs_voltages],
                 "n_sqs_converged": len(sqs_voltages),
                 "time_s": float(time.time() - t0),
