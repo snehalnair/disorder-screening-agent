@@ -29,9 +29,13 @@ import os
 import pathlib
 import time
 import sys
+import warnings
 
 import numpy as np
 from scipy import stats
+
+# Suppress harmless logm precision warnings from FrechetCellFilter
+warnings.filterwarnings("ignore", message="logm result may be inaccurate")
 
 # ── Paths ──
 SCRIPT_DIR = pathlib.Path(__file__).resolve().parent
