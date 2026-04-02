@@ -30,8 +30,11 @@ import argparse
 import json
 import pathlib
 import time
+import warnings
 import numpy as np
 from scipy import stats
+
+warnings.filterwarnings("ignore", message="logm result may be inaccurate")
 
 SCRIPT_DIR = pathlib.Path(__file__).resolve().parent
 PROJECT_DIR = SCRIPT_DIR.parent
