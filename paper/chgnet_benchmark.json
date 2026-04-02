@@ -1,0 +1,23 @@
+{
+  "mlip": "CHGNet",
+  "material": "LiCoO2",
+  "n_dopants": 6,
+  "n_sqs": 5,
+  "device": "cuda",
+  "dopant_results": {
+    "Al": {"voltage_ordered": -2.736, "voltage_disordered_mean": -2.848, "voltage_disordered_std": 0.242, "ef_ordered": -5.177, "n_sqs_converged": 5, "time_s": 1426},
+    "Cr": {"voltage_ordered": -3.728, "voltage_disordered_mean": -2.897, "voltage_disordered_std": 0.297, "ef_ordered": -5.371, "n_sqs_converged": 5, "time_s": 1438},
+    "Ga": {"voltage_ordered": -2.314, "voltage_disordered_mean": -2.940, "voltage_disordered_std": 0.181, "ef_ordered": -5.181, "n_sqs_converged": 5, "time_s": 1435},
+    "Ge": {"voltage_ordered": -2.543, "voltage_disordered_mean": -3.167, "voltage_disordered_std": 0.306, "ef_ordered": -5.254, "n_sqs_converged": 5, "time_s": 1435},
+    "Ni": {"voltage_ordered": -3.195, "voltage_disordered_mean": -2.948, "voltage_disordered_std": 0.164, "ef_ordered": -5.242, "n_sqs_converged": 5, "time_s": 1424},
+    "Ti": {"voltage_ordered": -2.837, "voltage_disordered_mean": -2.672, "voltage_disordered_std": 0.212, "ef_ordered": -5.277, "n_sqs_converged": 5, "time_s": 1421}
+  },
+  "voltage_rho": -0.257,
+  "voltage_p": 0.6228,
+  "ef_rho": 0.657,
+  "ef_p": 0.1562,
+  "cross_mlip_voltage_rho": -0.714,
+  "cross_mlip_voltage_p": 0.1108,
+  "mace_voltage_rho": -0.714,
+  "mace_ef_rho": 0.829
+}

@@ -1,0 +1,30 @@
+{
+  "material": "NMC811 (LiNi0.8Mn0.1Co0.1O2)",
+  "structure": "layered R-3m",
+  "mlip": "MACE-MP-0",
+  "n_dopants": 16,
+  "n_sqs": 5,
+  "supercell": [4, 4, 4],
+  "n_atoms": 256,
+  "dopant_results": {
+    "Al": {"voltage_ordered": -4.2399, "voltage_disordered_mean": -4.1975, "voltage_disordered_std": 0.1201, "ef_ordered": -4.7201, "ef_disordered_mean": -4.7129, "n_sqs_converged": 5, "time_s": 1050.36},
+    "Ti": {"voltage_ordered": -4.3053, "voltage_disordered_mean": -4.2560, "voltage_disordered_std": 0.0333, "ef_ordered": -4.7405, "ef_disordered_mean": -4.7411, "n_sqs_converged": 5, "time_s": 1058.20},
+    "Mg": {"voltage_ordered": -4.3247, "voltage_disordered_mean": -4.3134, "voltage_disordered_std": 0.0378, "ef_ordered": -4.7080, "ef_disordered_mean": -4.7141, "n_sqs_converged": 5, "time_s": 1046.87},
+    "Fe": {"voltage_ordered": -4.1903, "voltage_disordered_mean": -4.2623, "voltage_disordered_std": 0.0703, "ef_ordered": -4.7320, "ef_disordered_mean": -4.7340, "n_sqs_converged": 5, "time_s": 1026.54},
+    "Cr": {"voltage_ordered": -4.3448, "voltage_disordered_mean": -4.2338, "voltage_disordered_std": 0.0396, "ef_ordered": -4.7342, "ef_disordered_mean": -4.7279, "n_sqs_converged": 5, "time_s": 1028.07},
+    "Ga": {"voltage_ordered": -4.3046, "voltage_disordered_mean": -4.2917, "voltage_disordered_std": 0.0154, "ef_ordered": -4.7197, "ef_disordered_mean": -4.7186, "n_sqs_converged": 5, "time_s": 1010.60},
+    "Zr": {"voltage_ordered": -4.3333, "voltage_disordered_mean": -4.2715, "voltage_disordered_std": 0.0681, "ef_ordered": -4.7546, "ef_disordered_mean": -4.7473, "n_sqs_converged": 5, "time_s": 1060.13},
+    "Nb": {"voltage_ordered": -4.2948, "voltage_disordered_mean": -4.2732, "voltage_disordered_std": 0.0419, "ef_ordered": -4.7376, "ef_disordered_mean": -4.7531, "n_sqs_converged": 5, "time_s": 1058.48},
+    "Ta": {"voltage_ordered": -4.1349, "voltage_disordered_mean": -4.3145, "voltage_disordered_std": 0.0247, "ef_ordered": -4.7188, "ef_disordered_mean": -4.7539, "n_sqs_converged": 5, "time_s": 1047.40},
+    "W":  {"voltage_ordered": -4.2894, "voltage_disordered_mean": -4.2166, "voltage_disordered_std": 0.0273, "ef_ordered": -4.7515, "ef_disordered_mean": -4.7470, "n_sqs_converged": 5, "time_s": 1055.20},
+    "V":  {"voltage_ordered": -4.3412, "voltage_disordered_mean": -4.2559, "voltage_disordered_std": 0.0435, "ef_ordered": -4.7413, "ef_disordered_mean": -4.7330, "n_sqs_converged": 5, "time_s": 1018.82},
+    "Mo": {"voltage_ordered": -4.2627, "voltage_disordered_mean": -4.1617, "voltage_disordered_std": 0.0794, "ef_ordered": -4.7556, "ef_disordered_mean": -4.7339, "n_sqs_converged": 5, "time_s": 1056.92},
+    "Sn": {"voltage_ordered": -4.1883, "voltage_disordered_mean": -4.2589, "voltage_disordered_std": 0.0302, "ef_ordered": -4.7157, "ef_disordered_mean": -4.7223, "n_sqs_converged": 5, "time_s": 1046.77},
+    "Sb": {"voltage_ordered": -4.3566, "voltage_disordered_mean": -4.3177, "voltage_disordered_std": 0.0515, "ef_ordered": -4.7255, "ef_disordered_mean": -4.7311, "n_sqs_converged": 5, "time_s": 1031.15},
+    "Ge": {"voltage_ordered": -4.3774, "voltage_disordered_mean": -4.2299, "voltage_disordered_std": 0.0259, "ef_ordered": -4.7279, "ef_disordered_mean": -4.7179, "n_sqs_converged": 5, "time_s": 1032.61},
+    "Cu": {"voltage_ordered": -4.2745, "voltage_disordered_mean": -4.2308, "voltage_disordered_std": 0.0500, "ef_ordered": -4.7202, "ef_disordered_mean": -4.7104, "n_sqs_converged": 5, "time_s": 1050.91}
+  },
+  "voltage_rho": 0.085,
+  "voltage_p": 0.7535,
+  "ef_rho": 0.524
+}
