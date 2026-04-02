@@ -52,8 +52,8 @@ def build_supercell(material="lco"):
     from pymatgen.io.ase import AseAtomsAdaptor
 
     cif_map = {
-        "lco": ("lco_parent.cif", [3, 3, 3]),   # 108 atoms, 27 Co sites
-        "lno": ("lno_parent.cif", [3, 3, 3]),
+        "lco": ("lco_parent.cif", [4, 4, 4]),   # 256 atoms, 64 Co sites
+        "lno": ("lno_parent.cif", [4, 4, 4]),
         "lmo": ("lmo_spinel.cif", [2, 2, 2]),
     }
     cif_name, sc_size = cif_map[material]
@@ -285,8 +285,9 @@ def run_clustering_analysis(device="cpu", dopants=None, mc_steps=20000):
     # Temperatures: typical LCO synthesis range
     temperatures = [300, 600, 800, 900, 1000, 1100, 1200]
 
-    # Number of dopants in MC: ~3-4% concentration (1 dopant in 27 TM sites)
-    n_dopant = max(1, round(n_tm * 0.037))  # 1 in 27 ≈ 3.7%
+    # Number of dopants in MC: ~6% concentration (4 in 64 TM sites)
+    # Need ≥3 dopants for meaningful clustering statistics
+    n_dopant = max(3, round(n_tm * 0.0625))  # 4 in 64 = 6.25%
 
     print(f"\n{'=' * 70}")
     print(f"  MONTE CARLO CLUSTERING ANALYSIS")
