@@ -1,0 +1,220 @@
+{
+  "risk_formula": "R = property_scope \u00d7 sublattice_anisotropy + 0.3 \u00d7 (n_TM - 1)",
+  "risk_threshold": 1.0,
+  "rho_threshold": 0.5,
+  "n_observations": 16,
+  "accuracy": 0.9375,
+  "specificity": 1.0,
+  "precision_safe": 1.0,
+  "recall_safe": 0.9166666666666666,
+  "false_safe": 0,
+  "false_unsafe": 1,
+  "risk_rho_correlation": -0.6953126747297294,
+  "risk_rho_p_value": 0.0027864934049537564,
+  "confusion": {
+    "TP": 11,
+    "TN": 4,
+    "FP": 0,
+    "FN": 1
+  },
+  "structural_descriptors": {
+    "LiCoO2": {
+      "anisotropy": 1.94,
+      "nn_tm_dist": 2.816,
+      "nn_count": 6,
+      "n_tm": 1
+    },
+    "LiNiO2": {
+      "anisotropy": 1.93,
+      "nn_tm_dist": 2.878,
+      "nn_count": 6,
+      "n_tm": 1
+    },
+    "NMC811": {
+      "anisotropy": 1.93,
+      "nn_tm_dist": 2.87,
+      "nn_count": 6,
+      "n_tm": 3
+    },
+    "LiMn2O4": {
+      "anisotropy": 1.0,
+      "nn_tm_dist": 2.916,
+      "nn_count": 6,
+      "n_tm": 1
+    },
+    "SrTiO3": {
+      "anisotropy": 1.0,
+      "nn_tm_dist": 3.905,
+      "nn_count": 6,
+      "n_tm": 1
+    },
+    "CeO2": {
+      "anisotropy": 1.0,
+      "nn_tm_dist": 3.826,
+      "nn_count": 12,
+      "n_tm": 1
+    }
+  },
+  "observations": [
+    {
+      "name": "LiCoO_2 E_f",
+      "material": "LiCoO2",
+      "property": "Ef",
+      "risk_score": 0.0,
+      "rho": 0.76,
+      "actual": "safe",
+      "predicted": "safe",
+      "correct": true
+    },
+    {
+      "name": "LiCoO_2 V",
+      "material": "LiCoO2",
+      "property": "voltage",
+      "risk_score": 1.94,
+      "rho": -0.25,
+      "actual": "unsafe",
+      "predicted": "unsafe",
+      "correct": true
+    },
+    {
+      "name": "LiCoO_2 \\DeltaV",
+      "material": "LiCoO2",
+      "property": "dV",
+      "risk_score": 1.94,
+      "rho": 0.09,
+      "actual": "unsafe",
+      "predicted": "unsafe",
+      "correct": true
+    },
+    {
+      "name": "LiNiO_2 E_f",
+      "material": "LiNiO2",
+      "property": "Ef",
+      "risk_score": 0.0,
+      "rho": 0.82,
+      "actual": "safe",
+      "predicted": "safe",
+      "correct": true
+    },
+    {
+      "name": "LiNiO_2 V",
+      "material": "LiNiO2",
+      "property": "voltage",
+      "risk_score": 1.93,
+      "rho": -0.06,
+      "actual": "unsafe",
+      "predicted": "unsafe",
+      "correct": true
+    },
+    {
+      "name": "LiNiO_2 \\DeltaV",
+      "material": "LiNiO2",
+      "property": "dV",
+      "risk_score": 1.93,
+      "rho": 0.54,
+      "actual": "safe",
+      "predicted": "unsafe",
+      "correct": false
+    },
+    {
+      "name": "NMC811 E_f",
+      "material": "NMC811",
+      "property": "Ef",
+      "risk_score": 0.6,
+      "rho": 0.52,
+      "actual": "safe",
+      "predicted": "safe",
+      "correct": true
+    },
+    {
+      "name": "NMC811 V",
+      "material": "NMC811",
+      "property": "voltage",
+      "risk_score": 2.53,
+      "rho": 0.09,
+      "actual": "unsafe",
+      "predicted": "unsafe",
+      "correct": true
+    },
+    {
+      "name": "LiMn_2O_4 E_f",
+      "material": "LiMn2O4",
+      "property": "Ef",
+      "risk_score": 0.0,
+      "rho": 1.0,
+      "actual": "safe",
+      "predicted": "safe",
+      "correct": true
+    },
+    {
+      "name": "LiMn_2O_4 V",
+      "material": "LiMn2O4",
+      "property": "voltage",
+      "risk_score": 1.0,
+      "rho": 0.95,
+      "actual": "safe",
+      "predicted": "safe",
+      "correct": true
+    },
+    {
+      "name": "LiMn_2O_4 \\DeltaV",
+      "material": "LiMn2O4",
+      "property": "dV",
+      "risk_score": 1.0,
+      "rho": 0.84,
+      "actual": "safe",
+      "predicted": "safe",
+      "correct": true
+    },
+    {
+      "name": "SrTiO_3 E_f",
+      "material": "SrTiO3",
+      "property": "Ef",
+      "risk_score": 0.0,
+      "rho": 1.0,
+      "actual": "safe",
+      "predicted": "safe",
+      "correct": true
+    },
+    {
+      "name": "SrTiO_3 \\DeltaV",
+      "material": "SrTiO3",
+      "property": "dV",
+      "risk_score": 1.0,
+      "rho": 0.94,
+      "actual": "safe",
+      "predicted": "safe",
+      "correct": true
+    },
+    {
+      "name": "CeO_2 E_f",
+      "material": "CeO2",
+      "property": "Ef",
+      "risk_score": 0.0,
+      "rho": 1.0,
+      "actual": "safe",
+      "predicted": "safe",
+      "correct": true
+    },
+    {
+      "name": "CeO_2 \\DeltaV",
+      "material": "CeO2",
+      "property": "dV",
+      "risk_score": 1.0,
+      "rho": 0.96,
+      "actual": "safe",
+      "predicted": "safe",
+      "correct": true
+    },
+    {
+      "name": "CeO_2 E_{\\mathrm{Ovac}}",
+      "material": "CeO2",
+      "property": "E_Ovac",
+      "risk_score": 0.0,
+      "rho": 0.85,
+      "actual": "safe",
+      "predicted": "safe",
+      "correct": true
+    }
+  ]
+}
