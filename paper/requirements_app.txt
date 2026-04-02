@@ -1,0 +1,5 @@
+streamlit>=1.28
+pymatgen>=2024.1.1
+numpy>=1.24
+mp-api>=0.39
+pandas>=2.0
