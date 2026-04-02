@@ -24,7 +24,7 @@ The consequences of this assumption have not been systematically tested. Alterna
 
 Here we answer this question systematically. We screen 20+ dopants across five oxide materials spanning four crystal structure types — layered (LiCoO₂, LiNiO₂), spinel (LiMn₂O₄), perovskite (SrTiO₃), and fluorite (CeO₂) — computing properties in both ordered supercells and ensembles of five SQS realisations using the MACE-MP-0 universal MLIP. We quantify ranking preservation using the Spearman rank correlation coefficient (ρ) between ordered and disordered predictions, and we simulate the propagation of ranking errors through a Yao-style sequential pruning pipeline⁴ to measure their practical impact on dopant selection.
 
-Our central finding is that the disorder sensitivity of dopant rankings is **property-specific and structure-dependent**. Formation energy rankings are robust across all five materials (ρ ≥ 0.76), consistent with the local-bonding origin of substitution energetics. Voltage rankings in layered cathodes, however, are catastrophically disrupted (ρ ≤ −0.06), while remaining well-preserved in the spinel structure (ρ = 0.95). When these ranking perturbations propagate through a sequential pruning pipeline, the ordered and disorder-aware selections share only 14% of their final candidates — a finding with direct implications for the reliability of published dopant screening results.
+Our central finding is that the disorder sensitivity of dopant rankings is **property-specific and structure-dependent**. Formation energy rankings are robust across all five materials ($\rho \geq 0.76$), consistent with the local-bonding origin of substitution energetics. Voltage rankings in layered cathodes, however, are catastrophically disrupted ($\rho \leq -0.06$), while remaining well-preserved in the spinel structure (ρ = 0.95). When these ranking perturbations propagate through a sequential pruning pipeline, the ordered and disorder-aware selections share only 14% of their final candidates — a finding with direct implications for the reliability of published dopant screening results.
 
 ---
 
@@ -83,9 +83,9 @@ To test whether the layered danger zone applies beyond single-TM cathodes, we sc
 | Voltage | **+0.09** | 0.75 |
 | Formation energy | +0.52 | — |
 
-The voltage ranking is statistically indistinguishable from random (ρ = +0.09, p = 0.75), matching the pattern in LiCoO₂ (ρ = −0.25) and LiNiO₂ (ρ = −0.06). Notable rank-swaps include Ta (ordered rank 16 → disordered rank 2, +180 mV shift) and Ge (ordered rank 1 → disordered rank 13, −147 mV shift). The SQS inter-realisation standard deviation averages 0.047 V across NMC811 dopants, comparable to LiCoO₂ (0.054 V), confirming that voltage sensitivity to dopant configuration is a generic feature of layered cathodes regardless of TM composition (Fig. 6).
+The voltage ranking is statistically indistinguishable from random (ρ = +0.09, p = 0.75), matching the pattern in LiCoO₂ (ρ = −0.25) and LiNiO₂ (ρ = −0.06). Notable rank-swaps include Ta (ordered rank 16 -> disordered rank 2, +180 mV shift) and Ge (ordered rank 1 -> disordered rank 13, −147 mV shift). The SQS inter-realisation standard deviation averages 0.047 V across NMC811 dopants, comparable to LiCoO₂ (0.054 V), confirming that voltage sensitivity to dopant configuration is a generic feature of layered cathodes regardless of TM composition (Fig. 6).
 
-![Figure 6. NMC811 ordered vs disordered voltage rankings (n = 16 dopants, ρ = +0.09). Diamonds show ordered voltages coloured by rank-change magnitude; blue circles show SQS mean ± σ. Ta jumps 14 ranks (16→2) and Ge drops 12 ranks (1→13), illustrating that the layered danger zone extends to the dominant commercial cathode.](figures/fig6_nmc811_voltages.png)
+![Figure 6. NMC811 ordered vs disordered voltage rankings (n = 16 dopants, ρ = +0.09). Diamonds show ordered voltages coloured by rank-change magnitude; blue circles show SQS mean ± σ. Ta jumps 14 ranks (16->2) and Ge drops 12 ranks (1->13), illustrating that the layered danger zone extends to the dominant commercial cathode.](figures/fig6_nmc811_voltages.png)
 
 ### Validation against published DFT data
 
@@ -106,7 +106,7 @@ The convergence of ordered MACE with ordered DFT, combined with the divergence i
 
 ### Impact on published screening candidates
 
-The Yao et al.⁴ pipeline identified Sb and Ge as optimal dopants for high-voltage LiCoO₂ through five sequential DFT-based gates. In our disorder-aware analysis, Ge maintains its ranking (ordered rank 14→disordered rank 12 for formation energy; rank 2→5 for volume change), suggesting it is a robust selection. Sb, however, is substantially destabilised by disorder: its volume change rank drops from 4th to 13th, and its voltage rank drops from 5th to 12th. While Sb's performance in Yao's ordered DFT pipeline was validated experimentally — indicating that ordered DFT captured the relevant physics for their specific experimental conditions — our results suggest that the margin by which Sb outperformed other candidates may be narrower than ordered simulations indicate.
+The Yao et al.⁴ pipeline identified Sb and Ge as optimal dopants for high-voltage LiCoO₂ through five sequential DFT-based gates. In our disorder-aware analysis, Ge maintains its ranking (ordered rank 14->disordered rank 12 for formation energy; rank 2->5 for volume change), suggesting it is a robust selection. Sb, however, is substantially destabilised by disorder: its volume change rank drops from 4th to 13th, and its voltage rank drops from 5th to 12th. While Sb's performance in Yao's ordered DFT pipeline was validated experimentally — indicating that ordered DFT captured the relevant physics for their specific experimental conditions — our results suggest that the margin by which Sb outperformed other candidates may be narrower than ordered simulations indicate.
 
 ---
 
@@ -114,7 +114,7 @@ The Yao et al.⁴ pipeline identified Sb and Ge as optimal dopants for high-volt
 
 ### When is ordered screening safe?
 
-Our results provide a practical guide for when ordered-cell screening can be trusted. Formation energy rankings are safe across all tested single-TM structure types (ρ ≥ 0.76), though this preservation weakens in mixed-TM systems (NMC811 ρ = 0.52). This is consistent with the short-range nature of substitution energetics: the energy cost of inserting a dopant into a lattice site depends primarily on the local bonding environment, not on the positions of distant dopant atoms. Screening studies that rank dopants solely by thermodynamic stability — the most common first gate in sequential pipelines — can proceed with ordered cells without significant risk of ranking error.
+Our results provide a practical guide for when ordered-cell screening can be trusted. Formation energy rankings are safe across all tested single-TM structure types ($\rho \geq 0.76$), though this preservation weakens in mixed-TM systems (NMC811 ρ = 0.52). This is consistent with the short-range nature of substitution energetics: the energy cost of inserting a dopant into a lattice site depends primarily on the local bonding environment, not on the positions of distant dopant atoms. Screening studies that rank dopants solely by thermodynamic stability — the most common first gate in sequential pipelines — can proceed with ordered cells without significant risk of ranking error.
 
 Voltage rankings, in contrast, involve a global energy difference between fully lithiated and delithiated states. In layered structures, the delithiation process removes Li from a two-dimensional slab, and the energetic cost is modulated by long-range interactions between dopant atoms across this slab. When dopants are placed in ordered, maximally separated positions, these interactions are symmetrically averaged out; when dopants are randomly distributed, specific configurations create local energy wells or barriers that shift the mean delithiation energy. The result is that the ordered voltage is not representative of the ensemble-averaged disordered voltage, and the ranking is disrupted.
 
@@ -126,7 +126,7 @@ The spinel structure, despite also being a cathode material with Li intercalatio
 
 To test the mechanistic hypothesis above, we computed the pairwise dopant–dopant interaction energy E_int(r) = E(AB) − E(A) − E(B) + E(0) for Al substitution at transition-metal sites in LiCoO₂ and LiMn₂O₄ using single-point MACE-MP-0 energies at multiple supercell sizes (Table 5).
 
-**Table 5. Supercell convergence of dopant–dopant interaction energy (Al→TM site, nearest-neighbour shell).**
+**Table 5. Supercell convergence of dopant–dopant interaction energy (Al->TM site, nearest-neighbour shell).**
 
 | Supercell | In-plane (Å) | LiCoO₂ NN E_int (meV) | LiMn₂O₄ NN E_int (meV) |
 |---|---|---|---|
@@ -160,7 +160,7 @@ However, the pair interaction convergence analysis (Table 5) reveals a fundament
 
 ### Error amplification in sequential pipelines
 
-The cascading Jaccard similarity drop (0.76 → 0.23 → 0.14) through successive pruning gates reveals a structural vulnerability in sequential screening pipelines. Each gate applies a hard threshold to a shrinking candidate pool, so a dopant that narrowly passes Gate 1 in the ordered ranking but narrowly fails in the disordered ranking is permanently lost — and so are all downstream selections that depended on its presence.
+The cascading Jaccard similarity drop (0.76 -> 0.23 -> 0.14) through successive pruning gates reveals a structural vulnerability in sequential screening pipelines. Each gate applies a hard threshold to a shrinking candidate pool, so a dopant that narrowly passes Gate 1 in the ordered ranking but narrowly fails in the disordered ranking is permanently lost — and so are all downstream selections that depended on its presence.
 
 This amplification effect is robust to the choice of gate thresholds. We swept all three gate sizes across ±20% of the Yao-equivalent proportions (54 threshold combinations). The final-gate Jaccard similarity remains below 0.33 in all cases and below 0.30 in 96% of cases (Supplementary Table S1). The amplification is therefore not an artefact of a specific threshold choice but a generic property of the sequential pruning architecture.
 
@@ -172,7 +172,7 @@ Our finding suggests that ranking-sensitive gates (those applied to properties w
 
 ### From critique to correction: a hybrid screening protocol
 
-Rather than simply demonstrating that ordered screening fails, we propose and test a practical alternative. The key insight is that formation energy is safe to compute with ordered cells in single-TM hosts (ρ ≥ 0.76; weaker in mixed-TM systems), so it can serve as a cheap pre-filter before the more expensive disorder-aware simulation.
+Rather than simply demonstrating that ordered screening fails, we propose and test a practical alternative. The key insight is that formation energy is safe to compute with ordered cells in single-TM hosts ($\rho \geq 0.76$; weaker in mixed-TM systems), so it can serve as a cheap pre-filter before the more expensive disorder-aware simulation.
 
 We tested several hybrid strategies that combine ordered pre-filtering with targeted SQS simulation (Table 4). The most effective approach replaces sequential hard-threshold gates with a single ordered Ef pre-filter followed by continuous SQS-based scoring of survivors: ordered Ef selects the top 71% of dopants (Gate 1, which is robust), then all survivors are scored by a weighted combination of SQS voltage and SQS volume change — without further hard gates.
 
@@ -182,12 +182,12 @@ We tested several hybrid strategies that combine ordered pre-filtering with targ
 |---|---|---|---|---|---|
 | Pure ordered | All gates use ordered values | Al, Ge, V, Zr | 0.14 | 21 | baseline |
 | Full SQS | All properties from 5 SQS | Cr, Ge, Ni, Rh | 1.00 | 105 | — |
-| **Hybrid F** | **Ordered Ef filter → SQS continuous scoring** | **Cr, Ge, Ni, Ti** | **0.60** | **96** | **9%** |
+| **Hybrid F** | **Ordered Ef filter -> SQS continuous scoring** | **Cr, Ge, Ni, Ti** | **0.60** | **96** | **9%** |
 | Hybrid A | Ordered Ef+Vol gates, SQS voltage only | Cr, Fe, Ge, Ta | 0.33 | 61 | 42% |
 
 Strategy F achieves Jaccard = 0.60 with the full SQS gold standard — recovering 3 of 4 correct finalists (Cr, Ge, Ni) while substituting Ti for Rh — compared to 0.14 for the pure ordered approach. The key design principle is: **use ordered cells only for properties that are disorder-robust (formation energy), and deploy SQS for all disorder-sensitive properties (voltage, volume), avoiding hard intermediate gates that amplify errors.**
 
-This hybrid approach effectively **de-risks** the screening pipeline: the cheap ordered method is used precisely where it is safe (formation energy, ρ ≥ 0.76), and the more expensive disorder-aware method is deployed precisely where it is critical (voltage, ρ ≈ 0 in layered cathodes). The result is near-optimal accuracy at substantially reduced cost — a practical recipe that high-throughput researchers can adopt immediately with existing MLIP infrastructure.
+This hybrid approach effectively **de-risks** the screening pipeline: the cheap ordered method is used precisely where it is safe (formation energy, $\rho \geq 0.76$), and the more expensive disorder-aware method is deployed precisely where it is critical (voltage, ρ $\approx$ 0 in layered cathodes). The result is near-optimal accuracy at substantially reduced cost — a practical recipe that high-throughput researchers can adopt immediately with existing MLIP infrastructure.
 
 ### Ordered voltages sit in the tail of the disordered distribution
 
@@ -215,7 +215,7 @@ First, the MACE-MP-0 potential is trained on the Materials Project database, whi
 
 Second, our SQS realisations use 5 independent configurations at ~6% dopant concentration in 256-atom supercells. Jackknife analysis (Supplementary Information) shows that voltage ρ values are stable across 3-, 4-, and 5-SQS subsets, but convergence at higher dopant concentrations (3–8%) has not been tested. Exploratory lattice Monte Carlo analysis at synthesis temperature (1000 K) suggests that a substantial fraction of dopants may exhibit non-random short-range order (Supplementary Table S11), though this finding is limited by the NN-only Ising model used, which is not reliable for layered materials where pair interactions are long-ranged and supercell-size-dependent (Table 5). Grain-boundary segregation and explicit defect-defect correlations beyond nearest-neighbour are not modelled.
 
-Third, the voltage calculation uses complete delithiation (x = 0 → 1) rather than the partial delithiation relevant to cycling between specific states of charge. A partial delithiation test at x = 0.5 across all 21 LCO dopants (Supplementary Information) reveals that voltage rankings are not even self-consistent between delithiation endpoints: the Spearman correlation between full- and half-delithiation ordered voltages is ρ = +0.05 (p = 0.82, n = 21), indistinguishable from zero. This compounding fragility — rankings change with both disorder *and* delithiation depth — implies that the disorder gap reported here is a lower bound on the practical unreliability of ordered voltage screening.
+Third, the voltage calculation uses complete delithiation (x = 0 -> 1) rather than the partial delithiation relevant to cycling between specific states of charge. A partial delithiation test at x = 0.5 across all 21 LCO dopants (Supplementary Information) reveals that voltage rankings are not even self-consistent between delithiation endpoints: the Spearman correlation between full- and half-delithiation ordered voltages is ρ = +0.05 (p = 0.82, n = 21), indistinguishable from zero. This compounding fragility — rankings change with both disorder *and* delithiation depth — implies that the disorder gap reported here is a lower bound on the practical unreliability of ordered voltage screening.
 
 Fourth, only substitution at the primary transition-metal site is considered. Interstitial incorporation, anti-site defects, and charge-compensating point defects (e.g., oxygen vacancies for heterovalent dopants) are not modelled. Automated defect enumeration frameworks²⁰ could extend this analysis to include site-preference effects and explicit charge compensation, which may further modulate disorder sensitivity for aliovalent dopants.
 
@@ -227,7 +227,7 @@ Fifth, while the NMC811 screening (n = 16 dopants, ρ = +0.09) confirms that the
 
 ### Materials and dopants
 
-Five parent oxide structures were studied: LiCoO₂ (R̄3m layered, a = 2.82 Å, c = 14.05 Å), LiNiO₂ (R̄3m layered, a = 2.88 Å, c = 14.19 Å), LiMn₂O₄ (Fd̄3m spinel, a = 8.25 Å), SrTiO₃ (Pm̄3m perovskite, a = 3.905 Å), and CeO₂ (Fm̄3m fluorite, a = 5.411 Å). For each material, dopants were substituted at the transition-metal site: Co in LiCoO₂, Ni in LiNiO₂, Mn in LiMn₂O₄, Ti in SrTiO₃, and Ce in CeO₂. The dopant set for each material was selected from elements that survive a three-stage chemical pre-screening pipeline (Stages 1–3) consisting of SMACT charge neutrality, Shannon ionic radius mismatch (≤35%), and Hautier-Ceder substitution probability (≥0.001) filters, yielding 20–22 dopants per cathode material and 20 for each non-cathode oxide.
+Five parent oxide structures were studied: LiCoO₂ (R̄3m layered, a = 2.82 Å, c = 14.05 Å), LiNiO₂ (R̄3m layered, a = 2.88 Å, c = 14.19 Å), LiMn₂O₄ (Fd̄3m spinel, a = 8.25 Å), SrTiO₃ (Pm̄3m perovskite, a = 3.905 Å), and CeO₂ (Fm̄3m fluorite, a = 5.411 Å). For each material, dopants were substituted at the transition-metal site: Co in LiCoO₂, Ni in LiNiO₂, Mn in LiMn₂O₄, Ti in SrTiO₃, and Ce in CeO₂. The dopant set for each material was selected from elements that survive a three-stage chemical pre-screening pipeline (Stages 1–3) consisting of SMACT charge neutrality, Shannon ionic radius mismatch ($\leq$35%), and Hautier-Ceder substitution probability ($\geq$0.001) filters, yielding 20–22 dopants per cathode material and 20 for each non-cathode oxide.
 
 ### Supercell construction and SQS generation
 
@@ -243,9 +243,9 @@ All energy evaluations and geometry optimisations were performed using the MACE-
 
 ### Property calculations
 
-**Formation energy** was defined as E_f = E_doped − E_host − Σᵢ nᵢμᵢ, where E_doped and E_host are the total energies of the relaxed doped and undoped supercells respectively, nᵢ is the number of atoms of species i added (+) or removed (−), and μᵢ is the chemical potential of species i. Because we compare dopant rankings within each host material (same E_host and same stoichiometric change of one TM atom), the chemical potential references cancel in all pairwise rank comparisons. For computational efficiency, we therefore report E_doped/N_atoms (total energy per atom of the relaxed doped structure) as the ranking metric, which preserves identical dopant ordering.
+**Formation energy** was defined as E_f = E_doped - E_host - $\Sigma_i$ n$_i$$\mu_i$, where E_doped and E_host are the total energies of the relaxed doped and undoped supercells respectively, n$_i$ is the number of atoms of species i added (+) or removed (-), and $\mu_i$ is the chemical potential of species i. Because we compare dopant rankings within each host material (same E_host and same stoichiometric change of one TM atom), the chemical potential references cancel in all pairwise rank comparisons. For computational efficiency, we therefore report E_doped/N_atoms (total energy per atom of the relaxed doped structure) as the ranking metric, which preserves identical dopant ordering.
 
-**Average discharge voltage** was computed as V = −(E_delith − E_lith) / (n_Li · e), where E_lith and E_delith are the total energies of the relaxed doped structure before and after complete removal of all Li atoms, n_Li is the number of Li atoms removed, and e is the elementary charge. The full expression for intercalation voltage is V = −[E_delith − E_lith − n_Li · μ_Li] / (n_Li · e); because the Li chemical potential μ_Li is constant across dopants within a given host, it shifts all voltages by the same constant and does not affect rankings. We use complete delithiation (x = 0 → 1) for consistency across all dopants; the effect of partial delithiation (x = 0.5) on ranking preservation is tested separately (Supplementary Information).
+**Average discharge voltage** was computed as V = −(E_delith − E_lith) / (n_Li · e), where E_lith and E_delith are the total energies of the relaxed doped structure before and after complete removal of all Li atoms, n_Li is the number of Li atoms removed, and e is the elementary charge. The full expression for intercalation voltage is V = −[E_delith − E_lith − n_Li · μ_Li] / (n_Li · e); because the Li chemical potential μ_Li is constant across dopants within a given host, it shifts all voltages by the same constant and does not affect rankings. We use complete delithiation (x = 0 -> 1) for consistency across all dopants; the effect of partial delithiation (x = 0.5) on ranking preservation is tested separately (Supplementary Information).
 
 **Volume change** was computed as the percentage change in relaxed cell volume relative to the undoped parent structure at the same supercell size.
 
@@ -259,11 +259,11 @@ The pairwise dopant–dopant interaction energy was defined as E_int = E(AB) −
 
 **Spearman rank correlation** (ρ) was used to quantify ranking preservation between ordered and disordered predictions. Significance was assessed at the α = 0.05 level using the exact permutation distribution.
 
-**Jaccard similarity** was used to quantify candidate overlap at each pruning gate: J = |A ∩ B| / |A ∪ B|, where A and B are the sets of candidates surviving a gate under ordered and disordered rankings, respectively.
+**Jaccard similarity** was used to quantify candidate overlap at each pruning gate: J = |A $\cap$ B| / |A $\cup$ B|, where A and B are the sets of candidates surviving a gate under ordered and disordered rankings, respectively.
 
-**Pipeline simulation.** To quantify error amplification, we replicated a three-gate sequential pruning pipeline modelled on Yao et al.⁴: Gate 1 retained the top 71% by formation energy stability; Gate 2 retained the top 53% of Gate 1 survivors by smallest volume change; Gate 3 retained the top 50% of Gate 2 survivors by highest voltage. The proportions match the reduction ratios in the Yao pipeline (63→45→16→10).
+**Pipeline simulation.** To quantify error amplification, we replicated a three-gate sequential pruning pipeline modelled on Yao et al.⁴: Gate 1 retained the top 71% by formation energy stability; Gate 2 retained the top 53% of Gate 1 survivors by smallest volume change; Gate 3 retained the top 50% of Gate 2 survivors by highest voltage. The proportions match the reduction ratios in the Yao pipeline (63->45->16->10).
 
-**SQS convergence.** To assess whether five SQS realisations are sufficient for stable ranking comparisons, we performed jackknife subsampling: for each material, Spearman ρ was recomputed using all C(5,k) subsets for k = 3 and k = 4. For LiCoO₂ voltage, ρ = −0.19 ± 0.11 (3 SQS), −0.24 ± 0.08 (4 SQS), −0.25 (5 SQS), confirming convergence. For LiMn₂O₄ voltage, ρ = +0.95 is invariant to SQS subset. Leave-one-out jackknife for LiCoO₂ voltage shows ρ ∈ [−0.37, −0.14] — no single SQS realisation drives the result.
+**SQS convergence.** To assess whether five SQS realisations are sufficient for stable ranking comparisons, we performed jackknife subsampling: for each material, Spearman ρ was recomputed using all C(5,k) subsets for k = 3 and k = 4. For LiCoO₂ voltage, ρ = −0.19 ± 0.11 (3 SQS), −0.24 ± 0.08 (4 SQS), −0.25 (5 SQS), confirming convergence. For LiMn₂O₄ voltage, ρ = +0.95 is invariant to SQS subset. Leave-one-out jackknife for LiCoO₂ voltage shows ρ $\in$ [−0.37, −0.14] — no single SQS realisation drives the result.
 
 ### Computational resources
 
@@ -281,7 +281,7 @@ All checkpoint data, analysis scripts, parent CIF files, and the complete screen
 
 1. Manthiram, A. A reflection on lithium-ion battery cathode chemistry. *Nat. Commun.* **11**, 1550 (2020).
 2. Li, W., Erickson, E. M. & Manthiram, A. High-nickel layered oxide cathodes for lithium-based automotive batteries. *Nat. Energy* **5**, 26–34 (2020).
-3. Noh, H.-J. et al. Comparison of the structural and electrochemical properties of layered Li[NiₓCoᵧMn_z]O₂ cathode material for lithium-ion batteries. *J. Power Sources* **233**, 121–130 (2013).
+3. Noh, H.-J. et al. Comparison of the structural and electrochemical properties of layered Li[Ni$_x$Co$_y$Mn$_z$]O$_2$ cathode material for lithium-ion batteries. *J. Power Sources* **233**, 121–130 (2013).
 4. Yao, Y. et al. Stepwise screening of doping elements for high-voltage LiCoO₂ via materials genome approach. *Adv. Energy Mater.* **15**, 2502026 (2025).
 5. Hong, Y. S. et al. Hierarchical defect engineering for LiCoO₂ through low-solubility trace element doping. *Chem* **6**, 2759–2769 (2020).
 6. Lin, W. et al. Rational design of heterogeneous dopants for lithium cobalt oxide. *Nano Lett.* **24**, 7150 (2024).
