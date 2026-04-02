@@ -83,7 +83,9 @@ To test whether the layered danger zone applies beyond single-TM cathodes, we sc
 | Voltage | **+0.09** | 0.75 |
 | Formation energy | +0.52 | — |
 
-The voltage ranking is statistically indistinguishable from random (ρ = +0.09, p = 0.75), matching the pattern in LiCoO₂ (ρ = −0.25) and LiNiO₂ (ρ = −0.06). Notable rank-swaps include Ta (ordered rank 16 → disordered rank 2, +180 mV shift) and Ge (ordered rank 1 → disordered rank 13, −147 mV shift). The SQS inter-realisation standard deviation averages 0.047 V across NMC811 dopants, comparable to LiCoO₂ (0.054 V), confirming that voltage sensitivity to dopant configuration is a generic feature of layered cathodes regardless of TM composition.
+The voltage ranking is statistically indistinguishable from random (ρ = +0.09, p = 0.75), matching the pattern in LiCoO₂ (ρ = −0.25) and LiNiO₂ (ρ = −0.06). Notable rank-swaps include Ta (ordered rank 16 → disordered rank 2, +180 mV shift) and Ge (ordered rank 1 → disordered rank 13, −147 mV shift). The SQS inter-realisation standard deviation averages 0.047 V across NMC811 dopants, comparable to LiCoO₂ (0.054 V), confirming that voltage sensitivity to dopant configuration is a generic feature of layered cathodes regardless of TM composition (Fig. 6).
+
+![Figure 6. NMC811 ordered vs disordered voltage rankings (n = 16 dopants, ρ = +0.09). Diamonds show ordered voltages coloured by rank-change magnitude; blue circles show SQS mean ± σ. Ta jumps 14 ranks (16→2) and Ge drops 12 ranks (1→13), illustrating that the layered danger zone extends to the dominant commercial cathode.](figures/fig6_nmc811_voltages.png)
 
 ### Validation against published DFT data
 
