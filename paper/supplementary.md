@@ -302,4 +302,6 @@ Lattice Monte Carlo on the LiCoO₂ TM sublattice (4×4×4 supercell, 64 Co site
 
 **Summary at 1000 K:** 6/16 random (38%), 6/16 ordering (38%), 4/16 clustering (25%).
 
-E_nn sign determines behaviour: positive E_nn → repulsive → self-ordering; negative E_nn → attractive → clustering. The α₁ magnitude increases at lower temperatures as thermal fluctuations decrease. At synthesis T (800-1000 K), 62% of dopants show non-random short-range order, indicating that random SQS is an approximation whose accuracy varies by dopant.
+E_nn sign determines behaviour: positive E_nn → repulsive → self-ordering; negative E_nn → attractive → clustering. The α₁ magnitude increases at lower temperatures as thermal fluctuations decrease.
+
+**Important caveat:** The NN Ising model is a simplification. As shown in Table 5 of the main text, the NN interaction energy for Al in LiCoO₂ varies from −128 meV (3×3×2) to +4 meV (6×6×2) depending on supercell size, indicating that interactions in layered structures are not NN-dominated. The NN E_nn values used here (computed on a 4×4×4 supercell) are therefore not fully converged, and the ordering/clustering classifications should be treated as exploratory rather than definitive for the layered system. The key finding is the contrast with spinel LiMn₂O₄, where NN interactions are well-converged (+145 meV across all tested supercell sizes) and an NN Ising model is reliable.
