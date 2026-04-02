@@ -224,16 +224,49 @@ def remove_fraction_li(atoms, fraction=0.5, seed=42):
     return new_atoms, n_remove
 
 
+def relax_ionic_only(atoms, calc, fmax=0.10, max_steps=300):
+    """Ionic-only relaxation (no cell changes). Safer for partially delithiated structures."""
+    from ase.optimize import BFGS, FIRE
+
+    atoms = atoms.copy()
+    atoms.calc = calc
+    try:
+        opt = BFGS(atoms, logfile=None)
+        opt.run(fmax=fmax, steps=max_steps)
+        return atoms, opt.nsteps < max_steps
+    except Exception:
+        pass
+    try:
+        atoms2 = atoms.copy()
+        atoms2.calc = calc
+        opt = FIRE(atoms2, logfile=None)
+        opt.run(fmax=fmax * 1.5, steps=max_steps)
+        return atoms2, opt.nsteps < max_steps
+    except Exception:
+        return atoms, False
+
+
 def compute_voltage_partial(atoms_lith, calc, fraction=0.5, n_seeds=3):
-    """Compute voltage from partial delithiation, averaged over random Li removals."""
+    """Compute voltage from partial delithiation, averaged over random Li removals.
+
+    Uses ionic-only relaxation for the partially delithiated structure
+    (cell shape kept from lithiated relaxation) to avoid cell explosion
+    when many Li vacancies are introduced.
+    """
     voltages = []
+    e_lith = float(atoms_lith.get_potential_energy())
     for seed in range(n_seeds):
         atoms_delith, n_removed = remove_fraction_li(atoms_lith, fraction, seed=seed)
-        atoms_delith_relax, conv = relax_structure(atoms_delith, calc, fmax=0.20, max_steps=200)
-        e_lith = float(atoms_lith.get_potential_energy())
+        atoms_delith_relax, conv = relax_ionic_only(atoms_delith, calc, fmax=0.10, max_steps=300)
         e_delith = float(atoms_delith_relax.get_potential_energy())
         v = -(e_delith - e_lith) / n_removed
-        voltages.append(float(v))
+        # Sanity check: voltage should be in reasonable range
+        if abs(v) < 20.0:
+            voltages.append(float(v))
+        else:
+            print(f"      WARNING: unreasonable voltage {v:.1f} V (seed {seed}), skipping")
+    if not voltages:
+        return None, None
     return float(np.mean(voltages)), float(np.std(voltages, ddof=1)) if len(voltages) > 1 else 0.0
 
 
