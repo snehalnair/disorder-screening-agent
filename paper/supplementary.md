@@ -274,3 +274,32 @@ CHGNet v0.3.0 applied to 6 LiCoO₂ dopants to test whether disorder effect is M
 | Ti     | -2.837          | -2.672          | 0.212               | -5.277               | -3.390         |
 
 Both MLIPs independently show near-zero or negative voltage ρ, confirming that the disorder effect is structural (R-3m layered geometry) rather than MLIP-specific. The cross-MLIP disagreement on ordered voltage rankings (ρ = -0.71) further cautions against over-interpreting absolute voltage values from any single potential.
+
+---
+
+## Table S11. Monte Carlo clustering analysis (LiCoO2, 16 dopants)
+
+Lattice Monte Carlo on the LiCoO₂ TM sublattice (4×4×4 supercell, 64 Co sites, 4 dopants at 6.25% concentration, 20,000 MC steps per temperature). Pair interaction energy E_nn computed from MACE-MP-0 single-point evaluations. Warren-Cowley α₁ < 0 indicates ordering tendency; α₁ > 0 indicates clustering tendency.
+
+| Dopant | E_nn (meV) | α₁ (800 K) | α₁ (1000 K) | Tendency |
+|--------|-----------|------------|-------------|----------|
+| Al     | +60.9     | -0.044     | -0.042      | random   |
+| Ti     | +32.4     | -0.033     | -0.021      | random   |
+| Mg     | -36.5     | +0.016     | +0.003      | random   |
+| Zr     | +665.6    | -0.067     | -0.067      | ORDERING |
+| Nb     | -234.9    | +0.363     | +0.343      | CLUSTERING |
+| Fe     | -82.7     | +0.079     | +0.047      | random   |
+| Cr     | +418.0    | -0.067     | -0.067      | ORDERING |
+| Ga     | -208.8    | +0.339     | +0.301      | CLUSTERING |
+| Ni     | -146.4    | +0.233     | +0.165      | CLUSTERING |
+| Mn     | +238.2    | -0.066     | -0.062      | ORDERING |
+| V      | +392.1    | -0.067     | -0.067      | ORDERING |
+| Cu     | -162.5    | +0.295     | +0.187      | CLUSTERING |
+| W      | +94.0     | -0.054     | -0.045      | random   |
+| Mo     | +354.3    | -0.067     | -0.065      | ORDERING |
+| Ge     | +12.0     | -0.027     | -0.026      | random   |
+| Sn     | +383.7    | -0.067     | -0.066      | ORDERING |
+
+**Summary at 1000 K:** 6/16 random (38%), 6/16 ordering (38%), 4/16 clustering (25%).
+
+E_nn sign determines behaviour: positive E_nn → repulsive → self-ordering; negative E_nn → attractive → clustering. The α₁ magnitude increases at lower temperatures as thermal fluctuations decrease. At synthesis T (800-1000 K), 62% of dopants show non-random short-range order, indicating that random SQS is an approximation whose accuracy varies by dopant.
