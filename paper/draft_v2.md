@@ -4,13 +4,13 @@
 
 **Affiliations:** ¹ Independent Researcher
 
-**Corresponding author:** * snehal.nair@example.edu
+**Corresponding author:** * snehalnair90@gmail.com
 
 ---
 
 ## Abstract
 
-Computational screening pipelines for battery cathode dopants universally assume ordered host structures, yet real materials exhibit chemical disorder. Here we quantify this "disorder gap" by comparing ordered and disorder-aware (SQS-ensemble) simulations across nine oxide materials spanning five crystal structure types — layered, spinel, perovskite, fluorite, olivine, and NASICON — using the MACE-MP-0 machine-learning interatomic potential. Voltage rankings in layered cathodes lose all predictive power (Spearman ρ = −0.25 for LiCoO₂, +0.09 for NMC811, +0.23 for NaCoO₂), while formation energy rankings are preserved (ρ ≥ 0.72). The effect compounds with operating conditions: partial delithiation at two depths (x = 0.25, ρ = −0.07; x = 0.5, ρ = −0.32) confirms the voltage danger zone. Through a sequential pruning pipeline, these perturbations amplify catastrophically — ordered and disorder-aware pipelines share only 20% of their final candidates. Out-of-sample validation on olivine LiFePO₄ (ρ = 0.99), NASICON Na₃V₂(PO₄)₃ (ρ = 0.77), and Na-ion layered NaCoO₂ (ρ = 0.23) confirms both the safe zone for framework structures and the danger zone for layered oxides across Li-ion and Na-ion chemistries. We distil these findings into a two-descriptor decision rule (zero false-safe predictions across 26 observations) and provide an open-source web tool for instant risk assessment. Our results establish when ordered screening fails, why it fails, and how to screen safely — at ~1,500× lower cost than density functional theory.
+Computational screening pipelines for battery cathode dopants universally assume ordered host structures, yet real materials exhibit chemical disorder. Here we quantify this "disorder gap" across nine oxides spanning six structure types using the MACE-MP-0 machine-learning potential and SQS-ensemble simulations. Voltage rankings in layered cathodes lose all predictive power (Spearman ρ = −0.25 to +0.23), while formation energy rankings are preserved (ρ ≥ 0.52). Through sequential pruning, these perturbations amplify catastrophically — ordered and disorder-aware pipelines share only 20% of final candidates. Partial delithiation at two depths (x = 0.25, ρ = −0.07; x = 0.5, ρ = −0.32) confirms the voltage danger zone across operating conditions. Out-of-sample validation on olivine LiFePO₄ (ρ = 0.99), NASICON Na₃V₂(PO₄)₃ (ρ = 0.77), and Na-ion NaCoO₂ (ρ = 0.23) confirms both safe and danger zones across chemistries. A two-descriptor decision rule achieves zero false-safe predictions across 27 observations, and an open-source web tool enables instant risk assessment — at ~1,500× lower cost than density functional theory.
 
 ---
 
@@ -20,9 +20,9 @@ The computational discovery of functional dopants for battery cathode materials 
 
 These pipelines share a common assumption: the doped structure is modelled as an ordered supercell with a single, deterministic dopant placement. In a typical study, one transition-metal atom in a small supercell is replaced by the candidate, and properties are computed for this single configuration⁴. This ordered-host assumption does not reflect synthesised materials, where dopant atoms occupy lattice sites with statistical disorder characteristic of a solid solution⁷⁻⁹.
 
-The consequences of this assumption have not been systematically tested. While alternative approaches exist — cluster expansion¹⁸, charge-aware MLIPs¹⁹, automated defect frameworks²⁰ — none have quantified how disorder propagates through multi-stage screening pipelines. Special Quasi-random Structures (SQS)¹⁰ provide a faithful representation of substitutional alloys, and universal MLIPs such as MACE-MP-0¹¹ make large-supercell simulations affordable, yet no study has asked: **does accounting for chemical disorder change which dopants a screening pipeline selects?**
+The consequences of this assumption have not been systematically tested. While alternative approaches exist — cluster expansion¹⁵, charge-aware MLIPs¹⁶, automated defect frameworks¹⁷ — none have quantified how disorder propagates through multi-stage screening pipelines. Special Quasi-random Structures (SQS)¹⁰ provide a faithful representation of substitutional alloys, and universal MLIPs such as MACE-MP-0¹¹ make large-supercell simulations affordable, yet whether accounting for chemical disorder changes which dopants a screening pipeline selects remains untested.
 
-Here we answer this question across nine oxide materials spanning five crystal structure types (Fig. 1). We screen 12–20 dopants per material in both ordered supercells and ensembles of five SQS realisations, quantifying ranking preservation via Spearman ρ and simulating error propagation through sequential pruning. We find a sharp structure-type boundary: layered cathodes fall in a "danger zone" where voltage rankings are destroyed, while 3D frameworks, olivines, and NASICONs remain safe. We provide a two-descriptor decision rule, a hybrid screening protocol, and an open-source web tool that enables any researcher to assess disorder risk before committing to computation.
+Here we answer this question across nine oxide materials spanning six crystal structure types (Fig. 1). We screen 12–20 dopants per material in both ordered supercells and ensembles of five SQS realisations, quantifying ranking preservation via Spearman ρ and simulating error propagation through sequential pruning. We find a sharp structure-type boundary: layered cathodes fall in a "danger zone" where voltage rankings are destroyed, while 3D frameworks, olivines, and NASICONs remain safe. We provide a two-descriptor decision rule, a hybrid screening protocol, and an open-source web tool that enables any researcher to assess disorder risk before committing to computation.
 
 ---
 
@@ -36,7 +36,7 @@ Figure 1 illustrates the two-track approach. In conventional screening (left tra
 
 ### Disorder sensitivity is property-specific and structure-dependent
 
-We computed formation energy, voltage, and volume change for each dopant across eight materials (Table 1, Fig. 2). The Spearman rank correlation coefficient (ρ) between ordered and disordered rankings serves as our primary metric: ρ = 1.0 indicates identical rankings, ρ = 0 indicates no correlation.
+We computed formation energy, voltage, and volume change for each dopant across nine materials (Table 1, Fig. 2). The Spearman rank correlation coefficient (ρ) between ordered and disordered rankings serves as our primary metric: ρ = 1.0 indicates identical rankings, ρ = 0 indicates no correlation.
 
 **Table 1. Spearman ρ between ordered and disordered dopant rankings, with bootstrapped 95% CIs (10,000 resamples).**
 
@@ -44,7 +44,7 @@ We computed formation energy, voltage, and volume change for each dopant across 
 |---|---|---|---|---|---|
 | LiCoO₂ | Layered R-3m | 20 | +0.76 [+0.43, +0.94] | **−0.25 [−0.63, +0.19]** | +0.09 [−0.37, +0.55] |
 | LiNiO₂ | Layered R-3m | 14 | +0.82 [+0.49, +0.95] | **−0.06 [−0.62, +0.54]** | +0.54 [−0.08, +0.89] |
-| NMC811 | Layered R-3m | 16 | +0.52 [−0.02, +0.85] | **+0.09 [−0.51, +0.63]** | — |
+| NMC811 | Layered R-3m | 16 | +0.52 [−0.02, +0.85] | **+0.09 [−0.51, +0.63]** | —† |
 | NaCoO₂ | Layered R-3m | 18 | +0.79 [+0.46, +0.94] | **+0.23 [−0.26, +0.64]** | **−0.01 [−0.50, +0.49]** |
 | LiMn₂O₄ | Spinel Fd-3m | 12 | +1.00 [+1.00, +1.00] | +0.95 [+0.70, +1.00] | +0.84 [+0.46, +0.98] |
 | SrTiO₃ | Perovskite Pm-3m | 20 | +1.00 [+0.98, +1.00] | — | +0.94 [+0.80, +0.99] |
@@ -52,7 +52,9 @@ We computed formation energy, voltage, and volume change for each dopant across 
 | LiFePO₄ | Olivine Pnma | 18 | +1.00 [+1.00, +1.00] | +0.99 [+0.94, +1.00] | +0.79 [+0.49, +0.94] |
 | Na₃V₂(PO₄)₃ | NASICON R-3c | 18 | +0.72 [+0.31, +0.93] | +0.77 [+0.44, +0.93] | −0.04 [−0.57, +0.50] |
 
-![Figure 2. Spearman ρ heatmap showing disorder sensitivity by material and property. Voltage rankings in layered cathodes (red) are destroyed, while formation energy is universally preserved (green). LiFePO₄ and NASICON confirm the safe zone extends to olivine and polyhedral-framework structures.](figures/fig2_heatmap.png)
+†Volume change not computed for NMC811 due to the multi-component host lattice making a consistent volume reference ambiguous.
+
+![Figure 2. Spearman ρ heatmap (materials on x-axis sorted by volume-change ρ, properties on y-axis). Voltage rankings in layered cathodes (left, red) are destroyed, while formation energy is universally preserved (green). Materials are ordered from lowest to highest volume-change ρ, revealing the structure-type boundary: layered oxides cluster on the left, 3D frameworks on the right.](figures/fig2_heatmap.png)
 
 Two patterns emerge with striking clarity.
 
@@ -90,7 +92,7 @@ Both partial delithiation depths confirm the voltage danger zone: **ρ = −0.07
 
 This compounding fragility — rankings change with both disorder *and* operating conditions at every state of charge — implies that the disorder gap is not an artefact of the thermodynamic endpoint but a fundamental property of the layered voltage landscape. A dopant optimised by ordered screening for one state of charge may not be optimal at another, even before disorder is considered.
 
-![Figure 4. Partial delithiation voltage: ordered vs SQS-disordered for 19 LiCoO₂ dopants at two depths. Left: x = 0.25 (ρ = −0.07). Right: x = 0.5 (ρ = −0.32). Diamonds: ordered values. Circles with error bars: SQS ensemble mean ± σ. Both depths confirm that the voltage danger zone persists across the full state-of-charge range.](figures/fig4_partial_delithiation.png)
+![Figure 4. Partial delithiation voltage (x = 0 → 0.5): ordered vs SQS-disordered for 19 LiCoO₂ dopants. Diamonds: ordered values. Circles with error bars: SQS ensemble mean ± σ (5 realisations × 3 Li-removal seeds). Spearman ρ = −0.32 (p = 0.18), confirming that the voltage danger zone persists at partial states of charge. The x = 0.25 depth yields ρ = −0.07 (Extended Data Table 5).](figures/fig4_partial_delithiation.png)
 
 ### Dopant–dopant interactions explain the structure-type dependence
 
@@ -115,7 +117,7 @@ This convergence contrast — short-range in 3D, long-range in 2D — provides a
 
 ### Ordered voltages lie in the tails of the disordered distribution
 
-For 7 of 21 LiCoO₂ dopants, the ordered voltage lies in the statistical tail (|z| > 1.5) of the SQS distribution. The five dopants with the most extreme ordered voltages all have z-scores below −1.9, meaning their ordered value is more extreme than any of the five SQS realisations. Conversely, Ti sits at z = +2.6 at the opposite tail. The ordered configuration systematically overpredicts voltage for some dopants and underpredicts for others, with no consistent direction — explaining why the Spearman ρ collapses to zero rather than simply shifting all rankings uniformly.
+For 7 of 20 LiCoO₂ dopants with converged SQS data, the ordered voltage lies in the statistical tail (|z| > 1.5) of the SQS distribution (Extended Data Fig. 1). The five dopants with the most extreme ordered voltages all have z-scores below −1.9, meaning their ordered value is more extreme than any of the five SQS realisations. Conversely, Ti sits at z = +2.3 at the opposite tail. The ordered configuration systematically overpredicts voltage for some dopants and underpredicts for others, with no consistent direction — explaining why the Spearman ρ collapses to zero rather than simply shifting all rankings uniformly.
 
 ### The danger zone extends to the dominant commercial cathode
 
@@ -123,7 +125,7 @@ NMC811 — the dominant commercial cathode chemistry — confirms that the volta
 
 ### Cross-validation with a second MLIP
 
-To confirm that the disorder effect is not MLIP-specific, we repeated the LiCoO₂ screening for 6 dopants using CHGNet¹⁹ — a charge-informed graph neural network trained independently from MACE-MP-0. CHGNet independently confirms voltage ranking destruction (ρ = −0.26), consistent with MACE (ρ = −0.71 for the same subset). Both architecturally distinct potentials, trained on different data, reach the same conclusion: disorder reshuffles layered voltage rankings to the point where ordered predictions are uninformative.
+To confirm that the disorder effect is not MLIP-specific, we repeated the LiCoO₂ screening for 6 dopants using CHGNet¹⁶ — a charge-informed graph neural network trained independently from MACE-MP-0. CHGNet independently confirms voltage ranking destruction (ρ = −0.26), consistent with MACE (ρ = −0.71 for the same subset). Both architecturally distinct potentials, trained on different data, reach the same conclusion: disorder reshuffles layered voltage rankings to the point where ordered predictions are uninformative.
 
 ### Validation against published DFT data
 
@@ -139,22 +141,22 @@ where **property_scope** = 0 for local properties (formation energy) and 1 for g
 
 The physical basis is transparent. Formation energy depends on local bonding (scope = 0), so R = 0 regardless of structure — correctly predicting safety. Voltage depends on global energy differences (scope = 1), so risk scales with anisotropy: ~1.9 in layered structures (UNSAFE), ~1.0–1.2 in framework/olivine structures (borderline), and 1.0 in cubic 3D structures (SAFE). Mixed-TM hosts add 0.3 per extra species, reflecting the heterogeneous environments that weaken even formation energy preservation.
 
-**Updated predictor performance (26 observations across 9 materials):**
+**Predictor performance (27 observations across 9 materials):**
 
 | Metric | Value |
 |---|---|
-| Accuracy | 84.6% (22/26) |
+| Accuracy | 85.2% (23/27) |
 | **False-safe predictions** | **0** |
 | False-unsafe predictions | 4 |
-| Risk–ρ Spearman correlation | −0.68 (p < 0.001) |
+| Risk–ρ Spearman correlation | −0.73 (p < 0.001) |
 
 The predictor maintains **zero false-safe predictions** — it never declares a material-property combination safe when disorder actually destroys rankings. The four false-unsafe cases (LiFePO₄ voltage and volume, NASICON voltage, LiNiO₂ volume) represent conservative over-predictions for structures with intermediate anisotropy (1.15–1.93). All three NaCoO₂ predictions are correct: voltage and volume UNSAFE (confirmed by ρ = 0.23 and −0.01), formation energy SAFE (confirmed by ρ = 0.79). This asymmetry is by design: a false-unsafe merely triggers unnecessary SQS calculations, while a false-safe risks incorrect dopant selection.
 
 The out-of-sample results refine the danger zone boundary. Olivine (anisotropy = 1.21) and NASICON (anisotropy = 1.15) fall just above R = 1.0 but are empirically safe for voltage — suggesting the true boundary may lie closer to R ≈ 1.3. However, NASICON volume change (ρ = −0.04) *is* destroyed, validating the predictor for that property. NaCoO₂ (anisotropy ≈ 1.9) provides positive confirmation from the unsafe side: a Na-ion layered oxide with the same R-3m topology as LiCoO₂ shows the same voltage destruction (ρ = 0.23), demonstrating that the danger zone is topology-driven, not chemistry-specific.
 
-![Figure 6. Disorder-risk predictor. Risk score R vs actual Spearman ρ for all 26 material-property observations. Green: actually safe (ρ ≥ 0.50). Red: actually unsafe (ρ < 0.50). The R > 1.0 threshold achieves zero false-safe predictions. Grey band: the "conservative zone" where the predictor flags structures that turn out to be safe.](figures/fig6_predictor.png)
+![Figure 6. Disorder-risk predictor. Risk score R vs actual Spearman ρ for all 27 material-property observations. Green: actually safe (ρ ≥ 0.50). Red: actually unsafe (ρ < 0.50). The R > 1.0 threshold achieves zero false-safe predictions. Grey band: the "conservative zone" where the predictor flags structures that turn out to be safe.](figures/fig6_predictor.png)
 
-To make the predictor accessible, we provide an open-source Streamlit web application (https://disorder-screening.streamlit.app) where users can upload a CIF file or enter a Materials Project formula and receive an instant disorder-risk assessment with confidence level and physical explanation. The tool requires no simulation — only crystallographic data.
+To make the predictor accessible, we provide an open-source Streamlit web application (https://disorder-screening.streamlit.app) where users can upload a CIF file or enter a Materials Project²⁰ formula and receive an instant disorder-risk assessment with confidence level and physical explanation. The tool requires no simulation — only crystallographic data.
 
 ### A hybrid screening protocol
 
@@ -174,13 +176,13 @@ The hybrid approach — ordered Ef pre-filter followed by continuous SQS scoring
 
 ## Discussion
 
-This study establishes three key findings across nine materials and 26 material-property observations. First, chemical disorder creates a sharp boundary in computational screening reliability: voltage rankings in layered cathodes — whether Li-ion or Na-ion — are categorically unreliable when computed from ordered supercells, while formation energy rankings and rankings in 3D frameworks are preserved. Second, sequential pruning pipelines — the dominant paradigm in computational screening — amplify even moderate ranking perturbations into near-total finalist divergence (Jaccard = 0.20). Third, this danger zone can be predicted a priori from two structural descriptors, enabling researchers to make informed decisions about simulation methodology before committing computational resources.
+This study establishes three key findings across nine materials and 27 material-property observations. First, chemical disorder creates a sharp boundary in computational screening reliability: voltage rankings in layered cathodes — whether Li-ion or Na-ion — are categorically unreliable when computed from ordered supercells, while formation energy rankings and rankings in 3D frameworks are preserved. Second, sequential pruning pipelines — the dominant paradigm in computational screening — amplify even moderate ranking perturbations into near-total finalist divergence (Jaccard = 0.20). Third, this danger zone can be predicted a priori from two structural descriptors, enabling researchers to make informed decisions about simulation methodology before committing computational resources.
 
 The out-of-sample validation on LiFePO₄, Na₃V₂(PO₄)₃, and NaCoO₂ both confirms and refines the danger zone. LiFePO₄ (olivine, 1D Li transport, voltage ρ = 0.99) represents the strongest possible counter-example to the layered danger zone — its Fe sublattice has moderate anisotropy (1.21) yet voltage rankings are nearly perfectly preserved. This suggests that the edge-sharing octahedral chains in olivine create a fundamentally different interaction topology from the triangular-lattice TM planes in layered oxides. The NASICON result (3D framework, voltage ρ = 0.77 but volume ρ = −0.04) reveals that even within a single "safe" material, disorder can selectively destroy certain property rankings — a nuance that blanket safe/unsafe classifications would miss. NaCoO₂ (layered R-3m, voltage ρ = 0.23, Ef ρ = 0.79) extends the danger zone from Li-ion to Na-ion layered oxides, confirming that the effect is driven by topology — the 2D triangular TM sublattice — rather than by the specific alkali ion or interlayer chemistry.
 
 The partial delithiation results (ρ = −0.07 at x = 0.25; ρ = −0.32 at x = 0.5) have direct practical implications. Real batteries operate at partial states of charge, and dopant optimisation should target the relevant voltage window — not just the thermodynamic endpoints. Our finding that voltage rankings are not self-consistent between delithiation depths, *even in ordered cells*, suggests that the conventional approach of computing a single average voltage is fundamentally inadequate for ranking dopants in layered cathodes.
 
-The cost structure of modern universal MLIPs makes disorder-aware screening immediately practical. Each MACE-MP-0 relaxation of a 256-atom supercell takes ~2 minutes on a single A100 GPU. The complete eight-material study (~900 simulations) required ~42 GPU-hours — approximately 1,500× cheaper than equivalent DFT. Rather than choosing between fast-but-unreliable (ordered) and accurate-but-expensive (DFT), researchers can now afford an ensemble of disorder-aware MLIP simulations per dopant at lower total cost than a single ordered DFT run.
+The cost structure of modern universal MLIPs makes disorder-aware screening immediately practical. Each MACE-MP-0 relaxation of a 256-atom supercell takes ~2 minutes on a single A100 GPU. The complete nine-material study (~1,000 simulations) required ~42 GPU-hours. For comparison, a single DFT relaxation of a 256-atom supercell at GGA+U level typically requires 500–1,000 CPU-hours¹²; the equivalent DFT study would thus cost ~40,000–80,000 CPU-hours, or approximately 1,500× more. Rather than choosing between fast-but-unreliable (ordered) and accurate-but-expensive (DFT), researchers can now afford an ensemble of disorder-aware MLIP simulations per dopant at lower total cost than a single ordered DFT run.
 
 ### Implications for published screening studies
 
@@ -188,7 +190,7 @@ Several high-profile screening studies⁴⁻⁶ have identified optimal dopants 
 
 ### Limitations
 
-Several limitations should be considered. The MACE-MP-0 potential is trained predominantly on ordered structures; its accuracy for strongly oxidised, Li-depleted states has not been systematically validated against DFT. Our SQS realisations use 5 configurations at ~6% dopant concentration — convergence at higher concentrations has not been tested. Only substitution at the primary TM site is modelled; interstitial incorporation, anti-site defects, and charge-compensating point defects are not included. The Monte Carlo clustering analysis uses a nearest-neighbour Ising model that is unreliable for layered materials where pair interactions are long-ranged (Table 3). Finally, while we have validated across five structure types, both Li-ion and Na-ion chemistries, and both layered and framework Na-ion hosts, extension to sulfide, halide, and other anion chemistries remains to be tested.
+Several limitations should be considered. The MACE-MP-0 potential is trained predominantly on ordered structures; its accuracy for strongly oxidised, Li-depleted states has not been systematically validated against DFT. Our SQS realisations use 5 configurations at ~6% dopant concentration — convergence at higher concentrations has not been tested. Only substitution at the primary TM site is modelled; interstitial incorporation, anti-site defects, and charge-compensating point defects are not included. The Monte Carlo clustering analysis uses a nearest-neighbour Ising model that is unreliable for layered materials where pair interactions are long-ranged (Table 3). Finally, while we have validated across six structure types, both Li-ion and Na-ion chemistries, and both layered and framework Na-ion hosts, extension to sulfide, halide, and other anion chemistries remains to be tested.
 
 ---
 
@@ -196,7 +198,7 @@ Several limitations should be considered. The MACE-MP-0 potential is trained pre
 
 ### Materials and dopants
 
-Nine parent oxide structures were studied: LiCoO₂ (R-3m layered), LiNiO₂ (R-3m layered), LiNi₀.₈Mn₀.₁Co₀.₁O₂ (R-3m layered), NaCoO₂ (R-3m layered, O3-type), LiMn₂O₄ (Fd-3m spinel), SrTiO₃ (Pm-3m perovskite), CeO₂ (Fm-3m fluorite), LiFePO₄ (Pnma olivine), and Na₃V₂(PO₄)₃ (R-3c NASICON). Dopants were substituted at the primary transition-metal site (Co, Ni, Mn, Ti, Ce, Fe, or V). The dopant set (12–22 per material) was selected by a three-stage chemical pre-screen: SMACT charge neutrality, Shannon ionic radius mismatch (≤35%), and Hautier–Ceder substitution probability (≥0.001).
+Nine parent oxide structures were studied: LiCoO₂ (R-3m layered), LiNiO₂ (R-3m layered), LiNi₀.₈Mn₀.₁Co₀.₁O₂ (R-3m layered), NaCoO₂ (R-3m layered, O3-type), LiMn₂O₄ (Fd-3m spinel), SrTiO₃ (Pm-3m perovskite), CeO₂ (Fm-3m fluorite), LiFePO₄ (Pnma olivine), and Na₃V₂(PO₄)₃ (R-3c NASICON). Dopants were substituted at the primary transition-metal site (Co, Ni, Mn, Ti, Ce, Fe, or V). The dopant set (12–20 per material) was selected by a three-stage chemical pre-screen: SMACT¹⁸ charge neutrality, Shannon¹⁴ ionic radius mismatch (≤35%), and Hautier–Ceder¹⁹ substitution probability (≥0.001).
 
 ### Supercell construction
 
@@ -204,7 +206,7 @@ Supercells of 72–324 atoms were constructed: 4×4×4 (256 atoms) for layered, 
 
 **Ordered reference.** Farthest-first site selection, maximising minimum dopant–dopant distance, representing the conventional approach.
 
-**Disordered (SQS) realisations.** Five independent SQS were generated using pymatgen¹⁶, optimising pair correlation functions to match a random alloy. Properties were averaged across converged realisations; inter-realisation standard deviation provides configurational uncertainty.
+**Disordered (SQS) realisations.** Five independent SQS were generated using pymatgen¹³, optimising pair correlation functions to match a random alloy. Properties were averaged across converged realisations; inter-realisation standard deviation provides configurational uncertainty.
 
 ### Simulations
 
@@ -226,13 +228,13 @@ Spearman ρ quantified ranking preservation. Jaccard similarity measured candida
 
 ### Computational resources
 
-All simulations ran on NVIDIA A100 GPUs (Google Colab). The complete study (~900 relaxations) required ~42 GPU-hours. Equivalent DFT: ~40,000–80,000 CPU-hours (~1,500× more expensive).
+All simulations ran on NVIDIA A100 GPUs (Google Colab). The complete study (~1,000 relaxations) required ~42 GPU-hours. Equivalent DFT: ~40,000–80,000 CPU-hours (~1,500× more expensive).
 
 ---
 
 ## Data and Code Availability
 
-All checkpoint data, analysis scripts, parent CIF files, and the complete screening pipeline are available at [GitHub repository URL]. The disorder-risk predictor web tool is accessible at https://disorder-screening.streamlit.app. The interactive tool accepts CIF uploads or Materials Project formula queries and returns instant risk assessments with physical explanations, requiring no simulation infrastructure.
+All checkpoint data, analysis scripts, parent CIF files, and the complete screening pipeline are available at https://github.com/snehalnair/disorder-screening-agent. The disorder-risk predictor web tool is accessible at https://disorder-screening.streamlit.app. The interactive tool accepts CIF uploads or Materials Project formula queries and returns instant risk assessments with physical explanations, requiring no simulation infrastructure.
 
 ---
 
@@ -249,18 +251,15 @@ All checkpoint data, analysis scripts, parent CIF files, and the complete screen
 9. Urban, A., Seo, D.-H. & Ceder, G. Computational understanding of Li-ion batteries. *npj Comput. Mater.* **2**, 16002 (2016).
 10. van de Walle, A. et al. Efficient stochastic generation of special quasirandom structures. *Calphad* **42**, 13–18 (2013).
 11. Batatia, I. et al. A foundation model for atomistic materials chemistry. *arXiv:2401.00096* (2024).
-12. Varanasi, A. K. et al. Tuning electrochemical potential of LiCoO₂ with cation substitution. *Ionics* **20**, 315–321 (2014).
-13. Curtarolo, S. et al. The high-throughput highway to computational materials design. *Nat. Mater.* **12**, 191–201 (2013).
-14. Yu, L. & Zunger, A. Identification of potential photovoltaic absorbers. *Phys. Rev. Lett.* **108**, 068701 (2012).
-15. Nørskov, J. K. et al. Towards the computational design of solid catalysts. *Nat. Chem.* **1**, 37–46 (2009).
-16. Ong, S. P. et al. Python materials genomics (pymatgen). *Comput. Mater. Sci.* **68**, 314–319 (2013).
-17. Batatia, I. et al. MACE-MP-0: a universal interatomic potential. *arXiv:2401.00096* (2024).
-18. Sanchez, J. M., Ducastelle, F. & Gratias, D. Generalized cluster description of multicomponent systems. *Phys. A* **128**, 334–350 (1984).
-19. Deng, B. et al. CHGNet as a pretrained universal neural network potential. *Nat. Mach. Intell.* **5**, 1031–1041 (2023).
-20. Huang, B. Comprehensive DASP for defect simulation. *Comput. Phys. Commun.* **284**, 108610 (2023).
-21. Busk, J. et al. Calibrated uncertainty for molecular property prediction. *Mach. Learn.: Sci. Technol.* **3**, 015012 (2022).
-22. Bartel, C. J. et al. New tolerance factors to predict the stability of perovskite oxides and halides. *Sci. Adv.* **5**, eaav0693 (2019).
-23. Chen, C. & Ong, S. P. A universal graph deep learning interatomic potential for the periodic table. *Nat. Comput. Sci.* **2**, 718–728 (2022).
+12. Curtarolo, S. et al. The high-throughput highway to computational materials design. *Nat. Mater.* **12**, 191–201 (2013).
+13. Ong, S. P. et al. Python materials genomics (pymatgen). *Comput. Mater. Sci.* **68**, 314–319 (2013).
+14. Shannon, R. D. Revised effective ionic radii and systematic studies of interatomic distances in halides and chalcogenides. *Acta Crystallogr. A* **32**, 751–767 (1976).
+15. Sanchez, J. M., Ducastelle, F. & Gratias, D. Generalized cluster description of multicomponent systems. *Phys. A* **128**, 334–350 (1984).
+16. Deng, B. et al. CHGNet as a pretrained universal neural network potential. *Nat. Mach. Intell.* **5**, 1031–1041 (2023).
+17. Huang, B. Comprehensive DASP for defect simulation. *Comput. Phys. Commun.* **284**, 108610 (2023).
+18. Davies, D. W. et al. SMACT: semiconducting materials by analogy and chemical theory. *J. Open Source Softw.* **4**, 1361 (2019).
+19. Hautier, G., Fischer, C., Ehrlacher, V., Jain, A. & Ceder, G. Data mined ionic substitutions for the discovery of new compounds. *Inorg. Chem.* **50**, 656–663 (2011).
+20. Jain, A. et al. Commentary: The Materials Project: a materials genome approach to accelerating materials innovation. *APL Mater.* **1**, 011002 (2013).
 
 ---
 
@@ -321,7 +320,7 @@ All checkpoint data, analysis scripts, parent CIF files, and the complete screen
 | SQS realisations | 5 |
 | Li-removal seeds | 3 |
 
-### Extended Data Table 6. Disorder-risk predictor: all 26 observations
+### Extended Data Table 6. Disorder-risk predictor: all 27 observations
 
 | Material | Property | R | Prediction | ρ | Actual | Correct? |
 |---|---|---|---|---|---|---|

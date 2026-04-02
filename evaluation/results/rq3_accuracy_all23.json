@@ -1,0 +1,194 @@
+{
+  "per_dopant": [
+    {
+      "dopant": "Al",
+      "properties": {
+        "li_ni_exchange": {
+          "experimental": 2.1,
+          "ordered": null,
+          "disordered": null,
+          "error_ordered": null,
+          "error_disordered": null,
+          "units": "%"
+        },
+        "voltage": {
+          "experimental": 3.78,
+          "ordered": -3.5699166939300384,
+          "disordered": -3.447061426822387,
+          "error_ordered": 7.349916693930038,
+          "error_disordered": 7.227061426822386,
+          "units": "V"
+        }
+      }
+    },
+    {
+      "dopant": "Ti",
+      "properties": {
+        "li_ni_exchange": {
+          "experimental": 2.8,
+          "ordered": null,
+          "disordered": null,
+          "error_ordered": null,
+          "error_disordered": null,
+          "units": "%"
+        },
+        "voltage": {
+          "experimental": 3.79,
+          "ordered": -3.6445910656441236,
+          "disordered": -3.4559296124263468,
+          "error_ordered": 7.434591065644124,
+          "error_disordered": 7.245929612426346,
+          "units": "V"
+        }
+      }
+    },
+    {
+      "dopant": "Mg",
+      "properties": {
+        "li_ni_exchange": {
+          "experimental": 2.3,
+          "ordered": null,
+          "disordered": null,
+          "error_ordered": null,
+          "error_disordered": null,
+          "units": "%"
+        },
+        "voltage": {
+          "experimental": 3.76,
+          "ordered": -3.6326040214213244,
+          "disordered": -3.4176710809546322,
+          "error_ordered": 7.392604021421324,
+          "error_disordered": 7.177671080954632,
+          "units": "V"
+        }
+      }
+    },
+    {
+      "dopant": "Ga",
+      "properties": {
+        "li_ni_exchange": {
+          "experimental": 2.3,
+          "ordered": null,
+          "disordered": null,
+          "error_ordered": null,
+          "error_disordered": null,
+          "units": "%"
+        },
+        "voltage": {
+          "experimental": 3.75,
+          "ordered": -3.5906074103477263,
+          "disordered": -3.425799070812439,
+          "error_ordered": 7.340607410347726,
+          "error_disordered": 7.175799070812439,
+          "units": "V"
+        }
+      }
+    },
+    {
+      "dopant": "Fe",
+      "properties": {
+        "li_ni_exchange": {
+          "experimental": 3.9,
+          "ordered": null,
+          "disordered": null,
+          "error_ordered": null,
+          "error_disordered": null,
+          "units": "%"
+        },
+        "voltage": {
+          "experimental": 3.72,
+          "ordered": -3.4526503005661096,
+          "disordered": -3.3822733349505607,
+          "error_ordered": 7.17265030056611,
+          "error_disordered": 7.102273334950561,
+          "units": "V"
+        }
+      }
+    },
+    {
+      "dopant": "Zr",
+      "properties": {
+        "li_ni_exchange": {
+          "experimental": 3.5,
+          "ordered": null,
+          "disordered": null,
+          "error_ordered": null,
+          "error_disordered": null,
+          "units": "%"
+        },
+        "voltage": {
+          "experimental": 3.83,
+          "ordered": -3.6822209787101827,
+          "disordered": -3.369028279260085,
+          "error_ordered": 7.512220978710182,
+          "error_disordered": 7.1990282792600855,
+          "units": "V"
+        }
+      }
+    },
+    {
+      "dopant": "Nb",
+      "properties": {
+        "li_ni_exchange": {
+          "experimental": 3.8,
+          "ordered": null,
+          "disordered": null,
+          "error_ordered": null,
+          "error_disordered": null,
+          "units": "%"
+        },
+        "voltage": {
+          "experimental": 3.85,
+          "ordered": -3.6092275787124213,
+          "disordered": -3.4341019582201247,
+          "error_ordered": 7.459227578712421,
+          "error_disordered": 7.284101958220125,
+          "units": "V"
+        }
+      }
+    },
+    {
+      "dopant": "W",
+      "properties": {
+        "li_ni_exchange": {
+          "experimental": 3.2,
+          "ordered": null,
+          "disordered": null,
+          "error_ordered": null,
+          "error_disordered": null,
+          "units": "%"
+        },
+        "voltage": {
+          "experimental": 3.84,
+          "ordered": -3.6915440147088714,
+          "disordered": -3.392068905820105,
+          "error_ordered": 7.531544014708871,
+          "error_disordered": 7.232068905820105,
+          "units": "V"
+        }
+      }
+    }
+  ],
+  "mae_ordered": {
+    "formation_energy": null,
+    "li_ni_exchange": null,
+    "voltage": 7.3991702580051,
+    "volume_change": null
+  },
+  "mae_disordered": {
+    "formation_energy": null,
+    "li_ni_exchange": null,
+    "voltage": 7.205491708658335,
+    "volume_change": null
+  },
+  "pct_reduction": {
+    "voltage": 2.61757119505698
+  },
+  "spearman_vs_exp": {
+    "voltage": {
+      "rho": -0.11904761904761905,
+      "pvalue": 0.7788857260523796,
+      "n": 8
+    }
+  }
+}

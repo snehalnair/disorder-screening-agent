@@ -117,6 +117,15 @@ STRUCTURE_DATA = {
         "anisotropy": 1.15,
         "n_tm": 1,
     },
+    "NaCoO2": {
+        "structure": "layered R-3m",
+        "a": 2.89, "c": 15.61,
+        "nn_tm_dist": 2.85,        # Co-Co in-plane
+        "interlayer_dist": 5.42,
+        "nn_count": 6,
+        "anisotropy": 1.90,
+        "n_tm": 1,
+    },
 }
 
 # ── Dataset ──────────────────────────────────────────────────────────────
@@ -147,8 +156,13 @@ OBSERVATIONS = [
     ("NASICON",  "Ef",      0,  0.72),
     ("NASICON",  "voltage", 1,  0.77),
     ("NASICON",  "dV",      1, -0.04),
-    # Partial delithiation (LiCoO2 at x=0.5)
+    # Out-of-sample: NaCoO2
+    ("NaCoO2",  "Ef",      0,  0.79),
+    ("NaCoO2",  "voltage", 1,  0.23),
+    ("NaCoO2",  "dV",      1, -0.01),
+    # Partial delithiation (LiCoO2)
     ("LiCoO2",  "V_x05",   1, -0.32),
+    ("LiCoO2",  "V_x025",  1, -0.07),
 ]
 
 RHO_THRESHOLD = 0.50
@@ -160,6 +174,7 @@ PROP_LABELS = {
     "dV": "$\\Delta$V",
     "E_Ovac": "E$_{\\mathrm{Ovac}}$",
     "V_x05": "V(x=0.5)",
+    "V_x025": "V(x=0.25)",
 }
 
 MAT_LABELS = {
@@ -171,6 +186,7 @@ MAT_LABELS = {
     "CeO2": "CeO$_2$",
     "LiFePO4": "LiFePO$_4$",
     "NASICON": "NASICON",
+    "NaCoO2": "NaCoO$_2$",
 }
 
 
@@ -223,13 +239,35 @@ def plot_predictor(risks, rhos, labels, names, scopes, anisos, metrics, savepath
     (a) Risk score vs actual ρ — shows clear separation.
     (b) Decision boundary with structural interpretation.
     """
-    fig, axes = plt.subplots(1, 2, figsize=(13, 5.5),
-                             gridspec_kw={"width_ratios": [3, 2]})
+    fig, axes = plt.subplots(1, 2, figsize=(14, 5.5),
+                             gridspec_kw={"width_ratios": [3, 2], "wspace": 0.3})
 
     # ── Panel (a): Risk score vs actual ρ ──
     ax = axes[0]
 
     preds = np.array(metrics["predictions"])
+
+    # Pre-compute label offsets to avoid overlap
+    # Group by (R_rounded, rho_rounded) and stagger
+    label_offsets = {}
+    for i, name in enumerate(names):
+        label_offsets[name] = None  # default: auto-place
+
+    # Manual offsets for known clusters (dx, dy in fontsize units)
+    # Only label a curated subset — skip Ef points at R=0 to avoid clutter
+    labeled_set = {
+        # Unsafe region (right side, R≈1.9–2.5) — spread vertically
+        "LiCoO$_2$ V":            (0.8,  1.5),    # ρ=-0.25
+        "LiCoO$_2$ V(x=0.5)":    (0.8, -1.5),    # ρ=-0.32
+        "LiCoO$_2$ V(x=0.25)":   (-6.0,  1.2),   # ρ=-0.07
+        "NaCoO$_2$ V":            (-6.0, -0.5),   # ρ=0.23
+        "NMC811 V":                (0.8,  0.8),    # ρ=0.09, R=2.53
+        "NASICON $\\Delta$V":     (0.8, -1.2),    # ρ=-0.04, R=1.15
+        # Safe region — only label distinctive points
+        "NASICON V":               (0.8,  0.8),    # ρ=0.77, R=1.15
+        "LiFePO$_4$ V":           (0.8,  0.8),    # ρ=0.99, R=1.21
+        "LiMn$_2$O$_4$ V":       (-6.0, -0.5),   # ρ=0.95, R=1.0
+    }
 
     for i in range(len(risks)):
         correct = preds[i] == labels[i]
@@ -243,19 +281,17 @@ def plot_predictor(risks, rhos, labels, names, scopes, anisos, metrics, savepath
         edgecolor = 'black' if not correct else (color if correct else 'black')
         lw = 2.5 if not correct else 1.0
 
-        ax.scatter(risks[i], rhos[i], c=color, marker=marker, s=130,
+        ax.scatter(risks[i], rhos[i], c=color, marker=marker, s=110,
                   edgecolors=edgecolor, linewidths=lw, zorder=5)
 
-        # Label — offset to avoid overlap
-        ha = 'left'
-        dx = 0.05
-        if risks[i] > 1.5:
-            ha = 'right'
-            dx = -0.05
-
-        ax.annotate(names[i], (risks[i], rhos[i]),
-                   xytext=(dx, 0.02), textcoords='offset fontsize',
-                   fontsize=7.5, color='#444444', ha=ha, va='bottom')
+        # Only label curated points to avoid clutter
+        if names[i] in labeled_set:
+            dx, dy = labeled_set[names[i]]
+            ax.annotate(names[i], (risks[i], rhos[i]),
+                       xytext=(dx, dy), textcoords='offset fontsize',
+                       fontsize=6.5, color='#444444', ha='left', va='center',
+                       arrowprops=dict(arrowstyle='-', color='#AAAAAA',
+                                       lw=0.4, shrinkB=3))
 
     # Decision boundary
     ax.axvline(RISK_THRESHOLD, color='#7F8C8D', ls='--', lw=2, alpha=0.8)
@@ -265,23 +301,24 @@ def plot_predictor(risks, rhos, labels, names, scopes, anisos, metrics, savepath
     ax.axvspan(RISK_THRESHOLD, 3.0, alpha=0.06, color='red')
     ax.axvspan(-0.1, RISK_THRESHOLD, alpha=0.06, color='green')
 
-    ax.text(0.4, -0.38, 'PREDICTED\nSAFE', fontsize=10, color='#27AE60',
-            ha='center', fontweight='bold', alpha=0.7)
-    ax.text(2.0, -0.38, 'PREDICTED\nUNSAFE', fontsize=10, color='#E74C3C',
-            ha='center', fontweight='bold', alpha=0.7)
+    # Zone labels — placed at bottom corners, clear of data
+    ax.text(0.15, -0.45, 'PREDICTED\nSAFE', fontsize=9, color='#27AE60',
+            ha='center', fontweight='bold', alpha=0.6)
+    ax.text(2.4, -0.45, 'PREDICTED\nUNSAFE', fontsize=9, color='#E74C3C',
+            ha='center', fontweight='bold', alpha=0.6)
 
     ax.set_xlabel('Disorder risk score $R$', fontsize=12)
     ax.set_ylabel('Actual Spearman $\\rho$ (ordered vs disordered)', fontsize=11)
     ax.set_xlim(-0.15, 2.8)
-    ax.set_ylim(-0.45, 1.1)
+    ax.set_ylim(-0.50, 1.15)
     ax.set_title('(a) Risk score vs ranking preservation', fontsize=12)
 
-    # Accuracy annotation
+    # Accuracy annotation — bottom-left, clear of data points
     acc_text = (f"Accuracy: {metrics['accuracy']:.1%}\n"
                 f"False safe: {metrics['FP']}\n"
                 f"False unsafe: {metrics['FN']}")
     ax.text(0.02, 0.02, acc_text, transform=ax.transAxes,
-           fontsize=9, va='bottom', ha='left',
+           fontsize=8, va='bottom', ha='left',
            bbox=dict(boxstyle='round,pad=0.4', facecolor='white',
                     edgecolor='#CCCCCC', alpha=0.9))
 

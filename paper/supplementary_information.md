@@ -110,7 +110,7 @@ All energies in eV/atom (formation energy) or V (voltage). Volume change in %. "
 
 **Spearman rho:** Ef = +0.52, Voltage = +0.09
 
-### Table S2.4. NaCoO2 (layered R-3m, O3-type, 18 dopants)
+### Table S2.4. NaCoO2 (layered R-3m, O3-type, 19 candidates, 18 converged)
 
 Data from out-of-sample validation run. NaCoO2 is isostructural with LiCoO2 (same R-3m layered topology) but with Na+ instead of Li+ as the alkali ion.
 
@@ -138,7 +138,7 @@ Data from out-of-sample validation run. NaCoO2 is isostructural with LiCoO2 (sam
 
 **Spearman rho:** Ef = +0.79, Voltage = +0.23, Volume = -0.01
 
-*Note: Per-dopant numerical values will be populated from nco_screening_results.json once transferred from the Colab run.*
+*Note: Per-dopant numerical values to be populated from nco_screening_results.json (Colab output pending transfer).*
 
 ### Table S2.5. LiMn2O4 (spinel Fd-3m, 4x4x4, 256 atoms, 12 dopants)
 
@@ -289,18 +289,18 @@ All materials show Ef rho stable to within +/- 0.03 between k=4 and k=5, consist
 
 We swept the risk threshold from R = 0.5 to R = 2.0 and computed predictor accuracy, false-safe rate, and false-unsafe rate for each threshold.
 
-**Table S4.1. Threshold sweep (26 observations)**
+**Table S4.1. Threshold sweep (27 observations)**
 
 | R threshold | Accuracy | False-safe | False-unsafe |
 |-------------|----------|------------|--------------|
-| 0.50 | 69.2% | 0 | 8 |
-| 0.75 | 76.9% | 0 | 6 |
-| 1.00 | **84.6%** | **0** | 4 |
-| 1.15 | 88.5% | 1 | 2 |
-| 1.25 | 88.5% | 1 | 2 |
-| 1.50 | 88.5% | 2 | 1 |
-| 1.93 | 80.8% | 3 | 2 |
-| 2.00 | 76.9% | 5 | 1 |
+| 0.50 | 66.7% | 0 | 9 |
+| 0.80 | 70.4% | 0 | 8 |
+| 1.00 | **85.2%** | **0** | 4 |
+| 1.20 | 85.2% | 1 | 3 |
+| 1.50 | 92.6% | 1 | 1 |
+| 1.80 | 92.6% | 1 | 1 |
+| 1.93 | 81.5% | 3 | 2 |
+| 2.00 | 77.8% | 5 | 1 |
 
 The R = 1.0 threshold is the highest threshold that maintains zero false-safe predictions. Raising the threshold above 1.15 introduces false-safe predictions (NASICON volume at R = 1.15 is the first to flip). The choice of R = 1.0 represents the Pareto-optimal point for the safety-first objective.
 
@@ -409,7 +409,7 @@ In LiMn2O4, the interaction converges immediately at the nearest-neighbour shell
 
 where property_scope = 0 for Ef, 1 for voltage/volume/O-vacancy; sublattice_anisotropy = interlayer/intralayer TM-TM distance ratio.
 
-**Table S8.1. All 26 observations with predictor scores**
+**Table S8.1. All 27 observations with predictor scores**
 
 | # | Material | Property | Anisotropy | n_TM | R | Predicted | rho | Actual | Correct? |
 |---|----------|----------|------------|------|---|-----------|-----|--------|----------|
@@ -441,7 +441,7 @@ where property_scope = 0 for Ef, 1 for voltage/volume/O-vacancy; sublattice_anis
 | 26a | LiCoO2 (x=0.5) | Voltage | 1.94 | 1 | 1.94 | UNSAFE | -0.32 | Unsafe | Yes |
 | 26b | LiCoO2 (x=0.25) | Voltage | 1.94 | 1 | 1.94 | UNSAFE | -0.07 | Unsafe | Yes |
 
-**Summary:** 22/26 correct (84.6%). **Zero false-safe** predictions. 4 false-unsafe (conservative over-predictions for intermediate-anisotropy structures).
+**Summary:** 23/27 correct (85.2%). **Zero false-safe** predictions. 4 false-unsafe (conservative over-predictions for intermediate-anisotropy structures).
 
 ---
 

@@ -303,6 +303,7 @@ def fig2_heatmap():
     # Additional materials from JSON results (with bootstrap CIs)
     extra = {
         "NMC811": {"formation_energy": 0.52, "voltage": 0.09, "volume_change": np.nan},
+        "NaCoO₂": {"formation_energy": 0.79, "voltage": 0.23, "volume_change": -0.01},
         "LiFePO₄": {"formation_energy": 1.00, "voltage": 0.99, "volume_change": 0.79},
         "Na₃V₂(PO₄)₃": {"formation_energy": 0.72, "voltage": 0.77, "volume_change": -0.04},
     }
@@ -310,6 +311,10 @@ def fig2_heatmap():
         "NMC811": {
             "formation_energy": (-0.02, 0.85), "voltage": (-0.51, 0.63),
             "volume_change": (np.nan, np.nan),
+        },
+        "NaCoO₂": {
+            "formation_energy": (0.46, 0.94), "voltage": (-0.26, 0.64),
+            "volume_change": (-0.50, 0.49),
         },
         "LiFePO₄": {
             "formation_energy": (1.00, 1.00), "voltage": (0.94, 1.00),
@@ -321,80 +326,110 @@ def fig2_heatmap():
         },
     }
 
-    # Build the full matrix
+    # Build the full matrix — all 9 materials
     mat_names = [
-        "LiCoO$_2$", "LiNiO$_2$", "NMC811",  # layered
-        "LiMn$_2$O$_4$",                       # spinel
-        "LiFePO$_4$",                           # olivine
-        "Na$_3$V$_2$(PO$_4$)$_3$",             # NASICON
-        "SrTiO$_3$", "CeO$_2$",               # non-cathode 3D
+        "LiCoO$_2$", "LiNiO$_2$", "NMC811", "NaCoO$_2$",  # layered
+        "LiMn$_2$O$_4$",                                     # spinel
+        "LiFePO$_4$",                                         # olivine
+        "Na$_3$V$_2$(PO$_4$)$_3$",                           # NASICON
+        "SrTiO$_3$", "CeO$_2$",                              # non-cathode 3D
     ]
     # Keys for data lookup (plain unicode)
     mat_keys = [
-        "LiCoO₂", "LiNiO₂", "NMC811",
+        "LiCoO₂", "LiNiO₂", "NMC811", "NaCoO₂",
         "LiMn₂O₄", "LiFePO₄", "Na₃V₂(PO₄)₃",
         "SrTiO₃", "CeO₂",
     ]
     structures = [
-        "Layered", "Layered", "Layered",
+        "Layered", "Layered", "Layered", "Layered",
         "Spinel", "Olivine", "NASICON",
         "Perovskite", "Fluorite",
     ]
 
-    rho_matrix = np.full((len(mat_names), 3), np.nan)
-    ci_matrix = {}
-    n_matrix = np.zeros((len(mat_names), 3), dtype=int)
+    # Build unsorted matrix: rows = materials, cols = properties
+    n_mat = len(mat_names)
+    rho_raw = np.full((n_mat, 3), np.nan)
+    ci_raw = {}
 
     for i, mat_key in enumerate(mat_keys):
         for j, prop in enumerate(PROPERTIES):
             mat = mat_key
             if mat in orig_data:
                 d = orig_data[mat][prop]
-                rho_matrix[i, j] = d["rho"]
-                ci_matrix[(i, j)] = (d["lo"], d["hi"])
-                n_matrix[i, j] = d["n"]
+                rho_raw[i, j] = d["rho"]
+                ci_raw[(i, j)] = (d["lo"], d["hi"])
             elif mat in extra:
-                rho_matrix[i, j] = extra[mat][prop]
-                ci_matrix[(i, j)] = extra_ci.get(mat, {}).get(prop, (np.nan, np.nan))
+                rho_raw[i, j] = extra[mat][prop]
+                ci_raw[(i, j)] = extra_ci.get(mat, {}).get(prop, (np.nan, np.nan))
 
-    fig, ax = plt.subplots(figsize=(4.0, 4.5))
+    # Sort materials by volume_change ρ (column index 2), NaN sorts last
+    vol_rhos = rho_raw[:, 2].copy()
+    vol_rhos_sortable = np.where(np.isnan(vol_rhos), -999, vol_rhos)
+    sort_idx = np.argsort(vol_rhos_sortable)  # ascending: red→green
+
+    mat_names_sorted = [mat_names[i] for i in sort_idx]
+    structures_sorted = [structures[i] for i in sort_idx]
+    mat_keys_sorted = [mat_keys[i] for i in sort_idx]
+
+    # Build sorted matrix and CI lookup
+    rho_matrix = rho_raw[sort_idx, :]
+    ci_matrix = {}
+    for new_i, old_i in enumerate(sort_idx):
+        for j in range(3):
+            if (old_i, j) in ci_raw:
+                ci_matrix[(new_i, j)] = ci_raw[(old_i, j)]
+
+    # ── Horizontal layout: transpose so rows=properties, cols=materials ──
+    rho_T = rho_matrix.T  # shape (3, n_mat)
+
+    fig, ax = plt.subplots(figsize=(7.0, 2.8))
 
     norm = TwoSlopeNorm(vmin=-1, vcenter=0, vmax=1)
     cmap = plt.cm.RdYlGn
 
-    im = ax.imshow(rho_matrix, cmap=cmap, norm=norm, aspect="auto")
+    im = ax.imshow(rho_T, cmap=cmap, norm=norm, aspect="auto")
 
-    for i in range(len(mat_names)):
-        for j in range(3):
-            val = rho_matrix[i, j]
+    # Annotate cells
+    for j_prop in range(3):
+        for i_mat in range(n_mat):
+            val = rho_T[j_prop, i_mat]
             if np.isnan(val):
-                ax.text(j, i, "—", ha="center", va="center", fontsize=8, color="grey")
+                ax.text(i_mat, j_prop, "—", ha="center", va="center",
+                        fontsize=8, color="grey")
                 continue
-            lo, hi = ci_matrix.get((i, j), (np.nan, np.nan))
+            lo, hi = ci_matrix.get((i_mat, j_prop), (np.nan, np.nan))
             bold = not np.isnan(lo) and not np.isnan(hi) and (lo > 0 or hi < 0)
             color = "white" if abs(val) > 0.55 else "black"
-            ax.text(j, i, f"{val:+.2f}", ha="center", va="center",
-                    fontsize=8.5, fontweight="bold" if bold else "normal", color=color)
+            ax.text(i_mat, j_prop, f"{val:+.2f}", ha="center", va="center",
+                    fontsize=8, fontweight="bold" if bold else "normal", color=color)
             if not np.isnan(lo):
-                ax.text(j, i + 0.30, f"[{lo:+.2f},{hi:+.2f}]",
-                        ha="center", va="center", fontsize=5, color=color, alpha=0.7)
+                ax.text(i_mat, j_prop + 0.32, f"[{lo:+.2f},{hi:+.2f}]",
+                        ha="center", va="center", fontsize=4.5, color=color, alpha=0.7)
 
-    # Y-axis: material names with structure type
-    ylabels = [f"{m}\n({s})" for m, s in zip(mat_names, structures)]
-    ax.set_yticks(range(len(mat_names)))
-    ax.set_yticklabels(ylabels, fontsize=7)
-    ax.set_xticks(range(3))
-    ax.set_xticklabels([PROP_LABELS[p] for p in PROPERTIES], fontsize=8)
+    # X-axis: material names with structure type (top)
+    xlabels = [f"{m}\n({s})" for m, s in zip(mat_names_sorted, structures_sorted)]
+    ax.set_xticks(range(n_mat))
+    ax.set_xticklabels(xlabels, fontsize=6.5, ha="center")
     ax.tick_params(top=True, bottom=False, labeltop=True, labelbottom=False)
 
-    # Horizontal divider lines between structure groups
-    for y_pos in [2.5, 3.5, 4.5, 5.5]:
-        ax.axhline(y_pos, color="white", lw=2)
+    # Y-axis: property names (left)
+    prop_labels_list = [PROP_LABELS[p] for p in PROPERTIES]
+    ax.set_yticks(range(3))
+    ax.set_yticklabels(prop_labels_list, fontsize=8)
 
-    cbar = fig.colorbar(im, ax=ax, shrink=0.7, pad=0.08, aspect=25)
-    cbar.set_label("Spearman ρ", fontsize=8)
+    # Vertical divider lines between structure groups (find boundaries in sorted order)
+    struct_boundaries = []
+    for k in range(1, n_mat):
+        if structures_sorted[k] != structures_sorted[k - 1]:
+            struct_boundaries.append(k - 0.5)
+    for x_pos in struct_boundaries:
+        ax.axvline(x_pos, color="white", lw=2)
 
-    ax.text(-0.15, 1.08, "b", fontsize=12, fontweight="bold", transform=ax.transAxes)
+    cbar = fig.colorbar(im, ax=ax, shrink=0.85, pad=0.03, aspect=15,
+                         orientation="vertical")
+    cbar.set_label("Spearman $\\rho$", fontsize=8)
+
+    ax.text(-0.06, 1.25, "b", fontsize=12, fontweight="bold", transform=ax.transAxes)
 
     out = FIG_DIR / "fig2_heatmap"
     fig.savefig(str(out) + ".pdf")
@@ -616,8 +651,8 @@ def fig5_interaction_energy():
     fig, ax = plt.subplots(figsize=(4.5, 3.2))
 
     for mat_key, style in [
-        ("LiCoO2", {"color": ORD_COL, "marker": "o", "label": "LiCoO₂ (layered)"}),
-        ("LiMn2O4", {"color": DIS_COL, "marker": "s", "label": "LiMn₂O₄ (spinel)"}),
+        ("LiCoO2", {"color": ORD_COL, "marker": "o", "label": "LiCoO$_2$ (layered)"}),
+        ("LiMn2O4", {"color": DIS_COL, "marker": "s", "label": "LiMn$_2$O$_4$ (spinel)"}),
     ]:
         mat = data["materials"].get(mat_key, {})
         results = mat.get("results", [])
@@ -651,41 +686,47 @@ def fig5_interaction_energy():
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 def fig6_predictor():
-    """Risk score R vs actual Spearman ρ for all observations."""
+    """Risk score R vs actual Spearman ρ for all 26 observations."""
 
-    # All 23 observations: (label, R, rho, is_safe)
+    # All 26 observations: (label, R, rho, is_safe)
     # safe threshold: rho >= 0.50
     observations = [
         # Original 5 materials (16 obs)
         ("LCO Ef", 0.0, 0.76, True),
         ("LCO V", 1.94, -0.25, False),
-        ("LCO ΔV", 1.94, 0.09, False),
+        ("LCO dV", 1.94, 0.09, False),
         ("LNO Ef", 0.0, 0.82, True),
         ("LNO V", 1.93, -0.06, False),
-        ("LNO ΔV", 1.93, 0.54, True),
+        ("LNO dV", 1.93, 0.54, True),
         ("LMO Ef", 0.0, 1.00, True),
         ("LMO V", 1.0, 0.95, True),
-        ("LMO ΔV", 1.0, 0.84, True),
+        ("LMO dV", 1.0, 0.84, True),
         ("STO Ef", 0.0, 1.00, True),
-        ("STO ΔV", 1.0, 0.94, True),
+        ("STO dV", 1.0, 0.94, True),
         ("CeO2 Ef", 0.0, 1.00, True),
         ("CeO2 dV", 1.0, 0.96, True),
         ("CeO2 Ovac", 1.0, 0.85, True),
         # NMC811
         ("NMC Ef", 0.6, 0.52, True),
         ("NMC V", 2.53, 0.09, False),
-        # New out-of-sample
+        # Out-of-sample: LiFePO4
         ("LFP Ef", 0.0, 1.00, True),
         ("LFP V", 1.21, 0.99, True),
-        ("LFP ΔV", 1.21, 0.79, True),
+        ("LFP dV", 1.21, 0.79, True),
+        # Out-of-sample: NASICON
         ("NASICON Ef", 0.0, 0.72, True),
         ("NASICON V", 1.15, 0.77, True),
-        ("NASICON ΔV", 1.15, -0.04, False),
+        ("NASICON dV", 1.15, -0.04, False),
+        # Out-of-sample: NaCoO2
+        ("NCO Ef", 0.0, 0.79, True),
+        ("NCO V", 1.90, 0.23, False),
+        ("NCO dV", 1.90, -0.01, False),
         # Partial delithiation
         ("LCO x=0.5", 1.94, -0.32, False),
+        ("LCO x=0.25", 1.94, -0.07, False),
     ]
 
-    fig, ax = plt.subplots(figsize=(5.5, 4.0))
+    fig, ax = plt.subplots(figsize=(5.8, 4.2))
 
     # Background zones
     ax.axvspan(-0.3, 1.0, color=SAFE_COL, alpha=0.05, zorder=0)
@@ -693,9 +734,21 @@ def fig6_predictor():
     ax.axvline(1.0, color="0.5", ls="--", lw=0.8, zorder=1)
     ax.axhline(0.5, color="0.5", ls=":", lw=0.6, alpha=0.5, zorder=1)
 
-    # Zone labels
-    ax.text(0.5, -0.45, "Predicted SAFE", ha="center", fontsize=7, color=SAFE_COL, fontweight="bold")
-    ax.text(2.0, -0.45, "Predicted UNSAFE", ha="center", fontsize=7, color=UNSAFE_COL, fontweight="bold")
+    # Zone labels — positioned to avoid the annotation box
+    ax.text(0.5, 1.05, "Predicted SAFE", ha="center", fontsize=7,
+            color=SAFE_COL, fontweight="bold")
+    ax.text(2.0, 1.05, "Predicted UNSAFE", ha="center", fontsize=7,
+            color=UNSAFE_COL, fontweight="bold")
+
+    # Jitter overlapping R=0 Ef points vertically for visibility
+    # Collect R=0 points and add small horizontal jitter
+    r0_count = 0
+    r0_jitter = {
+        "LCO Ef": -0.06, "LNO Ef": -0.02, "LMO Ef": 0.02,
+        "STO Ef": 0.06, "CeO2 Ef": -0.06, "LFP Ef": 0.02,
+        "NASICON Ef": 0.06, "NCO Ef": -0.02,
+        "NMC Ef": 0.0,  # already at R=0.6, no jitter needed
+    }
 
     for label, R, rho, safe in observations:
         marker = "o" if safe else "s"
@@ -703,53 +756,66 @@ def fig6_predictor():
         edgecolor = "black"
         s = 40
         # Highlight out-of-sample
-        if "LFP" in label or "NASICON" in label or "x=0.5" in label:
+        if any(tag in label for tag in ["LFP", "NASICON", "NCO", "x=0.5", "x=0.25"]):
             edgecolor = C_PINK
             s = 55
-        ax.scatter(R, rho, marker=marker, s=s, color=color,
+        # Apply jitter for R=0 cluster
+        R_plot = R + r0_jitter.get(label, 0.0)
+        ax.scatter(R_plot, rho, marker=marker, s=s, color=color,
                    edgecolor=edgecolor, linewidth=0.6, zorder=4)
 
-    # Add select labels for key points
+    # Label key points with carefully tuned offsets to avoid overlap
     label_points = {
-        "LCO V": (-0.15, -0.08),
-        "NMC V": (0.08, -0.06),
-        "LFP V": (-0.15, 0.06),
-        "NASICON V": (-0.15, -0.08),
-        "NASICON ΔV": (0.08, -0.06),
-        "LCO x=0.5": (0.08, 0.06),
-        "LMO V": (-0.12, -0.08),
+        # Unsafe region — spread vertically
+        "LCO V":     (0.12, 0.06),    # ρ=-0.25
+        "LCO x=0.5": (0.12, -0.08),   # ρ=-0.32
+        "LCO x=0.25":(-0.30, 0.07),   # ρ=-0.07
+        "NCO V":     (-0.20, -0.08),   # ρ=0.23
+        "NMC V":     (0.10, 0.06),     # ρ=0.09, R=2.53
+        "NASICON dV":(-0.20, -0.06),   # ρ=-0.04
+        # Safe region
+        "LFP V":     (0.12, -0.06),    # ρ=0.99
+        "NASICON V": (-0.18, -0.06),   # ρ=0.77
+        "LMO V":     (-0.15, -0.06),   # ρ=0.95
     }
     for label, R, rho, safe in observations:
         if label in label_points:
             dx, dy = label_points[label]
-            ax.annotate(label, (R, rho), xytext=(R + dx, rho + dy),
+            R_plot = R + r0_jitter.get(label, 0.0)
+            ax.annotate(label, (R_plot, rho), xytext=(R_plot + dx, rho + dy),
                         fontsize=5.5, color="0.3", ha="center",
                         arrowprops=dict(arrowstyle="-", color="0.7", lw=0.4))
 
     # Legend
     legend_elements = [
         Line2D([0], [0], marker="o", color="w", markerfacecolor=SAFE_COL,
-               markeredgecolor="black", markersize=7, label="Actually safe (ρ ≥ 0.50)"),
+               markeredgecolor="black", markersize=7,
+               label="Actually safe ($\\rho$ $\\geq$ 0.50)"),
         Line2D([0], [0], marker="s", color="w", markerfacecolor=UNSAFE_COL,
-               markeredgecolor="black", markersize=7, label="Actually unsafe (ρ < 0.50)"),
+               markeredgecolor="black", markersize=7,
+               label="Actually unsafe ($\\rho$ < 0.50)"),
         Line2D([0], [0], marker="o", color="w", markerfacecolor="0.8",
                markeredgecolor=C_PINK, markersize=7, markeredgewidth=1.5,
                label="Out-of-sample validation"),
     ]
-    ax.legend(handles=legend_elements, loc="upper right", fontsize=6.5)
+    ax.legend(handles=legend_elements, loc="center right", fontsize=6.5,
+              bbox_to_anchor=(0.99, 0.55))
 
     ax.set_xlabel("Risk score R", fontsize=9)
-    ax.set_ylabel("Actual Spearman ρ", fontsize=9)
+    ax.set_ylabel("Actual Spearman $\\rho$", fontsize=9)
     ax.set_xlim(-0.3, 2.8)
-    ax.set_ylim(-0.55, 1.1)
+    ax.set_ylim(-0.55, 1.15)
     ax.spines["top"].set_visible(False)
     ax.spines["right"].set_visible(False)
 
-    # Accuracy annotation
+    # Accuracy annotation — bottom-left, compact
     ax.text(0.03, 0.03,
-            "Zero false-safe predictions\nAccuracy: 19/23 (82.6%)\nFalse-unsafe: 4 (conservative)",
+            "Zero false-safe predictions\n"
+            "Accuracy: 23/27 (85.2%)\n"
+            "False-unsafe: 4 (conservative)",
             transform=ax.transAxes, fontsize=6.5, va="bottom",
-            bbox=dict(boxstyle="round,pad=0.3", facecolor="white", edgecolor="0.7", alpha=0.9))
+            bbox=dict(boxstyle="round,pad=0.3", facecolor="white",
+                      edgecolor="0.7", alpha=0.9))
 
     ax.text(-0.12, 1.05, "f", fontsize=12, fontweight="bold", transform=ax.transAxes)
 
