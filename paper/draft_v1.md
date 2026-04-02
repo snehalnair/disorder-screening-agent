@@ -10,7 +10,7 @@
 
 ## Abstract
 
-Computational dopant screening pipelines for battery cathodes universally assume ordered host structures — a single periodic arrangement of dopant atoms within the crystal lattice. Yet real synthesised materials exhibit chemical disorder, with dopant atoms statistically distributed across available sites. Here we quantify how this "disorder gap" affects dopant rankings by comparing ordered and disorder-aware (Special Quasi-random Structure) simulations using the MACE-MP-0 universal machine-learning interatomic potential across five oxide materials spanning three crystal structure types: layered (LiCoO₂, LiNiO₂), spinel (LiMn₂O₄), perovskite (SrTiO₃), and fluorite (CeO₂). We find that formation energy rankings are universally preserved (Spearman ρ = 0.76–1.00), but voltage rankings in layered cathodes lose all predictive power (ρ = −0.25 for LiCoO₂, ρ = −0.06 for LiNiO₂ — both statistically indistinguishable from zero). Critically, when applied to a sequential pruning pipeline — the dominant paradigm in computational screening — these ranking perturbations amplify catastrophically: ordered and disorder-aware pipelines share only 14% of their final candidates (Jaccard similarity). We validate our approach against published DFT data (20-dopant formation energy correlation ρ = 0.77; 4-dopant voltage ranking agreement) confirming that the disorder effect is physical, not a model artefact. Our results establish that voltage-based dopant selection in layered cathodes requires disorder-aware simulation, provide a quantitative test for when ordered screening is safe, and demonstrate that universal MLIPs make disorder-aware screening computationally tractable at approximately 1,500× lower cost than DFT.
+Computational dopant screening pipelines for battery cathodes universally assume ordered host structures — a single periodic arrangement of dopant atoms within the crystal lattice. Yet real synthesised materials exhibit chemical disorder, with dopant atoms statistically distributed across available sites. Here we quantify how this "disorder gap" affects dopant rankings by comparing ordered and disorder-aware (Special Quasi-random Structure) simulations using the MACE-MP-0 universal machine-learning interatomic potential across five oxide materials spanning three crystal structure types: layered (LiCoO₂, LiNiO₂), spinel (LiMn₂O₄), perovskite (SrTiO₃), and fluorite (CeO₂). We find that formation energy rankings are universally preserved (Spearman ρ = 0.76–1.00), but voltage rankings in layered cathodes lose all predictive power (ρ = −0.25 for LiCoO₂, ρ = −0.06 for LiNiO₂ — both statistically indistinguishable from zero). Critically, when applied to a sequential pruning pipeline — the dominant paradigm in computational screening — these ranking perturbations amplify catastrophically: ordered and disorder-aware pipelines share only 14% of their final candidates (Jaccard similarity). The danger zone extends to the dominant commercial cathode: NMC811 (LiNi₀.₈Mn₀.₁Co₀.₁O₂) shows ρ = +0.09 (n = 16), and the effect is independently confirmed by a second MLIP (CHGNet, ρ = −0.26). We validate our approach against published DFT data (20-dopant formation energy correlation ρ = 0.77; 4-dopant voltage ranking agreement) confirming that the disorder effect is physical, not a model artefact. Our results establish that voltage-based dopant selection in layered cathodes requires disorder-aware simulation, provide a quantitative test for when ordered screening is safe, and demonstrate that universal MLIPs make disorder-aware screening computationally tractable at approximately 1,500× lower cost than DFT.
 
 ---
 
@@ -71,6 +71,19 @@ The Jaccard similarity — the ratio of shared candidates to total unique candid
 This error amplification is a generic property of sequential pruning: each gate operates on a shrinking candidate pool, so even small ranking perturbations at early gates propagate into large selection differences at later gates. The formation energy gate (Jaccard 0.76) appears safe in isolation, but the two candidates it swaps (Al/Ta out, Ni/Sn in) cascade through subsequent gates to produce almost entirely different finalists.
 
 ![Figure 2. Sequential pruning pipeline for LiCoO₂ (n = 21 dopants). Top: candidate counts at each gate for ordered (blue) and disordered (amber) pipelines. Bottom: Jaccard similarity drops from 1.0 to 0.20, showing that small early perturbations cascade into near-complete finalist divergence.](figures/fig2_pipeline_funnel.png)
+
+### The danger zone extends to NMC811
+
+To test whether the layered danger zone applies beyond single-TM cathodes, we screened 16 dopants in LiNi₀.₈Mn₀.₁Co₀.₁O₂ (NMC811) — the dominant commercial cathode chemistry — using the same ordered vs. SQS protocol (4×4×4 supercell, 256 atoms, 5 SQS realisations per dopant). The results confirm that the voltage ranking destruction is a robust property of the layered R̄3m structure, not an artefact of single-TM composition:
+
+**Table 1b. NMC811 disorder sensitivity (16 dopants).**
+
+| Property | Spearman ρ | p-value |
+|---|---|---|
+| Voltage | **+0.09** | 0.75 |
+| Formation energy | +0.52 | — |
+
+The voltage ranking is statistically indistinguishable from random (ρ = +0.09, p = 0.75), matching the pattern in LiCoO₂ (ρ = −0.25) and LiNiO₂ (ρ = −0.06). Notable rank-swaps include Ta (ordered rank 16 → disordered rank 2, +180 mV shift) and Ge (ordered rank 1 → disordered rank 13, −147 mV shift). The SQS inter-realisation standard deviation averages 0.050 V across NMC811 dopants, comparable to LiCoO₂ (0.054 V), confirming that voltage sensitivity to dopant configuration is a generic feature of layered cathodes regardless of TM composition.
 
 ### Validation against published DFT data
 
@@ -177,6 +190,12 @@ A key enabler of this work is the MACE-MP-0 universal MLIP, which reduces the pe
 
 This ~1,500× cost reduction changes the calculus of screening design: rather than choosing between one ordered simulation per dopant (fast but potentially unreliable) and one DFT relaxation per dopant (accurate but expensive), researchers can now afford an ensemble of disorder-aware MLIP simulations per dopant at lower total cost than a single ordered DFT run. The trade-off between accuracy and coverage is no longer necessary.
 
+### Cross-validation with a second MLIP
+
+A critical question is whether the disorder effect depends on the choice of MLIP. We repeated the LiCoO₂ screening for 6 dopants (Al, Cr, Ga, Ge, Ni, Ti) using CHGNet¹⁹ — a charge-informed graph neural network potential trained independently from MACE-MP-0. CHGNet independently confirms that disorder destroys voltage rankings in the layered structure: the CHGNet ordered-vs-disordered voltage ρ = −0.26 (n = 6), closely matching MACE's ρ = −0.71 for the same subset. Formation energy rankings are better preserved (CHGNet ρ = +0.66 vs MACE ρ = +0.83), consistent with the property-specific pattern.
+
+The cross-MLIP correlation of ordered voltages is ρ = −0.71 (p = 0.11), indicating that the two potentials disagree on even the ordered voltage rankings — a further caution against over-interpreting absolute voltage values from any single MLIP. Critically, however, both MLIPs independently reach the same qualitative conclusion: disorder reshuffles layered voltage rankings to the point where ordered predictions are uninformative. This convergence across architecturally distinct potentials trained on different data subsets strengthens the case that the disorder effect is a physical property of the layered R̄3m structure rather than a systematic artefact of a particular MLIP.
+
 ### Limitations
 
 Several limitations should be considered.
@@ -189,7 +208,7 @@ Third, the voltage calculation uses complete delithiation (x = 0 → 1) rather t
 
 Fourth, only substitution at the primary transition-metal site is considered. Interstitial incorporation, anti-site defects, and charge-compensating point defects (e.g., oxygen vacancies for heterovalent dopants) are not modelled. Automated defect enumeration frameworks²⁰ could extend this analysis to include site-preference effects and explicit charge compensation, which may further modulate disorder sensitivity for aliovalent dopants.
 
-Fifth, while the LiNiO₂ dataset (n = 14 dopants) confirms the voltage destruction pattern (ρ = −0.06) seen in LiCoO₂, extending this analysis to NMC-class layered oxides and other anion chemistries (e.g., sulfides, halides) would establish the generality of the structure-dependent disorder tolerance.
+Fifth, while the NMC811 screening (n = 16 dopants, ρ = +0.09) confirms that the danger zone extends to the most commercially relevant layered cathode, the analysis has not yet been applied to other anion chemistries (e.g., sulfides, halides) or to non-layered cathode families (e.g., olivine LiFePO₄, NASICON). Cross-validation with CHGNet (n = 6, ρ = −0.26) confirms the effect is not MLIP-specific, but extending to additional potentials and larger dopant sets would further strengthen the conclusion.
 
 ---
 

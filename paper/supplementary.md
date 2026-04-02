@@ -223,3 +223,54 @@ Note: LMO inter-realisation standard deviations are 10-100x smaller than LCO, co
 | Y      | -7.964         | -7.967 +/- 0.001 | 3.51    | 3.37 +/- 0.16 |
 | Zn     | -7.756         | -7.755 +/- 0.000 | 0.81    | 0.02 +/- 0.00 |
 | Zr     | -8.039         | -8.038 +/- 0.000 | 1.99    | 1.72 +/- 0.17 |
+
+---
+
+## Table S9. NMC811 dopant screening (n = 16, layered R-3m)
+
+LiNi₀.₈Mn₀.₁Co₀.₁O₂ (NMC811) screened with MACE-MP-0 using 4×4×4 supercell (256 atoms). Dopants substituted at Ni sites (~2% concentration). 5 SQS realisations per dopant.
+
+**Voltage ρ (ordered vs disordered) = +0.09 (p = 0.75)**
+**Formation energy ρ = +0.52**
+
+| Dopant | V_ord (V) | V_dis (V) | V_dis_std (V) | Ef_ord (eV/at) | Ef_dis (eV/at) |
+|--------|-----------|-----------|---------------|----------------|----------------|
+| Al     | -4.240    | -4.197    | 0.120         | -4.720         | -4.713         |
+| Ti     | -4.305    | -4.256    | 0.033         | -4.741         | -4.741         |
+| Mg     | -4.325    | -4.313    | 0.038         | -4.708         | -4.714         |
+| Fe     | -4.190    | -4.262    | 0.070         | -4.732         | -4.734         |
+| Cr     | -4.345    | -4.234    | 0.040         | -4.734         | -4.728         |
+| Ga     | -4.305    | -4.292    | 0.015         | -4.720         | -4.719         |
+| Zr     | -4.333    | -4.272    | 0.068         | -4.755         | -4.747         |
+| Nb     | -4.295    | -4.273    | 0.042         | -4.738         | -4.753         |
+| Ta     | -4.135    | -4.315    | 0.025         | -4.719         | -4.754         |
+| W      | -4.289    | -4.217    | 0.027         | -4.752         | -4.747         |
+| V      | -4.341    | -4.256    | 0.044         | -4.741         | -4.733         |
+| Mo     | -4.263    | -4.162    | 0.079         | -4.756         | -4.734         |
+| Sn     | -4.188    | -4.259    | 0.030         | -4.716         | -4.722         |
+| Sb     | -4.357    | -4.318    | 0.051         | -4.726         | -4.731         |
+| Ge     | -4.377    | -4.230    | 0.026         | -4.728         | -4.718         |
+| Cu     | -4.274    | -4.231    | 0.050         | -4.720         | -4.710         |
+
+Notable rank-swaps: Ta (ordered rank 16 → disordered rank 2, +180 mV), Ge (rank 1 → rank 13, -147 mV), Cr (rank 3 → rank 12, -111 mV).
+
+---
+
+## Table S10. CHGNet cross-validation (LiCoO2, n = 6)
+
+CHGNet v0.3.0 applied to 6 LiCoO₂ dopants to test whether disorder effect is MLIP-specific.
+
+**CHGNet voltage ρ (ordered vs disordered) = -0.26 (p = 0.62)**
+**CHGNet formation energy ρ = +0.66 (p = 0.16)**
+**Cross-MLIP ordered voltage ρ (CHGNet vs MACE) = -0.71 (p = 0.11)**
+
+| Dopant | CHGNet V_ord (V) | CHGNet V_dis (V) | CHGNet V_dis_std (V) | CHGNet Ef_ord (eV/at) | MACE V_ord (V) |
+|--------|-----------------|-----------------|---------------------|----------------------|----------------|
+| Al     | -2.736          | -2.848          | 0.242               | -5.177               | -3.641         |
+| Cr     | -3.728          | -2.897          | 0.297               | -5.371               | -3.491         |
+| Ga     | -2.314          | -2.940          | 0.181               | -5.181               | -3.647         |
+| Ge     | -2.543          | -3.167          | 0.306               | -5.254               | -3.552         |
+| Ni     | -3.195          | -2.948          | 0.164               | -5.242               | -3.458         |
+| Ti     | -2.837          | -2.672          | 0.212               | -5.277               | -3.390         |
+
+Both MLIPs independently show near-zero or negative voltage ρ, confirming that the disorder effect is structural (R-3m layered geometry) rather than MLIP-specific. The cross-MLIP disagreement on ordered voltage rankings (ρ = -0.71) further cautions against over-interpreting absolute voltage values from any single potential.
