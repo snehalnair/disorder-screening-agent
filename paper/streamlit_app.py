@@ -54,51 +54,43 @@ PRESETS = {
 }
 
 
-def fetch_structure_from_mp(formula):
+def fetch_structure_from_mp(formula, api_key=None):
     """Fetch crystal structure from Materials Project by formula.
 
-    Uses the legacy MP API (no key required for basic queries) or
-    pymatgen's MPRester if available.
+    Requires a Materials Project API key. Get one free at:
+    https://materialsproject.org/api
     """
+    if not api_key:
+        return None, (
+            "Materials Project API key required. "
+            "Get a free key at [materialsproject.org/api](https://materialsproject.org/api) "
+            "and enter it in the sidebar."
+        )
+
     try:
-        # Try mp-api first (requires mp_api package)
         from mp_api.client import MPRester
-        with MPRester() as mpr:
-            docs = mpr.summary.search(
+        with MPRester(api_key) as mpr:
+            docs = mpr.materials.summary.search(
                 formula=formula,
                 fields=["material_id", "structure", "energy_above_hull"],
             )
             if docs:
-                # Pick the most stable (lowest e_above_hull)
                 docs.sort(key=lambda d: d.energy_above_hull or 0)
                 return docs[0].structure, str(docs[0].material_id)
-    except Exception:
-        pass
-
-    try:
-        # Fallback: pymatgen's MPRester (legacy API)
-        from pymatgen.ext.matproj import MPRester as LegacyMPRester
-        with LegacyMPRester() as mpr:
-            results = mpr.get_structures(formula, final=True)
-            if results:
-                return results[0], "MP (legacy)"
-    except Exception:
-        pass
-
-    # Fallback: build from pymatgen's common structures
-    try:
-        from pymatgen.core import Structure, Lattice
-
-        # Try to parse as a known composition and build from spacegroup
-        # This handles simple cases like "NaCl", "SrTiO3", etc.
-        from pymatgen.core import Composition
-        comp = Composition(formula)
-        # Can't auto-generate without more info
-        return None, f"Could not fetch {formula} from Materials Project. Please upload a CIF file."
+            else:
+                return None, f"No structures found for '{formula}' in Materials Project."
     except Exception as e:
-        return None, str(e)
+        error_msg = str(e)
+        if "401" in error_msg or "API key" in error_msg:
+            return None, "Invalid API key. Check your key at materialsproject.org/api"
+        return None, f"Materials Project query failed: {error_msg}"
 
-    return None, "Structure not found"
+
+def _element_symbol(sp):
+    """Get bare element symbol from a Species or Element object (strips oxidation state)."""
+    if hasattr(sp, "element"):
+        return str(sp.element)  # Species("Cr3+") → "Cr"
+    return str(sp).split("+")[0].split("-")[0].rstrip("0123456789")
 
 
 def compute_anisotropy_from_structure(struct, target_species=None):
@@ -108,27 +100,39 @@ def compute_anisotropy_from_structure(struct, target_species=None):
     """
     from pymatgen.core import Structure
 
-    # Identify target sublattice (transition metals or user-specified)
-    all_species = set(str(sp) for sp in struct.species)
-    tm_in_struct = all_species & TM_ELEMENTS
+    # Strip oxidation states for matching
+    all_elements = set(_element_symbol(sp) for sp in struct.species)
+    tm_in_struct = all_elements & TM_ELEMENTS
+
+    ANION_SET = {"O", "S", "Se", "Te", "F", "Cl", "Br", "I", "N"}
 
     if target_species:
-        target_set = {target_species}
+        # Handle comma/space-separated input and normalize case (e.g., "Co, fe" → {"Co", "Fe"})
+        raw = [s.strip().capitalize() for s in target_species.replace(",", " ").split() if s.strip()]
+        target_set = set(raw) & all_elements
+        if not target_set:
+            return None, None, None, 0, None, f"Species '{target_species}' not found in structure. Available: {', '.join(sorted(all_elements))}"
     elif tm_in_struct:
         target_set = tm_in_struct
     else:
-        # Fallback: use the most common non-O, non-anion species
+        # Fallback: use the most common non-anion species
         from collections import Counter
-        counts = Counter(str(sp) for sp in struct.species
-                         if str(sp) not in {"O", "S", "Se", "Te", "F", "Cl", "Br", "I", "N"})
+        counts = Counter(_element_symbol(sp) for sp in struct.species
+                         if _element_symbol(sp) not in ANION_SET)
         if counts:
             target_set = {counts.most_common(1)[0][0]}
         else:
             return None, None, None, 0, None, "No cation sublattice found"
 
-    # Get target site indices
-    target_indices = [i for i, sp in enumerate(struct.species) if str(sp) in target_set]
+    # Get target site indices — match by bare element symbol
+    target_indices = [i for i, sp in enumerate(struct.species) if _element_symbol(sp) in target_set]
     n_tm_species = len(target_set)
+
+    if len(target_indices) < 2:
+        # Primitive cell has only 1 target site — make a supercell
+        struct = struct.copy()
+        struct.make_supercell([3, 3, 3])
+        target_indices = [i for i, sp in enumerate(struct.species) if _element_symbol(sp) in target_set]
 
     if len(target_indices) < 2:
         return None, None, None, n_tm_species, target_set, "Need at least 2 target sites"
@@ -143,7 +147,11 @@ def compute_anisotropy_from_structure(struct, target_species=None):
                     dists.append(d)
 
     if len(dists) < 2:
-        return None, None, None, n_tm_species, target_set, "Too few distances found"
+        return None, None, None, n_tm_species, target_set, (
+            f"Too few distances found. "
+            f"Target set: {target_set}, sites: {len(target_indices)}, "
+            f"struct: {len(struct)} atoms, dists found: {len(dists)}"
+        )
 
     dists.sort()
 
@@ -264,6 +272,7 @@ def main():
         "**Does chemical disorder change computational dopant rankings?**  \n"
         "Enter a formula, upload a CIF, or select a preset material to find out."
     )
+    st.markdown("**Decision rule:** `R > 1.0` → disorder-aware screening required")
     st.markdown("---")
 
     # ── Sidebar: inputs ──
@@ -296,6 +305,15 @@ def main():
                 placeholder="e.g., Co, Fe, Ti, Mn",
                 help="Which sublattice will be doped. Auto-detects TM sites if blank."
             )
+            mp_api_key = st.text_input(
+                "Materials Project API key",
+                type="password",
+                value=st.session_state.get("mp_api_key", ""),
+                help="Free key from https://materialsproject.org/api",
+                key="mp_api_key_input",
+            )
+            if mp_api_key:
+                st.session_state["mp_api_key"] = mp_api_key
         elif input_method == "Upload CIF":
             cif_file = st.file_uploader("Upload CIF file", type=["cif"])
             target_sp = st.text_input(
@@ -347,7 +365,7 @@ def main():
 
     elif input_method == "Enter formula" and formula_input:
         with st.spinner(f"Fetching structure for {formula_input} from Materials Project..."):
-            struct, mp_id = fetch_structure_from_mp(formula_input)
+            struct, mp_id = fetch_structure_from_mp(formula_input, api_key=mp_api_key if mp_api_key else None)
         if struct is None:
             st.error(f"Could not fetch structure: {mp_id}")
         else:
@@ -402,6 +420,16 @@ def main():
             else:
                 st.error("⚠️ UNSAFE — Use disorder-aware screening")
 
+            # Confidence directly under the verdict in the same column
+            margin = abs(risk - RISK_THRESHOLD)
+            if margin < 0.2:
+                confidence, conf_color = "Low", "orange"
+            elif margin < 0.5:
+                confidence, conf_color = "Medium", "blue"
+            else:
+                confidence, conf_color = "High", "green"
+            st.markdown(f"**Confidence: :{conf_color}[{confidence}]**")
+
         st.markdown("---")
 
         # ── Formula breakdown ──
@@ -433,39 +461,9 @@ def main():
         st.markdown("---")
         st.markdown(verdict)
 
-        # ── Confidence note ──
+        # ── Caveats ──
         st.markdown("---")
-        st.subheader("Confidence & Caveats")
-
-        # Distance from threshold
-        margin = abs(risk - RISK_THRESHOLD)
-        if margin < 0.2:
-            confidence = "Low"
-            conf_color = "orange"
-            conf_note = (
-                f"The risk score ({risk:.2f}) is close to the threshold ({RISK_THRESHOLD}). "
-                f"This is a borderline case — consider running a small SQS test "
-                f"(3-5 realisations) to verify."
-            )
-        elif margin < 0.5:
-            confidence = "Medium"
-            conf_color = "blue"
-            conf_note = (
-                f"The risk score ({risk:.2f}) is moderately separated from the threshold. "
-                f"The prediction is likely correct but has not been validated for "
-                f"every possible structure type."
-            )
-        else:
-            confidence = "High"
-            conf_color = "green"
-            conf_note = (
-                f"The risk score ({risk:.2f}) is well separated from the threshold. "
-                f"High confidence in this prediction based on validation across "
-                f"7 materials and 4 structure types."
-            )
-
-        st.markdown(f"**Confidence: :{conf_color}[{confidence}]** (margin from threshold: {margin:.2f})")
-        st.info(conf_note)
+        st.subheader("Caveats")
 
         st.markdown(
             "**General caveats:**\n"
