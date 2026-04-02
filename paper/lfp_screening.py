@@ -151,33 +151,40 @@ def build_lfp_supercell(supercell_size=(2, 2, 2)):
     return AseAtomsAdaptor.get_atoms(struct), struct
 
 
-def substitute_ordered(struct, dopant, target="Fe"):
-    """Farthest-first single substitution at Fe site (ordered baseline)."""
+def substitute_ordered(struct, dopant, target="Fe", n_dopant=4):
+    """Farthest-first substitution at Fe sites (ordered baseline).
+
+    Places n_dopant atoms by iteratively choosing the site farthest from
+    all previously chosen sites (maximises dopant–dopant distance).
+    """
     from pymatgen.io.ase import AseAtomsAdaptor
 
     s = struct.copy()
     target_indices = [i for i, sp in enumerate(s.species) if str(sp) == target]
 
-    # Pick site with maximum minimum-distance to other target sites
-    best_site = target_indices[0]
-    best_min_dist = 0
-    for idx in target_indices:
-        dists = [s.get_distance(idx, j) for j in target_indices if j != idx]
-        min_d = min(dists) if dists else 0
-        if min_d > best_min_dist:
-            best_min_dist = min_d
-            best_site = idx
+    # Farthest-first placement
+    chosen = [target_indices[0]]
+    for _ in range(n_dopant - 1):
+        best_site, best_min_dist = None, -1
+        for idx in target_indices:
+            if idx in chosen:
+                continue
+            min_d = min(s.get_distance(idx, c) for c in chosen)
+            if min_d > best_min_dist:
+                best_min_dist = min_d
+                best_site = idx
+        chosen.append(best_site)
 
-    s.replace(best_site, dopant)
+    for site in chosen:
+        s.replace(site, dopant)
     return AseAtomsAdaptor.get_atoms(s)
 
 
-def generate_sqs(struct, dopant, target="Fe", n_sqs=5, seed=42):
+def generate_sqs(struct, dopant, target="Fe", n_sqs=5, n_dopant=4, seed=42):
     """Generate SQS realisations via random site selection.
 
-    For single-dopant substitution at ~3% concentration (1/32 Fe sites),
-    random placement effectively approximates SQS — different realisations
-    sample different local environments around the dopant.
+    With n_dopant > 1, different random placements produce genuinely
+    different spatial arrangements, enabling ordered-vs-disordered comparison.
     """
     from pymatgen.io.ase import AseAtomsAdaptor
 
@@ -186,8 +193,9 @@ def generate_sqs(struct, dopant, target="Fe", n_sqs=5, seed=42):
     results = []
     for i in range(n_sqs):
         s = struct.copy()
-        site = rng.choice(target_indices)
-        s.replace(site, dopant)
+        sites = rng.choice(target_indices, size=n_dopant, replace=False)
+        for site in sites:
+            s.replace(site, dopant)
         results.append(AseAtomsAdaptor.get_atoms(s))
     return results
 
