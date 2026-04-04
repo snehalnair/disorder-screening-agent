@@ -136,7 +136,7 @@ for i in "${!CALCS[@]}"; do
     out_file="$RESULTS_DIR/${name}.out"
 
     # Run QE with MPI
-    mpirun --oversubscribe -np $NCORES pw.x < "$inp_file" > "$out_file" 2>&1
+    mpirun --oversubscribe -np $NCORES pw.x -in "$inp_file" > "$out_file" 2>&1
 
     T_END=$(date +%s)
     ELAPSED=$((T_END - T_START))
