@@ -26,7 +26,7 @@
 
 set -e
 
-NCORES=16
+NCORES=$(nproc)
 WORK_DIR="$HOME/dft_validation"
 REPO_DIR="$HOME/disorder-screening-agent"
 INPUT_DIR="$REPO_DIR/dft_sqs_validation/qe_sqs_inputs"
