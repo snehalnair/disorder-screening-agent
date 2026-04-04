@@ -1,0 +1,233 @@
+{
+  "undoped_lith": {
+    "dopant": "none",
+    "type": "undoped_lith",
+    "mace_energy_eV": -265.02381241577996,
+    "n_li": 18,
+    "n_atoms": 72
+  },
+  "undoped_delith": {
+    "dopant": "none",
+    "type": "undoped_delith",
+    "mace_energy_eV": -165.0289686290494,
+    "n_li": 0,
+    "n_atoms": 54
+  },
+  "li_metal": {
+    "dopant": "none",
+    "type": "li_metal",
+    "mace_energy_eV": null,
+    "n_li": 2,
+    "n_atoms": 2
+  },
+  "Al_ord_lith": {
+    "dopant": "Al",
+    "type": "ordered_lith",
+    "mace_energy_eV": -262.3156715615776,
+    "n_li": 18,
+    "n_atoms": 72
+  },
+  "Al_ord_delith": {
+    "dopant": "Al",
+    "type": "ordered_delith",
+    "mace_energy_eV": -250.2241278479023,
+    "n_li": 0,
+    "n_atoms": 54
+  },
+  "Al_sqs0_lith": {
+    "dopant": "Al",
+    "type": "sqs0_lith",
+    "mace_energy_eV": -335.7893491883662,
+    "n_li": 18,
+    "n_atoms": 72
+  },
+  "Al_sqs0_delith": {
+    "dopant": "Al",
+    "type": "sqs0_delith",
+    "mace_energy_eV": -255.83754049122962,
+    "n_li": 0,
+    "n_atoms": 54
+  },
+  "Al_sqs1_lith": {
+    "dopant": "Al",
+    "type": "sqs1_lith",
+    "mace_energy_eV": -334.52331742117553,
+    "n_li": 18,
+    "n_atoms": 72
+  },
+  "Al_sqs1_delith": {
+    "dopant": "Al",
+    "type": "sqs1_delith",
+    "mace_energy_eV": -255.83737667833924,
+    "n_li": 0,
+    "n_atoms": 54
+  },
+  "Ti_ord_lith": {
+    "dopant": "Ti",
+    "type": "ordered_lith",
+    "mace_energy_eV": -270.24746646889434,
+    "n_li": 18,
+    "n_atoms": 72
+  },
+  "Ti_ord_delith": {
+    "dopant": "Ti",
+    "type": "ordered_delith",
+    "mace_energy_eV": -262.9411304793106,
+    "n_li": 0,
+    "n_atoms": 54
+  },
+  "Ti_sqs0_lith": {
+    "dopant": "Ti",
+    "type": "sqs0_lith",
+    "mace_energy_eV": -337.4411311673997,
+    "n_li": 18,
+    "n_atoms": 72
+  },
+  "Ti_sqs0_delith": {
+    "dopant": "Ti",
+    "type": "sqs0_delith",
+    "mace_energy_eV": -255.1156158013614,
+    "n_li": 0,
+    "n_atoms": 54
+  },
+  "Ti_sqs1_lith": {
+    "dopant": "Ti",
+    "type": "sqs1_lith",
+    "mace_energy_eV": -347.299519152516,
+    "n_li": 18,
+    "n_atoms": 72
+  },
+  "Ti_sqs1_delith": {
+    "dopant": "Ti",
+    "type": "sqs1_delith",
+    "mace_energy_eV": -278.0789319102226,
+    "n_li": 0,
+    "n_atoms": 54
+  },
+  "Mg_ord_lith": {
+    "dopant": "Mg",
+    "type": "ordered_lith",
+    "mace_energy_eV": -259.9257423316033,
+    "n_li": 18,
+    "n_atoms": 72
+  },
+  "Mg_ord_delith": {
+    "dopant": "Mg",
+    "type": "ordered_delith",
+    "mace_energy_eV": -230.77249548001498,
+    "n_li": 0,
+    "n_atoms": 54
+  },
+  "Mg_sqs0_lith": {
+    "dopant": "Mg",
+    "type": "sqs0_lith",
+    "mace_energy_eV": -321.37625592827266,
+    "n_li": 18,
+    "n_atoms": 72
+  },
+  "Mg_sqs0_delith": {
+    "dopant": "Mg",
+    "type": "sqs0_delith",
+    "mace_energy_eV": -253.13322940427946,
+    "n_li": 0,
+    "n_atoms": 54
+  },
+  "Mg_sqs1_lith": {
+    "dopant": "Mg",
+    "type": "sqs1_lith",
+    "mace_energy_eV": -320.97067770602223,
+    "n_li": 18,
+    "n_atoms": 72
+  },
+  "Mg_sqs1_delith": {
+    "dopant": "Mg",
+    "type": "sqs1_delith",
+    "mace_energy_eV": -253.133229401765,
+    "n_li": 0,
+    "n_atoms": 54
+  },
+  "Ga_ord_lith": {
+    "dopant": "Ga",
+    "type": "ordered_lith",
+    "mace_energy_eV": -262.0191826558557,
+    "n_li": 18,
+    "n_atoms": 72
+  },
+  "Ga_ord_delith": {
+    "dopant": "Ga",
+    "type": "ordered_delith",
+    "mace_energy_eV": -163.75182510646914,
+    "n_li": 0,
+    "n_atoms": 54
+  },
+  "Ga_sqs0_lith": {
+    "dopant": "Ga",
+    "type": "sqs0_lith",
+    "mace_energy_eV": -333.8437050291282,
+    "n_li": 18,
+    "n_atoms": 72
+  },
+  "Ga_sqs0_delith": {
+    "dopant": "Ga",
+    "type": "sqs0_delith",
+    "mace_energy_eV": -291.98560448641524,
+    "n_li": 0,
+    "n_atoms": 54
+  },
+  "Ga_sqs1_lith": {
+    "dopant": "Ga",
+    "type": "sqs1_lith",
+    "mace_energy_eV": -345.14620945041185,
+    "n_li": 18,
+    "n_atoms": 72
+  },
+  "Ga_sqs1_delith": {
+    "dopant": "Ga",
+    "type": "sqs1_delith",
+    "mace_energy_eV": -292.16467148979416,
+    "n_li": 0,
+    "n_atoms": 54
+  },
+  "Fe_ord_lith": {
+    "dopant": "Fe",
+    "type": "ordered_lith",
+    "mace_energy_eV": -267.69548024835194,
+    "n_li": 18,
+    "n_atoms": 72
+  },
+  "Fe_ord_delith": {
+    "dopant": "Fe",
+    "type": "ordered_delith",
+    "mace_energy_eV": -167.4566369703929,
+    "n_li": 0,
+    "n_atoms": 54
+  },
+  "Fe_sqs0_lith": {
+    "dopant": "Fe",
+    "type": "sqs0_lith",
+    "mace_energy_eV": -326.1798942465162,
+    "n_li": 18,
+    "n_atoms": 72
+  },
+  "Fe_sqs0_delith": {
+    "dopant": "Fe",
+    "type": "sqs0_delith",
+    "mace_energy_eV": -247.2328603431959,
+    "n_li": 0,
+    "n_atoms": 54
+  },
+  "Fe_sqs1_lith": {
+    "dopant": "Fe",
+    "type": "sqs1_lith",
+    "mace_energy_eV": -326.1798942453243,
+    "n_li": 18,
+    "n_atoms": 72
+  },
+  "Fe_sqs1_delith": {
+    "dopant": "Fe",
+    "type": "sqs1_delith",
+    "mace_energy_eV": -247.23285856916766,
+    "n_li": 0,
+    "n_atoms": 54
+  }
+}

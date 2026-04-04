@@ -1,0 +1,43 @@
+&CONTROL
+  calculation = 'scf'
+  prefix = 'li_metal'
+  outdir = './tmp_li_metal'
+  pseudo_dir = './pseudo'
+  tprnfor = .false.
+  tstress = .false.
+  verbosity = 'low'
+  disk_io = 'low'
+/
+
+&SYSTEM
+  ibrav = 0
+  nat = 2
+  ntyp = 1
+  ecutwfc = 40.0
+  ecutrho = 320.0
+  occupations = 'smearing'
+  smearing = 'mv'
+  degauss = 0.02
+/
+
+&ELECTRONS
+  conv_thr = 1e-05
+  mixing_beta = 0.7
+  electron_maxstep = 100
+  diagonalization = 'david'
+/
+
+CELL_PARAMETERS angstrom
+  3.4900000000   0.0000000000   0.0000000000
+  0.0000000000   3.4900000000   0.0000000000
+  0.0000000000   0.0000000000   3.4900000000
+
+ATOMIC_SPECIES
+  Li       6.9410 Li.pbe-s-kjpaw_psl.1.0.0.UPF
+
+ATOMIC_POSITIONS crystal
+  Li    0.0000000000   0.0000000000   0.0000000000
+  Li    0.5000000000   0.5000000000   0.5000000000
+
+K_POINTS automatic
+  8 8 8 0 0 0
