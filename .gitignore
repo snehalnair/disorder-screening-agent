@@ -52,3 +52,13 @@ reports/
 .env
 *.key
 secrets.yaml
+
+# DFT — Quantum ESPRESSO source/build tree and tarball (third-party, ~330 MB)
+dft/quantum_espresso/
+
+# Large raw datasets (re-downloadable / regenerable; keep out of git)
+data/hea_validation/hea.2023-04-06.csv
+data/hea_validation/hea_sample.csv
+
+# Archived checkpoint snapshots
+archive/*.zip

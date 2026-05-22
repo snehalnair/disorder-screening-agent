@@ -41,11 +41,11 @@ FIG_DIR.mkdir(exist_ok=True)
 
 # Original 5-material checkpoint directories
 CHECKPOINT_DIRS = {
-    "LiCoO₂":  PROJECT_DIR / "lco",
-    "LiNiO₂":  PROJECT_DIR / "lno",
-    "LiMn₂O₄": PROJECT_DIR / "lmo",
-    "SrTiO₃":  PROJECT_DIR / "sto",
-    "CeO₂":    PROJECT_DIR / "ceo2",
+    "LiCoO₂":  PROJECT_DIR / "results" / "lco",
+    "LiNiO₂":  PROJECT_DIR / "results" / "lno",
+    "LiMn₂O₄": PROJECT_DIR / "results" / "lmo",
+    "SrTiO₃":  PROJECT_DIR / "results" / "sto",
+    "CeO₂":    PROJECT_DIR / "results" / "ceo2",
 }
 
 PROPERTIES = ["formation_energy", "voltage", "volume_change"]

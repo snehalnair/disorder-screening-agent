@@ -422,7 +422,7 @@ def main():
         results["n_dopants_ranked"] = len(v_ord_list)
 
         # Also load full-delithiation data for comparison
-        lco_dir = PROJECT_DIR / "lco"
+        lco_dir = PROJECT_DIR / "results" / "lco"
         v_full_ord, v_full_dis = [], []
         for d in dop_names:
             ckpt = lco_dir / f"LiCoO2_layered_{d}.json"

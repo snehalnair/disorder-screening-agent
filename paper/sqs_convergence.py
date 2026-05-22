@@ -101,11 +101,11 @@ def convergence_analysis(name, ckpt_dir):
 
 if __name__ == "__main__":
     materials = {
-        "LiCoO₂ (layered)": PROJECT_DIR / "lco",
-        "LiNiO₂ (layered)": PROJECT_DIR / "lno",
-        "LiMn₂O₄ (spinel)": PROJECT_DIR / "lmo",
-        "SrTiO₃ (perovskite)": PROJECT_DIR / "sto",
-        "CeO₂ (fluorite)": PROJECT_DIR / "ceo2",
+        "LiCoO₂ (layered)": PROJECT_DIR / "results" / "lco",
+        "LiNiO₂ (layered)": PROJECT_DIR / "results" / "lno",
+        "LiMn₂O₄ (spinel)": PROJECT_DIR / "results" / "lmo",
+        "SrTiO₃ (perovskite)": PROJECT_DIR / "results" / "sto",
+        "CeO₂ (fluorite)": PROJECT_DIR / "results" / "ceo2",
     }
 
     print("SQS Convergence Analysis")

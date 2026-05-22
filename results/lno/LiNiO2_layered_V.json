@@ -1,0 +1,162 @@
+{
+  "ordered": {
+    "voltage": -3.456129753813855,
+    "formation_energy": -4.424742869615054,
+    "volume_change": 3.0956145264916324
+  },
+  "sqs_results": [
+    {
+      "voltage": -3.4158979349450083,
+      "formation_energy": -4.697037432178889,
+      "volume_change": 3.0977364462122714,
+      "_convergence": {
+        "converged": true,
+        "optimizer_used": "FIRE",
+        "fmax_used": 0.15,
+        "relaxation_steps": 1869,
+        "max_force_final": 0.1213673522714571
+      }
+    },
+    {
+      "voltage": -3.5559959382031097,
+      "formation_energy": -4.655398280569941,
+      "volume_change": 4.201152328125887,
+      "_convergence": {
+        "converged": true,
+        "optimizer_used": "FIRE",
+        "fmax_used": 0.15,
+        "relaxation_steps": 1337,
+        "max_force_final": 0.15215079760202618
+      }
+    },
+    {
+      "voltage": -3.3648144328857907,
+      "formation_energy": -4.724560067757086,
+      "volume_change": 0.013244299243247926,
+      "_convergence": {
+        "converged": true,
+        "optimizer_used": "BFGS",
+        "fmax_used": 0.15,
+        "relaxation_steps": 363,
+        "max_force_final": 0.1468698111643971
+      }
+    },
+    {
+      "voltage": -3.4522273540745148,
+      "formation_energy": -4.778409231774724,
+      "volume_change": 5.075047093824379,
+      "_convergence": {
+        "converged": true,
+        "optimizer_used": "BFGS",
+        "fmax_used": 0.15,
+        "relaxation_steps": 599,
+        "max_force_final": 0.1651622307473079
+      }
+    },
+    {
+      "voltage": -3.453867621476571,
+      "formation_energy": -4.7172347498412615,
+      "volume_change": 1.015060779450611,
+      "_convergence": {
+        "converged": true,
+        "optimizer_used": "BFGS",
+        "fmax_used": 0.15,
+        "relaxation_steps": 336,
+        "max_force_final": 0.1675218066941605
+      }
+    }
+  ],
+  "n_sqs_done": 5,
+  "complete": true,
+  "result": {
+    "dopant": "V",
+    "ordered": {
+      "voltage": -3.456129753813855,
+      "formation_energy": -4.424742869615054,
+      "volume_change": 3.0956145264916324
+    },
+    "disordered_mean": {
+      "voltage": -3.4485606563169986,
+      "formation_energy": -4.714527952424381,
+      "volume_change": 2.680448189371279
+    },
+    "disordered_std": {
+      "voltage": 0.06271240970017353,
+      "formation_energy": 0.03997755453704719,
+      "volume_change": 1.9030641763622764
+    },
+    "disordered_n": {
+      "voltage": 5,
+      "formation_energy": 5,
+      "volume_change": 5
+    },
+    "n_converged": 5,
+    "disorder_sensitivity": {
+      "voltage": 0.0021900501532108253,
+      "formation_energy": 0.0654919599507796,
+      "volume_change": 0.134114352277212
+    },
+    "sqs_realisations": [
+      {
+        "voltage": -3.4158979349450083,
+        "formation_energy": -4.697037432178889,
+        "volume_change": 3.0977364462122714,
+        "_convergence": {
+          "converged": true,
+          "optimizer_used": "FIRE",
+          "fmax_used": 0.15,
+          "relaxation_steps": 1869,
+          "max_force_final": 0.1213673522714571
+        }
+      },
+      {
+        "voltage": -3.5559959382031097,
+        "formation_energy": -4.655398280569941,
+        "volume_change": 4.201152328125887,
+        "_convergence": {
+          "converged": true,
+          "optimizer_used": "FIRE",
+          "fmax_used": 0.15,
+          "relaxation_steps": 1337,
+          "max_force_final": 0.15215079760202618
+        }
+      },
+      {
+        "voltage": -3.3648144328857907,
+        "formation_energy": -4.724560067757086,
+        "volume_change": 0.013244299243247926,
+        "_convergence": {
+          "converged": true,
+          "optimizer_used": "BFGS",
+          "fmax_used": 0.15,
+          "relaxation_steps": 363,
+          "max_force_final": 0.1468698111643971
+        }
+      },
+      {
+        "voltage": -3.4522273540745148,
+        "formation_energy": -4.778409231774724,
+        "volume_change": 5.075047093824379,
+        "_convergence": {
+          "converged": true,
+          "optimizer_used": "BFGS",
+          "fmax_used": 0.15,
+          "relaxation_steps": 599,
+          "max_force_final": 0.1651622307473079
+        }
+      },
+      {
+        "voltage": -3.453867621476571,
+        "formation_energy": -4.7172347498412615,
+        "volume_change": 1.015060779450611,
+        "_convergence": {
+          "converged": true,
+          "optimizer_used": "BFGS",
+          "fmax_used": 0.15,
+          "relaxation_steps": 336,
+          "max_force_final": 0.1675218066941605
+        }
+      }
+    ]
+  }
+}
