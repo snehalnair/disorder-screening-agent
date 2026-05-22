@@ -27,7 +27,7 @@ from scipy import stats
 # ── Paths ──
 SCRIPT_DIR = pathlib.Path(__file__).resolve().parent
 PROJECT_DIR = SCRIPT_DIR.parent
-LCO_DIR = PROJECT_DIR / "lco"
+LCO_DIR = PROJECT_DIR / "results" / "lco"
 DATA_DIR = PROJECT_DIR / "data" / "structures"
 
 
@@ -195,7 +195,7 @@ def experiment2_sqs_convergence():
         return stats.spearmanr(o_vals, d_vals)[0]
 
     summary = {}
-    for name, path in [("LCO", LCO_DIR), ("LMO", PROJECT_DIR / "lmo")]:
+    for name, path in [("LCO", LCO_DIR), ("LMO", PROJECT_DIR / "results" / "lmo")]:
         results = load_material(path)
         if not results:
             continue

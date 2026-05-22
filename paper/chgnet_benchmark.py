@@ -25,7 +25,7 @@ from scipy import stats
 
 SCRIPT_DIR = pathlib.Path(__file__).resolve().parent
 PROJECT_DIR = SCRIPT_DIR.parent
-LCO_DIR = PROJECT_DIR / "lco"
+LCO_DIR = PROJECT_DIR / "results" / "lco"
 DATA_DIR = PROJECT_DIR / "data" / "structures"
 OUT_DIR = PROJECT_DIR / "paper"
 

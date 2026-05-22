@@ -1,0 +1,212 @@
+{
+  "ordered": {
+    "formation_energy": -7.9644975830844915,
+    "volume_change": 3.508906789981172
+  },
+  "sqs_results": [
+    {
+      "formation_energy": -7.968825450969204,
+      "volume_change": 3.468100938358571,
+      "_convergence": {
+        "converged": true,
+        "optimizer_used": "BFGS",
+        "fmax_used": 0.15,
+        "relaxation_steps": 67,
+        "max_force_final": 0.10936199070825771
+      }
+    },
+    {
+      "formation_energy": -7.9685235357789,
+      "volume_change": 3.4869700926778164,
+      "_convergence": {
+        "converged": true,
+        "optimizer_used": "BFGS",
+        "fmax_used": 0.15,
+        "relaxation_steps": 64,
+        "max_force_final": 0.14513129512725456
+      }
+    },
+    {
+      "formation_energy": -7.965818331806311,
+      "volume_change": 3.292127236314989,
+      "_convergence": {
+        "converged": true,
+        "optimizer_used": "BFGS",
+        "fmax_used": 0.15,
+        "relaxation_steps": 56,
+        "max_force_final": 0.14003087466640027
+      }
+    },
+    {
+      "formation_energy": -7.965011739375217,
+      "volume_change": 3.077193493048185,
+      "_convergence": {
+        "converged": true,
+        "optimizer_used": "BFGS",
+        "fmax_used": 0.15,
+        "relaxation_steps": 65,
+        "max_force_final": 0.14810366814085604
+      }
+    },
+    {
+      "formation_energy": -7.9684447604205415,
+      "volume_change": 3.3295688038741464,
+      "_convergence": {
+        "converged": true,
+        "optimizer_used": "BFGS",
+        "fmax_used": 0.15,
+        "relaxation_steps": 81,
+        "max_force_final": 0.13952350137615135
+      }
+    },
+    {
+      "formation_energy": -7.968801313236798,
+      "volume_change": 3.566616787904657,
+      "_convergence": {
+        "converged": true,
+        "optimizer_used": "BFGS",
+        "fmax_used": 0.15,
+        "relaxation_steps": 68,
+        "max_force_final": 0.14397493026751604
+      }
+    },
+    {
+      "formation_energy": -7.9669587376321145,
+      "volume_change": 3.5237985274288537,
+      "_convergence": {
+        "converged": true,
+        "optimizer_used": "BFGS",
+        "fmax_used": 0.15,
+        "relaxation_steps": 73,
+        "max_force_final": 0.14036687210239168
+      }
+    },
+    {
+      "formation_energy": -7.966430579674454,
+      "volume_change": 3.1848708999699817,
+      "_convergence": {
+        "converged": true,
+        "optimizer_used": "BFGS",
+        "fmax_used": 0.15,
+        "relaxation_steps": 71,
+        "max_force_final": 0.1266403267102391
+      }
+    }
+  ],
+  "n_sqs_done": 8,
+  "complete": true,
+  "result": {
+    "dopant": "Y",
+    "ordered": {
+      "formation_energy": -7.9644975830844915,
+      "volume_change": 3.508906789981172
+    },
+    "disordered_mean": {
+      "formation_energy": -7.967351806111692,
+      "volume_change": 3.36615584744715
+    },
+    "disordered_std": {
+      "formation_energy": 0.0013995899560576034,
+      "volume_change": 0.16325096021068217
+    },
+    "disordered_n": {
+      "formation_energy": 8,
+      "volume_change": 8
+    },
+    "n_converged": 8,
+    "disorder_sensitivity": {
+      "formation_energy": 0.00035836824575882586,
+      "volume_change": 0.0406824549861549
+    },
+    "sqs_realisations": [
+      {
+        "formation_energy": -7.968825450969204,
+        "volume_change": 3.468100938358571,
+        "_convergence": {
+          "converged": true,
+          "optimizer_used": "BFGS",
+          "fmax_used": 0.15,
+          "relaxation_steps": 67,
+          "max_force_final": 0.10936199070825771
+        }
+      },
+      {
+        "formation_energy": -7.9685235357789,
+        "volume_change": 3.4869700926778164,
+        "_convergence": {
+          "converged": true,
+          "optimizer_used": "BFGS",
+          "fmax_used": 0.15,
+          "relaxation_steps": 64,
+          "max_force_final": 0.14513129512725456
+        }
+      },
+      {
+        "formation_energy": -7.965818331806311,
+        "volume_change": 3.292127236314989,
+        "_convergence": {
+          "converged": true,
+          "optimizer_used": "BFGS",
+          "fmax_used": 0.15,
+          "relaxation_steps": 56,
+          "max_force_final": 0.14003087466640027
+        }
+      },
+      {
+        "formation_energy": -7.965011739375217,
+        "volume_change": 3.077193493048185,
+        "_convergence": {
+          "converged": true,
+          "optimizer_used": "BFGS",
+          "fmax_used": 0.15,
+          "relaxation_steps": 65,
+          "max_force_final": 0.14810366814085604
+        }
+      },
+      {
+        "formation_energy": -7.9684447604205415,
+        "volume_change": 3.3295688038741464,
+        "_convergence": {
+          "converged": true,
+          "optimizer_used": "BFGS",
+          "fmax_used": 0.15,
+          "relaxation_steps": 81,
+          "max_force_final": 0.13952350137615135
+        }
+      },
+      {
+        "formation_energy": -7.968801313236798,
+        "volume_change": 3.566616787904657,
+        "_convergence": {
+          "converged": true,
+          "optimizer_used": "BFGS",
+          "fmax_used": 0.15,
+          "relaxation_steps": 68,
+          "max_force_final": 0.14397493026751604
+        }
+      },
+      {
+        "formation_energy": -7.9669587376321145,
+        "volume_change": 3.5237985274288537,
+        "_convergence": {
+          "converged": true,
+          "optimizer_used": "BFGS",
+          "fmax_used": 0.15,
+          "relaxation_steps": 73,
+          "max_force_final": 0.14036687210239168
+        }
+      },
+      {
+        "formation_energy": -7.966430579674454,
+        "volume_change": 3.1848708999699817,
+        "_convergence": {
+          "converged": true,
+          "optimizer_used": "BFGS",
+          "fmax_used": 0.15,
+          "relaxation_steps": 71,
+          "max_force_final": 0.1266403267102391
+        }
+      }
+    ]
+  }
+}
